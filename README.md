@@ -1,6 +1,6 @@
 # Geekmo Lost Omens VK Mini App
 
-App for checking information about Lost Omens characters status
+App for checking Lost Omens characters status
 
 - [Geekmo Lost Omens VK Mini App](#geekmo-lost-omens-vk-mini-app)
     - [Dev guide](#dev-guide)
@@ -15,14 +15,23 @@ App for checking information about Lost Omens characters status
 
 This guide contains only necessary steps from [VK mini app start guide](https://dev.vk.com/ru/mini-apps/getting-started) to build, run and start developing our project from scratch. If you want, you can reference it (above guide is in russian).
 
-1. 
+Used Toolset:
+| Tool | Version |
+|---|---|
+| NodeJs  | 16.20.2 |
+| MS Visual Studio (C++ tools) | 2022 (MSVC v143 latest) | 
+
+1. Install required NodeJs version
+([VK Howto](https://dev.vk.com/ru/mini-apps/software-installation))
+2. Don`t forget to set msvs version (in case of ) ``````
+3. Clone this repo
 
 #### Codestyle
 
 Please, follow below agreement on how to write code and do the bureaucracy.
 
 1. Each commit should contain issue number
-2. For each feature create a separate branch (named *feature/#issue_number*
+2. For each feature create a separate branch (named *feature/#issue_number*)
 3. Do **NOT** commit to *master* branch directly, use only merges
 
 #### Useful links
@@ -30,6 +39,7 @@ Please, follow below agreement on how to write code and do the bureaucracy.
 Used below guides to start this project:
 - [VK mini app start guide](https://dev.vk.com/ru/mini-apps/getting-started)
 - [VK dev guide](https://vk.com/dev)
+- [VK toolset](https://dev.vk.com/ru/mini-apps/software-installation)
 
 ### User guide
 
