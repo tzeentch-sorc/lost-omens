@@ -19,6 +19,8 @@
         "@vkontakte/vk-miniapps-deploy": "^0.0.25",
         "@vkontakte/vk-tunnel": "^0.1.4",
         "@vkontakte/vkui": "5.1.0",
+        "@vkontakte/vkui-tokens": "^4.40.0",
+        "axios": "^1.5.1",
         "babel-eslint": "^10.1.0",
         "eruda": "^2.4.1",
         "eruda-code": "^2.0.0",
