@@ -1,8 +1,8 @@
-# Geekmo Lost Omens VK Mini App
+# Geekmo VK Mini App
 
-App for checking Lost Omens characters status
+App for checking characters status
 
-- [Geekmo Lost Omens VK Mini App](#geekmo-lost-omens-vk-mini-app)
+- [Geekmo VK Mini App](#geekmo-vk-mini-app)
     - [Dev guide](#dev-guide)
       - [Steps to start development](#steps-to-start-development)
       - [Codestyle](#codestyle)
