@@ -2,21 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Panel, PanelHeader, Header, Button, Group, Div, FixedLayout, Gradient } from '@vkontakte/vkui';
-import CharachterButtons from './CharachterButtons';
+import CharacterButtons from './CharacterButtons';
 
 const Home = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
-		<PanelHeader>Lost Omens</PanelHeader>
-		<Group header={<Header mode="secondary">Ваши персонажи</Header>}>
-			{fetchedUser && <CharachterButtons fetchedUser={fetchedUser} />}
-			<FixedLayout vertical="bottom">
-				<Div>
-					<Button stretched appearance="negative" size="l" onClick={go}>
-						Go back
-					</Button>
-				</Div>
-			</FixedLayout>
-		</Group>
+		{fetchedUser && <CharacterButtons fetchedUser={fetchedUser} toMain={go}/>}
 	</Panel>
 );
 
