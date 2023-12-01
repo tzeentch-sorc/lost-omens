@@ -5,9 +5,10 @@ App for checking characters status
 - [Geekmo VK Mini App](#geekmo-vk-mini-app)
     - [Dev guide](#dev-guide)
       - [Steps to start development](#steps-to-start-development)
+        - [To run](#to-run)
+        - [To deploy](#to-deploy)
       - [Codestyle](#codestyle)
       - [Useful links](#useful-links)
-    - [User guide](#user-guide)
 
 ### Dev guide
 
@@ -22,9 +23,19 @@ Used Toolset:
 | MS Visual Studio (C++ tools) | 2022 (MSVC v143 latest) | 
 
 1. Install required NodeJs version
-([VK Howto](https://dev.vk.com/ru/mini-apps/software-installation))
-2. Don`t forget to set msvs version (in case of ) ``````
-3. Clone this repo
+2. Install python3
+3. Install C++
+   More here: ([VK Howto](https://dev.vk.com/ru/mini-apps/software-installation))
+4. Clone this repo
+
+##### To run
+1. Run `nmp start` - to run app locally
+2. Run `nmp run tunnel` - to connect app to VK, in order to get user info
+3. Open link which is provided in logs and set it in vk app settings
+4. Open `vk.com/app51758531` 
+
+##### To deploy
+1. Run `npm run deploy` and follow steps in console
 
 #### Codestyle
 
@@ -40,7 +51,3 @@ Used below guides to start this project:
 - [VK mini app start guide](https://dev.vk.com/ru/mini-apps/getting-started)
 - [VK dev guide](https://vk.com/dev)
 - [VK toolset](https://dev.vk.com/ru/mini-apps/software-installation)
-
-### User guide
-
-
