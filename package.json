@@ -14,7 +14,7 @@
     "keywords": [],
     "license": "MIT",
     "dependencies": {
-        "@vkontakte/icons": "2.7.0",
+        "@vkontakte/icons": "^2.7.0",
         "@vkontakte/vk-bridge": "latest",
         "@vkontakte/vk-miniapps-deploy": "^0.0.25",
         "@vkontakte/vk-tunnel": "^0.1.4",
