@@ -19,6 +19,7 @@ const Character = ({ id }) => {
 	const [inventory, setInventory] = useState();
 	const [gold, setGold] = useState(0);
 	const [downtime, setDowntime] = useState(0);
+
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
 
@@ -40,6 +41,7 @@ const Character = ({ id }) => {
 			})
 			setInventory(data.inventory);
 			setGold(data.gold);
+			setDowntime(data.downtime);
 			setPopout(null);
 			setDowntime(data.downtime);
 		}
@@ -49,6 +51,7 @@ const Character = ({ id }) => {
 	return (
 		<Panel popout={popout} nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign', {keepSearchParams: true})} />}>
+
 				{charName}
 			</PanelHeader>
 			<Group>
