@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import bridge from "@vkontakte/vk-bridge";
 import App from "./App";
+import { createHashRouter, RouterProvider } from '@vkontakte/vk-mini-apps-router';
+import { AdaptivityProvider, AppRoot, ConfigProvider } from '@vkontakte/vkui';
+
 
 //TODO custom styles
 import '@vkontakte/vkui/dist/components.css';
@@ -11,7 +14,36 @@ import '@vkontakte/vkui-tokens/themes/vkComDark/cssVars/declarations/onlyVariabl
 // Init VK Mini App
 bridge.send("VKWebAppInit");
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const router = createHashRouter([
+  {
+    path: '/',
+    panel: 'intro',
+    view: 'default',
+  },
+  {
+    path: '/campaign',
+    panel: 'campaign',
+    view: 'default',
+  },
+  {
+    path: '/char',
+    panel: 'char',
+    view: 'default',
+  },
+]);
+
+ReactDOM.render((
+  <ConfigProvider>
+    <AdaptivityProvider>
+      <AppRoot>
+        <RouterProvider router={router}>
+          <App />
+        </RouterProvider>
+      </AppRoot>
+    </AdaptivityProvider>
+  </ConfigProvider>
+)
+  , document.getElementById("root"));
 if (process.env.NODE_ENV === "development") {
-  import("./eruda").then(({ default: eruda }) => {}); //runtime download
+  import("./eruda").then(({ default: eruda }) => { }); //runtime download
 }

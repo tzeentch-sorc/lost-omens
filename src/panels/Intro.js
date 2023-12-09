@@ -1,17 +1,25 @@
-import { Div, FixedLayout, Group, Panel, PanelHeader, Button, Avatar, Gradient, Spacing, Separator } from "@vkontakte/vkui";
+import { Div, FixedLayout, Group, Panel, PanelHeader, Button, Avatar, Spacing, Separator } from "@vkontakte/vkui";
 import React from "react";
 import { Fragment } from "react";
+import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+
 
 import './Intro.css'
 
+const CAMPAIGNS = {
+    LOST_OMENS: "Lost Omens (PF 2e)"
+}
 
 const Intro = ({ id, snackbarErr, fetchedUser, seenIntro, go }) => {
+    const routeNavigator = useRouteNavigator();
+    const [params, setParams] = useSearchParams();
+
     return (
-        <Panel id={id} centered={true}>
+        <Panel id={id} centered={true} nav='intro'>
             <PanelHeader>
                 Добро пожаловать
             </PanelHeader>
-            {(!seenIntro && fetchedUser) &&
+            {fetchedUser &&
                 <Fragment>
                     <Group>
                         <Div className="Intro">
@@ -22,14 +30,18 @@ const Intro = ({ id, snackbarErr, fetchedUser, seenIntro, go }) => {
                         <Spacing>
                             <Separator />
                         </Spacing>
-                        <Div style={{textAlign: "justify"}}>
+                        <Div style={{ textAlign: "justify" }}>
                             <p>Здесь можно будет посмотреть состояние персонажей во всех наших ролевых мегакампаниях.</p>
                         </Div>
                     </Group>
                     <FixedLayout vertical="bottom">
                         <Div>
-                            <Button stretched appearance="positive" size="l" onClick={go}>
-                                Кампания Lost Omens (PF 2e)
+                            <Button stretched appearance="positive" size="l" onClick={() => {
+                                params.set('CampaignName', CAMPAIGNS.LOST_OMENS)
+                                setParams(params)
+                                routeNavigator.push('/campaign', {keepSearchParams: true})
+                            }}>
+                                Кампания {CAMPAIGNS.LOST_OMENS}
                             </Button>
                         </Div>
                     </FixedLayout>

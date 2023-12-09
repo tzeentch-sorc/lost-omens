@@ -4,12 +4,6 @@ import axios from 'axios';
 import Character from './Character';
 
 
-const GOOGLE_SCRIPTS_BASE_URL = 'https://script.google.com/macros/s/AKfycbyHwbc7G8ZBzv4wD-dRuLQNLcjibe3MSNd_a7tQUEVvmdV9-mcl46sR64otlmZH1V7IcQ/exec'
-
-const ROUTES = {
-    LIST: 'list',
-    CHAR: 'char'
-}
 
 
 const CharacterButtons = ({ fetchedUser, toMain }) => {
@@ -71,22 +65,7 @@ const CharacterButtons = ({ fetchedUser, toMain }) => {
     return (
         <View activePanel={activePanel}>
             <Panel id={ROUTES.LIST} >
-                <PanelHeader>Lost Omens</PanelHeader>
-                <Group header={<Header mode="secondary">Ваши персонажи</Header>}>
-                    <SplitLayout popout={popout}>
-                        <SplitCol>
-                            {date && prio && createInfo(date, prio)}
-                            {characters && characters.map((elem) => createButton(elem))}
-                        </SplitCol>
-                    </SplitLayout>
-                    <FixedLayout vertical="bottom">
-                        <Div>
-                            <Button stretched appearance="negative" size="l" onClick={toMain}>
-                                Go back
-                            </Button>
-                        </Div>
-                    </FixedLayout>
-                </Group>
+
             </Panel>
             <Character id={ROUTES.CHAR} fetchedUser={fetchedUser} go={initialState} charName={activeChar} url={GOOGLE_SCRIPTS_BASE_URL}/>
         </View>
