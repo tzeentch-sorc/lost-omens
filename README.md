@@ -42,7 +42,7 @@ Used Toolset:
 Please, follow below agreement on how to write code and do the bureaucracy.
 
 1. Each commit should contain issue number
-2. For each feature create a separate branch (named *feature/#issue_number*)
+2. For each feature create a separate branch (named *#<issue_number>-<issue-name>*)
 3. Do **NOT** commit to *master* branch directly, use only merges
 
 #### Useful links
