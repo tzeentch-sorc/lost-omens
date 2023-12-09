@@ -12,7 +12,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 
 
-const Character = ({ id }) => {
+const Character = () => {
 
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();

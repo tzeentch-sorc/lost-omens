@@ -10,7 +10,7 @@ import {
 } from '@vkontakte/vkui';
 
 import { Icon28CalendarOutline, Icon28CrownOutline } from '@vkontakte/icons'
-import {GOOGLE_SCRIPTS_BASE_URL} from '../App.js'
+import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 
@@ -19,7 +19,7 @@ const ROUTES = {
 	CHAR: 'char'
 }
 
-const CampaignPanel = ({ id, fetchedUser }) => {
+const CampaignPanel = ({ fetchedUser }) => {
 
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
@@ -36,7 +36,7 @@ const CampaignPanel = ({ id, fetchedUser }) => {
 				<Button stretched appearance="neutral" size="m" key={element} id={element} onClick={() => {
 					params.set('CharName', element);
 					setParams(params);
-					routeNavigator.push('/char', {keepSearchParams: true});
+					routeNavigator.push('/char', { keepSearchParams: true });
 				}}>
 					{element}
 				</Button>
@@ -74,8 +74,8 @@ const CampaignPanel = ({ id, fetchedUser }) => {
 	}, []);
 
 	return (
-		<Panel id={id} nav='campaign'>
-			<PanelHeader before={<PanelHeaderBack onClick={()=> routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
+		<Panel nav='campaign'>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
 			{
 				fetchedUser &&
 				<Group>

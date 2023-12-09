@@ -10,12 +10,12 @@ const CAMPAIGNS = {
     LOST_OMENS: "Lost Omens (PF 2e)"
 }
 
-const Intro = ({ id, snackbarErr, fetchedUser, seenIntro, go }) => {
+const Intro = ({ fetchedUser}) => {
     const routeNavigator = useRouteNavigator();
     const [params, setParams] = useSearchParams();
 
     return (
-        <Panel id={id} centered={true} nav='intro'>
+        <Panel centered={true} nav='intro'>
             <PanelHeader>
                 Добро пожаловать
             </PanelHeader>
@@ -47,7 +47,6 @@ const Intro = ({ id, snackbarErr, fetchedUser, seenIntro, go }) => {
                     </FixedLayout>
                 </Fragment>
             }
-            {snackbarErr}
         </Panel>
     )
 };

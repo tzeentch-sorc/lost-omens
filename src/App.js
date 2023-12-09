@@ -81,7 +81,7 @@ const App = (router) => {
 			<View activePanel={activePanel} nav='default'>
 				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} /*seenIntro={userSeenIntro}*/ />
 				<CampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				<Character id={ROUTES.CHAR} url={GOOGLE_SCRIPTS_BASE_URL} />
+				<Character id={ROUTES.CHAR} />
 			</View>
 		</Root>
 	);
