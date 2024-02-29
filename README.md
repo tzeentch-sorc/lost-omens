@@ -29,8 +29,8 @@ Used Toolset:
 4. Clone this repo
 
 ##### To run
-1. Run `nmp start` - to run app locally
-2. Run `nmp run tunnel` - to connect app to VK, in order to get user info
+1. Run `npm start` - to run app locally
+2. Run `npm run tunnel` - to connect app to VK, in order to get user info
 3. Open link which is provided in logs and set it in vk app settings
 4. Open `vk.com/app51758531` 
 
