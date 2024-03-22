@@ -9,6 +9,7 @@ import { Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon28CubeBoxOutline
 import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
+import './Character.css'
 
 
 
@@ -67,7 +68,7 @@ const LOCharacter = () => {
 					id="tab-inventory"
 					aria-controls="tab-content-inventory"
 				>
-					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}> Инвентарь</SimpleCell>
+					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}> <div class="not4mob">Инвентарь</div></SimpleCell>
 				</TabsItem>
 				<TabsItem
 					selected={selected === 'spells'}
@@ -78,7 +79,7 @@ const LOCharacter = () => {
 					id="tab-spells"
 					aria-controls="tab-content-spells"
 				>
-					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}> Заклинания</SimpleCell>
+					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}> <div class="not4mob">Заклинания</div></SimpleCell>
 				</TabsItem>
 				<TabsItem
 					selected={selected === 'formulae'}
@@ -89,7 +90,7 @@ const LOCharacter = () => {
 					id="tab-formulae"
 					aria-controls="tab-content-formulae"
 				>
-					<SimpleCell before={<Icon28EducationOutline width={24} height={24} />}> Формулы </SimpleCell>
+					<SimpleCell before={<Icon28EducationOutline width={24} height={24} />}> <div class="not4mob">Формулы</div> </SimpleCell>
 				</TabsItem>
 			</Tabs>
 		);
