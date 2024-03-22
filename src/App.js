@@ -7,7 +7,7 @@ import { useActiveVkuiLocation, useGetPanelForView } from '@vkontakte/vk-mini-ap
 import '@vkontakte/vkui/dist/vkui.css';
 
 import CampaignPanel from './panels/CampaignPanel.js';
-import Intro from './panels/Intro.js'
+import Intro from './panels/Intro.js';
 import Character from './panels/Character.js';
 
 

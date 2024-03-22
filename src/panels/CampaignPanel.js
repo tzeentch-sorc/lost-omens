@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
 	Panel, PanelHeader, Header,
-	Button, Group, Div,
+	Button, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Card, SimpleCell
+	CardGrid, Card, SimpleCell, Badge
 } from '@vkontakte/vkui';
 
-import { Icon28CalendarOutline, Icon28CrownOutline } from '@vkontakte/icons'
+import { Icon28CalendarOutline, Icon28CrownOutline, Icon24UserOutline, Icon24StatisticsOutline, Icon24InfoCircleOutline } from '@vkontakte/icons'
 import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -20,7 +19,6 @@ const ROUTES = {
 }
 
 const CampaignPanel = ({ fetchedUser }) => {
-
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
@@ -32,22 +30,29 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(element) {
 		return (
-			<Group mode="plain" header={<Header mode="secondary">С внешней тенью</Header>}>
-					<CardGrid size="l">
-						<Card mode="shadow" key={element} id={element} onClick={() => {
-						params.set('CharName', element);
-						setParams(params);
-						routeNavigator.push('/char', { keepSearchParams: true });
-					}}>
-							<div style={{ height: 96 }} />
-						</Card>
-					</CardGrid>
-				</Group>
-				<Div key={element} id={element}>
-					<Button stretched appearance="neutral" size="m" >
-						{element}
-					</Button>
-				</Div>
+			<Group mode="plain">
+				<CardGrid size="l">
+					<Card mode="shadow" size="m">
+						<SimpleCell
+							key={element.name}
+							id={element.name}
+							onClick={() => {
+								if (element.lvl_up) {
+									//TODO
+								} else {
+									params.set('CharName', element.name);
+									setParams(params);
+									routeNavigator.push('/char', { keepSearchParams: true });
+								}
+
+							}} before={<Icon24UserOutline width={24} height={24} />} badgeAfterTitle={element.lvl_up && <Badge></Badge>}> {element.name}</SimpleCell>
+
+						<SimpleCell
+							key={element.name}
+							id={element.name} before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
+					</Card>
+				</CardGrid>
+			</Group>
 		);
 	}
 
@@ -69,7 +74,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {
+			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + "a.orlov99").then(resp => {//fetchedUser.screen_name
 				return resp.data
 			})
 			setCharacters(data.chars)
