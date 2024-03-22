@@ -30,17 +30,24 @@ const CampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState()
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 
-	function createButton(element) {
+	function createCard(element) {
 		return (
-			<Div key={element} id={element}>
-				<Button stretched appearance="neutral" size="m" key={element} id={element} onClick={() => {
-					params.set('CharName', element);
-					setParams(params);
-					routeNavigator.push('/char', { keepSearchParams: true });
-				}}>
-					{element}
-				</Button>
-			</Div>
+			<Group mode="plain" header={<Header mode="secondary">С внешней тенью</Header>}>
+					<CardGrid size="l">
+						<Card mode="shadow" key={element} id={element} onClick={() => {
+						params.set('CharName', element);
+						setParams(params);
+						routeNavigator.push('/char', { keepSearchParams: true });
+					}}>
+							<div style={{ height: 96 }} />
+						</Card>
+					</CardGrid>
+				</Group>
+				<Div key={element} id={element}>
+					<Button stretched appearance="neutral" size="m" >
+						{element}
+					</Button>
+				</Div>
 		);
 	}
 
@@ -83,7 +90,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 						<SplitCol>
 							{date && prio && createInfo(date, prio)}
 							<Header mode="secondary">Ваши персонажи</Header>
-							{characters && characters.map((elem) => createButton(elem))}
+							{characters && characters.map((elem) => createCard(elem))}
 						</SplitCol>
 					</SplitLayout>
 				</Group>
