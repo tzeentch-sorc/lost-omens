@@ -5,7 +5,7 @@ import {
 	Header, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, CardGrid, Card, SplitCol, SplitLayout, Tabs, TabsItem
 } from '@vkontakte/vkui';
-import { Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon28CubeBoxOutline, Icon28MagicWandOutline, Icon28EducationOutline } from '@vkontakte/icons'
+import { Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon28CubeBoxOutline, Icon28MagicWandOutline, Icon24BookSpreadOutline } from '@vkontakte/icons'
 import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -90,7 +90,7 @@ const LOCharacter = () => {
 					id="tab-formulae"
 					aria-controls="tab-content-formulae"
 				>
-					<SimpleCell before={<Icon28EducationOutline width={24} height={24} />}> <div class="not4mob">Формулы</div> </SimpleCell>
+					<SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}> <div class="not4mob">Формулы</div> </SimpleCell>
 				</TabsItem>
 			</Tabs>
 		);
