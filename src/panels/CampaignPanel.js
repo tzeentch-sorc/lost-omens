@@ -118,7 +118,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + "a.orlov99").then(resp => {//fetchedUser.screen_name
+			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {
 				return resp.data
 			})
 			setCharacters(data.chars)
