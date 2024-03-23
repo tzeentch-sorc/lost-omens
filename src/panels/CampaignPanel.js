@@ -68,7 +68,17 @@ const CampaignPanel = ({ fetchedUser }) => {
 	function createCard(element) {
 		return (
 
-			<Card mode="shadow" size="m">
+			<Card mode="shadow" size="m"
+			onClick={() => {
+				if (element.lvl_up) {
+					openAction(element);
+				} else {
+					params.set('CharName', element.name);
+					setParams(params);
+					routeNavigator.push('/char', { keepSearchParams: true });
+				}
+
+			}}>
 				<SimpleCell
 					key={element.name}
 					id={element.name}
@@ -78,16 +88,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 							<Icon24StatisticsOutline width={16} height={16} />
 						</Counter>
 					}
-					onClick={() => {
-						if (element.lvl_up) {
-							openAction(element);
-						} else {
-							params.set('CharName', element.name);
-							setParams(params);
-							routeNavigator.push('/char', { keepSearchParams: true });
-						}
-
-					}} before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
+					before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
 
 				<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
 			</Card>
