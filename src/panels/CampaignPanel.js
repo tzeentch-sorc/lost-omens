@@ -83,7 +83,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 						<SplitCol>
 							{date && prio && createInfo(date, prio)}
 							<Header mode="secondary">Ваши персонажи</Header>
-							{characters && characters.map((elem) => createButton(elem))}
+							{characters && characters.map((elem) => createButton(elem.name))}
 						</SplitCol>
 					</SplitLayout>
 				</Group>
