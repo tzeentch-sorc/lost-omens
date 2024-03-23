@@ -51,7 +51,6 @@ const Character = () => {
 	return (
 		<Panel popout={popout} nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign', {keepSearchParams: true})} />}>
-
 				{charName}
 			</PanelHeader>
 			<Group>

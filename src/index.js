@@ -23,12 +23,12 @@ const router = createHashRouter([
   {
     path: '/campaign',
     panel: 'campaign',
-    view: 'default',
+    view: 'lost_omens',
   },
   {
     path: '/char',
     panel: 'char',
-    view: 'default',
+    view: 'lost_omens',
   },
 ]);
 
@@ -36,7 +36,7 @@ ReactDOM.render((
   <ConfigProvider>
     <AdaptivityProvider>
       <AppRoot>
-        <RouterProvider router={router}>
+        <RouterProvider router={router} notFound={<p>Ничегошеньки!</p>}>
           <App />
         </RouterProvider>
       </AppRoot>

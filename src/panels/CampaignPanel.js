@@ -18,11 +18,6 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 import './CampaignPanel.css'
 
-const ROUTES = {
-	LIST: 'list',
-	CHAR: 'char'
-}
-
 const CampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();

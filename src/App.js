@@ -17,18 +17,12 @@ const ROUTES = {
 	CHAR: 'char'
 }
 
-// const STORAGE_KEYS = {
-// 	STATUS: 'status'
-// }
-
 const App = (router) => {
 
-	const activePanel = useGetPanelForView('default');
-	const { view: activeView } = useActiveVkuiLocation();
+	const { view: activeView, panel: activePanel } = useActiveVkuiLocation();
 
 	const [fetchedUser, setUser] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
-	//const [userSeenIntro, setSeenIntro] = useState(false);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -43,32 +37,6 @@ const App = (router) => {
 						access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
 					}
 				}).then(resp => { return resp.response[0] });
-			// const storageData = await bridge.send('VKWebAppStorageGet', {
-			// 	keys: Object.values(STORAGE_KEYS)
-			// })
-			// const data = {};
-			// storageData.keys.forEach(({ key, value }) => {
-			// 	try {
-			// 		data[key] = value ? JSON.parse(value) : {};
-			// 		switch (key) {
-			// 			case STORAGE_KEYS.STATUS:
-			// 				if (data[key].seenIntro) {
-			// 					setActivePanel(ROUTES.HOME);
-			// 					setSeenIntro(true);
-			// 				}
-			// 				break;
-			// 			default: break;
-			// 		}
-			// 	} catch (err) {
-			// 		setSnackbar(<Snackbar
-			// 			layout='vertical'
-			// 			onClose={() => setSnackbar(null)}
-			// 			duration={900}
-			// 		>
-			// 			{err}
-			// 		</Snackbar>)
-			// 	}
-			// });
 			setUser(user);
 			setPopout(null);
 		}
@@ -79,9 +47,11 @@ const App = (router) => {
 
 		<Root popout={popout} activeView={activeView}>
 			<View activePanel={activePanel} nav='default'>
-				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} /*seenIntro={userSeenIntro}*/ />
+				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} />
+			</View>
+			<View activePanel={activePanel} nav='lost_omens'>
 				<CampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				<Character id={ROUTES.CHAR} />
+				<Character id={ROUTES.CHAR}/>
 			</View>
 		</Root>
 	);

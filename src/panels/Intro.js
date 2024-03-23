@@ -7,7 +7,8 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 
 const CAMPAIGNS = {
-    LOST_OMENS: "Lost Omens (PF 2e)"
+    LOST_OMENS: "Lost Omens (PF 2e)",
+    SF: "Starfinder"
 }
 
 const Intro = ({ fetchedUser}) => {
@@ -42,6 +43,15 @@ const Intro = ({ fetchedUser}) => {
                                 routeNavigator.push('/campaign', {keepSearchParams: true})
                             }}>
                                 Кампания {CAMPAIGNS.LOST_OMENS}
+                            </Button>
+                        </Div>
+                        <Div>
+                            <Button stretched appearance="positive" size="l" onClick={() => {
+                                params.set('CampaignName', CAMPAIGNS.SF)
+                                setParams(params)
+                                routeNavigator.push('/campaign', {keepSearchParams: true})
+                            }}>
+                                Кампания {CAMPAIGNS.SF}
                             </Button>
                         </Div>
                     </FixedLayout>
