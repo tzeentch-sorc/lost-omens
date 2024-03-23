@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
 	Panel, PanelHeader, Header,
-	Button, Group, Div,
+	Button, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Card, SimpleCell
+	CardGrid, Card, SimpleCell, Badge, Alert, Counter
+
 } from '@vkontakte/vkui';
 
-import { Icon28CalendarOutline, Icon28CrownOutline } from '@vkontakte/icons'
+import {
+	Icon28CalendarOutline, Icon28CrownOutline, Icon24UserOutline,
+	Icon24StatisticsOutline, Icon24InfoCircleOutline
+} from '@vkontakte/icons'
 import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
+import './CampaignPanel.css'
 
 const ROUTES = {
 	LIST: 'list',
@@ -20,7 +24,6 @@ const ROUTES = {
 }
 
 const CampaignPanel = ({ fetchedUser }) => {
-
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
@@ -30,17 +33,66 @@ const CampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState()
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 
-	function createButton(element) {
+	const closePopout = () => {
+		setPopout(null);
+	};
+
+	const openAction = (element) => {
+		setPopout(
+			<Alert
+				actions={[
+					{
+						title: <Icon24StatisticsOutline width={24} height={24} />,
+						mode: 'default',
+						action: () => {
+							window.open('https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform', "_blank")
+						},
+					},
+					{
+						title: 'Пропустить',
+						mode: 'cancel',
+						action: () => {
+							params.set('CharName', element.name);
+							setParams(params);
+							routeNavigator.push('/char', { keepSearchParams: true });
+						},
+					},
+				]}
+				onClose={closePopout}
+				header={element.name + ' нуждается в повышении уровня!'}
+				text="Можно повысить уровень прямо сейчас или продолжить работу без повышения"
+			/>,
+		);
+	};
+
+	function createCard(element) {
 		return (
-			<Div key={element} id={element}>
-				<Button stretched appearance="neutral" size="m" key={element} id={element} onClick={() => {
-					params.set('CharName', element);
+
+			<Card mode="shadow" size="m"
+			onClick={() => {
+				if (element.lvl_up) {
+					openAction(element);
+				} else {
+					params.set('CharName', element.name);
 					setParams(params);
 					routeNavigator.push('/char', { keepSearchParams: true });
-				}}>
-					{element}
-				</Button>
-			</Div>
+				}
+
+			}}>
+				<SimpleCell
+					key={element.name}
+					id={element.name}
+					indicator={
+						element.lvl_up &&
+						<Counter size="m" mode="prominent">
+							<Icon24StatisticsOutline width={16} height={16} />
+						</Counter>
+					}
+					before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
+
+				<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
+			</Card>
+
 		);
 	}
 
@@ -62,7 +114,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {
+			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {//fetchedUser.screen_name
 				return resp.data
 			})
 			setCharacters(data.chars)
@@ -83,7 +135,22 @@ const CampaignPanel = ({ fetchedUser }) => {
 						<SplitCol>
 							{date && prio && createInfo(date, prio)}
 							<Header mode="secondary">Ваши персонажи</Header>
-							{characters && characters.map((elem) => createButton(elem))}
+							<SplitLayout popout={popout}>
+								<SplitCol>
+									<Group mode="plain">
+										<div class="not4mob">
+										<CardGrid size="m">
+											{characters && characters.map((elem) => createCard(elem))}
+										</CardGrid>
+										</div>
+										<div class="formob">
+										<CardGrid size="l">
+											{characters && characters.map((elem) => createCard(elem))}
+										</CardGrid>
+										</div>
+									</Group>
+								</SplitCol>
+							</SplitLayout>
 						</SplitCol>
 					</SplitLayout>
 				</Group>
