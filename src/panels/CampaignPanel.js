@@ -5,7 +5,7 @@ import {
 	Button, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Card, SimpleCell, Badge, Alert
+	CardGrid, Card, SimpleCell, Badge, Alert, Counter
 
 } from '@vkontakte/vkui';
 
@@ -74,6 +74,12 @@ const CampaignPanel = ({ fetchedUser }) => {
 								<SimpleCell
 									key={element.name}
 									id={element.name}
+									indicator={
+										element.lvl_up &&
+										<Counter size="s" mode="prominent">
+										  1
+										</Counter>
+									  }
 									onClick={() => {
 										if (element.lvl_up) {
 											openAction(element);
@@ -83,7 +89,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 											routeNavigator.push('/char', { keepSearchParams: true });
 										}
 
-									}} before={<Icon24UserOutline width={24} height={24} />} badgeAfterTitle={element.lvl_up && <Badge></Badge>}> {element.name}</SimpleCell>
+									}} before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
 
 								<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
 							</Card>
