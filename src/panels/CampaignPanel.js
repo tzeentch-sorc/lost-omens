@@ -5,8 +5,7 @@ import {
 	Button, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Card, SimpleCell, Badge, ModalRoot, ModalCard,
-	ButtonGroup
+	CardGrid, Card, SimpleCell, Badge, Alert
 
 } from '@vkontakte/vkui';
 
@@ -33,72 +32,41 @@ const CampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState()
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 
-	const [activeModal, setActiveModal] = useState(null);
-	const [modalHistory, setModalHistory] = useState([]);
-
-	const changeActiveModal = (activeModal) => {
-		activeModal = activeModal || null;
-		let localModalHistory = modalHistory ? [...modalHistory] : [];
-
-		if (activeModal === null) {
-			localModalHistory = [];
-		} else if (modalHistory.indexOf(activeModal) !== -1) {
-			localModalHistory = localModalHistory.splice(0, localModalHistory.indexOf(activeModal) + 1);
-		} else {
-			localModalHistory.push(activeModal);
-		}
-
-		setActiveModal(activeModal);
-		setModalHistory(localModalHistory);
+	const closePopout = () => {
+		setPopout(null);
 	};
 
-	const modalBack = () => {
-		changeActiveModal(modalHistory[modalHistory.length - 2]);
+	const openAction = (element) => {
+		setPopout(
+			<Alert
+				actions={[
+					{
+						title: <Icon24StatisticsOutline width={24} height={24} />,
+						mode: 'default',
+						action: () => {
+							window.open('https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform', "_blank")
+						},
+					},
+					{
+						title: 'Пропустить',
+						mode: 'cancel',
+						action: () => {
+							params.set('CharName', element.name);
+							setParams(params);
+							routeNavigator.push('/char', { keepSearchParams: true });
+						},
+					},
+				]}
+				onClose={closePopout}
+				header={element.name + ' нуждается в повышении уровня!'}
+				text="Можно повысить уровень прямо сейчас или продолжить работу без повышения"
+			/>,
+		);
 	};
-
-	const modal = (
-		<ModalRoot activeModal={activeModal} onClose={modalBack}>
-			<ModalCard
-				id="confirmLvlup"
-				onClose={() => changeActiveModal(null)}
-				icon={<Icon24StatisticsOutline width={56} height={56} />}
-				header="Вашему персонажу необходимо повышение уровня"
-				subheader="Теперь вы можете перейти к форме повышения уровня прямо из нашего приложения"
-				actions={
-					<React.Fragment>
-						<ButtonGroup mode="horizontal" gap="m" stretched>
-							<Button
-								size="l"
-								mode="primary"
-								stretched
-								onClick={()=>window.open('https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform', "_blank")}
-							>
-								Повысить уровень
-							</Button>
-							<Button
-								size="l"
-								mode="secondary"
-								stretched
-								onClick={() => {
-									//TODO
-									params.set('CharName', element.name);
-									setParams(params);
-									routeNavigator.push('/char', { keepSearchParams: true });
-								}}
-							>
-								Продолжить
-							</Button>
-						</ButtonGroup>
-
-					</React.Fragment>
-				}
-			/>
-		</ModalRoot>
-	);
 
 	function createCard(element) {
 		return (
-			<SplitLayout modal={modal}>
+			<SplitLayout popout={popout}>
 				<SplitCol>
 					<Group mode="plain">
 						<CardGrid size="l">
@@ -108,7 +76,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 									id={element.name}
 									onClick={() => {
 										if (element.lvl_up) {
-											changeActiveModal("confirmLvlup");
+											openAction(element);
 										} else {
 											params.set('CharName', element.name);
 											setParams(params);
