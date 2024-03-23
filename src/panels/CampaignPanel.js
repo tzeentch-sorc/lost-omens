@@ -16,6 +16,7 @@ import {
 import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
+import './CampaignPanel.css'
 
 const ROUTES = {
 	LIST: 'list',
@@ -66,37 +67,31 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(element) {
 		return (
-			<SplitLayout popout={popout}>
-				<SplitCol>
-					<Group mode="plain">
-						<CardGrid size="l">
-							<Card mode="shadow" size="m">
-								<SimpleCell
-									key={element.name}
-									id={element.name}
-									indicator={
-										element.lvl_up &&
-										<Counter size="s" mode="prominent">
-										  1
-										</Counter>
-									  }
-									onClick={() => {
-										if (element.lvl_up) {
-											openAction(element);
-										} else {
-											params.set('CharName', element.name);
-											setParams(params);
-											routeNavigator.push('/char', { keepSearchParams: true });
-										}
 
-									}} before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
+			<Card mode="shadow" size="m">
+				<SimpleCell
+					key={element.name}
+					id={element.name}
+					indicator={
+						element.lvl_up &&
+						<Counter size="m" mode="prominent">
+							<Icon24StatisticsOutline width={16} height={16} />
+						</Counter>
+					}
+					onClick={() => {
+						if (element.lvl_up) {
+							openAction(element);
+						} else {
+							params.set('CharName', element.name);
+							setParams(params);
+							routeNavigator.push('/char', { keepSearchParams: true });
+						}
 
-								<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
-							</Card>
-						</CardGrid>
-					</Group>
-				</SplitCol>
-			</SplitLayout>
+					}} before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
+
+				<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
+			</Card>
+
 		);
 	}
 
@@ -118,7 +113,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {
+			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + "a.orlov99").then(resp => {//fetchedUser.screen_name
 				return resp.data
 			})
 			setCharacters(data.chars)
@@ -139,7 +134,22 @@ const CampaignPanel = ({ fetchedUser }) => {
 						<SplitCol>
 							{date && prio && createInfo(date, prio)}
 							<Header mode="secondary">Ваши персонажи</Header>
-							{characters && characters.map((elem) => createCard(elem))}
+							<SplitLayout popout={popout}>
+								<SplitCol>
+									<Group mode="plain">
+										<div class="not4mob">
+										<CardGrid size="m">
+											{characters && characters.map((elem) => createCard(elem))}
+										</CardGrid>
+										</div>
+										<div class="formob">
+										<CardGrid size="l">
+											{characters && characters.map((elem) => createCard(elem))}
+										</CardGrid>
+										</div>
+									</Group>
+								</SplitCol>
+							</SplitLayout>
 						</SplitCol>
 					</SplitLayout>
 				</Group>
