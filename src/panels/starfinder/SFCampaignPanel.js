@@ -13,18 +13,16 @@ import {
 	Icon28CalendarOutline, Icon28CrownOutline, Icon24UserOutline,
 	Icon24StatisticsOutline, Icon24InfoCircleOutline
 } from '@vkontakte/icons'
-import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import './CampaignPanel.css'
+import './SFCampaignPanel.css'
+const SFCampaignPanel = ({ fetchedUser }) => {
 
-const CampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
 
 	const [characters, setCharacters] = useState([])
-	const [date, setDate] = useState("-")
 	const [prio, setPrio] = useState()
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 
@@ -40,7 +38,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 						title: <Icon24StatisticsOutline width={24} height={24} />,
 						mode: 'default',
 						action: () => {
-							window.open('https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform', "_blank")
+							window.open('https://forms.gle/CgVTL2qUVctKja4R7', "_blank")
 						},
 					},
 					{
@@ -49,7 +47,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 						action: () => {
 							params.set('CharName', element.name);
 							setParams(params);
-							routeNavigator.push('/char/lost_omens', { keepSearchParams: true });
+							routeNavigator.push('/char/starfinder', { keepSearchParams: true });
 						},
 					},
 				]}
@@ -63,14 +61,14 @@ const CampaignPanel = ({ fetchedUser }) => {
 	function createCard(element) {
 		return (
 
-			<Card mode="shadow" size="m" key={element.name + "_lo_card"}
+			<Card mode="shadow" size="m" key={element.name + "_sf_card"}
 				onClick={() => {
 					if (element.lvl_up) {
 						openAction(element);
 					} else {
 						params.set('CharName', element.name);
 						setParams(params);
-						routeNavigator.push('/char/lost_omens', { keepSearchParams: true });
+						routeNavigator.push('/char/starfinder', { keepSearchParams: true });
 					}
 
 				}}>
@@ -85,20 +83,16 @@ const CampaignPanel = ({ fetchedUser }) => {
 					}
 					before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
 
-				<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
+				<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.lvl} уровня</SimpleCell>
 			</Card>
 
 		);
 	}
 
-	function createInfo(date, prio) {
+	function createInfo(prio) {
 		return (
-			<CardGrid key="infoBlock" id="infoBlock" size='m'>
-				<Card key="last_game">
-					<Header mode="primary">Последняя партия</Header>
-					<SimpleCell before={<Icon28CalendarOutline width={24} height={24} />}>{date}</SimpleCell>
-				</Card>
-				<Card key="prio">
+			<CardGrid key="infoBlock" id="infoBlock" size='l'>
+				<Card>
 					<Header mode="primary">Приоритет</Header>
 					<SimpleCell before={<Icon28CrownOutline width={24} height={24} />}> {prio}</SimpleCell>
 				</Card>
@@ -109,11 +103,10 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {
+			const data = await axios.get(SF_GOOGLE_SCRIPTS_BASE_URL + "?id=id306494424").then(resp => {//TODO + fetchedUser.screen_name
 				return resp.data
 			})
 			setCharacters(data.chars)
-			setDate(data.date)
 			setPrio(data.prio)
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
@@ -129,7 +122,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 				<Group>
 					<SplitLayout popout={popout}>
 						<SplitCol>
-							{date && prio && createInfo(date, prio)}
+							{prio && createInfo(prio)}
 							<Header mode="secondary">Ваши персонажи</Header>
 							<Group mode="plain">
 								<Div className="not4mob">
@@ -151,4 +144,6 @@ const CampaignPanel = ({ fetchedUser }) => {
 	)
 };
 
-export default CampaignPanel;
+export default SFCampaignPanel;
+
+export const SF_GOOGLE_SCRIPTS_BASE_URL = "https://script.google.com/macros/s/AKfycbwhqD4nmaw7eE_kYJrnvxAhdtOj1kse6iazqU9uWquPDUm3Rh6ct_P0banY9zXiXxzuew/exec"

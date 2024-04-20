@@ -21,15 +21,25 @@ const router = createHashRouter([
     view: 'default',
   },
   {
-    path: '/campaign',
+    path: '/campaign/lost_omens',
     panel: 'campaign',
     view: 'lost_omens',
   },
   {
-    path: '/char',
+    path: '/char/lost_omens',
     panel: 'char',
     view: 'lost_omens',
   },
+  {
+    path: '/campaign/starfinder',
+    panel: 'campaign',
+    view: 'starfinder',
+  },
+  {
+    path: '/char/starfinder',
+    panel: 'char',
+    view: 'starfinder',
+  }
 ]);
 
 ReactDOM.render((

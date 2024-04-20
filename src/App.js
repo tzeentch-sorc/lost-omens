@@ -9,6 +9,8 @@ import '@vkontakte/vkui/dist/vkui.css';
 import CampaignPanel from './panels/CampaignPanel.js';
 import Intro from './panels/Intro.js';
 import Character from './panels/Character.js';
+import SFCampaignPanel from './panels/starfinder/SFCampaignPanel.js';
+import SFCharacter from './panels/starfinder/SFCharacter.js';
 
 
 const ROUTES = {
@@ -52,6 +54,10 @@ const App = (router) => {
 			<View activePanel={activePanel} nav='lost_omens'>
 				<CampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<Character id={ROUTES.CHAR}/>
+			</View>
+			<View activePanel={activePanel} nav='starfinder'>
+				<SFCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+				<SFCharacter id={ROUTES.CHAR}/>
 			</View>
 		</Root>
 	);
