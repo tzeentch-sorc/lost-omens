@@ -5,13 +5,13 @@ import {
 	Button, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Card, SimpleCell, Badge, Alert, Counter, Div
+	CardGrid, Card, SimpleCell, Badge, Alert, Counter, Div, RichCell, InfoRow
 
 } from '@vkontakte/vkui';
 
 import {
 	Icon28CalendarOutline, Icon28CrownOutline, Icon24UserOutline,
-	Icon24StatisticsOutline, Icon24InfoCircleOutline
+	Icon24StatisticsOutline, Icon20ArrowUpOutline, Icon24BookmarkOutline
 } from '@vkontakte/icons'
 import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
@@ -25,6 +25,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	const [characters, setCharacters] = useState([])
 	const [date, setDate] = useState("-")
+	const [advName, setAdvName] = useState("неизвестное приключение")
 	const [prio, setPrio] = useState()
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 
@@ -62,7 +63,6 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(element) {
 		return (
-
 			<Card mode="shadow" size="m" key={element.name + "_lo_card"}
 				onClick={() => {
 					if (element.lvl_up) {
@@ -72,37 +72,48 @@ const CampaignPanel = ({ fetchedUser }) => {
 						setParams(params);
 						routeNavigator.push('/char/lost_omens', { keepSearchParams: true });
 					}
-
 				}}>
-				<SimpleCell
+				<RichCell
 					key={element.name}
 					id={element.name}
-					indicator={
-						element.lvl_up &&
-						<Counter size="m" mode="prominent">
-							<Icon24StatisticsOutline width={16} height={16} />
-						</Counter>
-					}
-					before={<Icon24UserOutline width={24} height={24} />}> {element.name}</SimpleCell>
-
-				<SimpleCell before={<Icon24InfoCircleOutline width={24} height={24} />}> {element.race}-{element.type} {element.lvl} уровня</SimpleCell>
+					before={<Icon24UserOutline width={48} height={48} color='#008cff'/>}
+					text={element.type+ ", " +element.lvl + " ур."} 
+					caption={element.race}
+					after={element.lvl_up &&
+						<Counter size="s" mode="primary">
+							<Icon20ArrowUpOutline width={16} height={16}/>
+						</Counter>}
+					afterCaption={element.lvl_up && "Доступно повышение"}
+				>
+					{element.name}
+				</RichCell>
 			</Card>
-
 		);
 	}
 
 	function createInfo(date, prio) {
 		return (
-			<CardGrid key="infoBlock" id="infoBlock" size='m'>
-				<Card key="last_game">
-					<Header mode="primary">Последняя партия</Header>
-					<SimpleCell before={<Icon28CalendarOutline width={24} height={24} />}>{date}</SimpleCell>
-				</Card>
-				<Card key="prio">
-					<Header mode="primary">Приоритет</Header>
-					<SimpleCell before={<Icon28CrownOutline width={24} height={24} />}> {prio}</SimpleCell>
-				</Card>
-			</CardGrid>
+			<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain">
+				<CardGrid key="infoBlock" id="infoBlock" size='l'>
+					<Card mode="plain" key="last_game">
+						<Group header={<Header mode="primary">Последняя партия</Header>} mode="plain">
+							<SimpleCell before={<Icon28CalendarOutline width={24} height={24} />}>
+								<InfoRow header="Дата партии">{date}</InfoRow>
+							</SimpleCell>
+							<SimpleCell before={<Icon24BookmarkOutline width={24} height={24}/>}>
+								<InfoRow header="Название партии">{advName}</InfoRow>
+							</SimpleCell>
+						</Group>
+					</Card>
+					<Card mode="plain">
+						<Group header={<Header mode="primary">Приоритет</Header>} mode="plain">
+							<SimpleCell before={<Icon28CrownOutline width={24} height={24} />}>
+								<InfoRow>{prio}</InfoRow>
+							</SimpleCell>
+						</Group>
+					</Card>
+				</CardGrid>
+			</Group>
 		);
 	}
 
@@ -114,6 +125,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 			})
 			setCharacters(data.chars)
 			setDate(data.date)
+			setAdvName(data.adv_name)
 			setPrio(data.prio)
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
