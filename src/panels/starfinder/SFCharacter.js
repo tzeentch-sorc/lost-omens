@@ -5,7 +5,7 @@ import {
 	Header, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, CardGrid, Card, Div, SplitCol, SplitLayout
 } from '@vkontakte/vkui';
-import { Icon28SparkleOutline, Icon28TouchIdOutline } from '@vkontakte/icons'
+import { Icon56Stars3Outline, Icon28TouchIdOutline } from '@vkontakte/icons'
 import { SF_GOOGLE_SCRIPTS_BASE_URL } from './SFCampaignPanel.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -54,7 +54,7 @@ const SFCharacter = () => {
 			<SplitLayout popout={popout}>
 				<SplitCol>
 					{charId && lvl > 0 && exp > 0 &&
-						<Group>
+						<Group mode="plain">
 							<CardGrid size="m" >
 								<Card key="full_name">
 									<Header mode="primary">ID</Header>
@@ -62,7 +62,7 @@ const SFCharacter = () => {
 								</Card>
 								<Card key="level">
 									<Header mode="primary">Уровень и опыт</Header>
-									<SimpleCell before={<Icon28SparkleOutline width={24} height={24} />}>{lvl} ({exp} XP)</SimpleCell>
+									<SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>{lvl} ({exp} XP)</SimpleCell>
 								</Card>
 							</CardGrid>
 							<CardGrid size="l" >

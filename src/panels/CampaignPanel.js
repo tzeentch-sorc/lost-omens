@@ -25,7 +25,7 @@ const CampaignPanel = ({ fetchedUser }) => {
 
 	const [characters, setCharacters] = useState([])
 	const [date, setDate] = useState("-")
-	const [advName, setAdvName] = useState("неизвестное приключение")
+	const [advName, setAdvName] = useState("Неизвестное приключение")
 	const [prio, setPrio] = useState()
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 

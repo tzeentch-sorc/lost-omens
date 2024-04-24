@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import bridge from "@vkontakte/vk-bridge";
 import App from "./App";
 import { createHashRouter, RouterProvider } from '@vkontakte/vk-mini-apps-router';
@@ -42,7 +42,9 @@ const router = createHashRouter([
   }
 ]);
 
-ReactDOM.render((
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
   <ConfigProvider>
     <AdaptivityProvider>
       <AppRoot>
@@ -52,8 +54,7 @@ ReactDOM.render((
       </AppRoot>
     </AdaptivityProvider>
   </ConfigProvider>
-)
-  , document.getElementById("root"));
+);
 if (process.env.NODE_ENV === "development") {
   import("./eruda").then(({ default: eruda }) => { }); //runtime download
 }
