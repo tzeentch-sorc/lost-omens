@@ -6,9 +6,9 @@ import { useActiveVkuiLocation, useGetPanelForView } from '@vkontakte/vk-mini-ap
 
 import '@vkontakte/vkui/dist/vkui.css';
 
-import CampaignPanel from './panels/CampaignPanel.js';
+import LOCampaignPanel from './panels/lost_omens/LOCampaignPanel.js';
 import Intro from './panels/Intro.js';
-import Character from './panels/Character.js';
+import LOCharacter from './panels/lost_omens/LOCharacter.js';
 import SFCampaignPanel from './panels/starfinder/SFCampaignPanel.js';
 import SFCharacter from './panels/starfinder/SFCharacter.js';
 
@@ -52,8 +52,8 @@ const App = (router) => {
 				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} />
 			</View>
 			<View activePanel={activePanel} nav='lost_omens'>
-				<CampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				<Character id={ROUTES.CHAR}/>
+				<LOCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+				<LOCharacter id={ROUTES.CHAR}/>
 			</View>
 			<View activePanel={activePanel} nav='starfinder'>
 				<SFCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />

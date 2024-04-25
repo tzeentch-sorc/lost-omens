@@ -9,9 +9,6 @@ import { Icon56Stars3Outline, Icon28TouchIdOutline } from '@vkontakte/icons'
 import { SF_GOOGLE_SCRIPTS_BASE_URL } from './SFCampaignPanel.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-
-
-
 const SFCharacter = () => {
 
 	const routeNavigator = useRouteNavigator();

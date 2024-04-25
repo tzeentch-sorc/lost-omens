@@ -6,13 +6,13 @@ import {
 	ScreenSpinner, CardGrid, Card, SplitCol, SplitLayout
 } from '@vkontakte/vkui';
 import { Icon28HourglassOutline, Icon36CoinsStacks3Outline } from '@vkontakte/icons'
-import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
+import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 
 
 
-const Character = () => {
+const LOCharacter = () => {
 
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
@@ -77,4 +77,4 @@ const Character = () => {
 	);
 };
 
-export default Character;
+export default LOCharacter;
