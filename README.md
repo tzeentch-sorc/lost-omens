@@ -19,7 +19,7 @@ This guide contains only necessary steps from [VK mini app start guide](https://
 Used Toolset:
 | Tool | Version |
 |---|---|
-| NodeJs  | 16.20.2 |
+| NodeJs  | 20.12.2 |
 | MS Visual Studio (C++ tools) | 2022 (MSVC v143 latest) | 
 
 1. Install required NodeJs version
@@ -30,7 +30,7 @@ Used Toolset:
 
 ##### To run
 1. Run `npm start` - to run app locally
-2. Run `npm run tunnel` - to connect app to VK, in order to get user info
+2. Run `vk-tunnel --insecure=0 --http-protocol=https --ws-protocol=wss --host=localhost --port=10888 --timeout=5000` - to connect app to VK, in order to get user info
 3. Open link which is provided in logs and set it in vk app settings
 4. Open `vk.com/app51758531` 
 

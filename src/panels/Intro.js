@@ -7,7 +7,8 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 
 const CAMPAIGNS = {
-    LOST_OMENS: "Lost Omens (PF 2e)"
+    LOST_OMENS: "Lost Omens (PF 2e)",
+    SF: "Уроборос (Starfinder)"
 }
 
 const Intro = ({ fetchedUser}) => {
@@ -15,13 +16,12 @@ const Intro = ({ fetchedUser}) => {
     const [params, setParams] = useSearchParams();
 
     return (
-        <Panel centered={true} nav='intro'>
+        <Panel nav='intro'>
             <PanelHeader>
                 Добро пожаловать
             </PanelHeader>
             {fetchedUser &&
-                <Fragment>
-                    <Group>
+                <Group padding="s">
                         <Div className="Intro">
                             {fetchedUser.photo_200 && <Avatar src={fetchedUser.photo_200} />}
                             <h2>Привет, {fetchedUser.first_name}!</h2>
@@ -30,22 +30,32 @@ const Intro = ({ fetchedUser}) => {
                         <Spacing>
                             <Separator />
                         </Spacing>
-                        <Div style={{ textAlign: "justify" }}>
+                        <Div style={{ textAlign: "center" }}>
                             <p>Здесь можно будет посмотреть состояние персонажей во всех наших ролевых мегакампаниях.</p>
                         </Div>
-                    </Group>
-                    <FixedLayout vertical="bottom">
+                        <Spacing>
+                            <Separator />
+                        </Spacing>
                         <Div>
                             <Button stretched appearance="positive" size="l" onClick={() => {
                                 params.set('CampaignName', CAMPAIGNS.LOST_OMENS)
                                 setParams(params)
-                                routeNavigator.push('/campaign', {keepSearchParams: true})
+                                routeNavigator.push('/campaign/lost_omens', {keepSearchParams: true})
                             }}>
                                 Кампания {CAMPAIGNS.LOST_OMENS}
                             </Button>
                         </Div>
-                    </FixedLayout>
-                </Fragment>
+
+                        <Div>
+                            <Button stretched appearance="positive" size="l" onClick={() => {
+                                params.set('CampaignName', CAMPAIGNS.SF)
+                                setParams(params)
+                                routeNavigator.push('/campaign/starfinder', {keepSearchParams: true})
+                            }}>
+                                Кампания {CAMPAIGNS.SF}
+                            </Button>
+                        </Div> 
+                </Group>
             }
         </Panel>
     )

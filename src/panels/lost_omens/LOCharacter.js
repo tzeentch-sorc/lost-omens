@@ -3,16 +3,16 @@ import axios from 'axios';
 import {
 	Panel, SimpleCell, InfoRow,
 	Header, Group, PanelHeaderBack, PanelHeader,
-	ScreenSpinner, CardGrid, Card
+	ScreenSpinner, CardGrid, Card, SplitCol, SplitLayout
 } from '@vkontakte/vkui';
 import { Icon28HourglassOutline, Icon36CoinsStacks3Outline } from '@vkontakte/icons'
-import { GOOGLE_SCRIPTS_BASE_URL } from '../App.js'
+import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 
 
 
-const Character = () => {
+const LOCharacter = () => {
 
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
@@ -42,35 +42,39 @@ const Character = () => {
 			setInventory(data.inventory);
 			setGold(data.gold);
 			setDowntime(data.downtime);
-			setPopout(null);
 			setDowntime(data.downtime);
+			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
+			setTimeout(() => setPopout(null), 1000);
 		}
 		fetchData();
 	}, []);
 
 	return (
-		<Panel popout={popout} nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign', {keepSearchParams: true})} />}>
-
+		<Panel nav='char'>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/lost_omens', { keepSearchParams: true })} />}>
 				{charName}
 			</PanelHeader>
-			<Group>
-				<CardGrid size='m'>
-					<Card >
-						<Header mode="primary">Золото</Header>
-						<SimpleCell before={<Icon36CoinsStacks3Outline width={24} height={24} />}>{gold}</SimpleCell>
-					</Card>
-					<Card>
-						<Header mode="primary">Даунтайм</Header>
-						<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime}</SimpleCell>
-					</Card>
-				</CardGrid>
-			</Group>
-			<Group header={<Header mode="primary">Инвентарь</Header>}>
-				{inventory && inventory.map(e => createRow(e))}
-			</Group>
+			<SplitLayout popout={popout}>
+				<SplitCol>
+					<Group>
+						<CardGrid size='m'>
+							<Card key="gold">
+								<Header mode="primary">Золото</Header>
+								<SimpleCell before={<Icon36CoinsStacks3Outline width={24} height={24} />}>{gold}</SimpleCell>
+							</Card>
+							<Card key="downtime">
+								<Header mode="primary">Даунтайм</Header>
+								<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime}</SimpleCell>
+							</Card>
+						</CardGrid>
+					</Group>
+					<Group header={<Header mode="primary">Инвентарь</Header>}>
+						{inventory && inventory.map(e => createRow(e))}
+					</Group>
+				</SplitCol>
+			</SplitLayout>
 		</Panel>
 	);
 };
 
-export default Character;
+export default LOCharacter;

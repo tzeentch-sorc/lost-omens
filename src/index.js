@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import bridge from "@vkontakte/vk-bridge";
 import App from "./App";
 import { createHashRouter, RouterProvider } from '@vkontakte/vk-mini-apps-router';
@@ -21,29 +21,40 @@ const router = createHashRouter([
     view: 'default',
   },
   {
-    path: '/campaign',
+    path: '/campaign/lost_omens',
     panel: 'campaign',
-    view: 'default',
+    view: 'lost_omens',
   },
   {
-    path: '/char',
+    path: '/char/lost_omens',
     panel: 'char',
-    view: 'default',
+    view: 'lost_omens',
   },
+  {
+    path: '/campaign/starfinder',
+    panel: 'campaign',
+    view: 'starfinder',
+  },
+  {
+    path: '/char/starfinder',
+    panel: 'char',
+    view: 'starfinder',
+  }
 ]);
 
-ReactDOM.render((
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
   <ConfigProvider>
     <AdaptivityProvider>
       <AppRoot>
-        <RouterProvider router={router}>
+        <RouterProvider router={router} notFound={<p>Ничегошеньки!</p>}>
           <App />
         </RouterProvider>
       </AppRoot>
     </AdaptivityProvider>
   </ConfigProvider>
-)
-  , document.getElementById("root"));
+);
 if (process.env.NODE_ENV === "development") {
   import("./eruda").then(({ default: eruda }) => { }); //runtime download
 }
