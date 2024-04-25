@@ -48,7 +48,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		}
 	}
 
-	function createCard(element) {
+	function createCard(elem) {
 		return (
 			<SFCharCard element={elem} key={elem.name + "_sf_card"} openAction={() => openAlert(elem)} />
 		);
@@ -56,7 +56,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(SF_GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {//TODO id306494424 + fetchedUser.screen_name
+			const data = await axios.get(SF_GOOGLE_SCRIPTS_BASE_URL + "?id=emmalain").then(resp => {//TODO id306494424 + fetchedUser.screen_name
 				return resp.data
 			});
 
