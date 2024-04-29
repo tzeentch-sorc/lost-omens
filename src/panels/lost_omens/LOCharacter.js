@@ -39,12 +39,13 @@ const LOCharacter = () => {
 			const data = await axios.post(GOOGLE_SCRIPTS_BASE_URL + "?id=" + charName).then(resp => {
 				return resp.data
 			})
-			setInventory(data.inventory);
+			setInventory(data.inventory.sort((a, b) => b[1] - a[1]));
 			setGold(data.gold);
 			setDowntime(data.downtime);
 			setDowntime(data.downtime);
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
+			console.log(data.inventory)
 		}
 		fetchData();
 	}, []);
