@@ -44,9 +44,9 @@ const LOCharacter = () => {
 			}
 		} else {
 			var tmpexp = exp - 6000;
-			if (tmpexp - (lvl-1) * 1500 == 0) {
+			if (tmpexp - (lvl-7) * 1500 == 0) {
 				return 3;
-			} else if (tmpexp - lvl * 1500 == 500) {
+			} else if (tmpexp - (lvl-7) * 1500 == 500) {
 				return 2;
 			} else {
 				return 1;
