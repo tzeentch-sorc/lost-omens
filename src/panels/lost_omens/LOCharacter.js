@@ -123,28 +123,28 @@ const LOCharacter = () => {
 						}}
 					/>
 					{selected === 'inventory' && (
-				<Group id="tab-content-inventory" aria-labelledby="tab-inventory" role="tabpanel">
-					{inventory && inventory.map(e => createRow(e))}
-				</Group>
-			)}
-			{selected === 'spells' && (
-				<Group
-					id="tab-content-spells"
-					aria-labelledby="tab-spells"
-					role="tabpanel"
-				>
-					Ты думал здесь что-то будет?
-				</Group>
-			)}
-			{selected === 'formulae' && (
-				<Group
-					id="tab-content-formulae"
-					aria-labelledby="tab-formulae"
-					role="tabpanel"
-				>
-					Never gonna give you up...
-				</Group>
-			)}
+						<Group id="tab-content-inventory" aria-labelledby="tab-inventory" role="tabpanel">
+							{inventory && inventory.map(e => createRow(e))}
+						</Group>
+					)}
+					{selected === 'spells' && (
+						<Group
+							id="tab-content-spells"
+							aria-labelledby="tab-spells"
+							role="tabpanel"
+						>
+							Ты думал здесь что-то будет?
+						</Group>
+					)}
+					{selected === 'formulae' && (
+						<Group
+							id="tab-content-formulae"
+							aria-labelledby="tab-formulae"
+							role="tabpanel"
+						>
+							Never gonna give you up...
+						</Group>
+					)}
 				</SplitCol>
 			</SplitLayout>
 		</Panel>
