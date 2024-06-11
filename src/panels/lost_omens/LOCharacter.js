@@ -3,9 +3,13 @@ import axios from 'axios';
 import {
 	Panel, SimpleCell, InfoRow,
 	Header, Group, PanelHeaderBack, PanelHeader,
-	ScreenSpinner, CardGrid, Card, SplitCol, SplitLayout, Tabs, TabsItem
+	ScreenSpinner, CardGrid, Card, SplitCol, SplitLayout, Tabs, TabsItem, Div, Placeholder
 } from '@vkontakte/vkui';
-import { Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon28CubeBoxOutline, Icon28MagicWandOutline, Icon24BookSpreadOutline } from '@vkontakte/icons'
+import {
+	Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon28CubeBoxOutline,
+	Icon28MagicWandOutline, Icon24BookSpreadOutline, Icon28MagicHatOutline, 
+	Icon28MortarOutline, Icon56DiamondOutline
+} from '@vkontakte/icons'
 import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -18,6 +22,8 @@ const LOCharacter = () => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const [inventory, setInventory] = useState();
+	const [spellList, setSpellList] = useState();
+	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
 	const [downtime, setDowntime] = useState(0);
 
@@ -44,8 +50,9 @@ const LOCharacter = () => {
 				return resp.data
 			})
 			setInventory(data.inventory.sort((a, b) => b[1] - a[1]));
+			setSpellList(data.spells);
+			setFormulae(data.formulae);
 			setGold(data.gold);
-			setDowntime(data.downtime);
 			setDowntime(data.downtime);
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
@@ -114,37 +121,79 @@ const LOCharacter = () => {
 								<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime}</SimpleCell>
 							</Card>
 						</CardGrid>
+						<DefaultInPanel
+							selected={selected}
+							setSelected={setSelected}
+							onMenuClick={(opened) => {
+								setMenuOpened((prevState) => (opened ? !prevState : false));
+							}}
+						/>
+						{selected === 'inventory' && (!inventory || inventory.length < 1) && (
+							<Group id="tab-content-inventory" aria-labelledby="tab-inventory" role="tabpanel" mode="plain">
+								<Placeholder icon={<Icon56DiamondOutline width={56} height={56} />} header="Здесь будtт ваш инвентарь">
+									<Div>
+										Сходи, закупись, не скупись!
+									</Div>
+								</Placeholder>
+							</Group>
+						)}
+						{selected === 'inventory' && inventory && inventory.length >= 1 && (
+							<Group id="tab-content-inventory" aria-labelledby="tab-inventory" role="tabpanel" mode="plain">
+								{inventory && inventory.map(e => createRow(e))}
+							</Group>
+						)}
+						{selected === 'spells'&& (!spellList || spellList.length < 1) && (
+							<Group
+								id="tab-content-spells"
+								aria-labelledby="tab-spells"
+								role="tabpanel"
+								mode="plain"
+							>
+								<Placeholder icon={<Icon28MagicHatOutline width={56} height={56} />} header="Здесь будут ваши заклинания">
+									<Div>
+										Ты думал здесь что-то будет?
+									</Div>
+								</Placeholder>
+
+							</Group>
+						)}
+						{selected === 'spells' && spellList && spellList.length >= 1 && (
+							<Group
+								id="tab-content-spells"
+								aria-labelledby="tab-spells"
+								role="tabpanel"
+								mode="plain"
+							>
+								{spellList && spellList.map(e => createRow(e))}
+
+							</Group>
+						)}
+						{selected === 'formulae'&& (!formulae || formulae.length < 1) && (
+							<Group
+								id="tab-content-formulae"
+								aria-labelledby="tab-formulae"
+								role="tabpanel"
+								mode="plain"
+							>
+								<Placeholder icon={<Icon28MortarOutline width={56} height={56} />} header="Здесь будут ваши формулы">
+									<Div>
+										Never gonna give you up...
+									</Div>
+								</Placeholder>
+
+							</Group>
+						)}
+						{selected === 'formulae' && formulae && formulae.length >= 1 && (
+							<Group
+								id="tab-content-formulae"
+								aria-labelledby="tab-formulae"
+								role="tabpanel"
+								mode="plain"
+							>
+								{formulae && formulae.map(e => createRow(e))}
+							</Group>
+						)}
 					</Group>
-					<DefaultInPanel
-						selected={selected}
-						setSelected={setSelected}
-						onMenuClick={(opened) => {
-							setMenuOpened((prevState) => (opened ? !prevState : false));
-						}}
-					/>
-					{selected === 'inventory' && (
-						<Group id="tab-content-inventory" aria-labelledby="tab-inventory" role="tabpanel">
-							{inventory && inventory.map(e => createRow(e))}
-						</Group>
-					)}
-					{selected === 'spells' && (
-						<Group
-							id="tab-content-spells"
-							aria-labelledby="tab-spells"
-							role="tabpanel"
-						>
-							Ты думал здесь что-то будет?
-						</Group>
-					)}
-					{selected === 'formulae' && (
-						<Group
-							id="tab-content-formulae"
-							aria-labelledby="tab-formulae"
-							role="tabpanel"
-						>
-							Never gonna give you up...
-						</Group>
-					)}
 				</SplitCol>
 			</SplitLayout>
 		</Panel>
