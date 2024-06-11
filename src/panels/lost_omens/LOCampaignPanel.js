@@ -70,7 +70,6 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 		fetchData()
 	}, []);
 
-
 	if (characters.length < 1 && prio != -1) {
 		//no chars found
 		return (
