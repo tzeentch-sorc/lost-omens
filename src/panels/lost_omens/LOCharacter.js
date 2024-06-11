@@ -9,7 +9,7 @@ import { Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline,
 import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import './Character.css'
+import '../Character.css'
 
 
 
@@ -117,120 +117,6 @@ const LOCharacter = () => {
 			</Tabs>
 		);
 	};
-
-	/*
-		const Scrollable = () => {
-			const [mode, setMode] = React.useState('default');
-			const [layoutFillMode, setLayoutFillMode] = React.useState('auto');
-			const [selected, setSelected] = React.useState('news');
-			const [disabled, setDisabled] = React.useState(false);
-	
-			return (
-				<Group>
-					<Tabs
-						mode={mode}
-						layoutFillMode={layoutFillMode}
-						withScrollToSelectedTab
-						scrollBehaviorToSelectedTab="center"
-					>
-						<HorizontalScroll arrowSize="m">
-							<TabsItem
-								selected={selected === 'groups'}
-								disabled={disabled}
-								onClick={() => setSelected('groups')}
-							>
-								Сообщества
-							</TabsItem>
-							<TabsItem
-								before={mode === 'default' ? <Icon24NewsfeedOutline /> : <Icon20NewsfeedOutline />}
-								after={<Icon16Dropdown />}
-								selected={selected === 'news'}
-								disabled={disabled}
-								onClick={() => setSelected('news')}
-							>
-								Лента
-							</TabsItem>
-							<TabsItem
-								before={mode === 'default' ? <Icon24ThumbsUpOutline /> : <Icon20ThumbsUpOutline />}
-								status={<Badge mode="prominent">Есть новые</Badge>}
-								after={<Icon16Dropdown />}
-								selected={selected === 'recommendations'}
-								disabled={disabled}
-								onClick={() => setSelected('recommendations')}
-							>
-								Рекомендации
-							</TabsItem>
-							<TabsItem
-								before={mode === 'default' ? <Icon24UsersOutline /> : <Icon20UsersOutline />}
-								status={
-									<Counter mode="prominent" size="s">
-										3
-									</Counter>
-								}
-								after={<Icon16Dropdown />}
-								selected={selected === 'friends'}
-								disabled={disabled}
-								onClick={() => setSelected('friends')}
-							>
-								Друзья
-							</TabsItem>
-							<TabsItem
-								before={mode === 'default' ? <Icon24PictureOutline /> : <Icon20PictureOutline />}
-								status={23}
-								after={<Icon16Dropdown />}
-								selected={selected === 'photos'}
-								disabled={disabled}
-								onClick={() => setSelected('photos')}
-							>
-								Фотографии
-							</TabsItem>
-						</HorizontalScroll>
-					</Tabs>
-					<FormItem top="mode">
-						<CustomSelect
-							value={mode}
-							options={[
-								{
-									label: 'default',
-									value: 'default',
-								},
-								{
-									label: 'accent',
-									value: 'accent',
-								},
-								{
-									label: 'secondary',
-									value: 'secondary',
-								},
-							]}
-							onChange={(event) => setMode(event.target.value)}
-						/>
-					</FormItem>
-					<FormItem top="layoutFillMode">
-						<CustomSelect
-							value={layoutFillMode}
-							options={[
-								{
-									label: 'auto',
-									value: 'auto',
-								},
-								{
-									label: 'stretched',
-									value: 'stretched',
-								},
-								{
-									label: 'shrinked',
-									value: 'shrinked',
-								},
-							]}
-							onChange={(event) => setLayoutFillMode(event.target.value)}
-						/>
-					</FormItem>
-					<Checkbox onChange={() => setDisabled((prev) => !prev)}>disabled</Checkbox>
-				</Group>
-			);
-		};
-	*/
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/lost_omens', { keepSearchParams: true })} />}>
