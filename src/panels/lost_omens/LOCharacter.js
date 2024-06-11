@@ -36,19 +36,19 @@ const LOCharacter = () => {
 	}
 
 	function countGames(exp, lvl) {
-		if (lvl && lvl<7){
-			if(exp-lvl*1000>0){
+		if (lvl && lvl < 7) {
+			if (exp - (lvl-1) * 1000 > 0) {
 				return 1;
-			}else{
+			} else {
 				return 2;
 			}
 		} else {
-			var tmpexp = exp-6000;
-			if(tmpexp-lvl*1500==0){
+			var tmpexp = exp - 6000;
+			if (tmpexp - (lvl-1) * 1500 == 0) {
 				return 3;
-			}else if(tmpexp-lvl*1500==500){
+			} else if (tmpexp - lvl * 1500 == 500) {
 				return 2;
-			}else{
+			} else {
 				return 1;
 			}
 		}
@@ -93,14 +93,15 @@ const LOCharacter = () => {
 							<Card key="experience">
 								<Header mode="primary">Опыт</Header>
 								<SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
-									{experience && (experience)} {!experience && (" ??? ")} XP 
+									{experience && (experience)} {!experience && (" ??? ")} XP
 								</SimpleCell>
 							</Card>
 							<Card key="lvlcountdown">
-								<Header mode="primary">Партий до {level && (parseInt(level, 10)+1)} {!level && (" ??? ")} 
-								уровня</Header>
+								<Header mode="primary">
+									Партий до {level && (parseInt(level, 10) + 1)} {!level && (" ??? ")} ур.
+								</Header>
 								<SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
-								 	 {experience && level && (countGames(experience, level))} 
+									{experience && level && (countGames(experience, level))}
 									{(!experience || !level) && (" ??? ")}
 								</SimpleCell>
 							</Card>
