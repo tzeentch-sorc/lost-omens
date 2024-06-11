@@ -57,7 +57,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {
+			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + "id140794487").then(resp => {//fetchedUser.screen_name
 				return resp.data
 			})
 			setCharacters(data.chars)
