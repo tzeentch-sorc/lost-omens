@@ -86,7 +86,7 @@ const LOCharacter = () => {
 							</Card>
 							<Card key="downtime">
 								<Header mode="primary">Даунтайм</Header>
-								<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime}</SimpleCell>
+								<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime} / 56 дней</SimpleCell>
 							</Card>
 						</CardGrid>
 						<CardGrid size='m'>
