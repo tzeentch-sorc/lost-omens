@@ -3,13 +3,14 @@ import { createRoot } from "react-dom/client";
 import bridge from "@vkontakte/vk-bridge";
 import App from "./App";
 import { createHashRouter, RouterProvider } from '@vkontakte/vk-mini-apps-router';
-import { AdaptivityProvider, AppRoot, ConfigProvider } from '@vkontakte/vkui';
+import { AdaptivityProvider, useAppearance, AppRoot, ConfigProvider } from '@vkontakte/vkui';
 
 
 //TODO custom styles
 import '@vkontakte/vkui/dist/components.css';
 import '@vkontakte/vkui-tokens/themes/vkCom/cssVars/declarations/onlyVariables.css';
 import '@vkontakte/vkui-tokens/themes/vkComDark/cssVars/declarations/onlyVariablesLocal.css';
+import '@vkontakte/vkui/dist/vkui.css'
 
 // Init VK Mini App
 bridge.send("VKWebAppInit");
@@ -44,8 +45,9 @@ const router = createHashRouter([
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+const theme = ()=>useAppearance();
 root.render(
-  <ConfigProvider>
+  <ConfigProvider appearance={theme === 'light' ? 'light' : 'dark'}>
     <AdaptivityProvider>
       <AppRoot>
         <RouterProvider router={router} notFound={<p>Ничегошеньки!</p>}>
