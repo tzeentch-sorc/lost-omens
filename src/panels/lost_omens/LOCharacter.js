@@ -5,7 +5,7 @@ import {
 	Header, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, CardGrid, Card, SplitCol, SplitLayout
 } from '@vkontakte/vkui';
-import { Icon28HourglassOutline, Icon36CoinsStacks3Outline } from '@vkontakte/icons'
+import { Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline, Icon28HourglassErrorBadgeOutline } from '@vkontakte/icons'
 import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -19,6 +19,8 @@ const LOCharacter = () => {
 	const [inventory, setInventory] = useState();
 	const [gold, setGold] = useState(0);
 	const [downtime, setDowntime] = useState(0);
+	const [experience, setExperience] = useState();
+	const [level, setLevel] = useState();
 
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
@@ -33,6 +35,25 @@ const LOCharacter = () => {
 		);
 	}
 
+	function countGames(exp, lvl) {
+		if (lvl && lvl<7){
+			if(exp-lvl*1000>0){
+				return 1;
+			}else{
+				return 2;
+			}
+		} else {
+			var tmpexp = exp-6000;
+			if(tmpexp-lvl*1500==0){
+				return 3;
+			}else if(tmpexp-lvl*1500==500){
+				return 2;
+			}else{
+				return 1;
+			}
+		}
+	}
+
 
 	useEffect(() => {
 		async function fetchData() {
@@ -41,7 +62,8 @@ const LOCharacter = () => {
 			})
 			setInventory(data.inventory.sort((a, b) => b[1] - a[1]));
 			setGold(data.gold);
-			setDowntime(data.downtime);
+			setExperience(data.exp);
+			setLevel(data.lvl);
 			setDowntime(data.downtime);
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
@@ -49,7 +71,6 @@ const LOCharacter = () => {
 		}
 		fetchData();
 	}, []);
-
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/lost_omens', { keepSearchParams: true })} />}>
@@ -65,7 +86,23 @@ const LOCharacter = () => {
 							</Card>
 							<Card key="downtime">
 								<Header mode="primary">Даунтайм</Header>
-								<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime}</SimpleCell>
+								<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime} / 56 дней</SimpleCell>
+							</Card>
+						</CardGrid>
+						<CardGrid size='m'>
+							<Card key="experience">
+								<Header mode="primary">Опыт</Header>
+								<SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
+									{experience && (experience)} {!experience && (" ??? ")} XP 
+								</SimpleCell>
+							</Card>
+							<Card key="lvlcountdown">
+								<Header mode="primary">Партий до {level && (parseInt(level, 10)+1)} {!level && (" ??? ")} 
+								уровня</Header>
+								<SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
+								 	 {experience && level && (countGames(experience, level))} 
+									{(!experience || !level) && (" ??? ")}
+								</SimpleCell>
 							</Card>
 						</CardGrid>
 					</Group>
