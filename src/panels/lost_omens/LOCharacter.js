@@ -3,10 +3,13 @@ import axios from 'axios';
 import {
 	Panel, SimpleCell, InfoRow,
 	Header, Group, PanelHeaderBack, PanelHeader,
-	ScreenSpinner, CardGrid, Card, SplitCol, SplitLayout, Tabs, TabsItem, Div, Placeholder
+	ScreenSpinner, CardGrid, Card, SplitCol, 
+	SplitLayout, Tabs, TabsItem, Div, Placeholder, 
+	Tabs, TabsItem, Div, Placeholder
 } from '@vkontakte/vkui';
 import {
-	Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline, Icon28HourglassErrorBadgeOutline, Icon28CubeBoxOutline,
+	Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline, 
+	Icon28HourglassErrorBadgeOutline, Icon28CubeBoxOutline,
 	Icon28MagicWandOutline, Icon24BookSpreadOutline, Icon28MagicHatOutline, 
 	Icon28MortarOutline, Icon56DiamondOutline
 } from '@vkontakte/icons'
@@ -84,47 +87,6 @@ const LOCharacter = () => {
 		fetchData();
 	}, []);
 
-	const DefaultInPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
-		return (
-			<Tabs>
-				<TabsItem
-					selected={selected === 'inventory'}
-					onClick={() => {
-						if (selected === 'inventory') {
-							onMenuClick(true);
-						}
-						setSelected('inventory');
-					}}
-					id="tab-inventory"
-					aria-controls="tab-content-inventory"
-				>
-					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}> <div class="not4mob">Инвентарь</div></SimpleCell>
-				</TabsItem>
-				<TabsItem
-					selected={selected === 'spells'}
-					onClick={() => {
-						onMenuClick(false);
-						setSelected('spells');
-					}}
-					id="tab-spells"
-					aria-controls="tab-content-spells"
-				>
-					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}> <div class="not4mob">Заклинания</div></SimpleCell>
-				</TabsItem>
-				<TabsItem
-					selected={selected === 'formulae'}
-					onClick={() => {
-						onMenuClick(false);
-						setSelected('formulae');
-					}}
-					id="tab-formulae"
-					aria-controls="tab-content-formulae"
-				>
-					<SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}> <div class="not4mob">Формулы</div> </SimpleCell>
-				</TabsItem>
-			</Tabs>
-		);
-	};
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/lost_omens', { keepSearchParams: true })} />}>
