@@ -16,7 +16,8 @@ import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import '../Character.css'
-
+import InventorySettings from './LOInventorySettings.js'
+import CharBuildSettings from './LOCharBuildSettings.js'
 
 
 const LOCharacter = () => {
@@ -69,6 +70,15 @@ const LOCharacter = () => {
 
 	useEffect(() => {
 		async function fetchData() {
+			//попытка получить через spreadsheetApp
+			let inventoryData = await InventorySettings.getFilteredQuery("player", "Александр Софрыгин");
+			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
+			console.log("inventory data", inventoryData);
+			console.log("character build data", characterBuildData);
+			let allData = await CharBuildSettings.getQueryAll();
+			console.log("all data", allData);
+
+			//старое
 			const data = await axios.post(GOOGLE_SCRIPTS_BASE_URL + "?id=" + charName).then(resp => {
 				return resp.data
 			})
@@ -81,7 +91,7 @@ const LOCharacter = () => {
 			setDowntime(data.downtime);
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
-			console.log(data.inventory)
+			//console.log(data.inventory);
 		}
 		fetchData();
 	}, []);
@@ -99,7 +109,7 @@ const LOCharacter = () => {
 					id="tab-inventory"
 					aria-controls="tab-content-inventory"
 				>
-					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}> <div class="not4mob">Инвентарь</div></SimpleCell>
+					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}> <div className="not4mob">Инвентарь</div></SimpleCell>
 				</TabsItem>
 				<TabsItem
 					selected={selected === 'spells'}
@@ -110,7 +120,7 @@ const LOCharacter = () => {
 					id="tab-spells"
 					aria-controls="tab-content-spells"
 				>
-					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}> <div class="not4mob">Заклинания</div></SimpleCell>
+					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}> <div className="not4mob">Заклинания</div></SimpleCell>
 				</TabsItem>
 				<TabsItem
 					selected={selected === 'formulae'}
@@ -121,7 +131,7 @@ const LOCharacter = () => {
 					id="tab-formulae"
 					aria-controls="tab-content-formulae"
 				>
-					<SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}> <div class="not4mob">Формулы</div> </SimpleCell>
+					<SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}> <div className="not4mob">Формулы</div> </SimpleCell>
 				</TabsItem>
 			</Tabs>
 		);
@@ -170,8 +180,12 @@ const LOCharacter = () => {
 							}}
 						/>
 						{selected === 'inventory' && (!inventory || inventory.length < 1) && (
-							<Group id="tab-content-inventory" aria-labelledby="tab-inventory" role="tabpanel" mode="plain">
-								<Placeholder icon={<Icon56DiamondOutline width={56} height={56} />} header="Здесь будtт ваш инвентарь">
+							<Group 
+								id="tab-content-inventory" 
+								aria-controls="tab-inventory" 
+								role="tabpanel" 
+								mode="plain">
+								<Placeholder icon={<Icon56DiamondOutline width={56} height={56} />} header="Здесь будет ваш инвентарь">
 									<Div>
 										Сходи, закупись, не скупись!
 									</Div>
@@ -179,14 +193,18 @@ const LOCharacter = () => {
 							</Group>
 						)}
 						{selected === 'inventory' && inventory && inventory.length >= 1 && (
-							<Group id="tab-content-inventory" aria-labelledby="tab-inventory" role="tabpanel" mode="plain">
+							<Group 
+								id="tab-content-inventory" 
+								aria-controls="tab-inventory" 
+								role="tabpanel" 
+								mode="plain">
 								{inventory && inventory.map(e => createRow(e))}
 							</Group>
 						)}
 						{selected === 'spells'&& (!spellList || spellList.length < 1) && (
 							<Group
 								id="tab-content-spells"
-								aria-labelledby="tab-spells"
+								aria-controls="tab-spells"
 								role="tabpanel"
 								mode="plain"
 							>
@@ -201,7 +219,7 @@ const LOCharacter = () => {
 						{selected === 'spells' && spellList && spellList.length >= 1 && (
 							<Group
 								id="tab-content-spells"
-								aria-labelledby="tab-spells"
+								aria-controls="tab-spells"
 								role="tabpanel"
 								mode="plain"
 							>
@@ -212,7 +230,7 @@ const LOCharacter = () => {
 						{selected === 'formulae'&& (!formulae || formulae.length < 1) && (
 							<Group
 								id="tab-content-formulae"
-								aria-labelledby="tab-formulae"
+								aria-controls="tab-formulae"
 								role="tabpanel"
 								mode="plain"
 							>
@@ -227,7 +245,7 @@ const LOCharacter = () => {
 						{selected === 'formulae' && formulae && formulae.length >= 1 && (
 							<Group
 								id="tab-content-formulae"
-								aria-labelledby="tab-formulae"
+								aria-controls="tab-formulae"
 								role="tabpanel"
 								mode="plain"
 							>
