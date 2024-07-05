@@ -29,7 +29,7 @@ const SFNoCharsPage = ({campaignName, user, }) => {
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',
 					params: {
-						user_ids: 'faa_magic, rizaevns, iaroslavvvv, ferrafenex, never_tell_never',
+						user_ids: 'iaroslavvvv, rizaevns, wowan001, never_tell_never',
 						v: '5.131',
 						fields: 'screen_name, photo_200',
 						access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
