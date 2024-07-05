@@ -2,17 +2,23 @@
 import fetch from "node-fetch";
 
 function idOf(i) {
-    return (i >= 26 ? idOf(Math.floor(i / 26) - 1) : "") + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i % 26];
+    let res = (i >= 26 ? idOf(Math.floor(i / 26) - 1) : "") + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i % 26]
+    //console.log("idof", i, res)
+    return res;
 }
 function parseSimpleCsv(csv) {
     return csv.split("\n").map(line => line.slice(1, line.length - 1).split("\",\""));
 }
-function requestCsv(sheetId, request) {
+
+async function requestCsv(sheetId, request) {
     let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${request.gid}&range=${request.range}&tqx=out:csv`;
     if ("query" in request) {
+        //console.log(request.query);
         url += `&tq=${encodeURIComponent(request.query)}`;
     }
-    return fetch(url, { method: "GET", mode: 'no-cors' }).then(f => f.text());
+    console.log(url);
+    const f = await fetch(url, { method: "GET", mode: 'no-cors' });
+    return await f.text();
 }
 
 class QuerySettings {
@@ -59,8 +65,8 @@ class QuerySettings {
         let fieldId = this.query.colByField[field];
         let colIDs = this.query.colIDs.filter(i => i !== fieldId);
         let selected = colIDs.map(idOf).join(", ");
-        let queryString = `select ${selected} where ${idOf(fieldId)} = '${value}'`;
-
+        let queryString = `select ${selected} where ${idOf(fieldId)} = "${value}"`;
+        //console.log ("query string",queryString);
         let data = parseSimpleCsv(await requestCsv(this.sheetId, {
             gid: this.gid,
             range: this.range.str,

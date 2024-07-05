@@ -71,7 +71,7 @@ const LOCharacter = () => {
 	useEffect(() => {
 		async function fetchData() {
 			//попытка получить через spreadsheetApp
-			let inventoryData = await InventorySettings.getFilteredQuery("player", "Александр Софрыгин");
+			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
 			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
 			console.log("inventory data", inventoryData);
 			console.log("character build data", characterBuildData);
