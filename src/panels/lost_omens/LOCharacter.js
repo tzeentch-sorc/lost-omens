@@ -71,12 +71,17 @@ const LOCharacter = () => {
 	useEffect(() => {
 		async function fetchData() {
 			//попытка получить через spreadsheetApp
-			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
+			//для инвентаря требуется доработка на стороне таблички
+			//let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
+			//console.log("inventory data", inventoryData);
+
+			//получение черт и заклинаний
 			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
-			console.log("inventory data", inventoryData);
 			console.log("character build data", characterBuildData);
-			let allData = await CharBuildSettings.getQueryAll();
-			console.log("all data", allData);
+
+			//Посмотреть все данные листа
+			//let allData = await CharBuildSettings.getQueryAll();
+			//console.log("all data", allData);
 
 			//старое
 			const data = await axios.post(GOOGLE_SCRIPTS_BASE_URL + "?id=" + charName).then(resp => {

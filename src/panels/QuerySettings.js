@@ -7,18 +7,19 @@ function idOf(i) {
     return res;
 }
 function parseSimpleCsv(csv) {
+    console.log(csv);
     return csv.split("\n").map(line => line.slice(1, line.length - 1).split("\",\""));
 }
 
-async function requestCsv(sheetId, request) {
-    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${request.gid}&range=${request.range}&tqx=out:csv`;
-    if ("query" in request) {
-        //console.log(request.query);
-        url += `&tq=${encodeURIComponent(request.query)}`;
-    }
-    console.log(url);
-    const f = await fetch(url, { method: "GET", mode: 'no-cors' });
-    return await f.text();
+async function requestCsv (sheetId, request) {
+	let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${request.gid}&range=${request.range}&tqx=out:csv`;
+	if ("query" in request) {
+		url += `&tq=${encodeURIComponent(request.query)}`;
+	}
+	const f = await fetch(url, { method: "GET" });
+    let result = await f.text();
+    //console.log(result);
+    return result;
 }
 
 class QuerySettings {
@@ -72,6 +73,7 @@ class QuerySettings {
             range: this.range.str,
             query: queryString,
         }));
+        //console.log(data);
         return data.map(row => this.createObject(colIDs, row));
     }
 
