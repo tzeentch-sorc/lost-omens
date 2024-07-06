@@ -10,15 +10,15 @@ const CharInfoSettings = new QuerySettings({
 		name: "Персонаж",
 		lvl: "Уровень",
 		exp: "Опыт",
-		downtime: "Даунтайм",
-		gold: "Золото"		
+		gold: "Золото",
+		downtime: "Даунтайм"	
 	},
 	query: {
-		colByField: { name: 1, lvl: 3, exp: 6, downtime: 8, gold:7},
-		fieldByCol: { 1: "name", 3: "lvl", 6: "exp", 8: "downtime", 7: "gold" },
-		colIDs: [ 1, 3, 6, 7, 8 ],
+		colByField: { name: 0, lvl: 1, exp: 2, gold:3, downtime: 4},
+		fieldByCol: { 0: "name", 1: "lvl", 2: "exp", 3: "gold", 4: "downtime" },
+		colIDs: [ 0, 1, 2, 3, 4 ],
 	},
-	range: { min: 1, max: 8, str: "B2:I" },
+	range: { min: 0, max: 4, str: "A2:E" },
 });
 
 export default CharInfoSettings;
