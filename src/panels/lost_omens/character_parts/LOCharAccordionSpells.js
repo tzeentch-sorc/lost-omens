@@ -13,7 +13,7 @@ const LOSpells = ({ spellist }) => {
     const data = [
         {
             id: "acc_spell_0",
-            title: 'Чары',
+            title: 'Заговоры',
             detail: 0,
         },
         {
