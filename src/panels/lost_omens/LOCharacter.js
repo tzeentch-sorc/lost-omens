@@ -14,7 +14,6 @@ import {
 } from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import '../Character.css'
 import InventorySettings from './export_settings/LOInventorySettings.js'
 import CharBuildSettings from './export_settings/LOCharBuildSettings.js'
 import CharInfoSettings from './export_settings/LOCharInfoSettings.js'
@@ -86,16 +85,16 @@ const LOCharacter = () => {
 	}
 
 	function hasSpells() {
-		return (spell_0 || spell_1 || spell_2 ||
-			spell_3 || spell_4 || spell_5 || spell_6 ||
-			spell_7 || spell_8 | spell_9 || spell_10
+		return (spell_0[0]!="" || spell_1[0]!="" || spell_2[0]!="" ||
+			spell_3[0]!="" || spell_4[0]!="" || spell_5[0]!="" || spell_6[0]!="" ||
+			spell_7[0]!="" || spell_8[0]!="" | spell_9[0]!="" || spell_10[0]!=""
 		);
 	}
 	function hasFormulae() {
-		return (formulae || false);
+		return (formulae[0]!="");
 	}
 	function hasInventory() {
-		return (inventory || false);
+		return (inventory||false);
 	}
 
 	useEffect(() => {
