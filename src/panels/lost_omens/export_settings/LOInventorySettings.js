@@ -1,11 +1,11 @@
 import QuerySettings from '../../QuerySettings.js';
 
-const sheetId = "1-CYeR6NCErpwoB2DjjhpKh2SHeSCdcVUclP1wuItXq8";
+const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
 
 const InventorySettings = new QuerySettings({
 	sheetId,
-	gid: 712729011, //sheet "Инвентарь"
-	headrow: 3,
+	gid: 346052728, //sheet "inventory"
+	headrow: 2,
 	fields: {
 		name: "Предмет",
 		cost: "Цена",
@@ -17,7 +17,7 @@ const InventorySettings = new QuerySettings({
 		fieldByCol: { 0: "name", 1: "cost", 2: "count", 3: "owner" },
 		colIDs: [ 0, 1, 2, 3 ],
 	},
-	range: { min: 0, max: 3, str: "A3:D" },
+	range: { min: 0, max: 3, str: "A2:D" },
 });
 
 export default InventorySettings;

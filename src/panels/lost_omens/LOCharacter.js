@@ -14,7 +14,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import LOInventoryPlaceholder from './placeholders/LOInventoryPlaceholder.js';
 import LOSpellsPlaceholder from './placeholders/LOSpellsPlaceholder.js';
 import LOFormulaePlaceholder from './placeholders/LOFormulaePlaceholder.js';
-import DefaultInPanel from './LOCharTabPanel.js';
+import LOCharTabPanel from './LOCharTabPanel.js';
 import AccordionSpells from './LOCharAccordionSpells.js';
 
 import InventorySettings from './export_settings/LOInventorySettings.js'
@@ -52,7 +52,7 @@ const LOCharacter = () => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
 
-	function createRow(element) {
+	function createInventoryRow(element) {
 		if (element.count == 0) return;
 		var description = "Количество: " + element.count + "; Цена: " + element.cost;
 		return (
@@ -62,7 +62,7 @@ const LOCharacter = () => {
 		);
 	}
 
-	function createSimpleRow(element) {
+	function createFormulaeRow(element) {
 		return (
 			<SimpleCell multiline key={element}>
 				<InfoRow>{element}</InfoRow>
@@ -186,7 +186,7 @@ const LOCharacter = () => {
 								</SimpleCell>
 							</Card>
 						</CardGrid>
-						<DefaultInPanel
+						<LOCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
 							onMenuClick={(opened) => {
@@ -202,7 +202,7 @@ const LOCharacter = () => {
 								aria-controls="tab-inventory"
 								role="tabpanel"
 								mode="plain">
-								{inventory && inventory.map(e => createRow(e))}
+								{inventory && inventory.map(e => createInventoryRow(e))}
 							</Group>
 						)}
 						{selected === 'spells' && (!hasSpells()) && (
@@ -221,7 +221,7 @@ const LOCharacter = () => {
 								role="tabpanel"
 								mode="plain"
 							>
-								{formulae && formulae.map(e => createSimpleRow(e))}
+								{formulae && formulae.map(e => createFormulaeRow(e))}
 							</Group>
 						)}
 					</Group>

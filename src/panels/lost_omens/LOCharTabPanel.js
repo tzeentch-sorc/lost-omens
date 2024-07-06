@@ -7,7 +7,7 @@ import {
 	Icon28MagicWandOutline, Icon24BookSpreadOutline
 } from '@vkontakte/icons'
 
-const DefaultInPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
+const LOCharTabPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
     return (
         <Tabs>
             <TabsItem
@@ -55,4 +55,4 @@ const DefaultInPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
     );
 };
 
-export default DefaultInPanel;
+export default LOCharTabPanel;

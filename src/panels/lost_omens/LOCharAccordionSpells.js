@@ -13,7 +13,7 @@ const AccordionSpells = ({ spellist }) => {
     const data = [
         {
             id: "acc_spell_0",
-            title: 'Кантрипы',
+            title: 'Чары',
             detail: 0,
         },
         {

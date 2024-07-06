@@ -1,11 +1,11 @@
 import QuerySettings from '../../QuerySettings.js';
 
-const sheetId = "1-CYeR6NCErpwoB2DjjhpKh2SHeSCdcVUclP1wuItXq8";
+const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
 
 const CharInfoSettings = new QuerySettings({
 	sheetId,
-	gid: 726487847, //sheet "Персонажи" gold exp lvl dt
-	headrow: 4,
+	gid: 550804557, //sheet "characters" 
+	headrow: 2,
 	fields: {
 		name: "Персонаж",
 		lvl: "Уровень",
@@ -14,11 +14,11 @@ const CharInfoSettings = new QuerySettings({
 		gold: "Золото"		
 	},
 	query: {
-		colByField: { name: 4, lvl: 7, exp: 8, downtime: 16, gold:21},
-		fieldByCol: { 4: "name", 7: "lvl", 8: "exp", 16: "downtime", 21: "gold" },
-		colIDs: [ 4, 7, 8, 16, 21 ],
+		colByField: { name: 1, lvl: 3, exp: 6, downtime: 8, gold:7},
+		fieldByCol: { 1: "name", 3: "lvl", 6: "exp", 8: "downtime", 7: "gold" },
+		colIDs: [ 1, 3, 6, 7, 8 ],
 	},
-	range: { min: 4, max: 21, str: "E4:V" },
+	range: { min: 1, max: 8, str: "B2:I" },
 });
 
 export default CharInfoSettings;
