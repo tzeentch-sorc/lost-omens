@@ -50,16 +50,16 @@ const LOCharacter = () => {
 	const charName = params.get('CharName');
 
 	function createRow(element) {
-		if (element[2] == 0) return;
-		var description = "Количество: " + element[2] + "; Цена: " + element[1];
+		if (element.count == 0) return;
+		var description = "Количество: " + element.count + "; Цена: " + element.cost;
 		return (
-			<SimpleCell multiline key={element[0]}>
-				<InfoRow header={description}>{element[0]}</InfoRow>
+			<SimpleCell multiline key={element.name}>
+				<InfoRow header={description}>{element.name}</InfoRow>
 			</SimpleCell>
 		);
 	}
 
-	function createSpell(element) {
+	function createSimpleRow(element) {
 		return (
 			<SimpleCell multiline key={element}>
 				<InfoRow>{element}</InfoRow>
@@ -90,19 +90,25 @@ const LOCharacter = () => {
 		return (spell_0 || spell_1 || spell_2 ||
 			spell_3 || spell_4 || spell_5 || spell_6 ||
 			spell_7 || spell_8 | spell_9 || spell_10
-		)
+		);
+	}
+	function hasFormulae() {
+		return (formulae || false);
 	}
 
 	useEffect(() => {
 		async function fetchData() {
 			//попытка получить через spreadsheetApp
-			//для инвентаря требуется доработка на стороне таблички
-			//let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
-			//console.log("inventory data", inventoryData);
+			//получение инвентаря
+			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
+			console.log("inventory data", inventoryData);
 
-			//получение черт и заклинаний
+			setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
+
+			//получение черт, заклинаний, формул
 			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
 			console.log("character build data", characterBuildData);
+
 			setSpell_0(characterBuildData[0].spells_0.split(','));
 			setSpell_1(characterBuildData[0].spells_1.split(','));
 			setSpell_2(characterBuildData[0].spells_2.split(','));
@@ -115,6 +121,8 @@ const LOCharacter = () => {
 			setSpell_9(characterBuildData[0].spells_9.split(','));
 			setSpell_10(characterBuildData[0].spells_10.split(','));
 
+			setFormulae(characterBuildData[0].formulas.split(','));
+
 			//Посмотреть все данные листа
 			//let allData = await CharBuildSettings.getQueryAll();
 			//console.log("all data", allData);
@@ -123,15 +131,17 @@ const LOCharacter = () => {
 			const data = await axios.post(GOOGLE_SCRIPTS_BASE_URL + "?id=" + charName).then(resp => {
 				return resp.data
 			})
-			setInventory(data.inventory.sort((a, b) => b[1] - a[1]));
-			setFormulae(data.formulae);
+			
 			setGold(data.gold);
 			setExperience(data.exp);
 			setLevel(data.lvl);
 			setDowntime(data.downtime);
+			
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
-			//console.log(data.inventory);
+
+			//console.log("old",data.inventory);
+			//console.log("new", inventoryData);
 		}
 		fetchData();
 	}, []);
@@ -193,7 +203,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Кантрипы</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_0 && spell_0.map(e => createSpell(e))}
+								{spell_0 && spell_0.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -202,7 +212,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 1</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_1 && spell_1.map(e => createSpell(e))}
+								{spell_1 && spell_1.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -211,7 +221,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 2</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_2 && spell_2.map(e => createSpell(e))}
+								{spell_2 && spell_2.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -220,7 +230,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 3</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_3 && spell_3.map(e => createSpell(e))}
+								{spell_3 && spell_3.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -229,7 +239,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 4</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_4 && spell_4.map(e => createSpell(e))}
+								{spell_4 && spell_4.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -238,7 +248,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 5</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_5 && spell_5.map(e => createSpell(e))}
+								{spell_5 && spell_5.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -247,7 +257,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 6</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_6 && spell_6.map(e => createSpell(e))}
+								{spell_6 && spell_6.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -256,7 +266,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 7</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_7 && spell_7.map(e => createSpell(e))}
+								{spell_7 && spell_7.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -265,7 +275,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 8</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_8 && spell_8.map(e => createSpell(e))}
+								{spell_8 && spell_8.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -274,7 +284,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 9</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_9 && spell_9.map(e => createSpell(e))}
+								{spell_9 && spell_9.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -283,7 +293,7 @@ const LOCharacter = () => {
 						<Accordion.Summary iconPosition="before">Круг 10</Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
-								{spell_10 && spell_10.map(e => createSpell(e))}
+								{spell_10 && spell_10.map(e => createSimpleRow(e))}
 							</Div>
 						</Accordion.Content>
 					</Accordion>)}
@@ -373,7 +383,7 @@ const LOCharacter = () => {
 						{selected === 'spells' && (hasSpells()) && (
 							<AccordionSpells />
 						)}
-						{selected === 'formulae' && (!formulae || formulae.length < 1) && (
+						{selected === 'formulae' && (!hasFormulae()) && (
 							<Group
 								id="tab-content-formulae"
 								aria-controls="tab-formulae"
@@ -388,14 +398,14 @@ const LOCharacter = () => {
 
 							</Group>
 						)}
-						{selected === 'formulae' && formulae && formulae.length >= 1 && (
+						{selected === 'formulae' && (hasFormulae()) && (
 							<Group
 								id="tab-content-formulae"
 								aria-controls="tab-formulae"
 								role="tabpanel"
 								mode="plain"
 							>
-								{formulae && formulae.map(e => createRow(e))}
+								{formulae && formulae.map(e => createSimpleRow(e))}
 							</Group>
 						)}
 					</Group>

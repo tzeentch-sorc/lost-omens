@@ -4,7 +4,7 @@ const sheetId = "1-CYeR6NCErpwoB2DjjhpKh2SHeSCdcVUclP1wuItXq8";
 
 const CharBuildSettings = new QuerySettings({
 	sheetId,
-	gid: 1046921888,
+	gid: 1046921888, //sheet "Экспорт"
 	headrow: 1,
 	fields: {
 		name: "name",
