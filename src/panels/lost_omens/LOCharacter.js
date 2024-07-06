@@ -170,6 +170,8 @@ const LOCharacter = () => {
 								</SimpleCell>
 							</Card>
 						</CardGrid>
+					</Group>
+					<Group>
 						<LOCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
@@ -181,19 +183,19 @@ const LOCharacter = () => {
 							<LOInventoryPlaceholder />
 						)}
 						{selected === 'inventory' && (hasInventory()) && (
-							<LOInventory inventory={inventory}/>
+							<LOInventory inventory={inventory} />
 						)}
 						{selected === 'spells' && (!hasSpells()) && (
 							<LOSpellsPlaceholder />
 						)}
-						{selected === 'spells' && (hasSpells()) && (	
+						{selected === 'spells' && (hasSpells()) && (
 							<LOSpells spellist={spellist()} />
 						)}
 						{selected === 'formulae' && (!hasFormulae()) && (
 							<LOFormulaePlaceholder />
 						)}
 						{selected === 'formulae' && (hasFormulae()) && (
-							<LOFormulae formulae={formulae}/>
+							<LOFormulae formulae={formulae} />
 						)}
 					</Group>
 				</SplitCol>
