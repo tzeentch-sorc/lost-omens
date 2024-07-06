@@ -3,16 +3,19 @@ import {
 	Panel, SimpleCell, InfoRow,
 	Header, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, CardGrid, Card, SplitCol,
-	SplitLayout, Tabs, TabsItem, Div, Placeholder,
-	Accordion
+	SplitLayout
 } from '@vkontakte/vkui';
 import {
 	Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline,
-	Icon28HourglassErrorBadgeOutline, Icon28CubeBoxOutline,
-	Icon28MagicWandOutline, Icon24BookSpreadOutline, Icon28MagicHatOutline,
-	Icon28MortarOutline, Icon56DiamondOutline
+	Icon28HourglassErrorBadgeOutline
 } from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+
+import LOInventoryPlaceholder from './placeholders/LOInventoryPlaceholder.js';
+import LOSpellsPlaceholder from './placeholders/LOSpellsPlaceholder.js';
+import LOFormulaePlaceholder from './placeholders/LOFormulaePlaceholder.js';
+import DefaultInPanel from './LOCharTabPanel.js';
+import AccordionSpells from './LOCharAccordionSpells.js';
 
 import InventorySettings from './export_settings/LOInventorySettings.js'
 import CharBuildSettings from './export_settings/LOCharBuildSettings.js'
@@ -98,6 +101,12 @@ const LOCharacter = () => {
 	function hasInventory() {
 		return (inventory || false);
 	}
+	function spellist() {
+		return ([spell_0, spell_1, spell_2,
+			spell_3, spell_4, spell_5, spell_6,
+			spell_7, spell_8, spell_9, spell_10]
+		)
+	}
 
 	useEffect(() => {
 		async function fetchData() {
@@ -142,167 +151,6 @@ const LOCharacter = () => {
 		fetchData();
 	}, []);
 
-	const DefaultInPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
-		return (
-			<Tabs>
-				<TabsItem
-					selected={selected === 'inventory'}
-					onClick={() => {
-						if (selected === 'inventory') {
-							onMenuClick(true);
-						}
-						setSelected('inventory');
-					}}
-					id="tab-inventory"
-					aria-controls="tab-content-inventory"
-				>
-					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}>
-						<Div className="not4mob">Инвентарь</Div>
-					</SimpleCell>
-				</TabsItem>
-				<TabsItem
-					selected={selected === 'spells'}
-					onClick={() => {
-						onMenuClick(false);
-						setSelected('spells');
-					}}
-					id="tab-spells"
-					aria-controls="tab-content-spells"
-				>
-					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}>
-						<Div className="not4mob">Заклинания</Div>
-					</SimpleCell>
-				</TabsItem>
-				<TabsItem
-					selected={selected === 'formulae'}
-					onClick={() => {
-						onMenuClick(false);
-						setSelected('formulae');
-					}}
-					id="tab-formulae"
-					aria-controls="tab-content-formulae"
-				>
-					<SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}>
-						<Div className="not4mob">Формулы</Div>
-					</SimpleCell>
-				</TabsItem>
-			</Tabs>
-		);
-	};
-
-	const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
-	const AccordionSpells = () => {
-		const [openId, setOpenId] = React.useState(null);
-
-		return (
-			<Group
-				id="tab-content-spells"
-				aria-controls="tab-spells"
-				role="tabpanel"
-				mode="plain">
-				{spell_0[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Кантрипы</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_0 && spell_0.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_1[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 1</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_1 && spell_1.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_2[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 2</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_2 && spell_2.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_3[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 3</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_3 && spell_3.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_4[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 4</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_4 && spell_4.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_5[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 5</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_5 && spell_5.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_6[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 6</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_6 && spell_6.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_7[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 7</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_7 && spell_7.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_8[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 8</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_8 && spell_8.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_9[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 9</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_9 && spell_9.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-				{spell_10[0] != '' && (
-					<Accordion>
-						<Accordion.Summary iconPosition="before"><b>Круг 10</b></Accordion.Summary>
-						<Accordion.Content>
-							<Div style={infoStyle}>
-								{spell_10 && spell_10.map(e => createSimpleRow(e))}
-							</Div>
-						</Accordion.Content>
-					</Accordion>)}
-			</Group>
-		)
-	};
-
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/lost_omens', { keepSearchParams: true })} />}>
@@ -346,17 +194,7 @@ const LOCharacter = () => {
 							}}
 						/>
 						{selected === 'inventory' && (!hasInventory()) && (
-							<Group
-								id="tab-content-inventory"
-								aria-controls="tab-inventory"
-								role="tabpanel"
-								mode="plain">
-								<Placeholder icon={<Icon56DiamondOutline width={56} height={56} />} header="Здесь будет ваш инвентарь">
-									<Div>
-										Сходи, закупись, не скупись!
-									</Div>
-								</Placeholder>
-							</Group>
+							<LOInventoryPlaceholder />
 						)}
 						{selected === 'inventory' && (hasInventory()) && (
 							<Group
@@ -368,37 +206,13 @@ const LOCharacter = () => {
 							</Group>
 						)}
 						{selected === 'spells' && (!hasSpells()) && (
-							<Group
-								id="tab-content-spells"
-								aria-controls="tab-spells"
-								role="tabpanel"
-								mode="plain"
-							>
-								<Placeholder icon={<Icon28MagicHatOutline width={56} height={56} />} header="Здесь будут ваши заклинания">
-									<Div>
-										Ты думал здесь что-то будет?
-									</Div>
-								</Placeholder>
-
-							</Group>
+							<LOSpellsPlaceholder />
 						)}
-						{selected === 'spells' && (hasSpells()) && (
-							<AccordionSpells />
+						{selected === 'spells' && (hasSpells()) && (	
+								<AccordionSpells spellist={spellist()} />
 						)}
 						{selected === 'formulae' && (!hasFormulae()) && (
-							<Group
-								id="tab-content-formulae"
-								aria-controls="tab-formulae"
-								role="tabpanel"
-								mode="plain"
-							>
-								<Placeholder icon={<Icon28MortarOutline width={56} height={56} />} header="Здесь будут ваши формулы">
-									<Div>
-										Never gonna give you up...
-									</Div>
-								</Placeholder>
-
-							</Group>
+							<LOFormulaePlaceholder />
 						)}
 						{selected === 'formulae' && (hasFormulae()) && (
 							<Group
