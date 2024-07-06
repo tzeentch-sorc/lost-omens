@@ -1,5 +1,4 @@
-
-import fetch from "node-fetch";
+import axios from 'axios';
 
 function idOf(i) {
     let res = (i >= 26 ? idOf(Math.floor(i / 26) - 1) : "") + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i % 26]
@@ -16,11 +15,8 @@ async function requestCsv (sheetId, request) {
 	if ("query" in request) {
 		url += `&tq=${encodeURIComponent(request.query)}`;
 	}
-	const f = await fetch(url, { method: "GET" });
-    let result = await f.text();
-    //console.log(url);
-    //console.log(result);
-    return result;
+	const f = await axios.get(url);
+    return f.data;
 }
 
 class QuerySettings {
