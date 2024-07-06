@@ -16,6 +16,7 @@ async function requestCsv (sheetId, request) {
 		url += `&tq=${encodeURIComponent(request.query)}`;
 	}
 	const f = await axios.get(url);
+    //console.log(url)
     return f.data;
 }
 

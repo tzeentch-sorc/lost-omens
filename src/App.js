@@ -64,5 +64,3 @@ const App = (router) => {
 }
 
 export default App;
-
-export const GOOGLE_SCRIPTS_BASE_URL = 'https://script.google.com/macros/s/AKfycbyHwbc7G8ZBzv4wD-dRuLQNLcjibe3MSNd_a7tQUEVvmdV9-mcl46sR64otlmZH1V7IcQ/exec'

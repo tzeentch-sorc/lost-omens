@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
 	Panel, PanelHeader, Header, Group,
 	PanelHeaderBack, ScreenSpinner,
@@ -7,7 +6,6 @@ import {
 	CardGrid, Div
 
 } from '@vkontakte/vkui';
-import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import './LOCampaignPanel.css'
@@ -16,6 +14,7 @@ import CharUpdateAlert from '../CharUpdateAlert.js';
 import EmptyCampaignPanel from '../EmptyCampaignPanel.js';
 import LOCharCard from './LOCharCard.js';
 import LONoCharsPage from './LONoCharsPage.js';
+import LOPlayerInfoSettings from './export_settings/LOPlayerInfoSettings.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -57,15 +56,20 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {
-				return resp.data
-			})
-			setCharacters(data.chars)
-			setDate(data.date)
-			setAdvName(data.adv_name)
-			setPrio(data.prio)
+			const data = await LOPlayerInfoSettings.getFilteredQuery("id", "vk.com/"+ fetchedUser.screen_name);
+			//console.log("data: ", data);
+			setCharacters(data.map(elem => ({
+				name: elem.char_name,
+				lvl: elem.lvl,
+				lvl_up: elem.lvl_up,
+				type: elem.char_class,
+				race: elem.race
+			})));
+			setDate(data[0].adv_date)
+			setAdvName(data[0].adv)
+			setPrio(data[0].prio)
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => setPopout(null), 1000);
+			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData()
 	}, []);
