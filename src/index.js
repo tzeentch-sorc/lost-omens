@@ -7,9 +7,6 @@ import { AdaptivityProvider, useAppearance, AppRoot, ConfigProvider } from '@vko
 
 
 //TODO custom styles
-import '@vkontakte/vkui/dist/components.css';
-import '@vkontakte/vkui-tokens/themes/vkCom/cssVars/declarations/onlyVariables.css';
-import '@vkontakte/vkui-tokens/themes/vkComDark/cssVars/declarations/onlyVariablesLocal.css';
 import '@vkontakte/vkui/dist/vkui.css'
 
 // Init VK Mini App
@@ -46,12 +43,13 @@ const router = createHashRouter([
 const container = document.getElementById('root');
 const root = createRoot(container);
 const theme = ()=>useAppearance();
+console.log(theme === 'light' ? 'light' : 'dark');
 root.render(
   <ConfigProvider appearance={theme === 'light' ? 'light' : 'dark'}>
     <AdaptivityProvider>
       <AppRoot>
         <RouterProvider router={router} notFound={<p>Ничегошеньки!</p>}>
-          <App />
+            <App />
         </RouterProvider>
       </AppRoot>
     </AdaptivityProvider>
