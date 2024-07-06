@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import {
 	Panel, SimpleCell, InfoRow,
 	Header, Group, PanelHeaderBack, PanelHeader,
@@ -13,7 +12,6 @@ import {
 	Icon28MagicWandOutline, Icon24BookSpreadOutline, Icon28MagicHatOutline,
 	Icon28MortarOutline, Icon56DiamondOutline
 } from '@vkontakte/icons'
-import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import '../Character.css'
