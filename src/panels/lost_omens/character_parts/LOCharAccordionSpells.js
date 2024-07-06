@@ -6,7 +6,7 @@ import {
 
 
 
-const AccordionSpells = ({ spellist }) => {
+const LOSpells = ({ spellist }) => {
 
     const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
 
@@ -109,4 +109,4 @@ const AccordionSpells = ({ spellist }) => {
     
 };
 
-export default AccordionSpells;
+export default LOSpells;

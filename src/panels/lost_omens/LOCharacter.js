@@ -15,7 +15,7 @@ import LOInventoryPlaceholder from './placeholders/LOInventoryPlaceholder.js';
 import LOSpellsPlaceholder from './placeholders/LOSpellsPlaceholder.js';
 import LOFormulaePlaceholder from './placeholders/LOFormulaePlaceholder.js';
 import LOCharTabPanel from './character_parts/LOCharTabPanel.js';
-import AccordionSpells from './character_parts/LOCharAccordionSpells.js';
+import LOSpells from './character_parts/LOCharAccordionSpells.js';
 import LOInventory from './character_parts/LOInventory.js';
 import LOFormulae from './character_parts/LOFormulae.js';
 
@@ -187,7 +187,7 @@ const LOCharacter = () => {
 							<LOSpellsPlaceholder />
 						)}
 						{selected === 'spells' && (hasSpells()) && (	
-							<AccordionSpells spellist={spellist()} />
+							<LOSpells spellist={spellist()} />
 						)}
 						{selected === 'formulae' && (!hasFormulae()) && (
 							<LOFormulaePlaceholder />
