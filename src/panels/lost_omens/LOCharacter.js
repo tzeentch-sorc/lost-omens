@@ -94,6 +94,9 @@ const LOCharacter = () => {
 	function hasFormulae() {
 		return (formulae || false);
 	}
+	function hasInventory() {
+		return (inventory || false);
+	}
 
 	useEffect(() => {
 		async function fetchData() {
@@ -335,7 +338,7 @@ const LOCharacter = () => {
 								setMenuOpened((prevState) => (opened ? !prevState : false));
 							}}
 						/>
-						{selected === 'inventory' && (!inventory || inventory.length < 1) && (
+						{selected === 'inventory' && (!hasInventory()) && (
 							<Group
 								id="tab-content-inventory"
 								aria-controls="tab-inventory"
@@ -348,7 +351,7 @@ const LOCharacter = () => {
 								</Placeholder>
 							</Group>
 						)}
-						{selected === 'inventory' && inventory && inventory.length >= 1 && (
+						{selected === 'inventory' && (hasInventory()) && (
 							<Group
 								id="tab-content-inventory"
 								aria-controls="tab-inventory"
