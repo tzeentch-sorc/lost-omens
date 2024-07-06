@@ -18,6 +18,7 @@ async function requestCsv (sheetId, request) {
 	}
 	const f = await fetch(url, { method: "GET" });
     let result = await f.text();
+    //console.log(url);
     //console.log(result);
     return result;
 }

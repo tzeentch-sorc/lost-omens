@@ -1,4 +1,4 @@
-import QuerySettings from '../QuerySettings.js';
+import QuerySettings from '../../QuerySettings.js';
 
 const sheetId = "1-CYeR6NCErpwoB2DjjhpKh2SHeSCdcVUclP1wuItXq8";
 

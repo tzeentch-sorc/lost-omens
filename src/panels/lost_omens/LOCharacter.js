@@ -17,8 +17,9 @@ import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import '../Character.css'
-import InventorySettings from './LOInventorySettings.js'
-import CharBuildSettings from './LOCharBuildSettings.js'
+import InventorySettings from './export_settings/LOInventorySettings.js'
+import CharBuildSettings from './export_settings/LOCharBuildSettings.js'
+import CharInfoSettings from './export_settings/LOCharInfoSettings.js'
 
 
 const LOCharacter = () => {
@@ -123,24 +124,17 @@ const LOCharacter = () => {
 
 			setFormulae(characterBuildData[0].formulas.split(','));
 
-			//Посмотреть все данные листа
-			//let allData = await CharBuildSettings.getQueryAll();
-			//console.log("all data", allData);
+			//получение золота, уровня, даунтайма и опыта
+			let characterInfoData = await CharInfoSettings.getFilteredQuery("name", charName);
+			console.log("character info data", characterInfoData);
+			setGold(characterInfoData[0].gold);
+			setExperience(characterInfoData[0].exp);
+			setLevel(characterInfoData[0].lvl);
+			setDowntime(characterInfoData[0].downtime);		
 
-			//старое
-			const data = await axios.post(GOOGLE_SCRIPTS_BASE_URL + "?id=" + charName).then(resp => {
-				return resp.data
-			})
-			
-			setGold(data.gold);
-			setExperience(data.exp);
-			setLevel(data.lvl);
-			setDowntime(data.downtime);
-			
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
 
-			//console.log("old",data.inventory);
 			//console.log("new", inventoryData);
 		}
 		fetchData();
@@ -200,7 +194,7 @@ const LOCharacter = () => {
 				mode="plain">
 				{spell_0[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Кантрипы</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Кантрипы</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_0 && spell_0.map(e => createSimpleRow(e))}
@@ -209,7 +203,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_1[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 1</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 1</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_1 && spell_1.map(e => createSimpleRow(e))}
@@ -218,7 +212,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_2[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 2</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 2</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_2 && spell_2.map(e => createSimpleRow(e))}
@@ -227,7 +221,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_3[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 3</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 3</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_3 && spell_3.map(e => createSimpleRow(e))}
@@ -236,7 +230,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_4[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 4</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 4</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_4 && spell_4.map(e => createSimpleRow(e))}
@@ -245,7 +239,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_5[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 5</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 5</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_5 && spell_5.map(e => createSimpleRow(e))}
@@ -254,7 +248,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_6[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 6</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 6</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_6 && spell_6.map(e => createSimpleRow(e))}
@@ -263,7 +257,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_7[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 7</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 7</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_7 && spell_7.map(e => createSimpleRow(e))}
@@ -272,7 +266,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_8[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 8</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 8</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_8 && spell_8.map(e => createSimpleRow(e))}
@@ -281,7 +275,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_9[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 9</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 9</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_9 && spell_9.map(e => createSimpleRow(e))}
@@ -290,7 +284,7 @@ const LOCharacter = () => {
 					</Accordion>)}
 				{spell_10[0] != '' && (
 					<Accordion>
-						<Accordion.Summary iconPosition="before">Круг 10</Accordion.Summary>
+						<Accordion.Summary iconPosition="before"><b>Круг 10</b></Accordion.Summary>
 						<Accordion.Content>
 							<Div style={infoStyle}>
 								{spell_10 && spell_10.map(e => createSimpleRow(e))}
