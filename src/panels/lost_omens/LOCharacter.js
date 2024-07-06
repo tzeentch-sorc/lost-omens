@@ -155,9 +155,9 @@ const LOCharacter = () => {
 						</CardGrid>
 						<CardGrid size='m'>
 							<Card key="experience">
-								<Header mode="primary">Опыт</Header>
+								<Header mode="primary">Уровень и Опыт</Header>
 								<SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
-									{experience && (experience)} {!experience && (" ??? ")} XP
+									{experience && level && (level + " ур. (" + experience + " XP)")} {!experience && ("unknown")}
 								</SimpleCell>
 							</Card>
 							<Card key="lvlcountdown">
