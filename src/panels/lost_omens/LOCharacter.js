@@ -18,6 +18,8 @@ import InventorySettings from './export_settings/LOInventorySettings.js'
 import CharBuildSettings from './export_settings/LOCharBuildSettings.js'
 import CharInfoSettings from './export_settings/LOCharInfoSettings.js'
 
+import './LOCharacter.css'
+
 
 const LOCharacter = () => {
 
@@ -85,16 +87,16 @@ const LOCharacter = () => {
 	}
 
 	function hasSpells() {
-		return (spell_0[0]!="" || spell_1[0]!="" || spell_2[0]!="" ||
-			spell_3[0]!="" || spell_4[0]!="" || spell_5[0]!="" || spell_6[0]!="" ||
-			spell_7[0]!="" || spell_8[0]!="" | spell_9[0]!="" || spell_10[0]!=""
+		return (spell_0[0] != "" || spell_1[0] != "" || spell_2[0] != "" ||
+			spell_3[0] != "" || spell_4[0] != "" || spell_5[0] != "" || spell_6[0] != "" ||
+			spell_7[0] != "" || spell_8[0] != "" | spell_9[0] != "" || spell_10[0] != ""
 		);
 	}
 	function hasFormulae() {
-		return (formulae[0]!="");
+		return (formulae[0] != "");
 	}
 	function hasInventory() {
-		return (inventory||false);
+		return (inventory || false);
 	}
 
 	useEffect(() => {
@@ -130,7 +132,7 @@ const LOCharacter = () => {
 			setGold(characterInfoData[0].gold);
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
-			setDowntime(characterInfoData[0].downtime);		
+			setDowntime(characterInfoData[0].downtime);
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
@@ -154,7 +156,9 @@ const LOCharacter = () => {
 					id="tab-inventory"
 					aria-controls="tab-content-inventory"
 				>
-					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}> <div className="not4mob">Инвентарь</div></SimpleCell>
+					<SimpleCell before={<Icon28CubeBoxOutline width={24} height={24} />}>
+						<Div className="not4mob">Инвентарь</Div>
+					</SimpleCell>
 				</TabsItem>
 				<TabsItem
 					selected={selected === 'spells'}
@@ -165,7 +169,9 @@ const LOCharacter = () => {
 					id="tab-spells"
 					aria-controls="tab-content-spells"
 				>
-					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}> <div className="not4mob">Заклинания</div></SimpleCell>
+					<SimpleCell before={<Icon28MagicWandOutline width={24} height={24} />}>
+						<Div className="not4mob">Заклинания</Div>
+					</SimpleCell>
 				</TabsItem>
 				<TabsItem
 					selected={selected === 'formulae'}
@@ -176,7 +182,9 @@ const LOCharacter = () => {
 					id="tab-formulae"
 					aria-controls="tab-content-formulae"
 				>
-					<SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}> <div className="not4mob">Формулы</div> </SimpleCell>
+					<SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}>
+						<Div className="not4mob">Формулы</Div>
+					</SimpleCell>
 				</TabsItem>
 			</Tabs>
 		);
