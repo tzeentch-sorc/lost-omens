@@ -14,8 +14,10 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import LOInventoryPlaceholder from './placeholders/LOInventoryPlaceholder.js';
 import LOSpellsPlaceholder from './placeholders/LOSpellsPlaceholder.js';
 import LOFormulaePlaceholder from './placeholders/LOFormulaePlaceholder.js';
-import LOCharTabPanel from './LOCharTabPanel.js';
-import AccordionSpells from './LOCharAccordionSpells.js';
+import LOCharTabPanel from './character_parts/LOCharTabPanel.js';
+import AccordionSpells from './character_parts/LOCharAccordionSpells.js';
+import LOInventory from './character_parts/LOInventory.js';
+import LOFormulae from './character_parts/LOFormulae.js';
 
 import InventorySettings from './export_settings/LOInventorySettings.js'
 import CharBuildSettings from './export_settings/LOCharBuildSettings.js'
@@ -51,24 +53,6 @@ const LOCharacter = () => {
 
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
-
-	function createInventoryRow(element) {
-		if (element.count == 0) return;
-		var description = "Количество: " + element.count + "; Цена: " + element.cost;
-		return (
-			<SimpleCell multiline key={element.name}>
-				<InfoRow header={description}>{element.name}</InfoRow>
-			</SimpleCell>
-		);
-	}
-
-	function createFormulaeRow(element) {
-		return (
-			<SimpleCell multiline key={element}>
-				<InfoRow>{element}</InfoRow>
-			</SimpleCell>
-		);
-	}
 
 	function countGames(exp, lvl) {
 		if (lvl && lvl < 7) {
@@ -197,32 +181,19 @@ const LOCharacter = () => {
 							<LOInventoryPlaceholder />
 						)}
 						{selected === 'inventory' && (hasInventory()) && (
-							<Group
-								id="tab-content-inventory"
-								aria-controls="tab-inventory"
-								role="tabpanel"
-								mode="plain">
-								{inventory && inventory.map(e => createInventoryRow(e))}
-							</Group>
+							<LOInventory inventory={inventory}/>
 						)}
 						{selected === 'spells' && (!hasSpells()) && (
 							<LOSpellsPlaceholder />
 						)}
 						{selected === 'spells' && (hasSpells()) && (	
-								<AccordionSpells spellist={spellist()} />
+							<AccordionSpells spellist={spellist()} />
 						)}
 						{selected === 'formulae' && (!hasFormulae()) && (
 							<LOFormulaePlaceholder />
 						)}
 						{selected === 'formulae' && (hasFormulae()) && (
-							<Group
-								id="tab-content-formulae"
-								aria-controls="tab-formulae"
-								role="tabpanel"
-								mode="plain"
-							>
-								{formulae && formulae.map(e => createFormulaeRow(e))}
-							</Group>
+							<LOFormulae formulae={formulae}/>
 						)}
 					</Group>
 				</SplitCol>
