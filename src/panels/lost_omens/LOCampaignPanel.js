@@ -57,11 +57,11 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const data = await LOPlayerInfoSettings.getFilteredQuery("id", "vk.com/"+ fetchedUser.screen_name);
-			//console.log("data: ", data);
+			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
-				lvl_up: elem.lvl_up,
+				lvl_up: elem.lvl_up === "FALSE" ? false : true ,
 				type: elem.char_class,
 				race: elem.race
 			})));

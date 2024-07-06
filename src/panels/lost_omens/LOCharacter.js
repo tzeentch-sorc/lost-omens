@@ -54,6 +54,8 @@ const LOCharacter = () => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
 
+	const [easterEgg, setEasterEgg] = useState(0);
+
 	function countGames(exp, lvl) {
 		if (lvl && lvl < 7) {
 			if (exp - (lvl - 1) * 1000 > 0) {
@@ -92,6 +94,10 @@ const LOCharacter = () => {
 		)
 	}
 
+	function getRandomInt(max) {
+		return Math.floor(Math.random() * max);
+	}
+
 	useEffect(() => {
 		async function fetchData() {
 			//попытка получить через spreadsheetApp
@@ -126,7 +132,7 @@ const LOCharacter = () => {
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
 			setDowntime(characterInfoData[0].downtime);
-
+			setEasterEgg(getRandomInt(14));
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
 
@@ -155,9 +161,9 @@ const LOCharacter = () => {
 						</CardGrid>
 						<CardGrid size='m'>
 							<Card key="experience">
-								<Header mode="primary">Уровень и Опыт</Header>
+								<Header mode="primary">Уровень</Header>
 								<SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
-									{experience && level && (level + " ур. (" + experience + " XP)")} {!experience && ("unknown")}
+									{experience && level && (level + " (" + experience + " XP)")} {!experience && ("unknown")}
 								</SimpleCell>
 							</Card>
 							<Card key="lvlcountdown">
@@ -165,7 +171,7 @@ const LOCharacter = () => {
 									Партий до {level && (parseInt(level, 10) + 1)} {!level && (" ??? ")} ур.
 								</Header>
 								<SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
-									{experience && level && (countGames(experience, level))}
+									{experience && level && (countGames(experience, level) +  (easterEgg == 7 ? " Игорей" : " шт."))}
 									{(!experience || !level) && (" ??? ")}
 								</SimpleCell>
 							</Card>
