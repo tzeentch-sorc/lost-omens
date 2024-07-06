@@ -1,0 +1,27 @@
+import React from 'react';
+import {
+    Group, Div, Placeholder
+} from '@vkontakte/vkui';
+import {
+    Icon28MortarOutline
+} from '@vkontakte/icons'
+
+
+const LOFormulaePlaceholder = () => {
+    return (
+        <Group
+            id="tab-content-formulae"
+            aria-controls="tab-formulae"
+            role="tabpanel"
+            mode="plain"
+        >
+            <Placeholder icon={<Icon28MortarOutline width={56} height={56} />} header="Здесь будут ваши формулы">
+                <Div>
+                    Never gonna give you up...
+                </Div>
+            </Placeholder>
+
+        </Group>
+    );
+};
+export default LOFormulaePlaceholder;
