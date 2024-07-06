@@ -3,13 +3,14 @@ import axios from 'axios';
 import {
 	Panel, SimpleCell, InfoRow,
 	Header, Group, PanelHeaderBack, PanelHeader,
-	ScreenSpinner, CardGrid, Card, SplitCol, 
-	SplitLayout, Tabs, TabsItem, Div, Placeholder
+	ScreenSpinner, CardGrid, Card, SplitCol,
+	SplitLayout, Tabs, TabsItem, Div, Placeholder,
+	Accordion
 } from '@vkontakte/vkui';
 import {
-	Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline, 
+	Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline,
 	Icon28HourglassErrorBadgeOutline, Icon28CubeBoxOutline,
-	Icon28MagicWandOutline, Icon24BookSpreadOutline, Icon28MagicHatOutline, 
+	Icon28MagicWandOutline, Icon24BookSpreadOutline, Icon28MagicHatOutline,
 	Icon28MortarOutline, Icon56DiamondOutline
 } from '@vkontakte/icons'
 import { GOOGLE_SCRIPTS_BASE_URL } from '../../App.js'
@@ -25,12 +26,22 @@ const LOCharacter = () => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const [inventory, setInventory] = useState();
-	const [spellList, setSpellList] = useState();
 	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
 	const [downtime, setDowntime] = useState(0);
 	const [experience, setExperience] = useState();
 	const [level, setLevel] = useState();
+	const [spell_0, setSpell_0] = useState();
+	const [spell_1, setSpell_1] = useState();
+	const [spell_2, setSpell_2] = useState();
+	const [spell_3, setSpell_3] = useState();
+	const [spell_4, setSpell_4] = useState();
+	const [spell_5, setSpell_5] = useState();
+	const [spell_6, setSpell_6] = useState();
+	const [spell_7, setSpell_7] = useState();
+	const [spell_8, setSpell_8] = useState();
+	const [spell_9, setSpell_9] = useState();
+	const [spell_10, setSpell_10] = useState();
 
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
@@ -48,18 +59,26 @@ const LOCharacter = () => {
 		);
 	}
 
+	function createSpell(element) {
+		return (
+			<SimpleCell multiline key={element}>
+				<InfoRow>{element}</InfoRow>
+			</SimpleCell>
+		);
+	}
+
 	function countGames(exp, lvl) {
 		if (lvl && lvl < 7) {
-			if (exp - (lvl-1) * 1000 > 0) {
+			if (exp - (lvl - 1) * 1000 > 0) {
 				return 1;
 			} else {
 				return 2;
 			}
 		} else {
 			var tmpexp = exp - 6000;
-			if (tmpexp - (lvl-7) * 1500 == 0) {
+			if (tmpexp - (lvl - 7) * 1500 == 0) {
 				return 3;
-			} else if (tmpexp - (lvl-7) * 1500 == 500) {
+			} else if (tmpexp - (lvl - 7) * 1500 == 500) {
 				return 2;
 			} else {
 				return 1;
@@ -67,6 +86,12 @@ const LOCharacter = () => {
 		}
 	}
 
+	function hasSpells() {
+		return (spell_0 || spell_1 || spell_2 ||
+			spell_3 || spell_4 || spell_5 || spell_6 ||
+			spell_7 || spell_8 | spell_9 || spell_10
+		)
+	}
 
 	useEffect(() => {
 		async function fetchData() {
@@ -78,6 +103,17 @@ const LOCharacter = () => {
 			//получение черт и заклинаний
 			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
 			console.log("character build data", characterBuildData);
+			setSpell_0(characterBuildData[0].spells_0.split(','));
+			setSpell_1(characterBuildData[0].spells_1.split(','));
+			setSpell_2(characterBuildData[0].spells_2.split(','));
+			setSpell_3(characterBuildData[0].spells_3.split(','));
+			setSpell_4(characterBuildData[0].spells_4.split(','));
+			setSpell_5(characterBuildData[0].spells_5.split(','));
+			setSpell_6(characterBuildData[0].spells_6.split(','));
+			setSpell_7(characterBuildData[0].spells_7.split(','));
+			setSpell_8(characterBuildData[0].spells_8.split(','));
+			setSpell_9(characterBuildData[0].spells_9.split(','));
+			setSpell_10(characterBuildData[0].spells_10.split(','));
 
 			//Посмотреть все данные листа
 			//let allData = await CharBuildSettings.getQueryAll();
@@ -88,7 +124,6 @@ const LOCharacter = () => {
 				return resp.data
 			})
 			setInventory(data.inventory.sort((a, b) => b[1] - a[1]));
-			setSpellList(data.spells);
 			setFormulae(data.formulae);
 			setGold(data.gold);
 			setExperience(data.exp);
@@ -100,6 +135,7 @@ const LOCharacter = () => {
 		}
 		fetchData();
 	}, []);
+
 	const DefaultInPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
 		return (
 			<Tabs>
@@ -140,6 +176,119 @@ const LOCharacter = () => {
 				</TabsItem>
 			</Tabs>
 		);
+	};
+
+	const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
+	const AccordionSpells = () => {
+		const [openId, setOpenId] = React.useState(null);
+
+		return (
+			<Group
+				id="tab-content-spells"
+				aria-controls="tab-spells"
+				role="tabpanel"
+				mode="plain">
+				{spell_0[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Кантрипы</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_0 && spell_0.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_1[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 1</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_1 && spell_1.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_2[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 2</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_2 && spell_2.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_3[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 3</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_3 && spell_3.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_4[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 4</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_4 && spell_4.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_5[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 5</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_5 && spell_5.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_6[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 6</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_6 && spell_6.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_7[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 7</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_7 && spell_7.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_8[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 8</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_8 && spell_8.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_9[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 9</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_9 && spell_9.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+				{spell_10[0] != '' && (
+					<Accordion>
+						<Accordion.Summary iconPosition="before">Круг 10</Accordion.Summary>
+						<Accordion.Content>
+							<Div style={infoStyle}>
+								{spell_10 && spell_10.map(e => createSpell(e))}
+							</Div>
+						</Accordion.Content>
+					</Accordion>)}
+			</Group>
+		)
 	};
 
 	return (
@@ -185,10 +334,10 @@ const LOCharacter = () => {
 							}}
 						/>
 						{selected === 'inventory' && (!inventory || inventory.length < 1) && (
-							<Group 
-								id="tab-content-inventory" 
-								aria-controls="tab-inventory" 
-								role="tabpanel" 
+							<Group
+								id="tab-content-inventory"
+								aria-controls="tab-inventory"
+								role="tabpanel"
 								mode="plain">
 								<Placeholder icon={<Icon56DiamondOutline width={56} height={56} />} header="Здесь будет ваш инвентарь">
 									<Div>
@@ -198,15 +347,15 @@ const LOCharacter = () => {
 							</Group>
 						)}
 						{selected === 'inventory' && inventory && inventory.length >= 1 && (
-							<Group 
-								id="tab-content-inventory" 
-								aria-controls="tab-inventory" 
-								role="tabpanel" 
+							<Group
+								id="tab-content-inventory"
+								aria-controls="tab-inventory"
+								role="tabpanel"
 								mode="plain">
 								{inventory && inventory.map(e => createRow(e))}
 							</Group>
 						)}
-						{selected === 'spells'&& (!spellList || spellList.length < 1) && (
+						{selected === 'spells' && (!hasSpells()) && (
 							<Group
 								id="tab-content-spells"
 								aria-controls="tab-spells"
@@ -221,18 +370,10 @@ const LOCharacter = () => {
 
 							</Group>
 						)}
-						{selected === 'spells' && spellList && spellList.length >= 1 && (
-							<Group
-								id="tab-content-spells"
-								aria-controls="tab-spells"
-								role="tabpanel"
-								mode="plain"
-							>
-								{spellList && spellList.map(e => createRow(e))}
-
-							</Group>
+						{selected === 'spells' && (hasSpells()) && (
+							<AccordionSpells />
 						)}
-						{selected === 'formulae'&& (!formulae || formulae.length < 1) && (
+						{selected === 'formulae' && (!formulae || formulae.length < 1) && (
 							<Group
 								id="tab-content-formulae"
 								aria-controls="tab-formulae"

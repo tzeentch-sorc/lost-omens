@@ -7,7 +7,7 @@ function idOf(i) {
     return res;
 }
 function parseSimpleCsv(csv) {
-    console.log(csv);
+    //console.log(csv);
     return csv.split("\n").map(line => line.slice(1, line.length - 1).split("\",\""));
 }
 
