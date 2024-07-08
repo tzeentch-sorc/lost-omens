@@ -14,16 +14,19 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import LOInventoryPlaceholder from './placeholders/LOInventoryPlaceholder.js';
 import LOSpellsPlaceholder from './placeholders/LOSpellsPlaceholder.js';
 import LOFormulaePlaceholder from './placeholders/LOFormulaePlaceholder.js';
+
 import LOCharTabPanel from './character_parts/LOCharTabPanel.js';
 import LOSpells from './character_parts/LOSpells.js';
 import LOInventory from './character_parts/LOInventory.js';
 import LOFormulae from './character_parts/LOFormulae.js';
+import LOMainInfo from './character_parts/LOMainInfo.js';
 
 import InventorySettings from './export_settings/LOInventorySettings.js'
 import CharBuildSettings from './export_settings/LOCharBuildSettings.js'
 import CharInfoSettings from './export_settings/LOCharInfoSettings.js'
 
 import './LOCharacter.css'
+import LOFeatPanel from './character_parts/LOFeatPanel.js';
 
 
 const LOCharacter = () => {
@@ -47,6 +50,11 @@ const LOCharacter = () => {
 	const [spell_8, setSpell_8] = useState();
 	const [spell_9, setSpell_9] = useState();
 	const [spell_10, setSpell_10] = useState();
+	const [feat_race, setFeatRace] = useState();
+	const [feat_general, setFeatGeneral] = useState();
+	const [feat_class, setFeatClass] = useState();
+	const [feat_skill, setFeatSkill] = useState();
+	const [feat_archetype, setFeatArchetype] = useState();
 
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
@@ -93,6 +101,10 @@ const LOCharacter = () => {
 			spell_7, spell_8, spell_9, spell_10]
 		)
 	}
+	function featlist(){
+		return ([feat_race, feat_general, 
+			feat_class, feat_skill, feat_archetype])
+	}
 
 	function getRandomInt(max) {
 		return Math.floor(Math.random() * max);
@@ -108,7 +120,6 @@ const LOCharacter = () => {
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
 			setDowntime(characterInfoData[0].downtime);
-			setEasterEgg(getRandomInt(14));
 
 			//получение инвентаря
 			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
@@ -116,7 +127,7 @@ const LOCharacter = () => {
 
 			setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
 
-			//получение черт, заклинаний, формул
+			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
 			console.log("character build data", characterBuildData);
 
@@ -134,6 +145,14 @@ const LOCharacter = () => {
 
 			setFormulae(characterBuildData[0].formulas.split(','));
 
+			setFeatRace(characterBuildData[0].feat_race.split(','));
+			setFeatGeneral(characterBuildData[0].feat_general.split(','));
+			setFeatSkill(characterBuildData[0].feat_skill.split(','));
+			setFeatClass(characterBuildData[0].feat_class.split(','));
+			setFeatArchetype(characterBuildData[0].feat_archetype.split(','));
+
+			setEasterEgg(getRandomInt(14));
+
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
 
@@ -149,35 +168,13 @@ const LOCharacter = () => {
 			</PanelHeader>
 			<SplitLayout popout={popout}>
 				<SplitCol>
-					<Group>
-						<CardGrid size='m'>
-							<Card key="gold">
-								<Header mode="primary">Золото</Header>
-								<SimpleCell before={<Icon36CoinsStacks3Outline width={24} height={24} />}>{gold}</SimpleCell>
-							</Card>
-							<Card key="downtime">
-								<Header mode="primary">Даунтайм</Header>
-								<SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime} / 56 дней</SimpleCell>
-							</Card>
-						</CardGrid>
-						<CardGrid size='m'>
-							<Card key="experience">
-								<Header mode="primary">Уровень</Header>
-								<SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
-									{experience && level && (level + " (" + experience + " XP)")} {!experience && ("unknown")}
-								</SimpleCell>
-							</Card>
-							<Card key="lvlcountdown">
-								<Header mode="primary">
-									Партий до {level && (parseInt(level, 10) + 1)} {!level && (" ??? ")} ур.
-								</Header>
-								<SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
-									{experience && level && (countGames(experience, level) +  (easterEgg == 7 ? " Игорей" : " шт."))}
-									{(!experience || !level) && (" ??? ")}
-								</SimpleCell>
-							</Card>
-						</CardGrid>
-					</Group>
+					<LOMainInfo
+						gold={gold}
+						downtime={downtime}
+						experience={experience}
+						level={level}
+						easterEgg={easterEgg} />
+					<LOFeatPanel featlist={featlist()}/>
 					<Group>
 						<LOCharTabPanel
 							selected={selected}
