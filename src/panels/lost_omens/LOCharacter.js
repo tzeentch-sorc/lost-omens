@@ -15,7 +15,7 @@ import LOInventoryPlaceholder from './placeholders/LOInventoryPlaceholder.js';
 import LOSpellsPlaceholder from './placeholders/LOSpellsPlaceholder.js';
 import LOFormulaePlaceholder from './placeholders/LOFormulaePlaceholder.js';
 import LOCharTabPanel from './character_parts/LOCharTabPanel.js';
-import LOSpells from './character_parts/LOCharAccordionSpells.js';
+import LOSpells from './character_parts/LOSpells.js';
 import LOInventory from './character_parts/LOInventory.js';
 import LOFormulae from './character_parts/LOFormulae.js';
 
@@ -101,6 +101,15 @@ const LOCharacter = () => {
 	useEffect(() => {
 		async function fetchData() {
 			//попытка получить через spreadsheetApp
+			//получение золота, уровня, даунтайма и опыта
+			let characterInfoData = await CharInfoSettings.getFilteredQuery("name", charName);
+			console.log("character info data", characterInfoData);
+			setGold(characterInfoData[0].gold);
+			setExperience(characterInfoData[0].exp);
+			setLevel(characterInfoData[0].lvl);
+			setDowntime(characterInfoData[0].downtime);
+			setEasterEgg(getRandomInt(14));
+
 			//получение инвентаря
 			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
 			console.log("inventory data", inventoryData);
@@ -125,14 +134,6 @@ const LOCharacter = () => {
 
 			setFormulae(characterBuildData[0].formulas.split(','));
 
-			//получение золота, уровня, даунтайма и опыта
-			let characterInfoData = await CharInfoSettings.getFilteredQuery("name", charName);
-			console.log("character info data", characterInfoData);
-			setGold(characterInfoData[0].gold);
-			setExperience(characterInfoData[0].exp);
-			setLevel(characterInfoData[0].lvl);
-			setDowntime(characterInfoData[0].downtime);
-			setEasterEgg(getRandomInt(14));
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
 
