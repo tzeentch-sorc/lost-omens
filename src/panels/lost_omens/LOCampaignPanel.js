@@ -3,7 +3,8 @@ import {
 	Panel, PanelHeader, Header, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Div
+	CardGrid, Div,
+	FixedLayout
 
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
@@ -15,6 +16,7 @@ import EmptyCampaignPanel from '../EmptyCampaignPanel.js';
 import LOCharCard from './LOCharCard.js';
 import LONoCharsPage from './LONoCharsPage.js';
 import LOPlayerInfoSettings from './export_settings/LOPlayerInfoSettings.js'
+import LOPriorities from './LOPriorities.js';
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -26,6 +28,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	const [advName, setAdvName] = useState("Неизвестное приключение")
 	const [prio, setPrio] = useState(-1)
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [priorities, setPriorities] = useState([]);
 
 	const openAction = (element) => {
 		setPopout(
@@ -50,24 +53,31 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(element) {
 		return (
-			<LOCharCard element={element} key={element.name + "_lo_card"} openAction={() => {openAlert(element)}} />
+			<LOCharCard element={element} key={element.name + "_lo_card"} openAction={() => { openAlert(element) }} />
 		);
 	}
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await LOPlayerInfoSettings.getFilteredQuery("id", "vk.com/"+ fetchedUser.screen_name);
+			const data = await LOPlayerInfoSettings.getFilteredQuery("id", "vk.com/" + fetchedUser.screen_name);
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
-				lvl_up: elem.lvl_up === "FALSE" ? false : true ,
+				lvl_up: elem.lvl_up === "FALSE" ? false : true,
 				type: elem.char_class,
 				race: elem.race
 			})));
 			setDate(data[0].adv_date)
 			setAdvName(data[0].adv)
 			setPrio(data[0].prio)
+			const prioData = await LOPlayerInfoSettings.getQueryAll();
+			setPriorities(prioData.map(elem => ({
+				player: elem.player,
+				char_name: elem.char_name,
+				prio: elem.prio,
+				lvl: elem.lvl
+			})).sort((a, b) => b.prio - a.prio));
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
@@ -113,6 +123,10 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 						</SplitLayout>
 					</Group>
 				}
+				<FixedLayout filled vertical="bottom">
+					<LOPriorities setPopout={setPopout} priorities={priorities} />
+				</FixedLayout>
+
 			</Panel>
 		)
 	}
