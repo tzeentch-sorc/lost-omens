@@ -6,15 +6,15 @@ import {
 
 const LOPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     const MODAL_PAGE_WITH_FIXED_HEIGHT = 'fixed-height';
-
     function createPriorityRow(element) {
         //console.log("element",element);
+        let srt = element[1].sort((a, b) => b.lvl - a.lvl).map(e => (
+            e.lvl + " ур. " + e.char_name + ", "));
+        srt[srt.length-1] = srt[srt.length-1].substring(0, srt[srt.length-1].length - 2);
         return (
-            <SimpleCell multiline key={element[0]}>
+            <SimpleCell multiline key={element[0]} after={element[1][0].prio}>
                 <InfoRow header={element[0]}>
-                    <b>{element[1][0].prio>=10 ? element[1][0].prio: " "+element[1][0].prio}  |   </b>
-                    {element[1].sort((a, b) => b.lvl - a.lvl).map(e => (
-                        e.lvl + " ур. " + e.char_name + ", "))}
+                    {srt}
 
                 </InfoRow>
             </SimpleCell>
