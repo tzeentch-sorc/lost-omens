@@ -19,7 +19,7 @@ const CharInfoSettings = new QuerySettings({
 		colIDs: [ 0, 1, 2, 3, 4 ],
 		queryAll: "select A, B, C, D, E",
 	},
-	range: { min: 0, max: 4, str: "A2:E" },
+	range: { min: 0, max: 4, str: "A1:E" },
 });
 
 export default CharInfoSettings;

@@ -59,7 +59,16 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await LOPlayerInfoSettings.getFilteredQuery("id", "vk.com/" + fetchedUser.screen_name);
+			const prioData = await LOPlayerInfoSettings.getQueryAll();
+			setPriorities(prioData.map(elem => ({
+				player: elem.player,
+				char_name: elem.char_name,
+				prio: elem.prio,
+				lvl: elem.lvl
+			})).sort((a, b) => b.prio - a.prio));
+			//console.log(prioData);
+
+			const data = prioData.filter(elem=>{return elem.id == ("vk.com/" + fetchedUser.screen_name)});
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
@@ -71,13 +80,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			setDate(data[0].adv_date)
 			setAdvName(data[0].adv)
 			setPrio(data[0].prio)
-			const prioData = await LOPlayerInfoSettings.getQueryAll();
-			setPriorities(prioData.map(elem => ({
-				player: elem.player,
-				char_name: elem.char_name,
-				prio: elem.prio,
-				lvl: elem.lvl
-			})).sort((a, b) => b.prio - a.prio));
+			
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
