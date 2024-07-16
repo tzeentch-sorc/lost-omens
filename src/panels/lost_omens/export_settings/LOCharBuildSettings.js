@@ -76,7 +76,7 @@ const CharBuildSettings = new QuerySettings({
 	range: {
 		min: 0,
 		max: 18,
-		str: "A2:S",
+		str: "A1:S",
 	},
 });
 
