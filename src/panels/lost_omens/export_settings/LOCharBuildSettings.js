@@ -5,7 +5,7 @@ const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; //LO Geekmo Mirr
 const CharBuildSettings = new QuerySettings({
 	sheetId,
 	gid: 1439947023, //sheet "builds"
-	headrow: 2,
+	headrow: 1,
 	fields: {
 		name: "name",
 		feat_race: "feat-race",
@@ -76,7 +76,7 @@ const CharBuildSettings = new QuerySettings({
 	range: {
 		min: 0,
 		max: 18,
-		str: "A1:S",
+		str: "A2:S",
 	},
 });
 

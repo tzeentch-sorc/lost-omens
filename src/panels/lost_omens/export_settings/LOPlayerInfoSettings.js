@@ -5,7 +5,7 @@ const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mir
 const LOPlayerInfoSettings = new QuerySettings({
 	sheetId,
 	gid: 1846907861, //sheet "players"
-	headrow: 2,
+	headrow: 1,
 	fields: {
 		id: "VK",
 		player: "Игрок",
