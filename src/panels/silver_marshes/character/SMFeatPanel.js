@@ -3,9 +3,9 @@ import {
     Group, Div, Accordion
 } from '@vkontakte/vkui';
 
-import LOFeats from './LOFeats';
+import SMFeats from './SMFeats';
 
-const LOFeatPanel = ({ featlist }) => {
+const SMFeatPanel = ({ featlist }) => {
 
     const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
 
@@ -32,7 +32,7 @@ const LOFeatPanel = ({ featlist }) => {
                         <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
                         <Accordion.Content>
                             <Div style={infoStyle}>
-                                <LOFeats featlist={featlist}/>
+                                <SMFeats featlist={featlist}/>
                             </Div>
                         </Accordion.Content>
                     </Accordion>
@@ -43,4 +43,4 @@ const LOFeatPanel = ({ featlist }) => {
     
 };
 
-export default LOFeatPanel;
+export default SMFeatPanel;

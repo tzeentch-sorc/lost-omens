@@ -9,26 +9,7 @@ import {
 } from '@vkontakte/icons'
 
 
-const LOMainInfo = ({gold, downtime, experience, level, easterEgg}) => {
-
-    function countGames(exp, lvl) {
-		if (lvl && lvl < 7) {
-			if (exp - (lvl - 1) * 1000 > 0) {
-				return 1;
-			} else {
-				return 2;
-			}
-		} else {
-			var tmpexp = exp - 6000;
-			if (tmpexp - (lvl - 7) * 1500 == 0) {
-				return 3;
-			} else if (tmpexp - (lvl - 7) * 1500 == 500) {
-				return 2;
-			} else {
-				return 1;
-			}
-		}
-	}
+const SMMainInfo = ({gold, downtime, experience, level}) => {
 
     return (
         <Group>
@@ -40,7 +21,7 @@ const LOMainInfo = ({gold, downtime, experience, level, easterEgg}) => {
                 </Card>
                 <Card key="downtime">
                     <Header mode="primary">Даунтайм</Header>
-                    <SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime} / 56 дней</SimpleCell>
+                    <SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime}</SimpleCell>
                 </Card>
             </CardGrid>
             <CardGrid size='m'>
@@ -50,17 +31,8 @@ const LOMainInfo = ({gold, downtime, experience, level, easterEgg}) => {
                         {experience && level && (level + " (" + experience + " XP)")} {!experience && ("unknown")}
                     </SimpleCell>
                 </Card>
-                <Card key="lvlcountdown">
-                    <Header mode="primary">
-                        Партий до {level && (parseInt(level, 10) + 1)} {!level && (" ??? ")} ур.
-                    </Header>
-                    <SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
-                        {experience && level && (countGames(experience, level) + (easterEgg == 7 ? " Игорей" : " шт."))}
-                        {(!experience || !level) && (" ??? ")}
-                    </SimpleCell>
-                </Card>
             </CardGrid>
         </Group>)
 }
 
-export default LOMainInfo;
+export default SMMainInfo;

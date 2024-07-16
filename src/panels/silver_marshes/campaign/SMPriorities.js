@@ -4,7 +4,7 @@ import {
     Button, SimpleCell
 } from '@vkontakte/vkui';
 
-const LOPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
+const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     const MODAL_PAGE_WITH_FIXED_HEIGHT = 'fixed-height';
     function createPriorityRow(element) {
         //console.log("element",element);
@@ -42,7 +42,7 @@ const LOPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     );
 };
 
-const LOPriorities = ({ priorities, setPopout }) => {
+const SMPriorities = ({ priorities, setPopout }) => {
     function setupPriorities(priorities) {
         var result = new Map();
         priorities.forEach((item) => {
@@ -59,9 +59,9 @@ const LOPriorities = ({ priorities, setPopout }) => {
         return Array.from(result);
     }
 
-    const onClick = () => setPopout(<LOPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
+    const onClick = () => setPopout(<SMPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
 
     return (
         <Group><Button stretched appearance="positive" size="l" onClick={onClick}>Открыть список приоритетов</Button></Group>);
 };
-export default LOPriorities;
+export default SMPriorities;

@@ -1,10 +1,10 @@
 import QuerySettings from '../../../util/QuerySettings';
 
-const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
+const sheetId = "19CwEiAnXosem6qIXmNDsU4x5xV-TZ2dQz6ay5miKciM"; // SM Geekmo Mirror
 
 const CharInfoSettings = new QuerySettings({
 	sheetId,
-	gid: 550804557, //sheet "characters" 
+	gid: 0, //sheet "characters" 
 	headrow: 1,
 	fields: {
 		name: "Персонаж",

@@ -11,30 +11,28 @@ import {
 } from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import LOInventoryPlaceholder from '../placeholders/LOInventoryPlaceholder.js';
-import LOSpellsPlaceholder from '../placeholders/LOSpellsPlaceholder.js';
-import LOFormulaePlaceholder from '../placeholders/LOFormulaePlaceholder.js';
+import InventoryPlaceholder from '../../placeholders/InventoryPlaceholder.js';
+import SpellsPlaceholder from '../../placeholders/SpellsPlaceholder.js';
+import FormulaePlaceholder from '../../placeholders/FormulaePlaceholder.js';
 
-import LOCharTabPanel from './LOCharTabPanel.js';
-import LOSpells from './LOSpells.js';
-import LOInventory from './LOInventory.js';
-import LOFormulae from './LOFormulae.js';
-import LOMainInfo from './LOMainInfo.js';
+import SMCharTabPanel from './SMCharTabPanel.js';
+import SMSpells from './SMSpells.js';
+import SMInventory from './SMInventory.js';
+import SMMainInfo from './SMMainInfo.js';
 
-import InventorySettings from '../export_settings/LOInventorySettings.js'
-import CharBuildSettings from '../export_settings/LOCharBuildSettings.js'
-import CharInfoSettings from '../export_settings/LOCharInfoSettings.js'
+import InventorySettings from '../export_settings/SMInventorySettings.js'
+import CharBuildSettings from '../export_settings/SMCharBuildSettings.js'
+import CharInfoSettings from '../export_settings/SMCharInfoSettings.js'
 
-import './LOCharacter.css'
-import LOFeatPanel from './LOFeatPanel.js';
+import './SMCharacter.css'
+import SMFeatPanel from './SMFeatPanel.js';
 
 
-const LOCharacter = () => {
+const SMCharacter = () => {
 
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const [inventory, setInventory] = useState();
-	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
 	const [downtime, setDowntime] = useState(0);
 	const [experience, setExperience] = useState();
@@ -47,14 +45,8 @@ const LOCharacter = () => {
 	const [spell_5, setSpell_5] = useState();
 	const [spell_6, setSpell_6] = useState();
 	const [spell_7, setSpell_7] = useState();
-	const [spell_8, setSpell_8] = useState();
-	const [spell_9, setSpell_9] = useState();
-	const [spell_10, setSpell_10] = useState();
-	const [feat_race, setFeatRace] = useState();
 	const [feat_general, setFeatGeneral] = useState();
 	const [feat_class, setFeatClass] = useState();
-	const [feat_skill, setFeatSkill] = useState();
-	const [feat_archetype, setFeatArchetype] = useState();
 
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
@@ -62,52 +54,25 @@ const LOCharacter = () => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
 
-	const [easterEgg, setEasterEgg] = useState(0);
-
-	function countGames(exp, lvl) {
-		if (lvl && lvl < 7) {
-			if (exp - (lvl - 1) * 1000 > 0) {
-				return 1;
-			} else {
-				return 2;
-			}
-		} else {
-			var tmpexp = exp - 6000;
-			if (tmpexp - (lvl - 7) * 1500 == 0) {
-				return 3;
-			} else if (tmpexp - (lvl - 7) * 1500 == 500) {
-				return 2;
-			} else {
-				return 1;
-			}
-		}
-	}
-
 	function hasSpells() {
 		return (spell_0[0] != "" || spell_1[0] != "" || spell_2[0] != "" ||
 			spell_3[0] != "" || spell_4[0] != "" || spell_5[0] != "" || spell_6[0] != "" ||
-			spell_7[0] != "" || spell_8[0] != "" | spell_9[0] != "" || spell_10[0] != ""
+			spell_7[0] != ""
 		);
 	}
-	function hasFormulae() {
-		return (formulae[0] != "");
-	}
+
 	function hasInventory() {
 		return (inventory || false);
 	}
 	function spellist() {
 		return ([spell_0, spell_1, spell_2,
 			spell_3, spell_4, spell_5, spell_6,
-			spell_7, spell_8, spell_9, spell_10]
+			spell_7]
 		)
 	}
 	function featlist(){
-		return ([feat_race, feat_general, 
-			feat_class, feat_skill, feat_archetype])
-	}
-
-	function getRandomInt(max) {
-		return Math.floor(Math.random() * max);
+		return ([feat_general, 
+			feat_class])
 	}
 
 	useEffect(() => {
@@ -139,19 +104,9 @@ const LOCharacter = () => {
 			setSpell_5(characterBuildData[0].spells_5.split(','));
 			setSpell_6(characterBuildData[0].spells_6.split(','));
 			setSpell_7(characterBuildData[0].spells_7.split(','));
-			setSpell_8(characterBuildData[0].spells_8.split(','));
-			setSpell_9(characterBuildData[0].spells_9.split(','));
-			setSpell_10(characterBuildData[0].spells_10.split(','));
 
-			setFormulae(characterBuildData[0].formulas.split(','));
-
-			setFeatRace(characterBuildData[0].feat_race.split(','));
 			setFeatGeneral(characterBuildData[0].feat_general.split(','));
-			setFeatSkill(characterBuildData[0].feat_skill.split(','));
 			setFeatClass(characterBuildData[0].feat_class.split(','));
-			setFeatArchetype(characterBuildData[0].feat_archetype.split(','));
-
-			setEasterEgg(getRandomInt(14));
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
@@ -163,20 +118,19 @@ const LOCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/lost_omens', { keepSearchParams: true })} />}>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/silver_marshes', { keepSearchParams: true })} />}>
 				{charName}
 			</PanelHeader>
 			<SplitLayout popout={popout}>
 				<SplitCol>
-					<LOMainInfo
+					<SMMainInfo
 						gold={gold}
 						downtime={downtime}
 						experience={experience}
-						level={level}
-						easterEgg={easterEgg} />
-					<LOFeatPanel featlist={featlist()}/>
+						level={level}/>
+					<SMFeatPanel featlist={featlist()}/>
 					<Group>
-						<LOCharTabPanel
+						<SMCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
 							onMenuClick={(opened) => {
@@ -184,22 +138,16 @@ const LOCharacter = () => {
 							}}
 						/>
 						{selected === 'inventory' && (!hasInventory()) && (
-							<LOInventoryPlaceholder />
+							<InventoryPlaceholder />
 						)}
 						{selected === 'inventory' && (hasInventory()) && (
-							<LOInventory inventory={inventory} />
+							<SMInventory inventory={inventory} />
 						)}
 						{selected === 'spells' && (!hasSpells()) && (
-							<LOSpellsPlaceholder />
+							<SpellsPlaceholder />
 						)}
 						{selected === 'spells' && (hasSpells()) && (
-							<LOSpells spellist={spellist()} />
-						)}
-						{selected === 'formulae' && (!hasFormulae()) && (
-							<LOFormulaePlaceholder />
-						)}
-						{selected === 'formulae' && (hasFormulae()) && (
-							<LOFormulae formulae={formulae} />
+							<SMSpells spellist={spellist()} />
 						)}
 					</Group>
 				</SplitCol>
@@ -208,4 +156,4 @@ const LOCharacter = () => {
 	);
 };
 
-export default LOCharacter;
+export default SMCharacter;

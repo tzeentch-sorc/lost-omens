@@ -11,9 +11,9 @@ import {
 } from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import LOInventoryPlaceholder from '../placeholders/LOInventoryPlaceholder.js';
-import LOSpellsPlaceholder from '../placeholders/LOSpellsPlaceholder.js';
-import LOFormulaePlaceholder from '../placeholders/LOFormulaePlaceholder.js';
+import LOInventoryPlaceholder from '../../placeholders/InventoryPlaceholder.js';
+import LOSpellsPlaceholder from '../../placeholders/SpellsPlaceholder.js';
+import LOFormulaePlaceholder from '../../placeholders/FormulaePlaceholder.js';
 
 import LOCharTabPanel from './LOCharTabPanel.js';
 import LOSpells from './LOSpells.js';

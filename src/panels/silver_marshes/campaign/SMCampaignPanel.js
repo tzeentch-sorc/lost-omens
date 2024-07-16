@@ -9,16 +9,16 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import './LOCampaignPanel.css'
-import LOInfoCard from './LOInfoCard.js';
+import './SMCampaignPanel.css'
+import SMInfoCard from './SMInfoCard.js';
 import CharUpdateAlert from '../../common/CharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
-import LOCharCard from './LOCharCard.js';
-import LONoCharsPage from './LONoCharsPage.js';
-import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
-import LOPriorities from './LOPriorities.js';
+import SMCharCard from './SMCharCard.js';
+import SMNoCharsPage from './SMNoCharsPage.js';
+import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
+import SMPriorities from './SMPriorities.js';
 
-const LOCampaignPanel = ({ fetchedUser }) => {
+const SMCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
@@ -34,8 +34,8 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 		setPopout(
 			<CharUpdateAlert
 				charName={element.name}
-				formLink='https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform'
-				navLink='/char/lost_omens'
+				formLink='https://vk.com/trokkin'
+				navLink='/char/silver_marshes'
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -47,19 +47,19 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 		} else {
 			params.set('CharName', element.name);
 			setParams(params);
-			routeNavigator.push('/char/lost_omens', { keepSearchParams: true });
+			routeNavigator.push('/char/silver_marshes', { keepSearchParams: true });
 		}
 	}
 
 	function createCard(element) {
 		return (
-			<LOCharCard element={element} key={element.name + "_lo_card"} openAction={() => { openAlert(element) }} />
+			<SMCharCard element={element} key={element.name + "_sm_card"} openAction={() => { openAlert(element) }} />
 		);
 	}
 
 	useEffect(() => {
 		async function fetchData() {
-			const prioData = await LOPlayerInfoSettings.getQueryAll();
+			const prioData = await SMPlayerInfoSettings.getQueryAll();
 			setPriorities(prioData.map(elem => ({
 				player: elem.player,
 				char_name: elem.char_name,
@@ -68,7 +68,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			})).sort((a, b) => b.prio - a.prio));
 			//console.log(prioData);
 
-			const data = prioData.filter(elem=>{return elem.id == ("vk.com/" + fetchedUser.screen_name)});
+			const data = prioData.filter(elem => { return elem.id == ("vk.com/id" + fetchedUser.id) });
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
@@ -77,20 +77,24 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				type: elem.char_class,
 				race: elem.race
 			})));
-			setDate(data[0].adv_date)
-			setAdvName(data[0].adv)
-			setPrio(data[0].prio)
-			
+			if (data.length > 0) {
+				setDate(data[0].adv_date);
+				setAdvName(data[0].adv);
+				setPrio(data[0].prio);
+			} else {
+				setPrio(-2);
+			}
+
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData()
 	}, []);
 
-	if (characters.length < 1 && prio != -1) {
+	if (characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
-			<LONoCharsPage user={fetchedUser} campaignName={campaignName} />
+			<SMNoCharsPage user={fetchedUser} campaignName={campaignName} />
 		)
 	} else if (characters.length < 1 && prio == -1) {
 		//while loading
@@ -107,7 +111,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 						<SplitLayout popout={popout}>
 							<SplitCol>
 								{date && prio && advName &&
-									<LOInfoCard date={date} prio={prio} adventure={advName} />
+									<SMInfoCard date={date} prio={prio} adventure={advName} />
 								}
 								<Header mode="secondary">Ваши персонажи</Header>
 								<Group mode="plain">
@@ -127,7 +131,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 					</Group>
 				}
 				<FixedLayout filled vertical="bottom">
-					<LOPriorities setPopout={setPopout} priorities={priorities} />
+					<SMPriorities setPopout={setPopout} priorities={priorities} />
 				</FixedLayout>
 
 			</Panel>
@@ -135,4 +139,4 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	}
 };
 
-export default LOCampaignPanel;
+export default SMCampaignPanel;
