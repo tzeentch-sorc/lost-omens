@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     Group, ModalRoot, InfoRow, ModalPage, ModalPageHeader,
-    CellButton, SimpleCell
+    Button, SimpleCell
 } from '@vkontakte/vkui';
 
 const LOPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
@@ -62,6 +62,6 @@ const LOPriorities = ({ priorities, setPopout }) => {
     const onClick = () => setPopout(<LOPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
 
     return (
-        <Group><CellButton onClick={onClick}>Открыть список приоритетов</CellButton></Group>);
+        <Group><Button stretched appearance="positive" size="l" onClick={onClick}>Открыть список приоритетов</Button></Group>);
 };
 export default LOPriorities;
