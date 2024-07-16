@@ -45,7 +45,7 @@ const SFCharacter = () => {
 	return (
 
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/starfinder', { keepSearchParams: true })} />}>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/ouroboros', { keepSearchParams: true })} />}>
 				{charName}
 			</PanelHeader>
 			<SplitLayout popout={popout}>

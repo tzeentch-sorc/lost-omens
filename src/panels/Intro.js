@@ -7,8 +7,9 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 
 const CAMPAIGNS = {
-    LOST_OMENS: "Lost Omens (PF 2e)",
-    SF: "Уроборос (Starfinder)"
+    LOST_OMENS: "Утраченные Пророчества (PF 2e)",
+    SF: "Уроборос (Starfinder)",
+    SM: "Серебряный Предел (D&D5e)"
 }
 
 const Intro = ({ fetchedUser}) => {
@@ -50,9 +51,19 @@ const Intro = ({ fetchedUser}) => {
                             <Button stretched appearance="positive" size="l" onClick={() => {
                                 params.set('CampaignName', CAMPAIGNS.SF)
                                 setParams(params)
-                                routeNavigator.push('/campaign/starfinder', {keepSearchParams: true})
+                                routeNavigator.push('/campaign/ouroboros', {keepSearchParams: true})
                             }}>
                                 Кампания {CAMPAIGNS.SF}
+                            </Button>
+                        </Div> 
+
+                        <Div>
+                            <Button stretched appearance="positive" size="l" onClick={() => {
+                                params.set('CampaignName', CAMPAIGNS.SM)
+                                setParams(params)
+                                routeNavigator.push('/campaign/silver_marshes', {keepSearchParams: true})
+                            }}>
+                                Кампания {CAMPAIGNS.SM}
                             </Button>
                         </Div> 
                 </Group>

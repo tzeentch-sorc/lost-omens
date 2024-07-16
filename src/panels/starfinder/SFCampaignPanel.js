@@ -32,7 +32,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 			<CharUpdateAlert
 				charName={element.full_name}
 				formLink='https://forms.gle/CgVTL2qUVctKja4R7'
-				navLink='/char/starfinder'
+				navLink='/char/ouroboros'
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -44,7 +44,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		} else {
 			params.set('CharName', element.full_name);
 			setParams(params);
-			routeNavigator.push('/char/starfinder', { keepSearchParams: true });
+			routeNavigator.push('/char/ouroboros', { keepSearchParams: true });
 		}
 	}
 
