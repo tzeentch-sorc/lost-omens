@@ -3,20 +3,22 @@ import {
 	Panel, PanelHeader, Header, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Div
+	CardGrid, Div,
+	FixedLayout
 
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import './SMCampaignPanel.css'
-import SMInfoCard from './SMInfoCard.js';
-import CharUpdateAlert from '../CharUpdateAlert.js';
-import EmptyCampaignPanel from '../EmptyCampaignPanel.js';
-import SMCharCard from './SMCharCard.js';
-import SMNoCharsPage from './SMNoCharsPage.js';
-import SMPlayerInfoSettings from './export_settings/SMPlayerInfoSettings.js'
+import './LOCampaignPanel.css'
+import LOInfoCard from './LOInfoCard.js';
+import CharUpdateAlert from '../../common/CharUpdateAlert.js';
+import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import LOCharCard from './LOCharCard.js';
+import LONoCharsPage from './LONoCharsPage.js';
+import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
+import LOPriorities from './LOPriorities.js';
 
-const SMCampaignPanel = ({ fetchedUser }) => {
+const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
@@ -26,13 +28,14 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 	const [advName, setAdvName] = useState("Неизвестное приключение")
 	const [prio, setPrio] = useState(-1)
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [priorities, setPriorities] = useState([]);
 
 	const openAction = (element) => {
 		setPopout(
 			<CharUpdateAlert
 				charName={element.name}
 				formLink='https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform'
-				navLink='/char/silver_marshes'
+				navLink='/char/lost_omens'
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -44,42 +47,52 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 		} else {
 			params.set('CharName', element.name);
 			setParams(params);
-			routeNavigator.push('/char/silver_marshes', { keepSearchParams: true });
+			routeNavigator.push('/char/lost_omens', { keepSearchParams: true });
 		}
 	}
 
 	function createCard(element) {
 		return (
-			<SMCharCard element={element} key={element.name + "_sm_card"} openAction={() => {openAlert(element)}} />
+			<LOCharCard element={element} key={element.name + "_lo_card"} openAction={() => { openAlert(element) }} />
 		);
 	}
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await SMPlayerInfoSettings.getFilteredQuery("id", "vk.com/id"+ "96607288");//fetchedUser.id);
+			const prioData = await LOPlayerInfoSettings.getQueryAll();
+			setPriorities(prioData.map(elem => ({
+				player: elem.player,
+				char_name: elem.char_name,
+				prio: elem.prio,
+				lvl: elem.lvl
+			})).sort((a, b) => b.prio - a.prio));
+			//console.log(prioData);
+
+			const data = prioData.filter(elem=>{return elem.id == ("vk.com/" + fetchedUser.screen_name)});
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
-				lvl_up: elem.lvl_up === "FALSE" ? false : true ,
+				lvl_up: elem.lvl_up === "FALSE" ? false : true,
 				type: elem.char_class,
 				race: elem.race
 			})));
 			setDate(data[0].adv_date)
 			setAdvName(data[0].adv)
 			setPrio(data[0].prio)
+			
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData()
 	}, []);
-	console.log(characters);
-	if (characters.length == 1 && !characters[0].name) {
+
+	if (characters.length < 1 && prio != -1) {
 		//no chars found
 		return (
-			<SMNoCharsPage user={fetchedUser} campaignName={campaignName} />
+			<LONoCharsPage user={fetchedUser} campaignName={campaignName} />
 		)
-	} else if (characters.length == 0) {
+	} else if (characters.length < 1 && prio == -1) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
@@ -94,7 +107,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 						<SplitLayout popout={popout}>
 							<SplitCol>
 								{date && prio && advName &&
-									<SMInfoCard date={date} prio={prio} adventure={advName} />
+									<LOInfoCard date={date} prio={prio} adventure={advName} />
 								}
 								<Header mode="secondary">Ваши персонажи</Header>
 								<Group mode="plain">
@@ -113,9 +126,13 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 						</SplitLayout>
 					</Group>
 				}
+				<FixedLayout filled vertical="bottom">
+					<LOPriorities setPopout={setPopout} priorities={priorities} />
+				</FixedLayout>
+
 			</Panel>
 		)
 	}
 };
 
-export default SMCampaignPanel;
+export default LOCampaignPanel;

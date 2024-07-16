@@ -7,7 +7,7 @@ import {
 } from '@vkontakte/icons'
 
 
-const SMSpellsPlaceholder = () => {
+const LOSpellsPlaceholder = () => {
     return (
         <Group
             id="tab-content-spells"
@@ -24,4 +24,4 @@ const SMSpellsPlaceholder = () => {
         </Group>
     );
 };
-export default SMSpellsPlaceholder;
+export default LOSpellsPlaceholder;

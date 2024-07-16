@@ -1,10 +1,10 @@
 import { Card, RichCell, Counter } from "@vkontakte/vkui";
 import { Icon28UserOutgoingOutline, Icon24UserOutline } from "@vkontakte/icons";
 
-const SMCharCard = ({element, openAction}) => {
+const LOCharCard = ({element, openAction}) => {
 
     return (
-        <Card mode="shadow" size="m" key={element.name + "_sm_card"}
+        <Card mode="shadow" size="m" key={element.name + "_lo_card"}
             onClick={openAction}>
             <RichCell
                 key={element.name}
@@ -23,4 +23,4 @@ const SMCharCard = ({element, openAction}) => {
         </Card>)
 }
 
-export default SMCharCard;
+export default LOCharCard;

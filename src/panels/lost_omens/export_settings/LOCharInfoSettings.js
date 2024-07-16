@@ -1,4 +1,4 @@
-import QuerySettings from '../../QuerySettings.js';
+import QuerySettings from '../../../util/QuerySettings';
 
 const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
 

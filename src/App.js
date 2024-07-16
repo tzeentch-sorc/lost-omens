@@ -7,12 +7,12 @@ import { useActiveVkuiLocation, useGetPanelForView } from '@vkontakte/vk-mini-ap
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Intro from './panels/Intro.js';
-import LOCampaignPanel from './panels/lost_omens/LOCampaignPanel.js';
-import LOCharacter from './panels/lost_omens/LOCharacter.js';
-import SFCampaignPanel from './panels/starfinder/SFCampaignPanel.js';
-import SFCharacter from './panels/starfinder/SFCharacter.js';
-import SMCampaignPanel from './panels/dnd/SMCampaignPanel.js';
-import SMCharacter from './panels/dnd/SMCharacter.js';
+import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
+import LOCharacter from './panels/lost_omens/character/LOCharacter.js';
+import SFCampaignPanel from './panels/ouroboros/SFCampaignPanel.js';
+import SFCharacter from './panels/ouroboros/SFCharacter.js';
+import SMCampaignPanel from './panels/silver_marshes/campaign/SMCampaignPanel.js';
+import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
 
 
 const ROUTES = {

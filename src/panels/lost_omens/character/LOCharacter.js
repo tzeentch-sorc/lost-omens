@@ -11,22 +11,22 @@ import {
 } from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import LOInventoryPlaceholder from './placeholders/LOInventoryPlaceholder.js';
-import LOSpellsPlaceholder from './placeholders/LOSpellsPlaceholder.js';
-import LOFormulaePlaceholder from './placeholders/LOFormulaePlaceholder.js';
+import LOInventoryPlaceholder from '../placeholders/LOInventoryPlaceholder.js';
+import LOSpellsPlaceholder from '../placeholders/LOSpellsPlaceholder.js';
+import LOFormulaePlaceholder from '../placeholders/LOFormulaePlaceholder.js';
 
-import LOCharTabPanel from './character_parts/LOCharTabPanel.js';
-import LOSpells from './character_parts/LOSpells.js';
-import LOInventory from './character_parts/LOInventory.js';
-import LOFormulae from './character_parts/LOFormulae.js';
-import LOMainInfo from './character_parts/LOMainInfo.js';
+import LOCharTabPanel from './LOCharTabPanel.js';
+import LOSpells from './LOSpells.js';
+import LOInventory from './LOInventory.js';
+import LOFormulae from './LOFormulae.js';
+import LOMainInfo from './LOMainInfo.js';
 
-import InventorySettings from './export_settings/LOInventorySettings.js'
-import CharBuildSettings from './export_settings/LOCharBuildSettings.js'
-import CharInfoSettings from './export_settings/LOCharInfoSettings.js'
+import InventorySettings from '../export_settings/LOInventorySettings.js'
+import CharBuildSettings from '../export_settings/LOCharBuildSettings.js'
+import CharInfoSettings from '../export_settings/LOCharInfoSettings.js'
 
 import './LOCharacter.css'
-import LOFeatPanel from './character_parts/LOFeatPanel.js';
+import LOFeatPanel from './LOFeatPanel.js';
 
 
 const LOCharacter = () => {

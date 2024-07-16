@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     Group, Div, SimpleCell,
     InfoRow, Accordion
@@ -6,7 +6,7 @@ import {
 
 
 
-const SMSpells = ({ spellist }) => {
+const LOSpells = ({ spellist }) => {
 
     const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
 
@@ -51,6 +51,21 @@ const SMSpells = ({ spellist }) => {
             title: 'Круг 7',
             detail: 7,
         },
+        {
+            id: "acc_spell_8",
+            title: 'Круг 8',
+            detail: 8,
+        },
+        {
+            id: "acc_spell_9",
+            title: 'Круг 9',
+            detail: 9,
+        },
+        {
+            id: "acc_spell_10",
+            title: 'Круг 10',
+            detail: 10,
+        },
     ];
 
     const [openId, setOpenId] = React.useState();
@@ -94,4 +109,4 @@ const SMSpells = ({ spellist }) => {
     
 };
 
-export default SMSpells;
+export default LOSpells;

@@ -4,10 +4,10 @@ import {
 } from '@vkontakte/vkui';
 import {
     Icon28CubeBoxOutline,
-	Icon28MagicWandOutline
+	Icon28MagicWandOutline, Icon24BookSpreadOutline
 } from '@vkontakte/icons'
 
-const SMCharTabPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
+const LOCharTabPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
     return (
         <Tabs>
             <TabsItem
@@ -38,8 +38,21 @@ const SMCharTabPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
                     <Div className="not4mob">Заклинания</Div>
                 </SimpleCell>
             </TabsItem>
+            <TabsItem
+                selected={selected === 'formulae'}
+                onClick={() => {
+                    onMenuClick(false);
+                    setSelected('formulae');
+                }}
+                id="tab-formulae"
+                aria-controls="tab-content-formulae"
+            >
+                <SimpleCell before={<Icon24BookSpreadOutline width={24} height={24} />}>
+                    <Div className="not4mob">Формулы</Div>
+                </SimpleCell>
+            </TabsItem>
         </Tabs>
     );
 };
 
-export default SMCharTabPanel;
+export default LOCharTabPanel;

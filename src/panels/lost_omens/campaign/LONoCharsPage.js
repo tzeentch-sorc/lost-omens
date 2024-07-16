@@ -13,8 +13,8 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import MastersGroup from '../MastersGroup';
-import ArticleBlock from '../ArticleBlock';
+import MastersGroup from '../../common/MastersGroup';
+import ArticleBlock from '../../common/ArticleBlock';
 
 
 const LONoCharsPage = ({ campaignName, user, }) => {

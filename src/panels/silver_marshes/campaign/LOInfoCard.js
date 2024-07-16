@@ -5,7 +5,7 @@ import {
     Icon28CrownOutline, Icon24BookmarkOutline, Icon28CalendarOutline, Icon28HistoryForwardOutline
 } from '@vkontakte/icons'
 
-const SMInfoCard = ({ date, prio, adventure }) => {
+const LOInfoCard = ({ date, prio, adventure }) => {
 
     return (
         <Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain">
@@ -41,4 +41,4 @@ const SMInfoCard = ({ date, prio, adventure }) => {
     )
 }
 
-export default SMInfoCard;
+export default LOInfoCard;

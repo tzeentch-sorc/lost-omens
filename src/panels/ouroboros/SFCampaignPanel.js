@@ -11,9 +11,9 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import './SFCampaignPanel.css'
 import SFCharacterInfoCard from './SFInfoCard';
-import EmptyCampaignPanel from '../EmptyCampaignPanel';
+import EmptyCampaignPanel from '../common/EmptyCampaignPanel';
 import SFNoCharsPage from './SFNoCharsPage';
-import CharUpdateAlert from '../CharUpdateAlert';
+import CharUpdateAlert from '../common/CharUpdateAlert';
 import SFCharCard from './SFCharCard';
 
 const SFCampaignPanel = ({ fetchedUser }) => {

@@ -4,7 +4,7 @@ import {
 } from '@vkontakte/vkui';
 
 
-import AddItem from '../../AddItem';
+import AddItem from '../../common/AddItem';
 
 const LOInventory = ({ inventory }) => {
 

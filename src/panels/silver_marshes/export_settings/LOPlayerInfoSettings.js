@@ -1,11 +1,11 @@
-import QuerySettings from '../../QuerySettings.js';
+import QuerySettings from '../../../util/QuerySettings';
 
-const sheetId = "19CwEiAnXosem6qIXmNDsU4x5xV-TZ2dQz6ay5miKciM"; // SM Geekmo Mirror
+const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
 
-const SMPlayerInfoSettings = new QuerySettings({
+const LOPlayerInfoSettings = new QuerySettings({
 	sheetId,
-	gid: 1610912999, //sheet "players"
-	headrow: 2,
+	gid: 1846907861, //sheet "players"
+	headrow: 1,
 	fields: {
 		id: "VK",
 		player: "Игрок",
@@ -44,8 +44,9 @@ const SMPlayerInfoSettings = new QuerySettings({
 			9: "lvl_up"
 		 },
 		colIDs: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+		queryAll: "select A, B, C, D, E, F, G, H, I, J",
 	},
-	range: { min: 0, max: 9, str: "A2:J" },
+	range: { min: 0, max: 9, str: "A1:J" },
 });
 
-export default SMPlayerInfoSettings;
+export default LOPlayerInfoSettings;
