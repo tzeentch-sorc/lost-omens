@@ -4,7 +4,7 @@ import {
 } from '@vkontakte/vkui';
 
 
-import LOAddItem from './LOAddItem';
+import AddItem from '../../AddItem';
 
 const LOInventory = ({ inventory }) => {
 
@@ -25,7 +25,7 @@ const LOInventory = ({ inventory }) => {
             mode="plain">
             {inventory && inventory.map(e => createInventoryRow(e))}
 
-            <LOAddItem />
+            <AddItem link = "https://forms.gle/9pa4v5DeXGuCrU2w8"/>
 
         </Group>
     );

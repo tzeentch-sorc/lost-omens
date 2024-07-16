@@ -8,13 +8,12 @@ import {
     Icon12Add
 } from '@vkontakte/icons'
 
-const LOAddItem = () => {
+const AddItem = ({link}) => {
     const [rounded, setRounded] = useState(false);
     const [stretched, setStretched] = useState(true);
     const [disabled, setDisabled] = useState(false);
 
     const buttonBefore = <Icon12Add />;
-    const buttonLink = 'https://forms.gle/9pa4v5DeXGuCrU2w8';
     const buttonText = 'Добавить предмет';
 
     return (
@@ -22,7 +21,6 @@ const LOAddItem = () => {
             <InfoRow>
                 <Button
                     align='center'
-                    href={buttonLink}
                     before={buttonBefore}
                     appearance='neutral'
                     stretched={stretched}
@@ -30,7 +28,9 @@ const LOAddItem = () => {
                     mode='secondary'
                     disabled={disabled}
                     size='l'
-                    onClick={() => { }}
+                    onClick={() => {
+                        window.open(link, "_blank")
+                    }}
                 >
                     {buttonText}
                 </Button>
@@ -40,4 +40,4 @@ const LOAddItem = () => {
 };
 
 
-export default LOAddItem;
+export default AddItem;
