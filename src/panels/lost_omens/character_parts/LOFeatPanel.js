@@ -37,9 +37,7 @@ const LOFeatPanel = ({ featlist }) => {
                         </Accordion.Content>
                     </Accordion>
                 )
-            )
-
-            }
+            )}
 
         </Group>);
     

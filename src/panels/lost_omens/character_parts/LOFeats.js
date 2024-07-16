@@ -60,9 +60,7 @@ const LOFeats = ({ featlist }) => {
                         <InfoRow header={<b>{title}</b>}>{featlist[detail].map(e => createFeatRow(e))}</InfoRow>
                     </SimpleCell>
                 )
-            )
-
-            }
+            )}
 
         </Group>);
 
