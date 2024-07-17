@@ -11,7 +11,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 import './SMCampaignPanel.css'
 import SMInfoCard from './SMInfoCard.js';
-import CharUpdateAlert from '../../common/CharUpdateAlert.js';
+import SMCharUpdateAlert from './SMCharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
 import SMCharCard from './SMCharCard.js';
 import SMNoCharsPage from './SMNoCharsPage.js';
@@ -32,9 +32,8 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 
 	const openAction = (element) => {
 		setPopout(
-			<CharUpdateAlert
+			<SMCharUpdateAlert
 				charName={element.name}
-				formLink='https://vk.com/trokkin'
 				navLink='/char/silver_marshes'
 				closeMethod={() => setPopout(null)}
 			/>

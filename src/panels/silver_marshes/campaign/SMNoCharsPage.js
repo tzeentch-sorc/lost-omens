@@ -62,7 +62,17 @@ const SMNoCharsPage = ({ campaignName, user, }) => {
                                         image='https://sun9-50.userapi.com/impg/bY6e8HhSAo9lG2KA5kluNRi_ifLQvOj6HKhwuw/UYj2sDkBWvA.jpg?quality=96&as=32x16,48x24,72x36,108x54,160x80,240x120,360x181,480x241,540x271,640x321,720x361,1080x542,1100x552&sign=63965cbcbf5e5ad3177af50e472a0d42&from=bu&u=-YUXCvwzYnlqO047Z40tTXcyz3KL9Eo_5zrnzRBHgG4&cs=200x133'                                    />
                                     <MastersGroup masters={masters} />
                                     <Group>
-                                        <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа">
+                                        <Placeholder icon={<Icon56UserAddOutline />} 
+                                        header="Создание персонажа"
+                                        action={
+                                            <Button
+                                                size="m"
+                                                appearance="positive"
+                                                onClick={() => window.open('https://vk.com/@geekmo-new-character-dnd-5e')}
+                                            >
+                                                Статья о создании персонажа
+                                            </Button>
+                                        }>
                                             <Div>
                                                 Для создания стоит написать одному из мастеров
                                             </Div>
