@@ -5,11 +5,11 @@ import {
 } from '@vkontakte/vkui';
 import {
     Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline,
-    Icon28HourglassErrorBadgeOutline
+    Icon28WidgetsOutline
 } from '@vkontakte/icons'
 
 
-const SMMainInfo = ({gold, downtime, experience, level}) => {
+const SMMainInfo = ({gold, downtime, experience, level, mult}) => {
 
     return (
         <Group>
@@ -29,6 +29,12 @@ const SMMainInfo = ({gold, downtime, experience, level}) => {
                     <Header mode="primary">Уровень</Header>
                     <SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
                         {experience && level && (level + " (" + experience + " XP)")} {!experience && ("unknown")}
+                    </SimpleCell>
+                </Card>
+                <Card key="mult">
+                    <Header mode="primary">Класс</Header>
+                    <SimpleCell before={<Icon28WidgetsOutline width={24} height={24} />}>
+                        {mult}
                     </SimpleCell>
                 </Card>
             </CardGrid>

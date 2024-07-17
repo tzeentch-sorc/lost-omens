@@ -37,6 +37,7 @@ const SMCharacter = () => {
 	const [downtime, setDowntime] = useState(0);
 	const [experience, setExperience] = useState();
 	const [level, setLevel] = useState();
+	const [mult, setMult] = useState();
 	const [spell_0, setSpell_0] = useState();
 	const [spell_1, setSpell_1] = useState();
 	const [spell_2, setSpell_2] = useState();
@@ -85,6 +86,7 @@ const SMCharacter = () => {
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
 			setDowntime(characterInfoData[0].downtime);
+			setMult(characterInfoData[0].mult);
 
 			//получение инвентаря
 			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
@@ -127,7 +129,8 @@ const SMCharacter = () => {
 						gold={gold}
 						downtime={downtime}
 						experience={experience}
-						level={level}/>
+						level={level}
+						mult = {mult}/>
 					<SMFeatPanel featlist={featlist()}/>
 					<Group>
 						<SMCharTabPanel

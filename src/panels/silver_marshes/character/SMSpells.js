@@ -65,14 +65,14 @@ const SMSpells = ({ spellist }) => {
 
     function fixRetrain(listRankedSpells){
         var retrained = new Set(listRankedSpells.filter(elem => { return elem[0] == "-"}));
-        console.log("retrained", retrained);
+        //console.log("retrained", retrained);
         var result = new Array();
         listRankedSpells.forEach((item) => {
             if (!(retrained.has(item) || retrained.has("-"+item))) {
                 result.push(item);
             }
         });
-        console.log("result", result);
+        //console.log("result", result);
 
         return Array.from(result);
     }
