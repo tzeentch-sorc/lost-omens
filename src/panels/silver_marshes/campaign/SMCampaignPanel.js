@@ -67,7 +67,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 			})).sort((a, b) => b.prio - a.prio));
 			//console.log(prioData);
 
-			const data = prioData.filter(elem => { return elem.id == ("vk.com/id" + fetchedUser.id) });
+			const data = prioData.filter(elem => { return elem.id == ("vk.com/id" + "160166959")});//fetchedUser.id) });
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
