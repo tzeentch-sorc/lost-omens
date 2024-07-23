@@ -6,11 +6,13 @@ import { useActiveVkuiLocation, useGetPanelForView } from '@vkontakte/vk-mini-ap
 
 import '@vkontakte/vkui/dist/vkui.css';
 
-import LOCampaignPanel from './panels/lost_omens/LOCampaignPanel.js';
 import Intro from './panels/Intro.js';
-import LOCharacter from './panels/lost_omens/LOCharacter.js';
-import SFCampaignPanel from './panels/starfinder/SFCampaignPanel.js';
-import SFCharacter from './panels/starfinder/SFCharacter.js';
+import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
+import LOCharacter from './panels/lost_omens/character/LOCharacter.js';
+import SFCampaignPanel from './panels/ouroboros/SFCampaignPanel.js';
+import SFCharacter from './panels/ouroboros/SFCharacter.js';
+import SMCampaignPanel from './panels/silver_marshes/campaign/SMCampaignPanel.js';
+import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
 
 
 const ROUTES = {
@@ -55,9 +57,13 @@ const App = (router) => {
 				<LOCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<LOCharacter id={ROUTES.CHAR}/>
 			</View>
-			<View activePanel={activePanel} nav='starfinder'>
+			<View activePanel={activePanel} nav='ouroboros'>
 				<SFCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<SFCharacter id={ROUTES.CHAR}/>
+			</View>
+			<View activePanel={activePanel} nav='silver_marshes'>
+				<SMCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+				<SMCharacter id={ROUTES.CHAR}/>
 			</View>
 		</Root>
 	);

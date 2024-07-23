@@ -3,10 +3,7 @@ import {
     SimpleCell, InfoRow, Group
 } from '@vkontakte/vkui';
 
-
-import AddItem from '../../AddItem';
-
-const LOInventory = ({ inventory }) => {
+const SMInventory = ({ inventory }) => {
 
     function createInventoryRow(element) {
         if (element.count == 0) return;
@@ -25,9 +22,7 @@ const LOInventory = ({ inventory }) => {
             mode="plain">
             {inventory && inventory.map(e => createInventoryRow(e))}
 
-            <AddItem link = "https://forms.gle/9pa4v5DeXGuCrU2w8"/>
-
         </Group>
     );
 };
-export default LOInventory;
+export default SMInventory;

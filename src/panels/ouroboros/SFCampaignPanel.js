@@ -11,9 +11,9 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import './SFCampaignPanel.css'
 import SFCharacterInfoCard from './SFInfoCard';
-import EmptyCampaignPanel from '../EmptyCampaignPanel';
+import EmptyCampaignPanel from '../common/EmptyCampaignPanel';
 import SFNoCharsPage from './SFNoCharsPage';
-import CharUpdateAlert from '../CharUpdateAlert';
+import CharUpdateAlert from '../common/CharUpdateAlert';
 import SFCharCard from './SFCharCard';
 
 const SFCampaignPanel = ({ fetchedUser }) => {
@@ -32,7 +32,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 			<CharUpdateAlert
 				charName={element.full_name}
 				formLink='https://forms.gle/CgVTL2qUVctKja4R7'
-				navLink='/char/starfinder'
+				navLink='/char/ouroboros'
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -44,7 +44,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		} else {
 			params.set('CharName', element.full_name);
 			setParams(params);
-			routeNavigator.push('/char/starfinder', { keepSearchParams: true });
+			routeNavigator.push('/char/ouroboros', { keepSearchParams: true });
 		}
 	}
 

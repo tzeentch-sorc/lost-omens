@@ -13,11 +13,11 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import MastersGroup from '../MastersGroup';
-import ArticleBlock from '../ArticleBlock';
+import MastersGroup from '../../common/MastersGroup';
+import ArticleBlock from '../../common/ArticleBlock';
 
 
-const LONoCharsPage = ({ campaignName, user, }) => {
+const SMNoCharsPage = ({ campaignName, user, }) => {
 
     const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
     const [isDisplayed, setIsDisplayed] = useState(false);
@@ -29,7 +29,7 @@ const LONoCharsPage = ({ campaignName, user, }) => {
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',
                     params: {
-                        user_ids: 'dat_sky_tech, id41881976, nancy_drukovishna',
+                        user_ids: 'trokkin, vlavrinenko, id19825836, tihonya063, vadimka_scp, lizaarnautova, kirkirov',
                         v: '5.131',
                         fields: 'screen_name, photo_200',
                         access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
@@ -56,14 +56,23 @@ const LONoCharsPage = ({ campaignName, user, }) => {
                             <SplitCol>
                                 <Group mode="plain">
                                     <ArticleBlock
-                                        articleLink='https://vk.com/@geekmo-pathfinder-2e-campaign'
-                                        caption='Добро пожаловать в «Утраченные Пророчества»!'
-                                        description='Введение в мир Голариона 2й редакции'
-                                        image='https://sun9-67.userapi.com/impg/BLxFtRP692RLTqeCOp3LR3CGNxEJInVV9CRJ5w/kRE7xSR8qfk.jpg?size=604x302&quality=96&sign=3870102614006243570a351f7077b452&type=album)'
-                                    />
+                                        articleLink='https://vk.com/@geekmo-dnd-5e-campaign'
+                                        caption='Добро пожаловать в «Серебряный Предел»!'
+                                        description='Знакомство с мегакампанией'
+                                        image='https://sun9-50.userapi.com/impg/bY6e8HhSAo9lG2KA5kluNRi_ifLQvOj6HKhwuw/UYj2sDkBWvA.jpg?quality=96&as=32x16,48x24,72x36,108x54,160x80,240x120,360x181,480x241,540x271,640x321,720x361,1080x542,1100x552&sign=63965cbcbf5e5ad3177af50e472a0d42&from=bu&u=-YUXCvwzYnlqO047Z40tTXcyz3KL9Eo_5zrnzRBHgG4&cs=200x133'                                    />
                                     <MastersGroup masters={masters} />
                                     <Group>
-                                        <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа">
+                                        <Placeholder icon={<Icon56UserAddOutline />} 
+                                        header="Создание персонажа"
+                                        action={
+                                            <Button
+                                                size="m"
+                                                appearance="positive"
+                                                onClick={() => window.open('https://vk.com/@geekmo-new-character-dnd-5e')}
+                                            >
+                                                Статья о создании персонажа
+                                            </Button>
+                                        }>
                                             <Div>
                                                 Для создания стоит написать одному из мастеров
                                             </Div>
@@ -79,4 +88,4 @@ const LONoCharsPage = ({ campaignName, user, }) => {
     );
 }
 
-export default LONoCharsPage;
+export default SMNoCharsPage;

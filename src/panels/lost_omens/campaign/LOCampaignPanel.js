@@ -11,11 +11,11 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 import './LOCampaignPanel.css'
 import LOInfoCard from './LOInfoCard.js';
-import CharUpdateAlert from '../CharUpdateAlert.js';
-import EmptyCampaignPanel from '../EmptyCampaignPanel.js';
+import CharUpdateAlert from '../../common/CharUpdateAlert.js';
+import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
 import LOCharCard from './LOCharCard.js';
 import LONoCharsPage from './LONoCharsPage.js';
-import LOPlayerInfoSettings from './export_settings/LOPlayerInfoSettings.js'
+import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
 const LOCampaignPanel = ({ fetchedUser }) => {
@@ -68,7 +68,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			})).sort((a, b) => b.prio - a.prio));
 			//console.log(prioData);
 
-			const data = prioData.filter(elem=>{return elem.id == ("vk.com/" + fetchedUser.screen_name)});
+			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + fetchedUser.screen_name) });
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
@@ -77,17 +77,21 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				type: elem.char_class,
 				race: elem.race
 			})));
-			setDate(data[0].adv_date)
-			setAdvName(data[0].adv)
-			setPrio(data[0].prio)
-			
+			if (data.length > 0) {
+				setDate(data[0].adv_date);
+				setAdvName(data[0].adv);
+				setPrio(data[0].prio);
+			} else {
+				setPrio(-2);
+			}
+
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData()
 	}, []);
 
-	if (characters.length < 1 && prio != -1) {
+	if (characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
 			<LONoCharsPage user={fetchedUser} campaignName={campaignName} />

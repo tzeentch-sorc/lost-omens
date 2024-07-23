@@ -29,14 +29,24 @@ const router = createHashRouter([
     view: 'lost_omens',
   },
   {
-    path: '/campaign/starfinder',
+    path: '/campaign/ouroboros',
     panel: 'campaign',
-    view: 'starfinder',
+    view: 'ouroboros',
   },
   {
-    path: '/char/starfinder',
+    path: '/char/ouroboros',
     panel: 'char',
-    view: 'starfinder',
+    view: 'ouroboros',
+  },
+  {
+    path: '/campaign/silver_marshes',
+    panel: 'campaign',
+    view: 'silver_marshes',
+  },
+  {
+    path: '/char/silver_marshes',
+    panel: 'char',
+    view: 'silver_marshes',
   }
 ]);
 
