@@ -11,9 +11,8 @@ import {
 } from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import InventoryPlaceholder from '../../placeholders/InventoryPlaceholder.js';
-import SpellsPlaceholder from '../../placeholders/SpellsPlaceholder.js';
-import FormulaePlaceholder from '../../placeholders/FormulaePlaceholder.js';
+import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
+import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
 
 import SMCharTabPanel from './SMCharTabPanel.js';
 import SMSpells from './SMSpells.js';
