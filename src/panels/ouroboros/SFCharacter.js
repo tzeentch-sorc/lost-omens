@@ -65,7 +65,7 @@ const SFCharacter = () => {
 			</PanelHeader>
 			<SplitLayout popout={popout}>
 				<SplitCol>
-					{charId && lvl > 0 && exp > 0 &&
+					{charId && lvl > 0 && exp >= 0 &&
 						<Group mode="plain">
 							<CardGrid size="m" >
 								<Card key="full_name">
