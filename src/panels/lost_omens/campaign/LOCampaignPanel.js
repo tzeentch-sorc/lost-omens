@@ -78,9 +78,9 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				race: elem.race
 			})));
 			if (data.length > 0) {
-				setDate(data[0].adv_date);
-				setAdvName(data[0].adv);
-				setPrio(data[0].prio);
+				data[0].adv_date!="" && setDate(data[0].adv_date);
+				data[0].adv!="" && setAdvName(data[0].adv);
+				data[0].prio!="" && setPrio(data[0].prio);
 			} else {
 				setPrio(-2);
 			}
