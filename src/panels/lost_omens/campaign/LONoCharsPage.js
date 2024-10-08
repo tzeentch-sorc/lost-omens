@@ -15,6 +15,7 @@ import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
+import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
 
 
 const LONoCharsPage = ({ campaignName, user, }) => {
@@ -25,11 +26,13 @@ const LONoCharsPage = ({ campaignName, user, }) => {
 
     useEffect(() => {
         async function fetchData() {
+            const masterData = await LOMastersInfoSettings.getQueryAll();
+			const userIds = masterData.map(elem => elem.id).join(', ');
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',
                     params: {
-                        user_ids: 'dat_sky_tech, id41881976, nancy_drukovishna',
+                        user_ids: userIds,
                         v: '5.131',
                         fields: 'screen_name, photo_200',
                         access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
