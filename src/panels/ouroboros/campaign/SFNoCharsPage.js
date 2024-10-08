@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
-
+import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
 
 const SFNoCharsPage = ({campaignName, user, }) => {
 
@@ -25,18 +25,20 @@ const SFNoCharsPage = ({campaignName, user, }) => {
 
     useEffect(() => {
 		async function fetchData() {
-			const users = await bridge
-				.send('VKWebAppCallAPIMethod', {
-					method: 'users.get',
-					params: {
-						user_ids: 'iaroslavvvv, rizaevns, wowan001, never_tell_never',
-						v: '5.131',
-						fields: 'screen_name, photo_200',
-						access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
-					}
-				}).then(resp => { return resp.response });
+            const masterData = await SFMastersInfoSettings.getQueryAll();
+			const userIds = masterData.map(elem => elem.id).join(', ');
+            const users = await bridge
+                .send('VKWebAppCallAPIMethod', {
+                    method: 'users.get',
+                    params: {
+                        user_ids: userIds,
+                        v: '5.131',
+                        fields: 'screen_name, photo_200',
+                        access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
+                    }
+                }).then(resp => { return resp.response });
 
-			setMasters(users);
+            setMasters(users);
             setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
             setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 1000)
 		}
