@@ -10,7 +10,7 @@ import {
 	Icon56Stars3Outline, Icon28TouchIdOutline, Icon36CoinsStacks3Outline,
 	Icon24PlaneOutline, Icon28WrenchOutline
 } from '@vkontakte/icons'
-import { SF_GOOGLE_SCRIPTS_BASE_URL } from './SFCampaignPanel.js'
+import { SF_GOOGLE_SCRIPTS_BASE_URL } from '../campaign/SFCampaignPanel.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 const SFCharacter = () => {

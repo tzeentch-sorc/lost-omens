@@ -88,7 +88,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
-		fetchData()
+		fetchData().catch(console.error);
 	}, []);
 
 	if (characters.length < 1 && prio == -2) {
