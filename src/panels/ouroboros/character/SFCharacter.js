@@ -33,23 +33,6 @@ const SFCharacter = () => {
 	
 	useEffect(() => {
 		async function fetchData() {
-			/*isFinished = false
-			const data = await axios.post(SF_GOOGLE_SCRIPTS_BASE_URL + "?id=" + charName).then(resp => { //charName  "Кима"
-				return resp.data
-			})
-			setCharId(data.id)+
-			setLvl(data.lvl)+
-			setExp(data.exp)+
-			if (data.hist)
-				setHist(data.hist)+
-			if (data.desc)
-				setDesc(data.desc)+
-			if (data.gold)
-				setGold(data.gold)+
-			if (data.psVal)
-				setShip(data.psVal)
-			if (data.pmVal)
-				setMech(data.pmVal)*/
 			//получение золота, уровня и опыта
 			let characterInfoData = await SFCharInfoSettings.getFilteredQuery("name", charName);
 			console.log("character info data", characterInfoData);
@@ -66,7 +49,7 @@ const SFCharacter = () => {
 			setTimeout(() => setPopout(null), 1000);
 			console.log(characterInfoData)
 		}
-		fetchData();
+		fetchData().catch(console.error);
 	}, []);
 
 	return (

@@ -139,7 +139,7 @@ const LOCharacter = () => {
 
 			//console.log("new", inventoryData);
 		}
-		fetchData();
+		fetchData().catch(console.error);
 	}, []);
 
 	return (
