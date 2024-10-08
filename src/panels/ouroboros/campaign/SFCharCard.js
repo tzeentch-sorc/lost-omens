@@ -12,11 +12,11 @@ const SFCharCard = ({ element, openAction }) => {
                 id={element.name}
                 before={<Icon24UserOutline width={48} height={48} color='#008cff' />}
                 text={element.lvl + " ур."}
-                after={element.lvl_up == 'TRUE' ?
+                after={element.lvl_up &&
                     <Counter size="s" mode="primary">
                         <Icon28UserOutgoingOutline width={16} height={16} />
-                    </Counter> : null}
-                afterCaption={element.lvl_up == 'TRUE' ? "Доступно повышение" : ""}
+                    </Counter>}
+                afterCaption={element.lvl_up && "Доступно повышение"}
             >
                 {element.name}
             </RichCell>

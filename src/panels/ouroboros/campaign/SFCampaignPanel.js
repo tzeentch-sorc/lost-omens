@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
 	Panel, PanelHeader, Header, Group,
 	PanelHeaderBack, ScreenSpinner,
@@ -10,11 +9,12 @@ import {
 
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import './SFCampaignPanel.css'
-import SFCharacterInfoCard from './SFInfoCard';
-import EmptyCampaignPanel from '../common/EmptyCampaignPanel';
-import SFNoCharsPage from './SFNoCharsPage';
-import CharUpdateAlert from '../common/CharUpdateAlert';
-import SFCharCard from './SFCharCard';
+import SFCharacterInfoCard from './SFInfoCard.js';
+import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import SFNoCharsPage from './SFNoCharsPage.js';
+import CharUpdateAlert from '../../common/CharUpdateAlert.js';
+import SFCharCard from './SFCharCard.js';
+import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
@@ -23,14 +23,14 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	const campaignName = params.get('CampaignName');
 
 	const [characters, setCharacters] = useState([])
-	const [prio, setPrio] = useState(-1)
+	const [prio, setPrio] = useState(-1) // -1 => loading
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	const openAction = (element) => {
 		setPopout(
 			<CharUpdateAlert
-				charName={element.full_name}
+				charName={element.name}
 				formLink='https://forms.gle/CgVTL2qUVctKja4R7'
 				navLink='/char/ouroboros'
 				closeMethod={() => setPopout(null)}
@@ -39,10 +39,10 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	};
 
 	const openAlert = (element) => {
-		if (element.lvl_up == 'TRUE') {
+		if (element.lvl_up) {
 			openAction(element)
 		} else {
-			params.set('CharName', element.full_name);
+			params.set('CharName', element.name);
 			setParams(params);
 			routeNavigator.push('/char/ouroboros', { keepSearchParams: true });
 		}
@@ -56,14 +56,21 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await axios.get(SF_GOOGLE_SCRIPTS_BASE_URL + "?id=" + fetchedUser.screen_name).then(resp => {//TODO "id306494424" + fetchedUser.screen_name
-				return resp.data
-			});
-
-			setCharacters(data.chars)
-			setPrio(data.prio)
+			const prioData = await SFPlayerInfoSettings.getQueryAll();
+			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + fetchedUser.screen_name) });
+			console.log("data: ", data);
+			setCharacters(data.map(elem => ({
+				name: elem.char_name,
+				lvl: elem.lvl,
+				lvl_up: elem.lvl_up === "FALSE" ? false : true,
+			})));
+			if (data.length > 0) {
+				data[0].prio!="" && setPrio(data[0].prio);
+			} else {
+				setPrio(-2); // -2 => no character
+			}
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 1000)
+			setTimeout(() => {setPopout(null); setIsDisplayed(true);}, 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
@@ -115,5 +122,3 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 };
 
 export default SFCampaignPanel;
-
-export const SF_GOOGLE_SCRIPTS_BASE_URL = "https://script.google.com/macros/s/AKfycbwhqD4nmaw7eE_kYJrnvxAhdtOj1kse6iazqU9uWquPDUm3Rh6ct_P0banY9zXiXxzuew/exec"

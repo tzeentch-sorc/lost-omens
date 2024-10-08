@@ -2,7 +2,7 @@ import QuerySettings from '../../../util/QuerySettings';
 
 const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; //LO Geekmo Mirror
 
-const CharBuildSettings = new QuerySettings({
+const LOCharBuildSettings = new QuerySettings({
 	sheetId,
 	gid: 1439947023, //sheet "builds"
 	headrow: 1,
@@ -80,4 +80,4 @@ const CharBuildSettings = new QuerySettings({
 	},
 });
 
-export default CharBuildSettings;
+export default LOCharBuildSettings;

@@ -2,7 +2,7 @@ import QuerySettings from '../../../util/QuerySettings';
 
 const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
 
-const InventorySettings = new QuerySettings({
+const LOInventorySettings = new QuerySettings({
 	sheetId,
 	gid: 346052728, //sheet "inventory"
 	headrow: 1,
@@ -21,4 +21,4 @@ const InventorySettings = new QuerySettings({
 	range: { min: 0, max: 3, str: "A2:D" },
 });
 
-export default InventorySettings;
+export default LOInventorySettings;

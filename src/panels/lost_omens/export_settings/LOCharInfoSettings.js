@@ -2,7 +2,7 @@ import QuerySettings from '../../../util/QuerySettings';
 
 const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
 
-const CharInfoSettings = new QuerySettings({
+const LOCharInfoSettings = new QuerySettings({
 	sheetId,
 	gid: 550804557, //sheet "characters" 
 	headrow: 1,
@@ -22,4 +22,4 @@ const CharInfoSettings = new QuerySettings({
 	range: { min: 0, max: 4, str: "A2:E" },
 });
 
-export default CharInfoSettings;
+export default LOCharInfoSettings;

@@ -19,9 +19,9 @@ import SMSpells from './SMSpells.js';
 import SMInventory from './SMInventory.js';
 import SMMainInfo from './SMMainInfo.js';
 
-import InventorySettings from '../export_settings/SMInventorySettings.js'
-import CharBuildSettings from '../export_settings/SMCharBuildSettings.js'
-import CharInfoSettings from '../export_settings/SMCharInfoSettings.js'
+import SMInventorySettings from '../export_settings/SMInventorySettings.js'
+import SMCharBuildSettings from '../export_settings/SMCharBuildSettings.js'
+import SMCharInfoSettings from '../export_settings/SMCharInfoSettings.js'
 
 import './SMCharacter.css'
 import SMFeatPanel from './SMFeatPanel.js';
@@ -79,7 +79,7 @@ const SMCharacter = () => {
 		async function fetchData() {
 			//попытка получить через spreadsheetApp
 			//получение золота, уровня, даунтайма и опыта
-			let characterInfoData = await CharInfoSettings.getFilteredQuery("name", charName);
+			let characterInfoData = await SMCharInfoSettings.getFilteredQuery("name", charName);
 			console.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExperience(characterInfoData[0].exp);
@@ -88,13 +88,13 @@ const SMCharacter = () => {
 			setMult(characterInfoData[0].mult);
 
 			//получение инвентаря
-			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
+			let inventoryData = await SMInventorySettings.getFilteredQuery("owner", charName);
 			console.log("inventory data", inventoryData);
 
 			setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
 
 			//получение черт, заклинаний, формул, черт
-			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
+			let characterBuildData = await SMCharBuildSettings.getFilteredQuery("name", charName);
 			console.log("character build data", characterBuildData);
 
 			setSpell_0(characterBuildData[0].spells_0.split(','));
@@ -114,7 +114,7 @@ const SMCharacter = () => {
 
 			//console.log("new", inventoryData);
 		}
-		fetchData();
+		fetchData().catch(console.error);
 	}, []);
 
 	return (

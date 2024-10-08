@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import {
 	Panel, SimpleCell,
 	Header, Group, PanelHeaderBack, PanelHeader,
@@ -10,8 +9,9 @@ import {
 	Icon56Stars3Outline, Icon28TouchIdOutline, Icon36CoinsStacks3Outline,
 	Icon24PlaneOutline, Icon28WrenchOutline
 } from '@vkontakte/icons'
-import { SF_GOOGLE_SCRIPTS_BASE_URL } from './SFCampaignPanel.js'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+
+import SFCharInfoSettings from '../export_settings/SFCharInfoSettings.js'
 
 const SFCharacter = () => {
 
@@ -30,31 +30,26 @@ const SFCharacter = () => {
 
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
-	var isFinished = false
+	
 	useEffect(() => {
 		async function fetchData() {
-			isFinished = false
-			const data = await axios.post(SF_GOOGLE_SCRIPTS_BASE_URL + "?id=" + charName).then(resp => { //charName  "Кима"
-				return resp.data
-			})
-			setCharId(data.id)
-			setLvl(data.lvl)
-			setExp(data.exp)
-			if (data.hist)
-				setHist(data.hist)
-			if (data.desc)
-				setDesc(data.desc)
-			if (data.gold)
-				setGold(data.gold)
-			if (data.psVal)
-				setShip(data.psVal)
-			if (data.pmVal)
-				setMech(data.pmVal)
+			//получение золота, уровня и опыта
+			let characterInfoData = await SFCharInfoSettings.getFilteredQuery("name", charName);
+			console.log("character info data", characterInfoData);
+			setGold(characterInfoData[0].gold);
+			setExp(characterInfoData[0].exp);
+			setLvl(characterInfoData[0].lvl);
+			setHist(characterInfoData[0].story);
+			setDesc(characterInfoData[0].desc);
+			setCharId(characterInfoData[0].id);
+			setShip(characterInfoData[0].ship);
+			setMech(characterInfoData[0].mech)
+
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
-			console.log(data)
+			console.log(characterInfoData)
 		}
-		fetchData();
+		fetchData().catch(console.error);
 	}, []);
 
 	return (
