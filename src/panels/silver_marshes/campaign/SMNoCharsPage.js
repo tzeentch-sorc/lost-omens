@@ -15,6 +15,7 @@ import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
+import SMMastersInfoSettings from '../export_settings/SMMastersInfoSettings.js'
 
 
 const SMNoCharsPage = ({ campaignName, user, }) => {
@@ -25,11 +26,15 @@ const SMNoCharsPage = ({ campaignName, user, }) => {
 
     useEffect(() => {
         async function fetchData() {
+            const masterData = await SMMastersInfoSettings.getQueryAll();
+			const userIds = masterData.map(elem => elem.id).join(', ');
+            console.log(masterData);
+            console.log(userIds);
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',
                     params: {
-                        user_ids: 'trokkin, vlavrinenko, id19825836, tihonya063, vadimka_scp, lizaarnautova, kirkirov',
+                        user_ids: userIds,
                         v: '5.131',
                         fields: 'screen_name, photo_200',
                         access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
