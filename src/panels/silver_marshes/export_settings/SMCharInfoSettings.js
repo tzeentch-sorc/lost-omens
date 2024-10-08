@@ -2,7 +2,7 @@ import QuerySettings from '../../../util/QuerySettings';
 
 const sheetId = "19CwEiAnXosem6qIXmNDsU4x5xV-TZ2dQz6ay5miKciM"; // SM Geekmo Mirror
 
-const CharInfoSettings = new QuerySettings({
+const SMCharInfoSettings = new QuerySettings({
 	sheetId,
 	gid: 0, //sheet "characters" 
 	headrow: 1,
@@ -23,4 +23,4 @@ const CharInfoSettings = new QuerySettings({
 	range: { min: 0, max: 5, str: "A2:F" },
 });
 
-export default CharInfoSettings;
+export default SMCharInfoSettings;

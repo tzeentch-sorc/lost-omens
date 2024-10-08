@@ -30,7 +30,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	const openAction = (element) => {
 		setPopout(
 			<CharUpdateAlert
-				charName={element.full_name}
+				charName={element.name}
 				formLink='https://forms.gle/CgVTL2qUVctKja4R7'
 				navLink='/char/ouroboros'
 				closeMethod={() => setPopout(null)}
@@ -39,10 +39,10 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	};
 
 	const openAlert = (element) => {
-		if (element.lvl_up == 'TRUE') {
+		if (element.lvl_up) {
 			openAction(element)
 		} else {
-			params.set('CharName', element.full_name);
+			params.set('CharName', element.name);
 			setParams(params);
 			routeNavigator.push('/char/ouroboros', { keepSearchParams: true });
 		}

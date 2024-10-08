@@ -2,7 +2,7 @@ import QuerySettings from '../../../util/QuerySettings';
 
 const sheetId = "19CwEiAnXosem6qIXmNDsU4x5xV-TZ2dQz6ay5miKciM"; // SM Geekmo Mirror
 
-const LOPlayerInfoSettings = new QuerySettings({
+const SMPlayerInfoSettings = new QuerySettings({
 	sheetId,
 	gid: 1610912999, //sheet "players"
 	headrow: 1,
@@ -49,4 +49,4 @@ const LOPlayerInfoSettings = new QuerySettings({
 	range: { min: 0, max: 9, str: "A1:J" },
 });
 
-export default LOPlayerInfoSettings;
+export default SMPlayerInfoSettings;

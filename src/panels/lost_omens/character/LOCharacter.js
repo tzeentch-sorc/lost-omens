@@ -21,9 +21,9 @@ import LOInventory from './LOInventory.js';
 import LOFormulae from './LOFormulae.js';
 import LOMainInfo from './LOMainInfo.js';
 
-import InventorySettings from '../export_settings/LOInventorySettings.js'
-import CharBuildSettings from '../export_settings/LOCharBuildSettings.js'
-import CharInfoSettings from '../export_settings/LOCharInfoSettings.js'
+import LOInventorySettings from '../export_settings/LOInventorySettings.js'
+import LOCharBuildSettings from '../export_settings/LOCharBuildSettings.js'
+import LOCharInfoSettings from '../export_settings/LOCharInfoSettings.js'
 
 import './LOCharacter.css'
 import LOFeatPanel from './LOFeatPanel.js';
@@ -64,25 +64,6 @@ const LOCharacter = () => {
 
 	const [easterEgg, setEasterEgg] = useState(0);
 
-	function countGames(exp, lvl) {
-		if (lvl && lvl < 7) {
-			if (exp - (lvl - 1) * 1000 > 0) {
-				return 1;
-			} else {
-				return 2;
-			}
-		} else {
-			var tmpexp = exp - 6000;
-			if (tmpexp - (lvl - 7) * 1500 == 0) {
-				return 3;
-			} else if (tmpexp - (lvl - 7) * 1500 == 500) {
-				return 2;
-			} else {
-				return 1;
-			}
-		}
-	}
-
 	function hasSpells() {
 		return (spell_0[0] != "" || spell_1[0] != "" || spell_2[0] != "" ||
 			spell_3[0] != "" || spell_4[0] != "" || spell_5[0] != "" || spell_6[0] != "" ||
@@ -114,7 +95,7 @@ const LOCharacter = () => {
 		async function fetchData() {
 			//попытка получить через spreadsheetApp
 			//получение золота, уровня, даунтайма и опыта
-			let characterInfoData = await CharInfoSettings.getFilteredQuery("name", charName);
+			let characterInfoData = await LOCharInfoSettings.getFilteredQuery("name", charName);
 			console.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExperience(characterInfoData[0].exp);
@@ -122,13 +103,13 @@ const LOCharacter = () => {
 			setDowntime(characterInfoData[0].downtime);
 
 			//получение инвентаря
-			let inventoryData = await InventorySettings.getFilteredQuery("owner", charName);
+			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			console.log("inventory data", inventoryData);
 
 			setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
 
 			//получение черт, заклинаний, формул, черт
-			let characterBuildData = await CharBuildSettings.getFilteredQuery("name", charName);
+			let characterBuildData = await LOCharBuildSettings.getFilteredQuery("name", charName);
 			console.log("character build data", characterBuildData);
 
 			setSpell_0(characterBuildData[0].spells_0.split(','));
