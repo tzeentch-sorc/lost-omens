@@ -5,7 +5,7 @@ import {
 } from '@vkontakte/vkui';
 import {
     Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline,
-    Icon28WidgetsOutline
+    Icon28WidgetsOutline, Icon28HourglassErrorBadgeOutline
 } from '@vkontakte/icons'
 
 
@@ -65,6 +65,17 @@ const SMMainInfo = ({gold, downtime, experience, level, mult}) => {
                         {experience && level && (level + " (" + experience + " XP)")} {!experience && ("unknown")}
                     </SimpleCell>
                 </Card>
+                <Card key="lvlcountdown">
+                    <Header mode="primary">
+                        Партий до {level && (parseInt(level, 10) + 1)} {!level && (" ??? ")} ур.
+                    </Header>
+                    <SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
+                        {experience && level && (countGames(experience, level) + ( " шт."))}
+                        {(!experience || !level) && (" ??? ")}
+                    </SimpleCell>
+                </Card>
+            </CardGrid>
+            <CardGrid size="l" >
                 <Card key="mult">
                     <Header mode="primary">Класс</Header>
                     <SimpleCell before={<Icon28WidgetsOutline width={24} height={24} />}>
