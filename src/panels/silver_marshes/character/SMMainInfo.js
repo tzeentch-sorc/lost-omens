@@ -11,22 +11,38 @@ import {
 
 const SMMainInfo = ({gold, downtime, experience, level, mult}) => {
     function countGames(exp, lvl) {
-		if (lvl && lvl < 7) {
-			if (exp - (lvl - 1) * 1000 > 0) {
-				return 1;
-			} else {
+		if (lvl && lvl < 5) {
+            var tmplvl = lvl-3;
+			if (exp - (tmplvl*2) == 0) {
 				return 2;
+			} else {
+				return 1;
 			}
-		} else {
-			var tmpexp = exp - 6000;
-			if (tmpexp - (lvl - 7) * 1500 == 0) {
+		} else if (lvl && lvl < 9){
+			var tmpexp = exp - 4;
+            var tmplvl = lvl - 5;
+			if (tmpexp - (tmplvl*3) == 0) {
 				return 3;
-			} else if (tmpexp - (lvl - 7) * 1500 == 500) {
+			} else if (tmpexp - (tmplvl*3) == 1) {
 				return 2;
 			} else {
 				return 1;
 			}
-		}
+		} else if (lvl && lvl < 15) {
+            var tmpexp = exp - 16;
+            var tmplvl = lvl - 9;
+			if (tmpexp - (tmplvl*4) == 0) {
+				return 4;
+			} else if (tmpexp - (tmplvl*4) == 1) {
+				return 3;
+			} else if (tmpexp - (tmplvl*4) == 2) {
+				return 2;
+			} else {
+				return 1;
+			}
+        } else if (lvl) {
+            return "∞";
+        }
 	}
 
     return (
