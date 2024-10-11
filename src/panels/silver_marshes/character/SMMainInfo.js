@@ -62,7 +62,7 @@ const SMMainInfo = ({gold, downtime, experience, level, mult}) => {
                 <Card key="experience">
                     <Header mode="primary">Уровень</Header>
                     <SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
-                        {experience && level && (level + " (" + experience + " XP)")} {!experience && ("unknown")}
+                        {experience && level && (level)} {!experience && ("unknown")}
                     </SimpleCell>
                 </Card>
                 <Card key="lvlcountdown">
