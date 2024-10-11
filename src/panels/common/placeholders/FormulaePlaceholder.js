@@ -7,7 +7,7 @@ import {
 } from '@vkontakte/icons'
 
 
-const LOFormulaePlaceholder = () => {
+const FormulaePlaceholder = () => {
     return (
         <Group
             id="tab-content-formulae"
@@ -24,4 +24,4 @@ const LOFormulaePlaceholder = () => {
         </Group>
     );
 };
-export default LOFormulaePlaceholder;
+export default FormulaePlaceholder;
