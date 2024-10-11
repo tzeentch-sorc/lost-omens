@@ -31,7 +31,7 @@ const SMCharacter = () => {
 
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
-	const [inventory, setInventory] = useState();
+	const [inventory, setInventory] = useState([]);
 	const [gold, setGold] = useState(0);
 	const [downtime, setDowntime] = useState(0);
 	const [experience, setExperience] = useState();
@@ -62,7 +62,7 @@ const SMCharacter = () => {
 	}
 
 	function hasInventory() {
-		return (inventory || false);
+		return (inventory.length > 0);
 	}
 	function spellist() {
 		return ([spell_0, spell_1, spell_2,
@@ -91,7 +91,7 @@ const SMCharacter = () => {
 			let inventoryData = await SMInventorySettings.getFilteredQuery("owner", charName);
 			console.log("inventory data", inventoryData);
 
-			setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
+			inventoryData[0].name && setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await SMCharBuildSettings.getFilteredQuery("name", charName);

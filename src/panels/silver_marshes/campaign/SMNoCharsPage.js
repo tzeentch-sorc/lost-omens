@@ -28,8 +28,8 @@ const SMNoCharsPage = ({ campaignName, user, }) => {
         async function fetchData() {
             const masterData = await SMMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-            console.log(masterData);
-            console.log(userIds);
+            //console.log(masterData);
+            //console.log(userIds);
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',

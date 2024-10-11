@@ -13,16 +13,18 @@ const LOMainInfo = ({gold, downtime, experience, level, easterEgg}) => {
 
     function countGames(exp, lvl) {
 		if (lvl && lvl < 7) {
-			if (exp - (lvl - 1) * 1000 > 0) {
+            var tmplvl = lvl-1;
+			if (exp - (tmplvl * 1000) > 0) {
 				return 1;
 			} else {
 				return 2;
 			}
 		} else {
 			var tmpexp = exp - 6000;
-			if (tmpexp - (lvl - 7) * 1500 == 0) {
+            var tmplvl = lvl - 7;
+			if (tmpexp - (tmplvl * 1500) == 0) {
 				return 3;
-			} else if (tmpexp - (lvl - 7) * 1500 == 500) {
+			} else if (tmpexp - (tmplvl * 1500) == 500) {
 				return 2;
 			} else {
 				return 1;
