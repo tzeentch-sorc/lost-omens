@@ -9,41 +9,41 @@ import {
 } from '@vkontakte/icons'
 
 
-const SMMainInfo = ({gold, downtime, experience, level, mult}) => {
+const SMMainInfo = ({ gold, downtime, experience, level, mult }) => {
     function countGames(exp, lvl) {
-		if (lvl && lvl < 5) {
-            var tmplvl = lvl-3;
-			if (exp - (tmplvl*2) == 0) {
-				return 2;
-			} else {
-				return 1;
-			}
-		} else if (lvl && lvl < 9){
-			var tmpexp = exp - 4;
+        if (lvl && lvl < 5) {
+            var tmplvl = lvl - 3;
+            if (exp - (tmplvl * 2) == 0) {
+                return 2;
+            } else {
+                return 1;
+            }
+        } else if (lvl && lvl < 9) {
+            var tmpexp = exp - 4;
             var tmplvl = lvl - 5;
-			if (tmpexp - (tmplvl*3) == 0) {
-				return 3;
-			} else if (tmpexp - (tmplvl*3) == 1) {
-				return 2;
-			} else {
-				return 1;
-			}
-		} else if (lvl && lvl < 15) {
+            if (tmpexp - (tmplvl * 3) == 0) {
+                return 3;
+            } else if (tmpexp - (tmplvl * 3) == 1) {
+                return 2;
+            } else {
+                return 1;
+            }
+        } else if (lvl && lvl < 15) {
             var tmpexp = exp - 16;
             var tmplvl = lvl - 9;
-			if (tmpexp - (tmplvl*4) == 0) {
-				return 4;
-			} else if (tmpexp - (tmplvl*4) == 1) {
-				return 3;
-			} else if (tmpexp - (tmplvl*4) == 2) {
-				return 2;
-			} else {
-				return 1;
-			}
+            if (tmpexp - (tmplvl * 4) == 0) {
+                return 4;
+            } else if (tmpexp - (tmplvl * 4) == 1) {
+                return 3;
+            } else if (tmpexp - (tmplvl * 4) == 2) {
+                return 2;
+            } else {
+                return 1;
+            }
         } else if (lvl) {
             return "∞";
         }
-	}
+    }
 
     return (
         <Group>
@@ -70,7 +70,7 @@ const SMMainInfo = ({gold, downtime, experience, level, mult}) => {
                         Партий до {level && (parseInt(level, 10) + 1)} {!level && (" ??? ")} ур.
                     </Header>
                     <SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
-                        {experience && level && (countGames(experience, level) + ( " шт."))}
+                        {experience && level && (countGames(experience, level) + (" шт."))}
                         {(!experience || !level) && (" ??? ")}
                     </SimpleCell>
                 </Card>
