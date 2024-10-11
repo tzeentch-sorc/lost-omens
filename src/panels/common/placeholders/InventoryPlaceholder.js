@@ -7,7 +7,7 @@ import {
 } from '@vkontakte/icons'
 
 
-const LOInventoryPlaceholder = () => {
+const InventoryPlaceholder = () => {
     return (
         <Group
             id="tab-content-inventory"
@@ -22,4 +22,4 @@ const LOInventoryPlaceholder = () => {
         </Group>
     );
 };
-export default LOInventoryPlaceholder;
+export default InventoryPlaceholder;

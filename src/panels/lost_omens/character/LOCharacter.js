@@ -11,9 +11,9 @@ import {
 } from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import LOInventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
-import LOSpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
-import LOFormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
+import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
+import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
+import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
 
 import LOCharTabPanel from './LOCharTabPanel.js';
 import LOSpells from './LOSpells.js';
@@ -33,7 +33,7 @@ const LOCharacter = () => {
 
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
-	const [inventory, setInventory] = useState();
+	const [inventory, setInventory] = useState([]);
 	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
 	const [downtime, setDowntime] = useState(0);
@@ -74,7 +74,7 @@ const LOCharacter = () => {
 		return (formulae[0] != "");
 	}
 	function hasInventory() {
-		return (inventory || false);
+		return (inventory.length > 0);
 	}
 	function spellist() {
 		return ([spell_0, spell_1, spell_2,
@@ -106,7 +106,7 @@ const LOCharacter = () => {
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			console.log("inventory data", inventoryData);
 
-			setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
+			inventoryData[0].name && setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await LOCharBuildSettings.getFilteredQuery("name", charName);
@@ -165,19 +165,19 @@ const LOCharacter = () => {
 							}}
 						/>
 						{selected === 'inventory' && (!hasInventory()) && (
-							<LOInventoryPlaceholder />
+							<InventoryPlaceholder />
 						)}
 						{selected === 'inventory' && (hasInventory()) && (
 							<LOInventory inventory={inventory} />
 						)}
 						{selected === 'spells' && (!hasSpells()) && (
-							<LOSpellsPlaceholder />
+							<SpellsPlaceholder />
 						)}
 						{selected === 'spells' && (hasSpells()) && (
 							<LOSpells spellist={spellist()} />
 						)}
 						{selected === 'formulae' && (!hasFormulae()) && (
-							<LOFormulaePlaceholder />
+							<FormulaePlaceholder />
 						)}
 						{selected === 'formulae' && (hasFormulae()) && (
 							<LOFormulae formulae={formulae} />
