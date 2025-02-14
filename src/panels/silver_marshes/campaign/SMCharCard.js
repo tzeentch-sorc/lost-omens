@@ -1,6 +1,8 @@
 import { Card, RichCell, Counter } from "@vkontakte/vkui";
 import { Icon28UserOutgoingOutline, Icon24UserOutline } from "@vkontakte/icons";
 
+import Icon48Warlock from "../../common/custom_icons/Icon48Warlock.tsx";
+
 const SMCharCard = ({element, openAction}) => {
 
     return (
@@ -9,7 +11,7 @@ const SMCharCard = ({element, openAction}) => {
             <RichCell
                 key={element.name}
                 id={element.name}
-                before={<Icon24UserOutline width={48} height={48} color='#008cff' />}
+                before={<Icon48Warlock color='#008cff'/>}//<Icon24UserOutline width={48} height={48} color='#008cff' />}
                 text={element.type + ", " + element.lvl + " ур."}
                 caption={element.race}
                 after={element.lvl_up &&
