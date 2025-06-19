@@ -4,6 +4,10 @@ import { Icon28UserOutgoingOutline, Icon24UserOutline } from "@vkontakte/icons";
 import Icon48Warlock from "../../common/custom_icons/Icon48Warlock.tsx";
 
 const SMCharCard = ({element, openAction}) => {
+    const iconMap = {
+            "Колдун": <Icon48Warlock color='#008cff'/>,
+            // Add more types and icons as needed
+        };
 
     return (
         <Card mode="shadow" size="m" key={element.name + "_sm_card"}
@@ -11,7 +15,7 @@ const SMCharCard = ({element, openAction}) => {
             <RichCell
                 key={element.name}
                 id={element.name}
-                before={<Icon48Warlock color='#008cff'/>}//<Icon24UserOutline width={48} height={48} color='#008cff' />}
+                before={<Icon48Warlock color='#008cff'/>}
                 text={element.type + ", " + element.lvl + " ур."}
                 caption={element.race}
                 after={element.lvl_up &&
