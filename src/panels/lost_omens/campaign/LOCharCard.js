@@ -35,7 +35,7 @@ const LOCharCard = ({element, openAction}) => {
         "Бард": <Icon48Bard color='#008cff'/>,
         "Жрец": <Icon48Cleric color='#008cff'/>,
         "Друид": <Icon48Druid color='#008cff'/>,
-        "Воин": <Icon48Fighter color='#008cff'/>,
+        "Боец": <Icon48Fighter color='#008cff'/>,
         "Стрелок": <Icon48Gunslinger color='#008cff'/>,
         "Изобретатель": <Icon48Inventor color='#008cff'/>,
         "Сыщик": <Icon48Investigator color='#008cff'/>,
@@ -50,7 +50,7 @@ const LOCharCard = ({element, openAction}) => {
         "Чародей": <Icon48Sorcerer color='#008cff'/>,
         "Призыватель": <Icon48Summoner color='#008cff'/>,
         "Сорвиголова": <Icon48Swashbuckler color='#008cff'/>,
-        "Тавматург": <Icon48Taumaturg color='#008cff'/>,
+        "Тауматург": <Icon48Taumaturg color='#008cff'/>,
         "Ведьма": <Icon48Witch color='#008cff'/>,
         "Волшебник": <Icon48Wizard color='#008cff'/>,
 
