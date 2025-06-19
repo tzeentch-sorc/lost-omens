@@ -15,7 +15,9 @@ const SMCharCard = ({element, openAction}) => {
             <RichCell
                 key={element.name}
                 id={element.name}
-                before={<Icon48Warlock color='#008cff'/>}
+                before={
+                    iconMap[element.type] || <Icon24UserOutline width={48} height={48} color='#008cff' />
+                }
                 text={element.type + ", " + element.lvl + " ур."}
                 caption={element.race}
                 after={element.lvl_up &&
