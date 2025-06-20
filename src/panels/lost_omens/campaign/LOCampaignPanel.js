@@ -51,7 +51,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	};
 
 	const openAlert = (element) => {
-		if (!element.lvl_up) {
+		if (element.lvl_up) {
 			openAction(element);
 		} else {
 			params.set('Player', element.player);
