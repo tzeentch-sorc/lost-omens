@@ -61,6 +61,7 @@ const LOCharacter = () => {
 
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
+	const player = params.get('Player');
 
 	const [easterEgg, setEasterEgg] = useState(0);
 
@@ -168,7 +169,7 @@ const LOCharacter = () => {
 							<InventoryPlaceholder />
 						)}
 						{selected === 'inventory' && (hasInventory()) && (
-							<LOInventory inventory={inventory} />
+							<LOInventory inventory={inventory} charName={charName} playerName={player}/>
 						)}
 						{selected === 'spells' && (!hasSpells()) && (
 							<SpellsPlaceholder />
