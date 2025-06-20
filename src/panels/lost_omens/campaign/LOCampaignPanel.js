@@ -45,8 +45,10 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 		if (element.lvl_up) {
 			openAction(element);
 		} else {
+			params.set('Player', element.player);
 			params.set('CharName', element.name);
 			setParams(params);
+			//console.log(params);
 			routeNavigator.push('/char/lost_omens', { keepSearchParams: true });
 		}
 	}
@@ -71,9 +73,10 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			const data = prioData.filter(elem => { 
 				return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)  
 			});
-			console.log("data: ", data);
+			//console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
+				player: `${elem.player?.split(" ")?.[0] ?? ''} ${elem.player?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim(),
 				lvl: elem.lvl,
 				lvl_up: elem.lvl_up === "FALSE" ? false : true,
 				type: elem.char_class,
