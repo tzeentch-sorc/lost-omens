@@ -30,11 +30,20 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
 
+	function createPreEnteredLink(playerName, charName, level, link) {
+        var newLink = link + "?usp=pp_url" +
+            "&entry.1223877896=" + `${playerName?.split(" ")?.[0] ?? ''} ${playerName?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim() + 
+            "&entry.1161334128=" + charName + 
+            //"&entry.2096407236=" + "Выборы на повышении" +
+            "&entry.1736501258=" + level;
+        return newLink;
+    }
+
 	const openAction = (element) => {
 		setPopout(
 			<CharUpdateAlert
 				charName={element.name}
-				formLink='https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform'
+				formLink={createPreEnteredLink(element.player, element.name, parseInt(element.lvl, 10) + 1,'https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform')}
 				navLink='/char/lost_omens'
 				closeMethod={() => setPopout(null)}
 			/>
@@ -42,7 +51,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	};
 
 	const openAlert = (element) => {
-		if (element.lvl_up) {
+		if (!element.lvl_up) {
 			openAction(element);
 		} else {
 			params.set('Player', element.player);
