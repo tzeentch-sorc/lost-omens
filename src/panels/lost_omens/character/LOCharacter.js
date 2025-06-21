@@ -57,6 +57,7 @@ const LOCharacter = () => {
 
 	// const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
+	const player = params.get('Player');
 
 	const [easterEgg, setEasterEgg] = useState(0);
 
@@ -91,7 +92,7 @@ const LOCharacter = () => {
 		switch (selected) {
 			case 'inventory':
 				return hasInventory() ? (
-					<LOInventory inventory={inventory} totalWealth={wealth} />
+					<LOInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player}/>
 				) : (
 					<InventoryPlaceholder />
 				);
