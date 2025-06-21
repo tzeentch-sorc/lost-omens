@@ -4,7 +4,7 @@ import {
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
 	CardGrid, Div,
-	FixedLayout
+	Spacing
 
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
@@ -76,9 +76,9 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 				race: elem.race
 			})));
 			if (data.length > 0) {
-				data[0].adv_date!="" && setDate(data[0].adv_date);
-				data[0].adv!="" && setAdvName(data[0].adv);
-				data[0].prio!="" && setPrio(data[0].prio);
+				data[0].adv_date != "" && setDate(data[0].adv_date);
+				data[0].adv != "" && setAdvName(data[0].adv);
+				data[0].prio != "" && setPrio(data[0].prio);
 			} else {
 				setPrio(-2);
 			}
@@ -105,16 +105,20 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
 				{
 					fetchedUser &&
-					<Group>
+					<Group mode='card'>
 						<SplitLayout popout={popout}>
 							<SplitCol>
 								{date && prio && advName &&
-									<SMInfoCard date={date} prio={prio} adventure={advName} />
+									<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+										<SMInfoCard date={date} prio={prio} adventure={advName} />
+										<Spacing size={4} />
+										<SMPriorities setPopout={setPopout} priorities={priorities} />
+									</Group>
 								}
 								<Header mode="secondary">Ваши персонажи</Header>
 								<Group mode="plain">
 									<Div className="not4mob">
-										<CardGrid size="m">
+										<CardGrid size="m" style={{cursor: 'pointer'}} >
 											{characters && characters.map((elem) => createCard(elem))}
 										</CardGrid>
 									</Div>
@@ -128,10 +132,6 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 						</SplitLayout>
 					</Group>
 				}
-				<FixedLayout filled vertical="bottom">
-					<SMPriorities setPopout={setPopout} priorities={priorities} />
-				</FixedLayout>
-
 			</Panel>
 		)
 	}

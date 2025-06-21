@@ -3,3 +3,8 @@
       display: none;
     }
   }
+  .modal-open {
+    overscroll-behavior: none;
+    overflow: hidden !important;
+    height: 100% !important;
+  }

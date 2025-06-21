@@ -1,0 +1,29 @@
+.campaignCardBase {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 180px;
+    padding: 0;
+}
+
+.campaignCardShadow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.campaignCardTitle {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    right: 12px;
+    z-index: 2;
+    color: 'white';
+    font-weight: 600px;
+    font-size: 18px;
+    overflow: hidden;
+    text-align: center;
+}

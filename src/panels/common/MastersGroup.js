@@ -3,7 +3,7 @@ import UserRefCell from './UserRefCell';
 
 const MastersGroup = ({ masters }) => {
     return (
-        <Group header={
+        <Group mode="card" header={
             <Header
                 mode='secondary'
                 subtitle="Этим людям можно написать, если остались вопросы"

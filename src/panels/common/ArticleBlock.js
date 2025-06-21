@@ -5,7 +5,7 @@ const ArticleBlock = ({
     articleLink, caption, description, image
 }) => {
     return (
-        <Group header={<Header mode='secondary'>О мегакампании</Header>}>
+        <Group mode='card' header={<Header mode='secondary'>О мегакампании</Header>}>
             <CardGrid size="l">
                 <ContentCard
                     onClick={() => { window.open(articleLink) }}

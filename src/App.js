@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import bridge, { EGetLaunchParamsResponseLanguages } from '@vkontakte/vk-bridge';
-import { View, ScreenSpinner, Snackbar, Root } from '@vkontakte/vkui';
-import { useActiveVkuiLocation, useGetPanelForView } from '@vkontakte/vk-mini-apps-router';
+import bridge from '@vkontakte/vk-bridge';
+import {
+	View, ScreenSpinner, Root
+} from '@vkontakte/vkui';
+import { useActiveVkuiLocation } from '@vkontakte/vk-mini-apps-router';
 
 
 import '@vkontakte/vkui/dist/vkui.css';
@@ -13,7 +15,6 @@ import SFCampaignPanel from './panels/ouroboros/campaign/SFCampaignPanel.js';
 import SFCharacter from './panels/ouroboros/character/SFCharacter.js';
 import SMCampaignPanel from './panels/silver_marshes/campaign/SMCampaignPanel.js';
 import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
-
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
@@ -48,7 +49,6 @@ const App = (router) => {
 	}, []);
 
 	return (
-
 		<Root popout={popout} activeView={activeView}>
 			<View activePanel={activePanel} nav='default'>
 				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} />
@@ -59,11 +59,11 @@ const App = (router) => {
 			</View>
 			<View activePanel={activePanel} nav='ouroboros'>
 				<SFCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				<SFCharacter id={ROUTES.CHAR}/>
+				<SFCharacter id={ROUTES.CHAR} />
 			</View>
 			<View activePanel={activePanel} nav='silver_marshes'>
 				<SMCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				<SMCharacter id={ROUTES.CHAR}/>
+				<SMCharacter id={ROUTES.CHAR} />
 			</View>
 		</Root>
 	);

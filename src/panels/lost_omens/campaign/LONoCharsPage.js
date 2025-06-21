@@ -53,7 +53,7 @@ const LONoCharsPage = ({ campaignName, user, }) => {
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
             {
                 user && masters &&
-                <Group mode="plain">
+                <Group mode='plain'>
                     <SplitLayout popout={popout}>
                         {isDisplayed &&
                             <SplitCol>
@@ -62,10 +62,9 @@ const LONoCharsPage = ({ campaignName, user, }) => {
                                         articleLink='https://vk.com/@geekmo-pathfinder-2e-campaign'
                                         caption='Добро пожаловать в «Утраченные Пророчества»!'
                                         description='Введение в мир Голариона 2й редакции'
-                                        image='https://sun9-67.userapi.com/impg/BLxFtRP692RLTqeCOp3LR3CGNxEJInVV9CRJ5w/kRE7xSR8qfk.jpg?size=604x302&quality=96&sign=3870102614006243570a351f7077b452&type=album)'
-                                    />
+                                        image='/images/lo_banner_article.jpg'                                    />
                                     <MastersGroup masters={masters} />
-                                    <Group>
+                                    <Group mode="card">
                                         <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа">
                                             <Div>
                                                 Для создания стоит написать одному из мастеров

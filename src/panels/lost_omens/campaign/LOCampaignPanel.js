@@ -3,9 +3,7 @@ import {
 	Panel, PanelHeader, Header, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Div,
-	FixedLayout
-
+	CardGrid, Div, Button, Spacing
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -68,8 +66,8 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			})).sort((a, b) => b.prio - a.prio));
 			//console.log(prioData);
 
-			const data = prioData.filter(elem => { 
-				return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)  
+			const data = prioData.filter(elem => {
+				return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)
 			});
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
@@ -80,9 +78,9 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				race: elem.race
 			})));
 			if (data.length > 0) {
-				data[0].adv_date!="" && setDate(data[0].adv_date);
-				data[0].adv!="" && setAdvName(data[0].adv);
-				data[0].prio!="" && setPrio(data[0].prio);
+				data[0].adv_date != "" && setDate(data[0].adv_date);
+				data[0].adv != "" && setAdvName(data[0].adv);
+				data[0].prio != "" && setPrio(data[0].prio);
 			} else {
 				setPrio(-2);
 			}
@@ -109,16 +107,23 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
 				{
 					fetchedUser &&
-					<Group>
+					<Group mode='card'>
 						<SplitLayout popout={popout}>
 							<SplitCol>
 								{date && prio && advName &&
-									<LOInfoCard date={date} prio={prio} adventure={advName} />
+									<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+										<LOInfoCard date={date} prio={prio} adventure={advName} />
+										<Spacing size={4} />
+										<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+											<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral'/>
+											<Button stretched appearance="negative" size="l" onClick={() => {window.open("https://unidraw.io/app/board/f5649aff5774fb5628f5", "_blank")}}>Доска Авроры</Button>
+										</Div>
+									</Group>
 								}
 								<Header mode="secondary">Ваши персонажи</Header>
 								<Group mode="plain">
 									<Div className="not4mob">
-										<CardGrid size="m">
+										<CardGrid size="m" style={{ cursor: 'pointer' }}>
 											{characters && characters.map((elem) => createCard(elem))}
 										</CardGrid>
 									</Div>
@@ -132,10 +137,6 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 						</SplitLayout>
 					</Group>
 				}
-				<FixedLayout filled vertical="bottom">
-					<LOPriorities setPopout={setPopout} priorities={priorities} />
-				</FixedLayout>
-
 			</Panel>
 		)
 	}
