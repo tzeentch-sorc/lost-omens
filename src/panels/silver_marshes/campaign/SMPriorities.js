@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
-    Group, ModalRoot, InfoRow, ModalPage, ModalPageHeader,
-    Button, SimpleCell
+    Div, ModalRoot, InfoRow, ModalPage, ModalPageHeader,
+    Button, SimpleCell, PanelHeaderClose
 } from '@vkontakte/vkui';
 
 const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
@@ -10,7 +10,7 @@ const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
         //console.log("element",element);
         let srt = element[1].sort((a, b) => b.lvl - a.lvl).map(e => (
             e.lvl + " ур. " + e.char_name + ", "));
-        srt[srt.length-1] = srt[srt.length-1].substring(0, srt[srt.length-1].length - 2);
+        srt[srt.length - 1] = srt[srt.length - 1].substring(0, srt[srt.length - 1].length - 2);
         return (
             <SimpleCell multiline key={element[0]} after={element[1][0].prio}>
                 <InfoRow header={element[0]}>
@@ -30,7 +30,7 @@ const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
                 height={'70%'}
                 hideCloseButton={false}
                 header={
-                    <ModalPageHeader>
+                    <ModalPageHeader after={<PanelHeaderClose onClick={onClose} />} >
                         Список приоритетов
                     </ModalPageHeader>
                 }
@@ -62,6 +62,8 @@ const SMPriorities = ({ priorities, setPopout }) => {
     const onClick = () => setPopout(<SMPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
 
     return (
-        <Group><Button stretched appearance="positive" size="l" onClick={onClick}>Открыть список приоритетов</Button></Group>);
+        <Div style={{ paddingLeft: 16 }}>
+            <Button stretched appearance="positive" size="l" onClick={onClick}>Открыть список приоритетов</Button>
+        </Div>);
 };
 export default SMPriorities;

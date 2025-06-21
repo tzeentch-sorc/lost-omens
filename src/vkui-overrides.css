@@ -1,0 +1,140 @@
+/* This makes VKUI panels, groups, etc. transparent */
+.gradient-app {
+  --vkui--color_background_content: var(--panel-bg-color, rgba(255, 255, 255, 0.1));
+  --vkui--color_background_page: var(--panel-bg-color, rgba(255, 255, 255, 0.1));
+}
+
+/* Make sure the VKUI app renders above the background */
+.gradient-app>* {
+  position: relative;
+  z-index: 1;
+}
+
+.vkuiPanel__in {
+  background-color: var(--panel-bg-color, rgba(255, 255, 255, 0.1)) !important;
+  overflow-y: auto !important;
+  height: 100% !important;
+}
+
+.gradient-app>div[style*="linear-gradient"] {
+  pointer-events: none;
+}
+
+.geekmoGradient {
+  background: linear-gradient(45deg, #C60068, #90378C, #6161BA);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+html,
+body,
+#root,
+.gradient-app {
+  height: 100%;
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-positive .vkuiButton__in {
+  position: relative;
+  /* needed for pseudo-element positioning */
+  overflow: hidden;
+  /* clip overlay within button */
+  background-image: linear-gradient(-15deg, #C60068, #90378C, #6161BA);
+  border-radius: 6px;
+  /* keep rounded corners */
+  transition: background 0.3s ease;
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-positive .vkuiButton__in::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(0, 0, 0, 0.05);
+  /* transparent by default */
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  pointer-events: none;
+  /* so it doesn’t block clicks */
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-positive:hover .vkuiButton__in::after {
+  background: rgba(255, 255, 255, 0.1);
+  /* white overlay on hover */
+}
+
+.vkuiPanelHeader__in {
+  background-color: var(--panel-header-bg-color) !important;
+  position: relative;
+  z-index: 10;
+}
+
+.vkuiCard {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+
+.vkuiButton--mode-primary.vkuiButton--appearance-neutral .vkuiButton__in {
+  position: relative;
+  /* needed for pseudo-element positioning */
+  overflow: hidden;
+  /* clip overlay within button */
+  background-image: linear-gradient(25deg, #6161BA, #90378C);
+  border-radius: 6px;
+  /* keep rounded corners */
+  transition: background 0.3s ease;
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-neutral .vkuiButton__in::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(0, 0, 0, 0.05);
+  /* transparent by default */
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  pointer-events: none;
+  /* so it doesn’t block clicks */
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-neutral:hover .vkuiButton__in::after {
+  background: rgba(255, 255, 255, 0.1);
+  /* white overlay on hover */
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-negative .vkuiButton__in {
+  position: relative;
+  /* needed for pseudo-element positioning */
+  overflow: hidden;
+  /* clip overlay within button */
+  background-image: linear-gradient(25deg, #90378C,  #C60068);
+  border-radius: 6px;
+  /* keep rounded corners */
+  transition: background 0.3s ease;
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-negative .vkuiButton__in::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(0, 0, 0, 0.05);
+  /* transparent by default */
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  pointer-events: none;
+  /* so it doesn’t block clicks */
+}
+
+.vkuiButton--mode-primary.vkuiButton--appearance-negative:hover .vkuiButton__in::after {
+  background: rgba(255, 255, 255, 0.1);
+  /* white overlay on hover */
+}

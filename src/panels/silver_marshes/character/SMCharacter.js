@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-	Panel, SimpleCell, InfoRow,
-	Header, Group, PanelHeaderBack, PanelHeader,
-	ScreenSpinner, CardGrid, Card, SplitCol,
+	Panel, Group, PanelHeaderBack, PanelHeader,
+	ScreenSpinner, SplitCol,
 	SplitLayout
 } from '@vkontakte/vkui';
-import {
-	Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline,
-	Icon28HourglassErrorBadgeOutline
-} from '@vkontakte/icons'
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
@@ -33,6 +28,7 @@ const SMCharacter = () => {
 	const [params, setParams] = useSearchParams();
 	const [inventory, setInventory] = useState([]);
 	const [gold, setGold] = useState(0);
+	const [wealth, setWealth] = useState(0);
 	const [downtime, setDowntime] = useState(0);
 	const [experience, setExperience] = useState();
 	const [level, setLevel] = useState();
@@ -70,10 +66,29 @@ const SMCharacter = () => {
 			spell_7]
 		)
 	}
-	function featlist(){
-		return ([feat_general, 
+	function featlist() {
+		return ([feat_general,
 			feat_class])
 	}
+
+	function renderSelectedTab() {
+		switch (selected) {
+			case 'inventory':
+				return hasInventory() ? (
+					<SMInventory inventory={inventory} totalWealth={wealth} />
+				) : (
+					<InventoryPlaceholder />
+				);
+			case 'spells':
+				return hasSpells() ? (
+					<SMSpells spellist={spellist()} />
+				) : (
+					<SpellsPlaceholder />
+				);
+			default:
+				return null;
+		}
+	};
 
 	useEffect(() => {
 		async function fetchData() {
@@ -91,7 +106,11 @@ const SMCharacter = () => {
 			let inventoryData = await SMInventorySettings.getFilteredQuery("owner", charName);
 			console.log("inventory data", inventoryData);
 
-			inventoryData[0].name && setInventory(inventoryData.sort((a, b) => b.cost - a.cost));
+			if (inventoryData[0].name) {
+				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
+				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
+				setWealth(totalCost);
+			}
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await SMCharBuildSettings.getFilteredQuery("name", charName);
@@ -106,7 +125,7 @@ const SMCharacter = () => {
 			setSpell_6(characterBuildData[0].spells_6.split(','));
 			setSpell_7(characterBuildData[0].spells_7.split(','));
 
-			setFeatGeneral(characterBuildData[0].feat_general.split(','));
+			setFeatGeneral(characterBuildData[0].feat_general.split(',')); //TODO - rework with ; splitter
 			setFeatClass(characterBuildData[0].feat_class.split(','));
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
@@ -129,9 +148,9 @@ const SMCharacter = () => {
 						downtime={downtime}
 						experience={experience}
 						level={level}
-						mult = {mult}/>
-					<SMFeatPanel featlist={featlist()}/>
-					<Group>
+						mult={mult} />
+					<SMFeatPanel featlist={featlist()} />
+					<Group mode='card'>
 						<SMCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
@@ -139,18 +158,7 @@ const SMCharacter = () => {
 								setMenuOpened((prevState) => (opened ? !prevState : false));
 							}}
 						/>
-						{selected === 'inventory' && (!hasInventory()) && (
-							<InventoryPlaceholder />
-						)}
-						{selected === 'inventory' && (hasInventory()) && (
-							<SMInventory inventory={inventory} />
-						)}
-						{selected === 'spells' && (!hasSpells()) && (
-							<SpellsPlaceholder />
-						)}
-						{selected === 'spells' && (hasSpells()) && (
-							<SMSpells spellist={spellist()} />
-						)}
+						{renderSelectedTab()}
 					</Group>
 				</SplitCol>
 			</SplitLayout>

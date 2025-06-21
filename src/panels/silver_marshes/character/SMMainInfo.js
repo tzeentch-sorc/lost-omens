@@ -46,8 +46,7 @@ const SMMainInfo = ({ gold, downtime, experience, level, mult }) => {
     }
 
     return (
-        <Group>
-
+        <Group mode='card' header={<Header mode='secondary'>Ресурсы и опыт персонажа</Header>}>
             <CardGrid size='m'>
                 <Card key="gold">
                     <Header mode="primary">Золото</Header>

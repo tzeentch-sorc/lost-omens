@@ -3,7 +3,7 @@ import {
 	Panel, SimpleCell,
 	Header, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, CardGrid, Card, Div, SplitCol, SplitLayout,
-	HorizontalCell, Flex
+	HorizontalCell, SimpleGrid
 } from '@vkontakte/vkui';
 import {
 	Icon56Stars3Outline, Icon28TouchIdOutline, Icon36CoinsStacks3Outline,
@@ -61,7 +61,7 @@ const SFCharacter = () => {
 			<SplitLayout popout={popout}>
 				<SplitCol>
 					{charId && lvl > 0 && exp >= 0 &&
-						<Group mode="plain">
+						<Group mode="card">
 							<CardGrid size="m" >
 								<Card key="full_name">
 									<Header mode="primary">ID</Header>
@@ -75,23 +75,23 @@ const SFCharacter = () => {
 							<CardGrid size="l" >
 								<Card key="gold">
 									<Header mode="primary">Финансы</Header>
-									<Flex noWrap justify='center'>
+									<SimpleGrid align='stretch' columns={3} margin='none' gap='m'>
 										<HorizontalCell size='l' >
 											<SimpleCell subhead='Кредиты' before={<Icon36CoinsStacks3Outline width={24} height={24} />}>
 												{gold}
 											</SimpleCell>
 										</HorizontalCell>
-										<HorizontalCell size='l' >
+										<HorizontalCell size='l ' >
 											<SimpleCell subhead='Корабль' before={<Icon24PlaneOutline width={24} height={24} />}>
 												{ship}
 											</SimpleCell>
 										</HorizontalCell>
-										<HorizontalCell size='l' >
+										<HorizontalCell size='m' >
 											<SimpleCell subhead='Мех' before={<Icon28WrenchOutline width={24} height={24} />}>
 												{mech}
 											</SimpleCell>
 										</HorizontalCell>
-									</Flex>
+									</SimpleGrid>
 								</Card>
 							</CardGrid>
 							<CardGrid size="l" >

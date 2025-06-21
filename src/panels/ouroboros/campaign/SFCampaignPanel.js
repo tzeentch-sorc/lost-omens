@@ -57,7 +57,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
-			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)   });
+			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)
+		   });
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
@@ -93,14 +94,14 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 					{campaignName}
 				</PanelHeader>
 				{fetchedUser &&
-					<Group mode="plain">
+					<Group mode="card">
 						<SplitLayout popout={popout}>
 							{isDisplayed &&
 								<SplitCol>
 									{prio && <SFCharacterInfoCard prio={prio} />}
 									<Header mode="secondary">Ваши персонажи</Header>
 									<Group mode="plain">
-										<Div className="not4mob">
+										<Div className="not4mob" style={{cursor: 'pointer'}}>
 											<CardGrid size="m">
 												{characters && characters.map((elem) => createCard(elem))}
 											</CardGrid>

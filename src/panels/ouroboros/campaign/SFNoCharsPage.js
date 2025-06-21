@@ -61,10 +61,10 @@ const SFNoCharsPage = ({campaignName, user, }) => {
                                         articleLink='https://vk.com/@geekmo-ouroboros-invitation'
                                         caption='Добро пожаловать на станцию «Уроборос»!'
                                         description='Введение в систему и мегакампанию'
-                                        image='https://sun9-27.userapi.com/impg/U72Npb3EfzT-0av7QwY-QSjTWDQQrVTFZkV9bA/zgigXh3DtTQ.jpg?size=1280x720&quality=95&sign=71fe8128d8bcc4598df9b0c524269dbe&type=album'
+                                        image='/images/sf_bannerjpg.jpg'
                                     />
                                     <MastersGroup masters={masters}/>
-                                    <Group>
+                                    <Group mode='card'>
                                         <Placeholder
                                             icon={<Icon56UserAddOutline />}
                                             header="Создание персонажа"
