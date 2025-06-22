@@ -12,7 +12,7 @@ import Intro from './panels/Intro.js';
 import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
 import LOCharacter from './panels/lost_omens/character/LOCharacter.js';
 import HGCampaignPanel from './panels/golarion_heroes/campaign/HGCampaignPanel.js';
-//import HGCharacter from './panels/golarion_heroes/character/HGCharacter.js';
+import HGCharacter from './panels/golarion_heroes/character/HGCharacter.js';
 import SFCampaignPanel from './panels/ouroboros/campaign/SFCampaignPanel.js';
 import SFCharacter from './panels/ouroboros/character/SFCharacter.js';
 import SMCampaignPanel from './panels/silver_marshes/campaign/SMCampaignPanel.js';
@@ -64,7 +64,7 @@ const App = (router) => {
 			</View>
 			<View activePanel={activePanel} nav='golarion_heroes'>
 				<HGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				{/*<HGCharacter id={ROUTES.CHAR}/>*/}
+				<HGCharacter id={ROUTES.CHAR}/>
 			</View>
 			<View activePanel={activePanel} nav='ouroboros'>
 				<SFCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />

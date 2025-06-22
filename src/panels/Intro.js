@@ -10,6 +10,7 @@ import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, 
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
+    HG: "Герои Голариона (PF 1e)",
     SF: "Уроборос (Starfinder)",
     SM: "Серебряный Предел (D&D 5e)",
     HG: "Герои Голариона (PF 1e)",
@@ -59,6 +60,15 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.HG)
                                     setParams(params)
                                     routeNavigator.push(HGCampaign, { keepSearchParams: true })
+                                }} />
+
+                            <CampaignCard
+                                title={CAMPAIGNS.HG}
+                                imageSrc="/images/hg_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.HG)
+                                    setParams(params)
+                                    routeNavigator.push('/campaign/golarion_heroes', { keepSearchParams: true })
                                 }} />
                             
                             <CampaignCard

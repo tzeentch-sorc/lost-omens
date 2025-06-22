@@ -1,0 +1,295 @@
+import React, { useState, useEffect } from 'react';
+import {
+	Panel, Group, PanelHeaderBack, PanelHeader,
+	ScreenSpinner, SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
+	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text
+} from '@vkontakte/vkui';
+import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+
+import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
+import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
+import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
+import HGCharTabPanel from './HGCharTabPanel.js';
+import HGSpells from './HGSpells.js';
+import HGInventory from './HGInventory.js';
+import HGFormulae from './HGFormulae.js';
+import HGMainInfo from './HGMainInfo.js';
+
+import HGInventorySettings from '../export_settings/HGInventorySettings.js'
+import HGCharBuildSettings from '../export_settings/HGCharBuildSettings.js'
+import HGCharInfoSettings from '../export_settings/HGCharInfoSettings.js'
+
+import './HGCharacter.css'
+import HGFeatPanel from './HGFeatPanel.js';
+import { tierMap } from './tier-data.js';
+
+const HGCharacter = () => {
+
+	const routeNavigator = useRouteNavigator();
+	const [params, setParams] = useSearchParams();
+	const [inventory, setInventory] = useState([]);
+	const [tokens, setTokens] = useState(0);
+	const [wealth, setWealth] = useState(0);
+	const [formulae, setFormulae] = useState();
+	const [gold, setGold] = useState(0);
+	const [downtime, setDowntime] = useState(0);
+	const [experience, setExperience] = useState();
+	const [level, setLevel] = useState();
+	const [spell_0, setSpell_0] = useState();
+	const [spell_1, setSpell_1] = useState();
+	const [spell_2, setSpell_2] = useState();
+	const [spell_3, setSpell_3] = useState();
+	const [spell_4, setSpell_4] = useState();
+	const [spell_5, setSpell_5] = useState();
+	const [spell_6, setSpell_6] = useState();
+	const [spell_7, setSpell_7] = useState();
+	const [spell_8, setSpell_8] = useState();
+	const [spell_9, setSpell_9] = useState();
+	const [spell_10, setSpell_10] = useState();
+	const [feat_race, setFeatRace] = useState();
+	const [feat_general, setFeatGeneral] = useState();
+	const [feat_class, setFeatClass] = useState();
+	const [feat_skill, setFeatSkill] = useState();
+	const [feat_archetype, setFeatArchetype] = useState();
+
+	const [menuOpened, setMenuOpened] = React.useState(false);
+	const [selected, setSelected] = React.useState('inventory');
+
+	// const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const charName = params.get('CharName');
+	const player = params.get('Player');
+
+	const [easterEgg, setEasterEgg] = useState(0);
+
+	function hasSpells() {
+		return (spell_0[0] != "" || spell_1[0] != "" || spell_2[0] != "" ||
+			spell_3[0] != "" || spell_4[0] != "" || spell_5[0] != "" || spell_6[0] != "" ||
+			spell_7[0] != "" || spell_8[0] != "" | spell_9[0] != "" || spell_10[0] != ""
+		);
+	}
+	function hasFormulae() {
+		return (formulae[0] != "");
+	}
+	function hasInventory() {
+		return (inventory.length > 0);
+	}
+	function spellist() {
+		return ([spell_0, spell_1, spell_2,
+			spell_3, spell_4, spell_5, spell_6,
+			spell_7, spell_8, spell_9, spell_10]
+		)
+	}
+	function featlist() {
+		return ([feat_race, feat_general,
+			feat_class, feat_skill, feat_archetype])
+	}
+
+	function getRandomInt(max) {
+		return Math.floor(Math.random() * max);
+	}
+
+	function renderSelectedTab() {
+		switch (selected) {
+			case 'inventory':
+				return hasInventory() ? (
+					<HGInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player}/>
+				) : (
+					<InventoryPlaceholder />
+				);
+			case 'spells':
+				return hasSpells() ? (
+					<HGSpells spellist={spellist()} />
+				) : (
+					<SpellsPlaceholder />
+				);
+			case 'formulae':
+				return hasFormulae() ? (
+					<HGFormulae formulae={formulae} />
+				) : (
+					<FormulaePlaceholder />
+				);
+			default:
+				return null;
+		}
+	};
+
+	function extractTokensFromInventory(setTokens, inventoryData) {
+		setTokens(inventoryData.find((item) => {
+			if (item.name === 'Жетон открытой дороги') {
+				const index = inventoryData.indexOf(item);
+				if (index !== -1) {
+					inventoryData.splice(index, 1);
+					return item;
+				}
+			}
+		}).count);
+	}
+
+	//TODO rework all modals
+	const [modalTier, setModalTier] = useState(null);
+	const [activeModal, setActiveModal] = useState(null);
+
+	const MODAL_PAGE_TIERS = 'tier-bonuses';
+
+	const openTierModal = (tierId) => {
+		setModalTier(tierMap[tierId]);
+		setActiveModal(MODAL_PAGE_TIERS);
+	};
+
+	const closeModal = () => {
+		setActiveModal(null);
+		setModalTier(null);
+	};
+
+	const getTierInfo = (lvl) => {
+		if (lvl < 5) return 1;
+		else if (lvl < 7) return 2;
+		else if (lvl < 9) return 3;
+		else if (lvl < 11) return 4;
+		else return 5;
+	};
+
+	const getBonusItemLevel = (lvl) => {
+		const tier = getTierInfo(lvl);
+		console.log(tier)
+		if (tier >= 4) return (lvl - 1)
+		if (tier >= 2) return (lvl - 2)
+	}
+
+	const modal = (
+		<ModalRoot activeModal={activeModal} onClose={closeModal}>
+			<ModalPage
+				id={MODAL_PAGE_TIERS}
+				header={
+					<ModalPageHeader
+						after={<PanelHeaderClose onClick={closeModal} />}
+					>
+						Бонусы за достижение ранга
+					</ModalPageHeader>
+				}
+				onClose={closeModal}
+			>
+				{modalTier && (
+					<Div>
+						<Cell before={modalTier.getIcon(48)}> <Title level="1" style={{ marginBottom: 12, marginTop: 12 }} inline="true">{modalTier.name}</Title></Cell>
+						<Separator />
+						<Text style={{ fontStyle: 'italic', padding: 20 }}>{modalTier.description}</Text>
+						<Separator />
+						<List>
+							{modalTier.bonuses.map((bonus, index) => {
+								const ruleText = bonus.rule.includes('{level}') ? bonus.rule.replace('{level}', getBonusItemLevel(level)) : bonus.rule;
+								return (
+									<SimpleCell key={index} multiline>
+										<InfoRow header={bonus.title}>{ruleText}</InfoRow>
+									</SimpleCell>
+								)
+							})}
+						</List>
+					</Div>
+				)}
+			</ModalPage>
+		</ModalRoot>
+	);
+
+	useEffect(() => {
+		async function fetchData() {
+			//попытка получить через spreadsheetApp
+			//получение золота, уровня, даунтайма и опыта
+			let characterInfoData = await HGCharInfoSettings.getFilteredQuery("name", charName);
+			console.log("character info data", characterInfoData);
+			setGold(characterInfoData[0].gold);
+			setExperience(characterInfoData[0].exp);
+			setLevel(characterInfoData[0].lvl);
+			setDowntime(characterInfoData[0].downtime);
+
+			//получение инвентаря
+			let inventoryData = await HGInventorySettings.getFilteredQuery("owner", charName);
+			console.log("inventory data", inventoryData);
+
+			if (inventoryData[0].name) {
+				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
+				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
+				setWealth(totalCost);
+			}
+
+			extractTokensFromInventory(setTokens, inventoryData);
+
+			//получение черт, заклинаний, формул, черт
+			let characterBuildData = await HGCharBuildSettings.getFilteredQuery("name", charName);
+			console.log("character build data", characterBuildData);
+
+			setSpell_0(characterBuildData[0].spells_0.split(','));
+			setSpell_1(characterBuildData[0].spells_1.split(','));
+			setSpell_2(characterBuildData[0].spells_2.split(','));
+			setSpell_3(characterBuildData[0].spells_3.split(','));
+			setSpell_4(characterBuildData[0].spells_4.split(','));
+			setSpell_5(characterBuildData[0].spells_5.split(','));
+			setSpell_6(characterBuildData[0].spells_6.split(','));
+			setSpell_7(characterBuildData[0].spells_7.split(','));
+			setSpell_8(characterBuildData[0].spells_8.split(','));
+			setSpell_9(characterBuildData[0].spells_9.split(','));
+			setSpell_10(characterBuildData[0].spells_10.split(','));
+
+			setFormulae(characterBuildData[0].formulas.split(','));
+
+			setFeatRace(characterBuildData[0].feat_race.split(','));
+			setFeatGeneral(characterBuildData[0].feat_general.split(','));
+			setFeatSkill(characterBuildData[0].feat_skill.split(','));
+			setFeatClass(characterBuildData[0].feat_class.split(','));
+			setFeatArchetype(characterBuildData[0].feat_archetype.split(','));
+
+			setEasterEgg(getRandomInt(14));
+
+			// setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
+			// setTimeout(() => setPopout(null), 1000);
+
+			//console.log("new", inventoryData);
+		}
+		fetchData().catch(console.error);
+
+		const appRoot = document.querySelector('.vkuiAppRoot');
+		if (!appRoot) return;
+
+		if (activeModal) {
+			appRoot.style.overflow = 'hidden';
+		} else {
+			appRoot.style.overflow = '';
+		}
+	}, [activeModal]);
+
+	return (
+		<Panel nav='char'>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/golarion_heroes', { keepSearchParams: true })} />}>
+				{charName}
+			</PanelHeader>
+			<SplitLayout /*popout={popout} */ modal={modal}>
+				<SplitCol>
+					<HGMainInfo
+						gold={gold}
+						tokens={tokens}
+						downtime={downtime}
+						experience={experience}
+						tier={getTierInfo(level)}
+						level={level}
+						easterEgg={easterEgg}
+						// setPopout={setPopout}
+						onOpenTierModal={openTierModal}
+					/>
+					<HGFeatPanel featlist={featlist()} />
+					<Group mode='card'>
+						<HGCharTabPanel
+							selected={selected}
+							setSelected={setSelected}
+							onMenuClick={(opened) => {
+								setMenuOpened((prevState) => (opened ? !prevState : false));
+							}}
+						/>
+						{renderSelectedTab()}
+					</Group>
+				</SplitCol>
+			</SplitLayout>
+		</Panel>
+	);
+};
+
+export default HGCharacter;

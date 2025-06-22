@@ -1,0 +1,36 @@
+.inventoryCell {
+    gap: 6px;
+    padding-left: 12px;
+}
+
+.inventoryCellHeaderGroup {
+    font-weight: bold;
+    padding: 0 28px 8px 28px;
+    color: #999;
+    font-size: 16px;
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 5fr 80px 80px;
+}
+
+.inventoryCellHeader {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.inventoryCell {
+    display: grid;
+    grid-template-columns: 5fr 80px 80px;
+}
+
+.inventoryCellFooter {
+    display: grid;
+    grid-template-columns: 5fr 160px;
+    font-weight: bold;
+    padding: 0 28px 8px 28px;
+    font-size: 16px;
+    margin-top: 16px;
+}
