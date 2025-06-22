@@ -4,7 +4,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 
 import './Intro.css'
-import CampaignCard from "./common/CampaignCard";
+import CampaignCard from "./common/components/CampaignCard";
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
