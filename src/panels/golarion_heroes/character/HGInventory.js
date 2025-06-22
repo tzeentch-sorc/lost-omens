@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Cell, Group, List, Separator } from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
-import AddItem from '../../common/components/AddItem';
 
 import './HGInventory.css'
 
-const HGInventory = ({ inventory, totalWealth, charName, playerName }) => {
+const HGInventory = ({ inventory, totalWealth}) => {
     // Track both sorted column and direction ('asc' or 'desc')
     const [sortBy, setSortBy] = useState('cost');
     const [sortDirection, setSortDirection] = useState('desc');
@@ -77,17 +76,6 @@ const HGInventory = ({ inventory, totalWealth, charName, playerName }) => {
             </div>
         );
     };
-    function createPreEnteredLink(playerName, charName, link) {
-        var newLink = link + "?usp=pp_url" +
-            "&entry.138981921=" + playerName + 
-            "&entry.1777390359=" + charName;// + 
-            //"&entry.236814128=" + "Полученные предметы (на партии)" +
-            //"&entry.1500116348=" + "Купленные предметы (вне партии)" +
-            //"&entry.1762805081=" + "Проданные предметы (вне партии)" +
-            //"&entry.1805043020=" + "Купленные иные услуги" +
-            //"&entry.174313451=" + "Изменение количества монет";
-        return newLink;
-    };
 
     return (
         <Group
@@ -96,7 +84,6 @@ const HGInventory = ({ inventory, totalWealth, charName, playerName }) => {
             role="tabpanel"
             mode="plain"
         >
-            <AddItem link={createPreEnteredLink(playerName, charName, "https://docs.google.com/forms/d/e/1FAIpQLScuY24zsG6HEHABa5rGwHhBW0B7l9lK-La99b8MJospK_P9Ew/viewform")}/>
             {/* Headers */}
             <div
                 className='inventoryCellHeaderGroup'

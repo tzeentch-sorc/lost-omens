@@ -11,30 +11,15 @@ const HGFeats = ({ featlist }) => {
 
     const data = [
         {
-            id: "acc_feat_race",
-            title: 'Расовые черты',
+            id: "acc_feat_class",
+            title: 'Особые способности',
             detail: 0,
         },
         {
             id: "acc_feat_general",
-            title: 'Общие черты',
+            title: 'Черты',
             detail: 1,
-        },
-        {
-            id: "acc_feat_class",
-            title: 'Классовые черты',
-            detail: 2,
-        },
-        {
-            id: "acc_feat_skill",
-            title: 'Черты навыков',
-            detail: 3,
-        },
-        {
-            id: "acc_feat_archetype",
-            title: 'Черты архетипа',
-            detail: 4,
-        },
+        }
     ];
 
     function createFeatRow(element) {

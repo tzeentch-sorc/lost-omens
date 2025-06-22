@@ -9,7 +9,6 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 import '../../common/css/CampaignPanel.css'
 import HGInfoCard from './HGInfoCard.js';
-import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import HGCharCard from './HGCharCard.js';
 import HGNoCharsPage from './HGNoCharsPage.js';
@@ -43,7 +42,6 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 		if (element.lvl_up) {
 			openAction(element);
 		} else {
-			params.set('Player', element.player);
 			params.set('CharName', element.name);
 			setParams(params);
 			//console.log(params);

@@ -1,6 +1,6 @@
 import QuerySettings from '../../../util/QuerySettings';
 
-const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; // LO Geekmo Mirror
+const sheetId = "1FRkKmWu44biVjYP7cZJkG5RkxkwnjaSPVTke3tsZwp0"; // HG Geekmo Mirror
 
 const HGCharInfoSettings = new QuerySettings({
 	sheetId,
@@ -11,11 +11,11 @@ const HGCharInfoSettings = new QuerySettings({
 		lvl: "Уровень",
 		exp: "Опыт",
 		gold: "Золото",
-		downtime: "Даунтайм"	
+		mult: "Класс"
 	},
 	query: {
-		colByField: { name: 0, lvl: 1, exp: 2, gold:3, downtime: 4},
-		fieldByCol: { 0: "name", 1: "lvl", 2: "exp", 3: "gold", 4: "downtime" },
+		colByField: { name: 0, lvl: 1, exp: 2, gold:3, mult: 4},
+		fieldByCol: { 0: "name", 1: "lvl", 2: "exp", 3: "gold", 4: "mult" },
 		colIDs: [ 0, 1, 2, 3, 4 ],
 		queryAll: "select A, B, C, D, E",
 	},
