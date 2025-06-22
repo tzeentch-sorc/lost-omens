@@ -12,10 +12,16 @@ import './HGCampaignPanel.css'
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
 //import HGCharCard from './HGCharCard.js';
 import HGNoCharsPage from './HGNoCharsPage.js';
+<<<<<<< HEAD
 //import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
 //import HGPriorities from './HGPriorities.js';
 //import HGCharUpdateAlert from './HGCharUpdateAlert.js';
 import { getVkUserUrl } from '../../../util/utilFunc.js';
+=======
+import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
+import HGPriorities from './HGPriorities.js';
+import HGCharUpdateAlert from './HGCharUpdateAlert.js';
+>>>>>>> f20fb03 (campaign panel)
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -29,7 +35,10 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
 
+<<<<<<< HEAD
 	/*
+=======
+>>>>>>> f20fb03 (campaign panel)
 	const openAction = (element) => {
 		setPopout(
 			<HGCharUpdateAlert

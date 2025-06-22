@@ -62,7 +62,11 @@ const HGNoCharsPage = ({ campaignName, user, }) => {
                             <SplitCol>
                                 <Group mode="plain">
                                     <ArticleBlock
+<<<<<<< HEAD
                                         articleLink={HGArticleLink}
+=======
+                                        articleLink='https://vk.com/@geekmo-pathfinder-campaign'
+>>>>>>> f20fb03 (campaign panel)
                                         caption='Добро пожаловать к «Героям Голариона»!'
                                         description='Введение в мир Голариона 1й редакции'
                                         image='/images/hg_banner_article.png'                                    

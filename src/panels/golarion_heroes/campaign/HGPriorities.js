@@ -62,7 +62,9 @@ const HGPriorities = ({ priorities, setPopout, appearance }) => {
     const onClick = () => setPopout(<HGPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
 
     return (
-        <Button stretched appearance={appearance} size="l" onClick={onClick}>Приоритеты</Button>
+        <Div style={{ paddingLeft: 16 }}>
+            <Button stretched appearance="positive" size="l" onClick={onClick}>Открыть список приоритетов</Button>
+        </Div>
     );
 };
 export default HGPriorities;
