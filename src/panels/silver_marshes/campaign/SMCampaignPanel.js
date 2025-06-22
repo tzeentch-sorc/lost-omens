@@ -9,10 +9,10 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import './SMCampaignPanel.css'
+import '../../common/css/CampaignPanel.css'
 import SMInfoCard from './SMInfoCard.js';
 import SMCharUpdateAlert from './SMCharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import SMCharCard from './SMCharCard.js';
 import SMNoCharsPage from './SMNoCharsPage.js';
 import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
