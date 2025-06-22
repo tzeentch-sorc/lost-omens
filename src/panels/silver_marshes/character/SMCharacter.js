@@ -113,7 +113,7 @@ const SMCharacter = () => {
 				setWealth(totalCost);
 			}
 
-			//получение черт, заклинаний, формул, черт
+			//получение черт, заклинаний
 			let characterBuildData = await SMCharBuildSettings.getFilteredQuery("name", charName);
 			console.log("character build data", characterBuildData);
 

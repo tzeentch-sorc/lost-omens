@@ -7,10 +7,17 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
+<<<<<<< HEAD
 import './HGCampaignPanel.css'
 //import HGInfoCard from './HGInfoCard.js';
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
 //import HGCharCard from './HGCharCard.js';
+=======
+import '../../common/css/CampaignPanel.css'
+import HGInfoCard from './HGInfoCard.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import HGCharCard from './HGCharCard.js';
+>>>>>>> 663c8e8 (adapt features for needs)
 import HGNoCharsPage from './HGNoCharsPage.js';
 <<<<<<< HEAD
 //import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
