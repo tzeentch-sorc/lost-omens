@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Cell, Group, List, Separator } from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
-import AddItem from '../../common/AddItem';
+import AddItem from '../../common/components/AddItem';
 
 import './LOInventory.css'
 import { FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddItemChar, LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold } from '../../../util/consts.js'

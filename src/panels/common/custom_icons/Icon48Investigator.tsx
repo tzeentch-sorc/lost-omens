@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIconProps from '../SvgIconProps.ts';
-import SvgIcon from '../SvgIcon.tsx';
+import SvgIconProps from './SvgIconProps.ts';
+import SvgIcon from './SvgIcon.tsx';
 
 const Icon48Investigator = (props: SvgIconProps) => (
   <SvgIcon width={48} height={48} viewBox="0 0 420 420" strokeWidth="0px" {...props}>
