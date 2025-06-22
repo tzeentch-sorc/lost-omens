@@ -59,10 +59,11 @@ const HGNoCharsPage = ({ campaignName, user, }) => {
                             <SplitCol>
                                 <Group mode="plain">
                                     <ArticleBlock
-                                        articleLink='https://vk.com/@geekmo-pathfinder-2e-campaign'
-                                        caption='Добро пожаловать в «Утраченные Пророчества»!'
-                                        description='Введение в мир Голариона 2й редакции'
-                                        image='/images/lo_banner_article.jpg'                                    />
+                                        articleLink='https://vk.com/@geekmo-pathfinder-campaign'
+                                        caption='Добро пожаловать к «Героям Голариона»!'
+                                        description='Введение в мир Голариона 1й редакции'
+                                        image='/images/hg_banner_article.png'                                    
+                                    />
                                     <MastersGroup masters={masters} />
                                     <Group mode="card">
                                         <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа">

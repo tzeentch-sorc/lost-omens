@@ -15,6 +15,7 @@ import HGCharCard from './HGCharCard.js';
 import HGNoCharsPage from './HGNoCharsPage.js';
 import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
 import HGPriorities from './HGPriorities.js';
+import HGCharUpdateAlert from './HGCharUpdateAlert.js';
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -28,20 +29,10 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
 
-	function createPreEnteredLink(playerName, charName, level, link) {
-        var newLink = link + "?usp=pp_url" +
-            "&entry.1223877896=" + `${playerName?.split(" ")?.[0] ?? ''} ${playerName?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim() + 
-            "&entry.1161334128=" + charName + 
-            //"&entry.2096407236=" + "Выборы на повышении" +
-            "&entry.1736501258=" + level;
-        return newLink;
-    }
-
 	const openAction = (element) => {
 		setPopout(
-			<CharUpdateAlert
+			<HGCharUpdateAlert
 				charName={element.name}
-				formLink={createPreEnteredLink(element.player, element.name, parseInt(element.lvl, 10) + 1,'https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform')}
 				navLink='/char/golarion_heroes'
 				closeMethod={() => setPopout(null)}
 			/>
@@ -126,10 +117,7 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 									<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
 										<HGInfoCard date={date} prio={prio} adventure={advName} />
 										<Spacing size={4} />
-										<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-											<HGPriorities setPopout={setPopout} priorities={priorities} appearance='neutral'/>
-											<Button stretched appearance="negative" size="l" onClick={() => {window.open("https://unidraw.io/app/board/f5649aff5774fb5628f5", "_blank")}}>Доска Авроры</Button>
-										</Div>
+										<HGPriorities setPopout={setPopout} priorities={priorities} />
 									</Group>
 								}
 								<Header mode="secondary">Ваши персонажи</Header>

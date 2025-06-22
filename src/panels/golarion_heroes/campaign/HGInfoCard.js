@@ -32,7 +32,7 @@ const HGInfoCard = ({ date, prio, adventure }) => {
                 <Card mode="plain">
                     <Group header={<Header mode="primary">После партии</Header>} mode="plain">
                         <SimpleCell before={<Icon28HistoryForwardOutline width={24} height={24} />}>
-                            <InfoRow>{(prio - prio * 0.2).toFixed(2)}</InfoRow>
+                            <InfoRow>{(prio - 1).toFixed(1)}</InfoRow>
                         </SimpleCell>
                     </Group>
                 </Card>
