@@ -8,6 +8,7 @@ import CampaignCard from "./common/components/CampaignCard";
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
+    HG: "Герои Голариона (PF 1e)",
     SF: "Уроборос (Starfinder)",
     SM: "Серебряный Предел (D&D5e)"
 }
@@ -44,6 +45,15 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.LOST_OMENS)
                                     setParams(params)
                                     routeNavigator.push('/campaign/lost_omens', { keepSearchParams: true })
+                                }} />
+
+                            <CampaignCard
+                                title={CAMPAIGNS.HG}
+                                imageSrc="/images/hg_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.HG)
+                                    setParams(params)
+                                    routeNavigator.push('/campaign/golarion_heroes', { keepSearchParams: true })
                                 }} />
                             
                             <CampaignCard

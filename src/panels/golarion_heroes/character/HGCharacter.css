@@ -1,0 +1,10 @@
+@media only screen and (max-width: 768px) {
+    div.not4mob {
+      display: none;
+    }
+  }
+  .modal-open {
+    overscroll-behavior: none;
+    overflow: hidden !important;
+    height: 100% !important;
+  }

@@ -28,6 +28,16 @@ const router = createHashRouter([
     view: 'lost_omens',
   },
   {
+    path: '/campaign/golarion_heroes',
+    panel: 'campaign',
+    view: 'golarion_heroes',
+  },
+  {
+    path: '/char/golarion_heroes',
+    panel: 'char',
+    view: 'golarion_heroes',
+  },
+  {
     path: '/campaign/ouroboros',
     panel: 'campaign',
     view: 'ouroboros',
