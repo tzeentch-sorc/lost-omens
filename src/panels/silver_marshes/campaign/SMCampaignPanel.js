@@ -71,9 +71,13 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 			})).sort((a, b) => b.prio - a.prio));
 			//console.log(prioData);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
 =======
 			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + "id406019505")//fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)   
+=======
+			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)   
+>>>>>>> fb2b2e0 (fix)
 
 			});
 >>>>>>> f20fb03 (campaign panel)
