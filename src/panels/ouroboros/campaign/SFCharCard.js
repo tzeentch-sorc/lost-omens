@@ -3,7 +3,7 @@ import {
     Icon24UserOutline, Icon28UserOutgoingOutline
 } from '@vkontakte/icons'
 
-import '../../../util/consts.js'
+import {FavouriteColor} from '../../../util/consts.js'
 
 const SFCharCard = ({ element, openAction }) => {
     return (

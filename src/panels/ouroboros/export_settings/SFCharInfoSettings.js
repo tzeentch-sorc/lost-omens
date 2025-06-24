@@ -1,5 +1,5 @@
 import QuerySettings from '../../../util/QuerySettings';
-import '../../../util/consts.js'
+import {SFSpreadSheetID, SFCharactersSheetID} from '../../../util/consts.js'
 
 const sheetId = SFSpreadSheetID; // SF Geekmo Mirror
 

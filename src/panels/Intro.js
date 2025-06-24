@@ -6,6 +6,8 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 import CampaignCard from "./common/CampaignCard";
 
+import {LOCampaign, SMCampaign, SFCampaign} from '../util/consts.js';
+
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
     SF: "Уроборос (Starfinder)",
@@ -43,7 +45,7 @@ const Intro = ({ fetchedUser }) => {
                                 onClick={() => {
                                     params.set('CampaignName', CAMPAIGNS.LOST_OMENS)
                                     setParams(params)
-                                    routeNavigator.push('/campaign/lost_omens', { keepSearchParams: true })
+                                    routeNavigator.push(LOCampaign, { keepSearchParams: true })
                                 }} />
                             
                             <CampaignCard
@@ -52,7 +54,7 @@ const Intro = ({ fetchedUser }) => {
                                 onClick={() => {
                                     params.set('CampaignName', CAMPAIGNS.SF)
                                     setParams(params)
-                                    routeNavigator.push('/campaign/ouroboros', { keepSearchParams: true })
+                                    routeNavigator.push(SFCampaign, { keepSearchParams: true })
                                 }} />
                             
                             <CampaignCard
@@ -61,7 +63,7 @@ const Intro = ({ fetchedUser }) => {
                                 onClick={() => {
                                     params.set('CampaignName', CAMPAIGNS.SM)
                                     setParams(params)
-                                    routeNavigator.push('/campaign/silver_marshes', { keepSearchParams: true })
+                                    routeNavigator.push(SMCampaign, { keepSearchParams: true })
                                 }} />
                         </CardGrid>
                     </Group>

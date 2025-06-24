@@ -26,7 +26,7 @@ import Icon48Taumaturg from "../../common/custom_icons/Icon48Taumaturg.tsx";
 import Icon48Witch from "../../common/custom_icons/Icon48Witch.tsx";
 import Icon48Wizard from "../../common/custom_icons/Icon48Wizard.tsx";
 
-import '../../../util/consts.js'
+import {FavouriteColor} from '../../../util/consts.js'
 
 
 const LOCharCard = ({element, openAction}) => {

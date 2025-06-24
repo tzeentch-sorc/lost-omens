@@ -4,7 +4,7 @@ import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/AddItem';
 
 import './LOInventory.css'
-import '../../../util/consts.js'
+import {FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddItemChar, LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold} from '../../../util/consts.js'
 
 const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
     // Track both sorted column and direction ('asc' or 'desc')

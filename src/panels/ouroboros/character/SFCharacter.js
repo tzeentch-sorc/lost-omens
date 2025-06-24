@@ -12,7 +12,7 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import SFCharInfoSettings from '../export_settings/SFCharInfoSettings.js'
-import '../../../util/consts.js'
+import {SFCampaign} from '../../../util/consts.js'
 
 const SFCharacter = () => {
 

@@ -16,7 +16,7 @@ import bridge from '@vkontakte/vk-bridge';
 import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
 import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
-import '../../../util/consts.js'
+import {VKToken, LOArticleLink} from '../../../util/consts.js'
 
 
 const LONoCharsPage = ({ campaignName, user, }) => {

@@ -21,6 +21,7 @@ import SMCharInfoSettings from '../export_settings/SMCharInfoSettings.js'
 import './SMCharacter.css'
 import SMFeatPanel from './SMFeatPanel.js';
 
+import { SMCampaign } from '../../../util/consts.js'; 
 
 const SMCharacter = () => {
 
@@ -138,7 +139,7 @@ const SMCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/silver_marshes', { keepSearchParams: true })} />}>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
 				{charName}
 			</PanelHeader>
 			<SplitLayout popout={popout}>

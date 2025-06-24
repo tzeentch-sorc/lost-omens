@@ -1,5 +1,5 @@
 import QuerySettings from '../../../util/QuerySettings';
-import '../../../util/consts.js'
+import {SMSpreadSheetID, SMMastersSheetID} from '../../../util/consts.js'
 
 const sheetId = SMSpreadSheetID; // SM Geekmo Mirror
 

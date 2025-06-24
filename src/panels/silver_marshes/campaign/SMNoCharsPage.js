@@ -17,7 +17,7 @@ import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
 import SMMastersInfoSettings from '../export_settings/SMMastersInfoSettings.js'
 
-import '../../../util/consts.js'
+import {VKToken,SMArticleLink,SMCreateLink} from '../../../util/consts.js'
 
 
 const SMNoCharsPage = ({ campaignName, user, }) => {

@@ -23,7 +23,7 @@ import './LOCharacter.css'
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 
-import '../../../util/consts.js'
+import {LOCampaign} from '../../../util/consts.js'
 
 const LOCharacter = () => {
 

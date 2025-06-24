@@ -16,7 +16,7 @@ import LONoCharsPage from './LONoCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
-import '../../../util/consts.js'
+import {FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice, LOLvlupLevel, LOCharacter, LOBulletinLink} from '../../../util/consts.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();

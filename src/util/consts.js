@@ -11,6 +11,7 @@ export const LOCampaign = '/campaign/lost_omens';
 export const SFCharacter = '/char/ouroboros';
 export const SFCampaign = '/campaign/ouroboros';
 export const SMCharacter = '/char/silver_marshes';
+export const SMCampaign = '/campaign/silver_marshes';
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====

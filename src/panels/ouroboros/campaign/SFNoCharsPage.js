@@ -17,7 +17,7 @@ import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
 import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
 
-import '../../../util/consts.js'
+import {SFCreateLink, SFArticleLink, VKToken} from '../../../util/consts.js'
 
 const SFNoCharsPage = ({campaignName, user, }) => {
 

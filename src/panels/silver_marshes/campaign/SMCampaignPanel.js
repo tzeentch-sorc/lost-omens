@@ -18,7 +18,7 @@ import SMNoCharsPage from './SMNoCharsPage.js';
 import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
 import SMPriorities from './SMPriorities.js';
 
-import '../../../util/consts.js'
+import {SMCharacter} from '../../../util/consts.js';
 
 const SMCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();

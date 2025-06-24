@@ -16,7 +16,7 @@ import CharUpdateAlert from '../../common/CharUpdateAlert.js';
 import SFCharCard from './SFCharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
 
-import '../../../util/consts.js'
+import {SFCharacter, SFLvlupLink } from '../../../util/consts.js'
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 

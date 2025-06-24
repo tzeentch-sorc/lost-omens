@@ -14,6 +14,8 @@ import Icon48DndRogue from "../../common/custom_icons/Icon48DndRogue.tsx";
 import Icon48DndSorcerer from "../../common/custom_icons/Icon48DndSorcerer.tsx";
 import Icon48DndWizard from "../../common/custom_icons/Icon48DndWizard.tsx";
 
+import { FavouriteColor } from "../../../util/consts.js";
+
 const SMCharCard = ({element, openAction}) => {
     const iconMap = {
             "Варвар": <Icon48DndBarbarian color={FavouriteColor}/>,
