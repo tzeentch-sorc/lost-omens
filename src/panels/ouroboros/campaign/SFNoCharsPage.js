@@ -17,6 +17,8 @@ import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
 import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
 
+import '../../../util/consts.js'
+
 const SFNoCharsPage = ({campaignName, user, }) => {
 
     const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
@@ -34,7 +36,7 @@ const SFNoCharsPage = ({campaignName, user, }) => {
                         user_ids: userIds,
                         v: '5.131',
                         fields: 'screen_name, photo_200',
-                        access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
+                        access_token: VKToken
                     }
                 }).then(resp => { return resp.response });
 
@@ -58,7 +60,7 @@ const SFNoCharsPage = ({campaignName, user, }) => {
                             <SplitCol>
                                 <Group mode="plain">
                                     <ArticleBlock 
-                                        articleLink='https://vk.com/@geekmo-ouroboros-invitation'
+                                        articleLink={SFArticleLink}
                                         caption='Добро пожаловать на станцию «Уроборос»!'
                                         description='Введение в систему и мегакампанию'
                                         image='/images/sf_bannerjpg.jpg'
@@ -72,7 +74,7 @@ const SFNoCharsPage = ({campaignName, user, }) => {
                                                 <Button
                                                     size="m"
                                                     appearance="positive"
-                                                    onClick={() => window.open('https://forms.gle/DfWmZwPJ7vYA5Yhg7', "_blank")}
+                                                    onClick={() => window.open(SFCreateLink, "_blank")}
                                                 >
                                                     Создать
                                                 </Button>

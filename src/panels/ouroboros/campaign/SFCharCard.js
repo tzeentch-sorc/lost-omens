@@ -3,6 +3,8 @@ import {
     Icon24UserOutline, Icon28UserOutgoingOutline
 } from '@vkontakte/icons'
 
+import '../../../util/consts.js'
+
 const SFCharCard = ({ element, openAction }) => {
     return (
         <Card mode="shadow" size="m" key={element.name + "_sf_card"}
@@ -10,7 +12,7 @@ const SFCharCard = ({ element, openAction }) => {
             <RichCell
                 key={element.name}
                 id={element.name}
-                before={<Icon24UserOutline width={48} height={48} color='#008cff' />}
+                before={<Icon24UserOutline width={48} height={48} color={FavouriteColor} />}
                 text={element.lvl + " ур."}
                 after={element.lvl_up &&
                     <Counter size="s" mode="primary">

@@ -18,6 +18,8 @@ import SMNoCharsPage from './SMNoCharsPage.js';
 import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
 import SMPriorities from './SMPriorities.js';
 
+import '../../../util/consts.js'
+
 const SMCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
@@ -34,7 +36,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 		setPopout(
 			<SMCharUpdateAlert
 				charName={element.name}
-				navLink='/char/silver_marshes'
+				navLink={SMCharacter}
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -46,7 +48,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 		} else {
 			params.set('CharName', element.name);
 			setParams(params);
-			routeNavigator.push('/char/silver_marshes', { keepSearchParams: true });
+			routeNavigator.push(SMCharacter, { keepSearchParams: true });
 		}
 	}
 

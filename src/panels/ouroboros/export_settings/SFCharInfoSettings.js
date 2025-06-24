@@ -1,10 +1,11 @@
 import QuerySettings from '../../../util/QuerySettings';
+import '../../../util/consts.js'
 
-const sheetId = "1mMETeUIR5AZw63R8AulPkkgtkLu4bztv6tEJ_KsmlEo"; // SF Geekmo Mirror
+const sheetId = SFSpreadSheetID; // SF Geekmo Mirror
 
 const SFCharInfoSettings = new QuerySettings({
 	sheetId,
-	gid: 1102629437, //sheet "characters" 
+	gid: SFCharactersSheetID, //sheet "characters" 
 	headrow: 1,
 	fields: {
 		name: "Персонаж",

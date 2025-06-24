@@ -1,10 +1,11 @@
 import QuerySettings from '../../../util/QuerySettings';
+import '../../../util/consts.js'
 
-const sheetId = "19CwEiAnXosem6qIXmNDsU4x5xV-TZ2dQz6ay5miKciM"; //SM Geekmo Mirror
+const sheetId = SMSpreadSheetID; //SM Geekmo Mirror
 
 const SMCharBuildSettings = new QuerySettings({
 	sheetId,
-	gid: 2064380271, //sheet "builds"
+	gid: SMBuildsSheetID, //sheet "builds"
 	headrow: 1,
 	fields: {
 		name: "name",

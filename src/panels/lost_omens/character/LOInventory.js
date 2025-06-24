@@ -4,6 +4,7 @@ import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/AddItem';
 
 import './LOInventory.css'
+import '../../../util/consts.js'
 
 const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
     // Track both sorted column and direction ('asc' or 'desc')
@@ -78,14 +79,14 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
         );
     };
     function createPreEnteredLink(playerName, charName, link) {
-        var newLink = link + "?usp=pp_url" +
-            "&entry.138981921=" + playerName + 
-            "&entry.1777390359=" + charName;// + 
-            //"&entry.236814128=" + "Полученные предметы (на партии)" +
-            //"&entry.1500116348=" + "Купленные предметы (вне партии)" +
-            //"&entry.1762805081=" + "Проданные предметы (вне партии)" +
-            //"&entry.1805043020=" + "Купленные иные услуги" +
-            //"&entry.174313451=" + "Изменение количества монет";
+        var newLink = link + FormPreEnter +
+            LOAddItemPlayer + playerName + 
+            LOAddItemChar + charName;// + 
+            //LOAddItemOnParty + "Полученные предметы (на партии)" +
+            //LOAddItemBought + "Купленные предметы (вне партии)" +
+            //LOAddItemSold + "Проданные предметы (вне партии)" +
+            //LOAddItemService + "Купленные иные услуги" +
+            //LOAddItemChange + "Изменение количества монет";
         return newLink;
     };
 
@@ -96,7 +97,7 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
             role="tabpanel"
             mode="plain"
         >
-            <AddItem link={createPreEnteredLink(playerName, charName, "https://docs.google.com/forms/d/e/1FAIpQLScuY24zsG6HEHABa5rGwHhBW0B7l9lK-La99b8MJospK_P9Ew/viewform")}/>
+            <AddItem link={createPreEnteredLink(playerName, charName, LOAddItemLink)}/>
             {/* Headers */}
             <div
                 className='inventoryCellHeaderGroup'

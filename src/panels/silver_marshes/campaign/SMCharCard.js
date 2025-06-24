@@ -16,18 +16,18 @@ import Icon48DndWizard from "../../common/custom_icons/Icon48DndWizard.tsx";
 
 const SMCharCard = ({element, openAction}) => {
     const iconMap = {
-            "Варвар": <Icon48DndBarbarian color='#008cff'/>,
-            "Бард": <Icon48DndBard color='#008cff'/>,
-            "Жрец": <Icon48DndCleric color='#008cff'/>,
-            "Друид": <Icon48DndDruid color='#008cff'/>,
-            "Воин": <Icon48DndFighter color='#008cff'/>,
-            "Монах": <Icon48DndMonk color='#008cff'/>,
-            "Паладин": <Icon48DndPaladin color='#008cff'/>,
-            "Следопыт": <Icon48DndRanger color='#008cff'/>,
-            "Плут": <Icon48DndRogue color='#008cff'/>,
-            "Чародей": <Icon48DndSorcerer color='#008cff'/>,
-            "Колдун": <Icon48DndWarlock color='#008cff'/>,
-            "Волшебник": <Icon48DndWizard color='#008cff'/>,
+            "Варвар": <Icon48DndBarbarian color={FavouriteColor}/>,
+            "Бард": <Icon48DndBard color={FavouriteColor}/>,
+            "Жрец": <Icon48DndCleric color={FavouriteColor}/>,
+            "Друид": <Icon48DndDruid color={FavouriteColor}/>,
+            "Воин": <Icon48DndFighter color={FavouriteColor}/>,
+            "Монах": <Icon48DndMonk color={FavouriteColor}/>,
+            "Паладин": <Icon48DndPaladin color={FavouriteColor}/>,
+            "Следопыт": <Icon48DndRanger color={FavouriteColor}/>,
+            "Плут": <Icon48DndRogue color={FavouriteColor}/>,
+            "Чародей": <Icon48DndSorcerer color={FavouriteColor}/>,
+            "Колдун": <Icon48DndWarlock color={FavouriteColor}/>,
+            "Волшебник": <Icon48DndWizard color={FavouriteColor}/>,
             // Add more types and icons as needed
         };
 
@@ -38,7 +38,7 @@ const SMCharCard = ({element, openAction}) => {
                 key={element.name}
                 id={element.name}
                 before={
-                    iconMap[element.type] || <Icon24UserOutline width={48} height={48} color='#008cff' />
+                    iconMap[element.type] || <Icon24UserOutline width={48} height={48} color={FavouriteColor} />
                 }
                 text={element.type + ", " + element.lvl + " ур."}
                 caption={element.race}

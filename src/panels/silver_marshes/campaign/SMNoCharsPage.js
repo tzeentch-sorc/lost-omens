@@ -17,6 +17,8 @@ import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
 import SMMastersInfoSettings from '../export_settings/SMMastersInfoSettings.js'
 
+import '../../../util/consts.js'
+
 
 const SMNoCharsPage = ({ campaignName, user, }) => {
 
@@ -37,7 +39,7 @@ const SMNoCharsPage = ({ campaignName, user, }) => {
                         user_ids: userIds,
                         v: '5.131',
                         fields: 'screen_name, photo_200',
-                        access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
+                        access_token: VKToken
                     }
                 }).then(resp => { return resp.response });
 
@@ -61,7 +63,7 @@ const SMNoCharsPage = ({ campaignName, user, }) => {
                             <SplitCol>
                                 <Group mode="plain">
                                     <ArticleBlock
-                                        articleLink='https://vk.com/@geekmo-dnd-5e-campaign'
+                                        articleLink={SMArticleLink}
                                         caption='Добро пожаловать в «Серебряный Предел»!'
                                         description='Знакомство с мегакампанией'
                                         image='/images/sm_bannerjpg.jpg'
@@ -74,7 +76,7 @@ const SMNoCharsPage = ({ campaignName, user, }) => {
                                             <Button
                                                 size="m"
                                                 appearance="positive"
-                                                onClick={() => window.open('https://vk.com/@geekmo-new-character-dnd-5e')}
+                                                onClick={() => window.open(SMCreateLink)}
                                             >
                                                 Статья о создании персонажа
                                             </Button>

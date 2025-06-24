@@ -16,6 +16,8 @@ import CharUpdateAlert from '../../common/CharUpdateAlert.js';
 import SFCharCard from './SFCharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
 
+import '../../../util/consts.js'
+
 const SFCampaignPanel = ({ fetchedUser }) => {
 
 	const routeNavigator = useRouteNavigator();
@@ -31,8 +33,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		setPopout(
 			<CharUpdateAlert
 				charName={element.name}
-				formLink='https://forms.gle/CgVTL2qUVctKja4R7'
-				navLink='/char/ouroboros'
+				formLink={SFLvlupLink}
+				navLink={SFCharacter}
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -44,7 +46,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		} else {
 			params.set('CharName', element.name);
 			setParams(params);
-			routeNavigator.push('/char/ouroboros', { keepSearchParams: true });
+			routeNavigator.push(SFCharacter, { keepSearchParams: true });
 		}
 	}
 
