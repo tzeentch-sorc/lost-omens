@@ -28,7 +28,10 @@ Used Toolset:
    More here: ([VK Howto](https://dev.vk.com/ru/mini-apps/software-installation))
 4. Clone this repo
 
-Then you need to rename file `config.example.json` as `config.json` and insert correct access token. (You can make a copy)
+Then you need to rename file `config.example.json` as `config.json`:
+- insert correct access token,
+- set IDs for mirror master's google spreadsheets
+
 ```JSON
 {
     "VKToken": "insert_your_vk_token_here"
