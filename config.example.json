@@ -1,3 +1,34 @@
 {
-    "VKToken": "insert_your_vk_token_here"
+    "VKToken": "insert_your_token_here",
+    "LostOmens":{
+        "Mirror": "insert_your_mirror_id_here",
+        "Builds": 0,
+        "Characters": 0,
+        "Players": 0,
+        "Masters": 0,
+        "Inventory": 0
+    },
+    "Ouroboros":{
+        "Mirror": "insert_your_mirror_id_here",
+        "Characters": 0,
+        "Players": 0,
+        "Masters": 0
+    },
+    "SilverMarshes":{
+        "Mirror": "insert_your_mirror_id_here",
+        "Builds": 0,
+        "Characters": 0,
+        "Players": 0,
+        "Masters": 0,
+        "Inventory": 0
+    },
+    "GolarionHeroes":{
+        "Mirror": "insert_your_mirror_id_here",
+        "Builds": 0,
+        "Characters": 0,
+        "Players": 0,
+        "Masters": 0,
+        "Inventory": 0
+    }
+
 }

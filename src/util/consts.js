@@ -4,6 +4,7 @@ import config from '../../config.json';
 const FormPreEnter = "?usp=pp_url";
 const FavouriteColor = '#008cff';
 const VKToken = config.VKToken;
+
 // ----- Navigation -----
 const LOCharacter = '/char/lost_omens';
 const LOCampaign = '/campaign/lost_omens';
@@ -14,12 +15,12 @@ const SMCharacter = '/char/silver_marshes';
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
 // ----- Spreadsheet -----
-const LOSpreadSheetID = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; //LO Geekmo Mirror
-const LOBuildsSheetID = 1439947023; //sheet "builds"
-const LOCharactersSheetID = 550804557; //sheet "characters" 
-const LOPlayersSheetID = 1846907861; //sheet "players" 
-const LOMastersSheetID = 111508886; //sheet "masters"
-const LOInventorySheetID = 346052728; //sheet "inventory"
+const LOSpreadSheetID = config.LostOmens.Mirror; //LO Geekmo Mirror
+const LOBuildsSheetID = config.LostOmens.Builds; //sheet "builds"
+const LOCharactersSheetID = config.LostOmens.Characters; //sheet "characters"
+const LOPlayersSheetID = config.LostOmens.Players; //sheet "players"
+const LOMastersSheetID = config.LostOmens.Masters; //sheet "masters"
+const LOInventorySheetID = config.LostOmens.Inventory; //sheet "inventory"
 
 // ----- Additional info -----
 const LOArticleLink = 'https://vk.com/@geekmo-pathfinder-2e-campaign';
@@ -44,10 +45,10 @@ const LOAddItemChange = "&entry.174313451="; // Изменение количе�
 
 // ===== Ouroboros (Starfinder 1 edition) =====
 // ----- Spreadsheet -----
-const SFSpreadSheetID = "1mMETeUIR5AZw63R8AulPkkgtkLu4bztv6tEJ_KsmlEo"; //SF Geekmo Mirror
-const SFCharactersSheetID = 1102629437; //sheet "characters" 
-const SFPlayersSheetID = 1155921541; //sheet "players" 
-const SFMastersSheetID = 256532381; //sheet "masters"
+const SFSpreadSheetID = config.Ouroboros.Mirror; //SF Geekmo Mirror
+const SFCharactersSheetID = config.Ouroboros.Characters; //sheet "characters"
+const SFPlayersSheetID = config.Ouroboros.Players; //sheet "players"
+const SFMastersSheetID = config.Ouroboros.Masters; //sheet "masters"
 
 // ----- Additional info -----
 const SFArticleLink = 'https://vk.com/@geekmo-ouroboros-invitation';
@@ -59,12 +60,12 @@ const SFCreateLink = 'https://docs.google.com/forms/d/e/1FAIpQLSckArbA9xOBAh_VBK
 
 // ===== Silver Marshes (Dungeons and Dragons 5 edition) =====
 // ----- Spreadsheet -----
-const SMSpreadSheetID = "19CwEiAnXosem6qIXmNDsU4x5xV-TZ2dQz6ay5miKciM"; //SM Geekmo Mirror
-const SMBuildsSheetID = 2064380271; //sheet "builds"
-const SMCharactersSheetID = 0; //sheet "characters" 
-const SMPlayersSheetID = 1610912999; //sheet "players" 
-const SMMastersSheetID = 779160079; //sheet "gms"
-const SMInventorySheetID = 1037912553; //sheet "inventory"
+const SMSpreadSheetID = config.SilverMarshes.Mirror; //SM Geekmo Mirror
+const SMBuildsSheetID = config.SilverMarshes.Builds; //sheet "builds"
+const SMCharactersSheetID = config.SilverMarshes.Characters; //sheet "characters"
+const SMPlayersSheetID = config.SilverMarshes.Players; //sheet "players"
+const SMMastersSheetID = config.SilverMarshes.Masters; //sheet "gms"
+const SMInventorySheetID = config.SilverMarshes.Inventory; //sheet "inventory"
 
 // ----- Additional info -----
 const SMArticleLink = 'https://vk.com/@geekmo-dnd-5e-campaign';
