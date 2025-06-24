@@ -2,7 +2,7 @@ import React from 'react';
 import SvgIconProps from '../SvgIconProps.ts';
 import SvgIcon from '../SvgIcon.tsx';
 
-const Icon48Warlock = (props: SvgIconProps) => (
+const Icon48DndWarlock = (props: SvgIconProps) => (
   <SvgIcon width={48} height={48} viewBox="0 0 48 48" strokeWidth="0px" {...props}>
     <g id="Warlock">
       <path d="M23.3,15c-2.9,2.7-10,5.2-13.8,6.4s-.9,1.5-.1,1.8c2.8,1.3,7.1,3.7,8.8,6.6s.5.5.8.5c1,0,3.1.3,4.3,1.6s1.1.4,1.5,0c1.1-1.2,3.2-1.5,4.2-1.6s.7-.2.9-.5c1.7-2.9,6-5.3,8.8-6.6s.7-1.6-.1-1.8c-3.8-1.2-10.9-3.7-13.8-6.4s-1-.4-1.4,0ZM23.4,29.2c-2.4-.3-4.5-2.2-4.8-4.6s.1-2.5.7-3.5c1.1.4,2.4.6,3.9.7l-1,1.9c0,.1,0,.3,0,.4l1.4,2.6c.2.3.6.3.8,0l1.4-2.6c0-.1,0-.3,0-.4l-1-1.9c1.4,0,2.8-.3,3.9-.7.5.8.7,1.7.7,2.7,0,3.2-2.8,5.7-6,5.4Z" />
@@ -25,4 +25,4 @@ const Icon48Warlock = (props: SvgIconProps) => (
   </SvgIcon>
 );
 
-export default Icon48Warlock;
+export default Icon48DndWarlock;
