@@ -16,6 +16,8 @@ import LONoCharsPage from './LONoCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
+import '../../../util/consts.js'
+
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
@@ -29,11 +31,11 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	const [priorities, setPriorities] = useState([]);
 
 	function createPreEnteredLink(playerName, charName, level, link) {
-        var newLink = link + "?usp=pp_url" +
-            "&entry.1223877896=" + `${playerName?.split(" ")?.[0] ?? ''} ${playerName?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim() + 
-            "&entry.1161334128=" + charName + 
-            //"&entry.2096407236=" + "Выборы на повышении" +
-            "&entry.1736501258=" + level;
+        var newLink = link + FormPreEnter +
+            LOLvlupPlayer + `${playerName?.split(" ")?.[0] ?? ''} ${playerName?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim() + 
+            LOLvlupChar + charName + 
+            //LOLvlupChoice  + "Выборы на повышении" +
+            LOLvlupLevel + level;
         return newLink;
     }
 
@@ -41,8 +43,8 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 		setPopout(
 			<CharUpdateAlert
 				charName={element.name}
-				formLink={createPreEnteredLink(element.player, element.name, parseInt(element.lvl, 10) + 1,'https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform')}
-				navLink='/char/lost_omens'
+				formLink={createPreEnteredLink(element.player, element.name, parseInt(element.lvl, 10) + 1, LOLvlupLink)}
+				navLink={LOCharacter}
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -56,7 +58,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			params.set('CharName', element.name);
 			setParams(params);
 			//console.log(params);
-			routeNavigator.push('/char/lost_omens', { keepSearchParams: true });
+			routeNavigator.push(LOCharacter, { keepSearchParams: true });
 		}
 	}
 
@@ -128,7 +130,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 										<Spacing size={4} />
 										<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
 											<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral'/>
-											<Button stretched appearance="negative" size="l" onClick={() => {window.open("https://unidraw.io/app/board/f5649aff5774fb5628f5", "_blank")}}>Доска Авроры</Button>
+											<Button stretched appearance="negative" size="l" onClick={() => {window.open(LOBulletinLink, "_blank")}}>Доска Авроры</Button>
 										</Div>
 									</Group>
 								}

@@ -1,10 +1,11 @@
 import QuerySettings from '../../../util/QuerySettings';
+import '../../../util/consts.js'
 
-const sheetId = "1fwY9Ea8oQwEs5d7hIThsLf0FFOEX_g9EM7RWJLOS2fQ"; //LO Geekmo Mirror
+const sheetId = LOSpreadSheetID; //LO Geekmo Mirror
 
 const LOCharBuildSettings = new QuerySettings({
 	sheetId,
-	gid: 1439947023, //sheet "builds"
+	gid: LOBuildsSheetID, //sheet "builds"
 	headrow: 1,
 	fields: {
 		name: "name",

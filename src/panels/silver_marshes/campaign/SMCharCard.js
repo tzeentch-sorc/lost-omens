@@ -1,11 +1,13 @@
 import { Card, RichCell, Counter } from "@vkontakte/vkui";
 import { Icon28UserOutgoingOutline, Icon24UserOutline } from "@vkontakte/icons";
 
+import '../../../util/consts.js'
+
 import Icon48Warlock from "../../common/custom_icons/Icon48Warlock.tsx";
 
 const SMCharCard = ({element, openAction}) => {
     const iconMap = {
-            "Колдун": <Icon48Warlock color='#008cff'/>,
+            "Колдун": <Icon48Warlock color={FavouriteColor}/>,
             // Add more types and icons as needed
         };
 
@@ -16,7 +18,7 @@ const SMCharCard = ({element, openAction}) => {
                 key={element.name}
                 id={element.name}
                 before={
-                    iconMap[element.type] || <Icon24UserOutline width={48} height={48} color='#008cff' />
+                    iconMap[element.type] || <Icon24UserOutline width={48} height={48} color={FavouriteColor} />
                 }
                 text={element.type + ", " + element.lvl + " ур."}
                 caption={element.race}

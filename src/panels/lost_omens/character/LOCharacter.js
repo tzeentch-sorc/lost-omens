@@ -23,6 +23,8 @@ import './LOCharacter.css'
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 
+import '../../../util/consts.js'
+
 const LOCharacter = () => {
 
 	const routeNavigator = useRouteNavigator();
@@ -259,7 +261,7 @@ const LOCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/lost_omens', { keepSearchParams: true })} />}>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(LOCampaign, { keepSearchParams: true })} />}>
 				{charName}
 			</PanelHeader>
 			<SplitLayout /*popout={popout} */ modal={modal}>

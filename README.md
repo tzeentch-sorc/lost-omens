@@ -28,6 +28,13 @@ Used Toolset:
    More here: ([VK Howto](https://dev.vk.com/ru/mini-apps/software-installation))
 4. Clone this repo
 
+Then you need to rename file `config.example.json` as `config.json` and insert correct access token. (You can make a copy)
+```JSON
+{
+    "VKToken": "insert_your_vk_token_here"
+}
+```
+
 ##### To run
 1. Run `npm start` - to run app locally
 2. Run `vk-tunnel --insecure=0 --http-protocol=https --ws-protocol=wss --host=localhost --port=10888 --timeout=10000` - to connect app to VK, in order to get user info

@@ -12,6 +12,7 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import SFCharInfoSettings from '../export_settings/SFCharInfoSettings.js'
+import '../../../util/consts.js'
 
 const SFCharacter = () => {
 
@@ -55,7 +56,7 @@ const SFCharacter = () => {
 	return (
 
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/campaign/ouroboros', { keepSearchParams: true })} />}>
+			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SFCampaign, { keepSearchParams: true })} />}>
 				{charName}
 			</PanelHeader>
 			<SplitLayout popout={popout}>

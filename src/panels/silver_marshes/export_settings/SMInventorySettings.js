@@ -1,10 +1,11 @@
 import QuerySettings from '../../../util/QuerySettings';
+import '../../../util/consts.js'
 
-const sheetId = "19CwEiAnXosem6qIXmNDsU4x5xV-TZ2dQz6ay5miKciM"; // SM Geekmo Mirror
+const sheetId = SMSpreadSheetID; // SM Geekmo Mirror
 
 const SMInventorySettings = new QuerySettings({
 	sheetId,
-	gid: 1037912553, //sheet "inventory"
+	gid: SMInventorySheetID, //sheet "inventory"
 	headrow: 1,
 	fields: {
 		name: "Предмет",

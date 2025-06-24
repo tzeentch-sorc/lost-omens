@@ -16,6 +16,7 @@ import bridge from '@vkontakte/vk-bridge';
 import MastersGroup from '../../common/MastersGroup';
 import ArticleBlock from '../../common/ArticleBlock';
 import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
+import '../../../util/consts.js'
 
 
 const LONoCharsPage = ({ campaignName, user, }) => {
@@ -35,7 +36,7 @@ const LONoCharsPage = ({ campaignName, user, }) => {
                         user_ids: userIds,
                         v: '5.131',
                         fields: 'screen_name, photo_200',
-                        access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
+                        access_token: VKToken
                     }
                 }).then(resp => { return resp.response });
 
@@ -59,7 +60,7 @@ const LONoCharsPage = ({ campaignName, user, }) => {
                             <SplitCol>
                                 <Group mode="plain">
                                     <ArticleBlock
-                                        articleLink='https://vk.com/@geekmo-pathfinder-2e-campaign'
+                                        articleLink={LOArticleLink}
                                         caption='Добро пожаловать в «Утраченные Пророчества»!'
                                         description='Введение в мир Голариона 2й редакции'
                                         image='/images/lo_banner_article.jpg'                                    />
