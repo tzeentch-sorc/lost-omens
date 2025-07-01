@@ -17,6 +17,7 @@ import SFCharCard from './SFCharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
 
 import {SFCharacter, SFLvlupLink } from '../../../util/consts.js'
+import { getVkUserUrl } from '../../../util/utilFunc.js';
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
@@ -59,8 +60,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
-			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)
-		   });
+			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser)});
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,

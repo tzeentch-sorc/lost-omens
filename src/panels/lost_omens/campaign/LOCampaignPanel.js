@@ -16,6 +16,8 @@ import LONoCharsPage from './LONoCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
+import { getVkUserUrl } from '../../../util/utilFunc.js';
+
 import {FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice, LOLvlupLevel, LOCharacter, LOBulletinLink} from '../../../util/consts.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
@@ -80,7 +82,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			//console.log(prioData);
 
 			const data = prioData.filter(elem => {
-				return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)
+				return getVkUserUrl(elem, fetchedUser)
 			});
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
