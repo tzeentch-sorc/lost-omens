@@ -3,7 +3,7 @@ import {
 	Panel, SimpleCell,
 	Header, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, CardGrid, Card, Div, SplitCol, SplitLayout,
-	HorizontalCell, SimpleGrid
+	HorizontalCell, SimpleGrid, Text
 } from '@vkontakte/vkui';
 import {
 	Icon56Stars3Outline, Icon28TouchIdOutline, Icon36CoinsStacks3Outline,
@@ -99,13 +99,17 @@ const SFCharacter = () => {
 								<Card key="desc">
 									<Header mode="primary">Описание персонажа</Header>
 									<Div>
-										{desc}
+									{desc.split('\n').map((line, index) => (
+      									<Text key={index}>{line}</Text>
+    								))}
 									</Div>
 								</Card>
 								<Card key="hist">
 									<Header mode="primary">История</Header>
 									<Div>
-										{hist}
+									{hist.split('\n').map((line, index) => (
+										<Text key={index}>{line}</Text>
+    								))}
 									</Div>
 								</Card>
 							</CardGrid>

@@ -19,6 +19,8 @@ import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
 import SMPriorities from './SMPriorities.js';
 
 import {SMCharacter} from '../../../util/consts.js';
+import { getVkUserUrl } from '../../../util/utilFunc.js';
+
 
 const SMCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -68,8 +70,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 				lvl: elem.lvl
 			})).sort((a, b) => b.prio - a.prio));
 			//console.log(prioData);
-			const data = prioData.filter(elem => { return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id)   
-				});
+			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,

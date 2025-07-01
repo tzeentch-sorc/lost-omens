@@ -1,22 +1,31 @@
 import axios from 'axios';
+import Papa from 'papaparse';
 
 function idOf(i) {
     let res = (i >= 26 ? idOf(Math.floor(i / 26) - 1) : "") + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i % 26]
     //console.log("idof", i, res)
     return res;
 }
-function parseSimpleCsv(csv) {
+function parseSimpleCsv(csvString) {
     //console.log(csv);
-    return csv.split("\n").map(line => line.slice(1, line.length - 1).split("\",\""));
+
+    const result = Papa.parse(csvString, {
+        header: false,           
+        skipEmptyLines: true,    
+        newline: '',             
+        dynamicTyping: false     
+    });
+    console.log(result)
+    return result.data;
 }
 
-async function requestCsv (sheetId, request) {
-	let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${request.gid}&range=${request.range}&tqx=out:csv`;
-	if ("query" in request) {
-		url += `&tq=${encodeURIComponent(request.query)}`;
-	}
-	const f = await axios.get(url);
-    //console.log(url)
+async function requestCsv(sheetId, request) {
+    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${request.gid}&range=${request.range}&tqx=out:csv`;
+    if ("query" in request) {
+        url += `&tq=${encodeURIComponent(request.query)}`;
+    }
+    const f = await axios.get(url);
+    console.log(url)
     return f.data;
 }
 
