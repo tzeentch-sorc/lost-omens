@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Div, ModalRoot, InfoRow, ModalPage, ModalPageHeader,
-    Button, SimpleCell, PanelHeaderClose
+    Button, SimpleCell
 } from '@vkontakte/vkui';
 
 const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
@@ -30,7 +30,7 @@ const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
                 height={'70%'}
                 hideCloseButton={false}
                 header={
-                    <ModalPageHeader after={<PanelHeaderClose onClick={onClose} />} >
+                    <ModalPageHeader>
                         Список приоритетов
                     </ModalPageHeader>
                 }
