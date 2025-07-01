@@ -4,6 +4,8 @@ import {
     InfoRow, Accordion
 } from '@vkontakte/vkui';
 
+import { renderTextWithActions } from '../../common/RenderTextWithActions.js';
+
 
 
 const LOSpells = ({ spellist }) => {
@@ -73,7 +75,7 @@ const LOSpells = ({ spellist }) => {
     function createSpellRow(element) {
         return (
             <SimpleCell multiline key={element}>
-                <InfoRow>{element}</InfoRow>
+                <InfoRow>{renderTextWithActions(element)}</InfoRow>
             </SimpleCell>
         );
     }

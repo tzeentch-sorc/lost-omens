@@ -4,7 +4,8 @@ import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/AddItem';
 
 import './LOInventory.css'
-import {FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddItemChar, LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold} from '../../../util/consts.js'
+import { FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddItemChar, LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold } from '../../../util/consts.js'
+import { renderTextWithActions } from '../../common/RenderTextWithActions.js';
 
 const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
     // Track both sorted column and direction ('asc' or 'desc')
@@ -35,7 +36,6 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
         }
     };
 
-
     function createInventoryRow(element) {
         if (element.count === 0) return null;
         return (
@@ -43,7 +43,7 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
                 <div
                     className='inventoryCell'
                 >
-                    <div><b>{element.name}</b></div>
+                    <div><b>{renderTextWithActions(element.name)}</b></div>
                     <div style={{ textAlign: 'center' }}>{element.cost}</div>
                     <div style={{ textAlign: 'center' }}>{element.count}</div>
                 </div>
@@ -80,13 +80,13 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
     };
     function createPreEnteredLink(playerName, charName, link) {
         var newLink = link + FormPreEnter +
-            LOAddItemPlayer + playerName + 
+            LOAddItemPlayer + playerName +
             LOAddItemChar + charName;// + 
-            //LOAddItemOnParty + "Полученные предметы (на партии)" +
-            //LOAddItemBought + "Купленные предметы (вне партии)" +
-            //LOAddItemSold + "Проданные предметы (вне партии)" +
-            //LOAddItemService + "Купленные иные услуги" +
-            //LOAddItemChange + "Изменение количества монет";
+        //LOAddItemOnParty + "Полученные предметы (на партии)" +
+        //LOAddItemBought + "Купленные предметы (вне партии)" +
+        //LOAddItemSold + "Проданные предметы (вне партии)" +
+        //LOAddItemService + "Купленные иные услуги" +
+        //LOAddItemChange + "Изменение количества монет";
         return newLink;
     };
 
@@ -97,7 +97,7 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
             role="tabpanel"
             mode="plain"
         >
-            <AddItem link={createPreEnteredLink(playerName, charName, LOAddItemLink)}/>
+            <AddItem link={createPreEnteredLink(playerName, charName, LOAddItemLink)} />
             {/* Headers */}
             <div
                 className='inventoryCellHeaderGroup'
