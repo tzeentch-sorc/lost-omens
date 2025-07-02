@@ -20,13 +20,13 @@ const iconMap = {
 };
 
 export function renderTextWithActions(text) {
-    console.log('renderTextWithActions', text);
+    //console.log('renderTextWithActions', text);
     if (!text) return null; // or return '', depending on your needs
 
     // Regex to match the full symbol+variation selector sequence
     const regex = /(♠️|♠|♣️|♣|♥️|♥|♦️|♦|★️|★)/g;
     const parts = text.split(regex);
-    console.log('renderTextWithActions parts', parts);
+    //console.log('renderTextWithActions parts', parts);
     return parts.map((part, idx) => {
         const Icon = iconMap[part];
         if (Icon) {
