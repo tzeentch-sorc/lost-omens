@@ -4,3 +4,4 @@ build/
 node_modules/
 build.zip
 config.json
+npm-debug.log

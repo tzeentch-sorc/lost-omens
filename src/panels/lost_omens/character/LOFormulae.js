@@ -3,12 +3,13 @@ import {
     SimpleCell, InfoRow, Group
 } from '@vkontakte/vkui';
 
+import { renderTextWithActions } from '../../common/RenderTextWithActions.js';
 
 const LOFormulae = ({ formulae }) => {
     function createFormulaeRow(element) {
         return (
             <SimpleCell multiline key={element}>
-                <InfoRow>{element}</InfoRow>
+                <InfoRow>{renderTextWithActions(element)}</InfoRow>
             </SimpleCell>
         );
     }
