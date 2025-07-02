@@ -12,14 +12,16 @@ const LOInventorySettings = new QuerySettings({
 		cost: "Цена",
 		count: "Шт.",
 		owner: "Владелец",
+		invest: "Can Invest?",
+		type: "Категория"
 	},
 	query: {
-		colByField: { name: 0, cost: 1, count: 2, owner: 3 },
-		fieldByCol: { 0: "name", 1: "cost", 2: "count", 3: "owner" },
-		colIDs: [ 0, 1, 2, 3 ],
-		queryAll: "select A, B, C, D",
+		colByField: { name: 0, cost: 1, count: 2, owner: 3, invest: 4, type: 5 },
+		fieldByCol: { 0: "name", 1: "cost", 2: "count", 3: "owner", 4: "invest", 5: "type" },
+		colIDs: [ 0, 1, 2, 3, 4, 5 ],
+		queryAll: "select A, B, C, D, E, F",
 	},
-	range: { min: 0, max: 3, str: "A2:D" },
+	range: { min: 0, max: 3, str: "A2:F" },
 });
 
 export default LOInventorySettings;
