@@ -64,13 +64,22 @@ const LOCharacter = () => {
 	const [easterEgg, setEasterEgg] = useState(0);
 
 	function hasSpells() {
-		return (spell_0[0] != "" || spell_1[0] != "" || spell_2[0] != "" ||
-			spell_3[0] != "" || spell_4[0] != "" || spell_5[0] != "" || spell_6[0] != "" ||
-			spell_7[0] != "" || spell_8[0] != "" | spell_9[0] != "" || spell_10[0] != ""
-		);
+		return (
+        Array.isArray(spell_0) && spell_0[0] !== "" ||
+        Array.isArray(spell_1) && spell_1[0] !== "" ||
+        Array.isArray(spell_2) && spell_2[0] !== "" ||
+        Array.isArray(spell_3) && spell_3[0] !== "" ||
+        Array.isArray(spell_4) && spell_4[0] !== "" ||
+        Array.isArray(spell_5) && spell_5[0] !== "" ||
+        Array.isArray(spell_6) && spell_6[0] !== "" ||
+        Array.isArray(spell_7) && spell_7[0] !== "" ||
+        Array.isArray(spell_8) && spell_8[0] !== "" ||
+        Array.isArray(spell_9) && spell_9[0] !== "" ||
+        Array.isArray(spell_10) && spell_10[0] !== ""
+    );
 	}
 	function hasFormulae() {
-		return (formulae[0] != "");
+		return ( Array.isArray(formulae) && formulae[0] != "");
 	}
 	function hasInventory() {
 		return (inventory.length > 0);
