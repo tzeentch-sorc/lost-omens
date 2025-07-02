@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Cell, Group, List, Separator } from '@vkontakte/vkui';
+import { Cell, Group, List, Separator, Accordion } from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/AddItem';
 
@@ -98,23 +98,150 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
             mode="plain"
         >
             <AddItem link={createPreEnteredLink(playerName, charName, LOAddItemLink)} />
-            {/* Headers */}
-            <div
-                className='inventoryCellHeaderGroup'
-            >
-                {renderHeaderCell('Тип', 'name')}
-                {renderHeaderCell('Цена', 'cost')}
-                {renderHeaderCell('Кол-во', 'count')}
-            </div>
+            <Accordion open>
+                <Accordion.Summary iconPosition="before">Инвестируемые предметы</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
 
-            <List>
-                {inventory && sortedData.map(createInventoryRow)}
-            </List>
-
-
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
             <Separator />
+            <Accordion>
+                <Accordion.Summary iconPosition="before">Свитки</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
 
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
+            <Separator />
+            <Accordion>
+                <Accordion.Summary iconPosition="before">Талисманы</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
 
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
+            <Separator />
+            <Accordion>
+                <Accordion.Summary iconPosition="before">Эликсиры и зелья</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
+
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
+            <Separator />
+            <Accordion>
+                <Accordion.Summary iconPosition="before">Прочие расходники</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
+
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
+            <Separator />
+            <Accordion>
+                <Accordion.Summary iconPosition="before">Книги</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
+
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
+            <Separator />
+            <Accordion>
+                <Accordion.Summary iconPosition="before">Мелочи</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
+
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
+            <Separator />
+            <Accordion>
+                <Accordion.Summary iconPosition="before">Предметы</Accordion.Summary>
+                <Accordion.Content>
+                    {/* Headers */}
+                    <div
+                        className='inventoryCellHeaderGroup'
+                    >
+                        {renderHeaderCell('Предмет', 'name')}
+                        {renderHeaderCell('Цена', 'cost')}
+                        {renderHeaderCell('Кол-во', 'count')}
+                    </div>
+
+                    <List>
+                        {inventory && sortedData.map(createInventoryRow)}
+                    </List>
+                </Accordion.Content>
+            </Accordion>
+            <Separator />
             <div
                 className='inventoryCellFooter'
             >
