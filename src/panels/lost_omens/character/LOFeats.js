@@ -4,7 +4,7 @@ import {
     InfoRow
 } from '@vkontakte/vkui';
 
-
+import { renderTextWithActions } from '../../common/RenderTextWithActions.js';
 
 const LOFeats = ({ featlist }) => {
 
@@ -43,7 +43,7 @@ const LOFeats = ({ featlist }) => {
         var description ="Уровень "+lvl;
         return (
             <SimpleCell multiline key={element}>
-                <InfoRow header={description}>{name}</InfoRow>
+                <InfoRow header={description}>{renderTextWithActions(name)}</InfoRow>
             </SimpleCell>
         );
     }
