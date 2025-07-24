@@ -37,6 +37,14 @@
         "Players": 0,
         "Masters": 0,
         "Inventory": 0
+    },
+    "VouxUmbra":{
+        "Mirror": "insert_your_mirror_id_here",
+        "Builds": 0,
+        "Characters": 0,
+        "Players": 0,
+        "Masters": 0,
+        "Inventory": 0
     }
 
 }

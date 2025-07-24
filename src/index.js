@@ -51,6 +51,11 @@ const router = createHashRouter([
     path: '/campaign/blue_waters',
     panel: 'campaign',
     view: 'blue_waters',
+  },
+  {
+    path: '/campaign/voux_umbra',
+    panel: 'campaign',
+    view: 'voux_umbra',
   }
 ]);
 

@@ -16,6 +16,7 @@ import SFCharacter from './panels/ouroboros/character/SFCharacter.js';
 import SMCampaignPanel from './panels/silver_marshes/campaign/SMCampaignPanel.js';
 import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
 import BWCampaignPanel from './panels/blue_waters/campaign/BWCampaignPanel.js';
+import VUCampaignPanel from './panels/voux_umbra/campaign/VUCampaignPanel.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
@@ -68,6 +69,9 @@ const App = (router) => {
 			</View>
 			<View activePanel={activePanel} nav='blue_waters'>
 				<BWCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+			</View>
+			<View activePanel={activePanel} nav='voux_umbra'>
+				<VUCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 			</View>
 		</Root>
 	);

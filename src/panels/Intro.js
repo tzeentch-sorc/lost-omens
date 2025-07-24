@@ -6,13 +6,14 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 import CampaignCard from "./common/CampaignCard";
 
-import {LOCampaign, SMCampaign, SFCampaign, BWCampaign} from '../util/consts.js';
+import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign} from '../util/consts.js';
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
     SF: "Уроборос (Starfinder)",
     SM: "Серебряный Предел (D&D5e)",
-    BW: "Синие Воды (D&D 2024)"
+    BW: "Синие Воды (D&D 2024)",
+    VU: "Глас Теней (Shadowrun 5e)"
 }
 
 const Intro = ({ fetchedUser }) => {
@@ -74,6 +75,15 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.BW)
                                     setParams(params)
                                     routeNavigator.push(BWCampaign, { keepSearchParams: true })
+                                }} />
+
+                            <CampaignCard
+                                title={CAMPAIGNS.VU}
+                                imageSrc="/images/vu_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.VU)
+                                    setParams(params)
+                                    routeNavigator.push(VUCampaign, { keepSearchParams: true })
                                 }} />
                         </CardGrid>
                     </Group>

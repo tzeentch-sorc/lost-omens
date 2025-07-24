@@ -13,6 +13,7 @@ export const SFCampaign = '/campaign/ouroboros';
 export const SMCharacter = '/char/silver_marshes';
 export const SMCampaign = '/campaign/silver_marshes';
 export const BWCampaign = '/campaign/blue_waters';
+export const VUCampaign = '/campaign/voux_umbra';
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
@@ -81,3 +82,12 @@ export const BWMastersSheetID = config.BlueWaters.Masters; //sheet "gms"
 
 // ----- Additional info -----
 export const BWArticleLink = 'https://vk.com/@geekmo-megakampaniya-dampd-one-v-geekmo-dobro-pozhalovat-v-sinie-vo';
+
+
+// ===== Voux Umbra (Shadowrun 5 edition) =====
+// ----- Spreadsheet -----
+export const VUSpreadSheetID = config.VouxUmbra.Mirror; //VU Geekmo Mirror
+export const VUMastersSheetID = config.VouxUmbra.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const VUArticleLink = 'https://vk.com/@geekmo-shadowrun-campaign';
