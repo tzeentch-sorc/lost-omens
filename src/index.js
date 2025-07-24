@@ -46,6 +46,11 @@ const router = createHashRouter([
     path: '/char/silver_marshes',
     panel: 'char',
     view: 'silver_marshes',
+  },
+  {
+    path: '/campaign/blue_waters',
+    panel: 'campaign',
+    view: 'blue_waters',
   }
 ]);
 

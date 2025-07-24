@@ -12,6 +12,7 @@ export const SFCharacter = '/char/ouroboros';
 export const SFCampaign = '/campaign/ouroboros';
 export const SMCharacter = '/char/silver_marshes';
 export const SMCampaign = '/campaign/silver_marshes';
+export const BWCampaign = '/campaign/blue_waters';
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
@@ -71,3 +72,12 @@ export const SMInventorySheetID = config.SilverMarshes.Inventory; //sheet "inven
 // ----- Additional info -----
 export const SMArticleLink = 'https://vk.com/@geekmo-dnd-5e-campaign';
 export const SMCreateLink = 'https://vk.com/@geekmo-new-character-dnd-5e';
+
+
+// ===== Blue Waters (Dungeons and Dragons 2024) =====
+// ----- Spreadsheet -----
+export const BWSpreadSheetID = config.BlueWaters.Mirror; //BW Geekmo Mirror
+export const BWMastersSheetID = config.BlueWaters.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const BWArticleLink = 'https://vk.com/@geekmo-megakampaniya-dampd-one-v-geekmo-dobro-pozhalovat-v-sinie-vo';
