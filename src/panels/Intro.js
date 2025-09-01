@@ -11,7 +11,7 @@ import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
     SF: "Уроборос (Starfinder)",
-    SM: "Серебряный Предел (D&D5e)",
+    SM: "Серебряный Предел (D&D 5e)",
     HG: "Герои Голариона (PF 1e)",
     BW: "Синие Воды (D&D 2024)",
     VU: "Глас Теней (Shadowrun 5e) 18+",
