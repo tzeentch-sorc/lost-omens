@@ -8,10 +8,15 @@ export const VKToken = config.VKToken;
 // ----- Navigation -----
 export const LOCharacter = '/char/lost_omens';
 export const LOCampaign = '/campaign/lost_omens';
+export const HGCharacter = '/char/golarion_heroes';
+export const HGCampaign = '/campaign/golarion_heroes';
 export const SFCharacter = '/char/ouroboros';
 export const SFCampaign = '/campaign/ouroboros';
 export const SMCharacter = '/char/silver_marshes';
 export const SMCampaign = '/campaign/silver_marshes';
+export const BWCampaign = '/campaign/blue_waters';
+export const VUCampaign = '/campaign/voux_umbra';
+export const RGCampaign = '/campaign/rogues_gallery';
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
@@ -71,3 +76,38 @@ export const SMInventorySheetID = config.SilverMarshes.Inventory; //sheet "inven
 // ----- Additional info -----
 export const SMArticleLink = 'https://vk.com/@geekmo-dnd-5e-campaign';
 export const SMCreateLink = 'https://vk.com/@geekmo-new-character-dnd-5e';
+
+
+// ===== Blue Waters (Dungeons and Dragons 2024) =====
+// ----- Spreadsheet -----
+export const BWSpreadSheetID = config.BlueWaters.Mirror; //BW Geekmo Mirror
+export const BWMastersSheetID = config.BlueWaters.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const BWArticleLink = 'https://vk.com/@geekmo-megakampaniya-dampd-one-v-geekmo-dobro-pozhalovat-v-sinie-vo';
+
+
+// ===== Voux Umbra (Shadowrun 5 edition) =====
+// ----- Spreadsheet -----
+export const VUSpreadSheetID = config.VouxUmbra.Mirror; //VU Geekmo Mirror
+export const VUMastersSheetID = config.VouxUmbra.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const VUArticleLink = 'https://vk.com/@geekmo-shadowrun-campaign';
+
+
+// ===== Rogues Gallery (Shadowrun 5 edition) =====
+// ----- Spreadsheet -----
+export const RGSpreadSheetID = config.RoguesGallery.Mirror; //RG Geekmo Mirror
+export const RGMastersSheetID = config.RoguesGallery.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-2020-v-geekmo-rogues-gallery';
+
+// ===== Golarion Heroes (Pathfinder 1 edition) =====
+// ----- Spreadsheet -----
+export const HGSpreadSheetID = config.GolarionHeroes.Mirror; //HG Geekmo Mirror
+export const HGMastersSheetID = config.GolarionHeroes.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const HGArticleLink = 'https://vk.com/@geekmo-pathfinder-campaign';

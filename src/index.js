@@ -28,6 +28,16 @@ const router = createHashRouter([
     view: 'lost_omens',
   },
   {
+    path: '/campaign/golarion_heroes',
+    panel: 'campaign',
+    view: 'golarion_heroes',
+  },
+  {
+    path: '/char/golarion_heroes',
+    panel: 'char',
+    view: 'golarion_heroes',
+  },
+  {
     path: '/campaign/ouroboros',
     panel: 'campaign',
     view: 'ouroboros',
@@ -46,6 +56,22 @@ const router = createHashRouter([
     path: '/char/silver_marshes',
     panel: 'char',
     view: 'silver_marshes',
+  },
+  {
+    path: '/campaign/blue_waters',
+    panel: 'campaign',
+    view: 'blue_waters',
+  },
+  {
+    path: '/campaign/voux_umbra',
+    panel: 'campaign',
+    view: 'voux_umbra',
+  }
+  ,
+  {
+    path: '/campaign/rogues_gallery',
+    panel: 'campaign',
+    view: 'rogues_gallery',
   }
 ]);
 

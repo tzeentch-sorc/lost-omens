@@ -6,12 +6,16 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 import CampaignCard from "./common/CampaignCard";
 
-import {LOCampaign, SMCampaign, SFCampaign} from '../util/consts.js';
+import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign} from '../util/consts.js';
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
     SF: "Уроборос (Starfinder)",
-    SM: "Серебряный Предел (D&D5e)"
+    SM: "Серебряный Предел (D&D 5e)",
+    HG: "Герои Голариона (PF 1e)",
+    BW: "Синие Воды (D&D 2024)",
+    VU: "Глас Теней (Shadowrun 5e) 18+",
+    RG: "Rogues Gallery (Cyberpunk 2020) 18+"
 }
 
 const Intro = ({ fetchedUser }) => {
@@ -33,7 +37,7 @@ const Intro = ({ fetchedUser }) => {
                     </Group>
                     <Group mode="card">
                         <Header size="large" mode="primary">
-                            Мегакампании в Geekmo
+                            Мегакампании в GEEKMO
                         </Header>
 
                         <Separator className="introSeparator"/>
@@ -46,6 +50,15 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.LOST_OMENS)
                                     setParams(params)
                                     routeNavigator.push(LOCampaign, { keepSearchParams: true })
+                                }} />
+                            
+                            <CampaignCard
+                                title={CAMPAIGNS.HG}
+                                imageSrc="/images/hg_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.HG)
+                                    setParams(params)
+                                    routeNavigator.push(HGCampaign, { keepSearchParams: true })
                                 }} />
                             
                             <CampaignCard
@@ -64,6 +77,32 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.SM)
                                     setParams(params)
                                     routeNavigator.push(SMCampaign, { keepSearchParams: true })
+                                }} />
+
+                            <CampaignCard
+                                title={CAMPAIGNS.BW}
+                                imageSrc="/images/bw_banner.png"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.BW)
+                                    setParams(params)
+                                    routeNavigator.push(BWCampaign, { keepSearchParams: true })
+                                }} />
+
+                            <CampaignCard
+                                title={CAMPAIGNS.VU}
+                                imageSrc="/images/vu_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.VU)
+                                    setParams(params)
+                                    routeNavigator.push(VUCampaign, { keepSearchParams: true })
+                                }} />
+                            <CampaignCard
+                                title={CAMPAIGNS.RG}
+                                imageSrc="/images/rg_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.RG)
+                                    setParams(params)
+                                    routeNavigator.push(RGCampaign, { keepSearchParams: true })
                                 }} />
                         </CardGrid>
                     </Group>

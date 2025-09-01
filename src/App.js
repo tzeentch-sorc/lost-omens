@@ -11,10 +11,15 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Intro from './panels/Intro.js';
 import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
 import LOCharacter from './panels/lost_omens/character/LOCharacter.js';
+import HGCampaignPanel from './panels/golarion_heroes/campaign/HGCampaignPanel.js';
+//import HGCharacter from './panels/golarion_heroes/character/HGCharacter.js';
 import SFCampaignPanel from './panels/ouroboros/campaign/SFCampaignPanel.js';
 import SFCharacter from './panels/ouroboros/character/SFCharacter.js';
 import SMCampaignPanel from './panels/silver_marshes/campaign/SMCampaignPanel.js';
 import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
+import BWCampaignPanel from './panels/blue_waters/campaign/BWCampaignPanel.js';
+import VUCampaignPanel from './panels/voux_umbra/campaign/VUCampaignPanel.js';
+import RGCampaignPanel from './panels/rogues_gallery/campaign/RGCampaignPanel.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
@@ -57,6 +62,10 @@ const App = (router) => {
 				<LOCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<LOCharacter id={ROUTES.CHAR}/>
 			</View>
+			<View activePanel={activePanel} nav='golarion_heroes'>
+				<HGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+				{/*<HGCharacter id={ROUTES.CHAR}/>*/}
+			</View>
 			<View activePanel={activePanel} nav='ouroboros'>
 				<SFCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<SFCharacter id={ROUTES.CHAR} />
@@ -64,6 +73,15 @@ const App = (router) => {
 			<View activePanel={activePanel} nav='silver_marshes'>
 				<SMCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<SMCharacter id={ROUTES.CHAR} />
+			</View>
+			<View activePanel={activePanel} nav='blue_waters'>
+				<BWCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+			</View>
+			<View activePanel={activePanel} nav='voux_umbra'>
+				<VUCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+			</View>
+			<View activePanel={activePanel} nav='rogues_gallery'>
+				<RGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 			</View>
 		</Root>
 	);
