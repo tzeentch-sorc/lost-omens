@@ -37,7 +37,7 @@ const Intro = ({ fetchedUser }) => {
                     </Group>
                     <Group mode="card">
                         <Header size="large" mode="primary">
-                            Мегакампании в Geekmo
+                            Мегакампании в GEEKMO
                         </Header>
 
                         <Separator className="introSeparator"/>
