@@ -8,12 +8,15 @@ export const VKToken = config.VKToken;
 // ----- Navigation -----
 export const LOCharacter = '/char/lost_omens';
 export const LOCampaign = '/campaign/lost_omens';
+export const HGCharacter = '/char/golarion_heroes';
+export const HGCampaign = '/campaign/golarion_heroes';
 export const SFCharacter = '/char/ouroboros';
 export const SFCampaign = '/campaign/ouroboros';
 export const SMCharacter = '/char/silver_marshes';
 export const SMCampaign = '/campaign/silver_marshes';
 export const BWCampaign = '/campaign/blue_waters';
 export const VUCampaign = '/campaign/voux_umbra';
+export const RGCampaign = '/campaign/rogues_gallery';
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
@@ -100,3 +103,11 @@ export const RGMastersSheetID = config.RoguesGallery.Masters; //sheet "gms"
 
 // ----- Additional info -----
 export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-2020-v-geekmo-rogues-gallery';
+
+// ===== Golarion Heroes (Pathfinder 1 edition) =====
+// ----- Spreadsheet -----
+export const HGSpreadSheetID = config.GolarionHeroes.Mirror; //HG Geekmo Mirror
+export const HGMastersSheetID = config.GolarionHeroes.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const HGArticleLink = 'https://vk.com/@geekmo-pathfinder-campaign';

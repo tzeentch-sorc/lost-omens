@@ -7,14 +7,15 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import '../../common/css/CampaignPanel.css'
-import HGInfoCard from './HGInfoCard.js';
-import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
-import HGCharCard from './HGCharCard.js';
+import './HGCampaignPanel.css'
+//import HGInfoCard from './HGInfoCard.js';
+import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+//import HGCharCard from './HGCharCard.js';
 import HGNoCharsPage from './HGNoCharsPage.js';
-import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
-import HGPriorities from './HGPriorities.js';
-import HGCharUpdateAlert from './HGCharUpdateAlert.js';
+//import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
+//import HGPriorities from './HGPriorities.js';
+//import HGCharUpdateAlert from './HGCharUpdateAlert.js';
+import { getVkUserUrl } from '../../../util/utilFunc.js';
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -28,6 +29,7 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
 
+	/*
 	const openAction = (element) => {
 		setPopout(
 			<HGCharUpdateAlert
@@ -54,8 +56,9 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 			<HGCharCard element={element} key={element.name + "_hg_card"} openAction={() => { openAlert(element) }} />
 		);
 	}
+	*/
 
-	useEffect(() => {
+	/*useEffect(() => {
 		async function fetchData() {
 			const prioData = await HGPlayerInfoSettings.getQueryAll();
 			setPriorities(prioData.map(elem => ({
@@ -90,14 +93,14 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
-	}, []);
+	}, []);*/
 
-	if (characters.length < 1 && prio == -2) {
+	//if (characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
 			<HGNoCharsPage user={fetchedUser} campaignName={campaignName} />
-		)
-	} else if (characters.length < 1 && prio == -1) {
+		);
+	/*} else if (characters.length < 1 && prio == -1) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
@@ -137,7 +140,7 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 				}
 			</Panel>
 		)
-	}
+	}*/
 };
 
 export default HGCampaignPanel;

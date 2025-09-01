@@ -1,6 +1,7 @@
 import QuerySettings from '../../../util/QuerySettings';
+import {HGSpreadSheetID, HGMastersSheetID} from '../../../util/consts.js'
 
-const sheetId = "1FRkKmWu44biVjYP7cZJkG5RkxkwnjaSPVTke3tsZwp0"; // HG Geekmo Mirror
+const sheetId = HGSpreadSheetID; // HG	 Geekmo Mirror
 
 const HGMastersInfoSettings = new QuerySettings({
 	sheetId,

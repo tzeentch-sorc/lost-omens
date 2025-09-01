@@ -17,7 +17,7 @@ import MastersGroup from '../../common/MastersGroup.js';
 import ArticleBlock from '../../common/ArticleBlock.js';
 import RGMastersInfoSettings from '../export_settings/RGMastersInfoSettings.js'
 
-import { VKToken, VUArticleLink } from '../../../util/consts.js'
+import { VKToken, RGArticleLink } from '../../../util/consts.js'
 
 
 const RGNoCharsPage = ({ campaignName, user, }) => {

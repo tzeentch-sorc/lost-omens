@@ -74,6 +74,9 @@ const VUNoCharsPage = ({ campaignName, user, }) => {
                                             <Div>
                                                 Для создания стоит написать одному из мастеров
                                             </Div>
+                                            <Div>
+                                                <b>Строго 18+</b>
+                                            </Div>
                                         </Placeholder>
                                     </Group>
                                 </Group>

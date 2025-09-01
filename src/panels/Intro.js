@@ -6,12 +6,13 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 import CampaignCard from "./common/CampaignCard";
 
-import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign} from '../util/consts.js';
+import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign} from '../util/consts.js';
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
     SF: "Уроборос (Starfinder)",
     SM: "Серебряный Предел (D&D5e)",
+    HG: "Герои Голариона (PF 1e)",
     BW: "Синие Воды (D&D 2024)",
     VU: "Глас Теней (Shadowrun 5e)",
     RG: "Rogues Gallery (Cyberpunk 2020)"
@@ -49,6 +50,15 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.LOST_OMENS)
                                     setParams(params)
                                     routeNavigator.push(LOCampaign, { keepSearchParams: true })
+                                }} />
+                            
+                            <CampaignCard
+                                title={CAMPAIGNS.HG}
+                                imageSrc="/images/hg_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.HG)
+                                    setParams(params)
+                                    routeNavigator.push(HGCampaign, { keepSearchParams: true })
                                 }} />
                             
                             <CampaignCard

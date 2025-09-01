@@ -13,10 +13,11 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import MastersGroup from '../../common/components/MastersGroup.js';
-import ArticleBlock from '../../common/components/ArticleBlock.js';
+import MastersGroup from '../../common/MastersGroup.js';
+import ArticleBlock from '../../common/ArticleBlock.js';
 import HGMastersInfoSettings from '../export_settings/HGMastersInfoSettings.js'
 
+import { VKToken, HGArticleLink } from '../../../util/consts.js'
 
 const HGNoCharsPage = ({ campaignName, user, }) => {
 
@@ -27,7 +28,9 @@ const HGNoCharsPage = ({ campaignName, user, }) => {
     useEffect(() => {
         async function fetchData() {
             const masterData = await HGMastersInfoSettings.getQueryAll();
-			const userIds = masterData.map(elem => elem.id).join(', ');
+            const userIds = masterData.map(elem => elem.id).join(', ');
+            //console.log(masterData);
+            //console.log(userIds);
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',
@@ -35,7 +38,7 @@ const HGNoCharsPage = ({ campaignName, user, }) => {
                         user_ids: userIds,
                         v: '5.131',
                         fields: 'screen_name, photo_200',
-                        access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
+                        access_token: VKToken
                     }
                 }).then(resp => { return resp.response });
 
@@ -53,13 +56,13 @@ const HGNoCharsPage = ({ campaignName, user, }) => {
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
             {
                 user && masters &&
-                <Group mode='plain'>
+                <Group mode="plain">
                     <SplitLayout popout={popout}>
                         {isDisplayed &&
                             <SplitCol>
                                 <Group mode="plain">
                                     <ArticleBlock
-                                        articleLink='https://vk.com/@geekmo-pathfinder-campaign'
+                                        articleLink={HGArticleLink}
                                         caption='Добро пожаловать к «Героям Голариона»!'
                                         description='Введение в мир Голариона 1й редакции'
                                         image='/images/hg_banner_article.png'                                    
