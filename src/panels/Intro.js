@@ -14,7 +14,7 @@ const CAMPAIGNS = {
     SM: "Серебряный Предел (D&D5e)",
     HG: "Герои Голариона (PF 1e)",
     BW: "Синие Воды (D&D 2024)",
-    VU: "Глас Теней (Shadowrun 5e)",
+    VU: "Глас Теней (Shadowrun 5e) 18+",
     RG: "Rogues Gallery (Cyberpunk 2020)"
 }
 
