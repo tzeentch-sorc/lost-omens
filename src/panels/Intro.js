@@ -15,7 +15,7 @@ const CAMPAIGNS = {
     HG: "Герои Голариона (PF 1e)",
     BW: "Синие Воды (D&D 2024)",
     VU: "Глас Теней (Shadowrun 5e) 18+",
-    RG: "Rogues Gallery (Cyberpunk 2020)"
+    RG: "Rogues Gallery (Cyberpunk 2020) 18+"
 }
 
 const Intro = ({ fetchedUser }) => {
