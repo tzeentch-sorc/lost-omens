@@ -91,3 +91,12 @@ export const VUMastersSheetID = config.VouxUmbra.Masters; //sheet "gms"
 
 // ----- Additional info -----
 export const VUArticleLink = 'https://vk.com/@geekmo-shadowrun-campaign';
+
+
+// ===== Rogues Gallery (Shadowrun 5 edition) =====
+// ----- Spreadsheet -----
+export const RGSpreadSheetID = config.RoguesGallery.Mirror; //RG Geekmo Mirror
+export const RGMastersSheetID = config.RoguesGallery.Masters; //sheet "gms"
+
+// ----- Additional info -----
+export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-2020-v-geekmo-rogues-gallery';

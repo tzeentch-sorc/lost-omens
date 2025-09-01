@@ -57,6 +57,12 @@ const router = createHashRouter([
     panel: 'campaign',
     view: 'voux_umbra',
   }
+  ,
+  {
+    path: '/campaign/rogues_gallery',
+    panel: 'campaign',
+    view: 'rogues_gallery',
+  }
 ]);
 
 function ThemedApp() {

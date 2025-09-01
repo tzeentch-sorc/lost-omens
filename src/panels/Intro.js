@@ -13,7 +13,8 @@ const CAMPAIGNS = {
     SF: "Уроборос (Starfinder)",
     SM: "Серебряный Предел (D&D5e)",
     BW: "Синие Воды (D&D 2024)",
-    VU: "Глас Теней (Shadowrun 5e)"
+    VU: "Глас Теней (Shadowrun 5e)",
+    RG: "Rogues Gallery (Cyberpunk 2020)"
 }
 
 const Intro = ({ fetchedUser }) => {
@@ -84,6 +85,14 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.VU)
                                     setParams(params)
                                     routeNavigator.push(VUCampaign, { keepSearchParams: true })
+                                }} />
+                            <CampaignCard
+                                title={CAMPAIGNS.RG}
+                                imageSrc="/images/rg_banner.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.RG)
+                                    setParams(params)
+                                    routeNavigator.push(RGCampaign, { keepSearchParams: true })
                                 }} />
                         </CardGrid>
                     </Group>

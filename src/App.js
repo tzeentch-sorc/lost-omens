@@ -17,6 +17,7 @@ import SMCampaignPanel from './panels/silver_marshes/campaign/SMCampaignPanel.js
 import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
 import BWCampaignPanel from './panels/blue_waters/campaign/BWCampaignPanel.js';
 import VUCampaignPanel from './panels/voux_umbra/campaign/VUCampaignPanel.js';
+import RGCampaignPanel from './panels/rogues_gallery/campaign/RGCampaignPanel.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
@@ -72,6 +73,9 @@ const App = (router) => {
 			</View>
 			<View activePanel={activePanel} nav='voux_umbra'>
 				<VUCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+			</View>
+			<View activePanel={activePanel} nav='rogues_gallery'>
+				<RGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 			</View>
 		</Root>
 	);
