@@ -8,7 +8,7 @@ import {
 } from '@vkontakte/vkui';
 
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
-import './SFCampaignPanel.css'
+import '../../common/css/CampaignPanel.css';
 import SFCharacterInfoCard from './SFInfoCard.js';
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
 import SFNoCharsPage from './SFNoCharsPage.js';

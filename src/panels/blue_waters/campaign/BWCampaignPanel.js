@@ -9,7 +9,7 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import './BWCampaignPanel.css'
+import '../../common/css/CampaignPanel.css';
 //import SMInfoCard from './SMInfoCard.js';
 //import SMCharUpdateAlert from './SMCharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';

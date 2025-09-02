@@ -9,7 +9,7 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import './RGCampaignPanel.css'
+import '../../common/css/CampaignPanel.css';
 //import RGInfoCard from './RGInfoCard.js';
 //import RGCharUpdateAlert from './RGCharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';

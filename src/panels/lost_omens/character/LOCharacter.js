@@ -19,7 +19,8 @@ import LOInventorySettings from '../export_settings/LOInventorySettings.js'
 import LOCharBuildSettings from '../export_settings/LOCharBuildSettings.js'
 import LOCharInfoSettings from '../export_settings/LOCharInfoSettings.js'
 
-import './LOCharacter.css'
+import '../../common/css/Character.css';
+
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 
