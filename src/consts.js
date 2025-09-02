@@ -114,6 +114,9 @@ export const RGMastersSheetID = config.RoguesGallery.Masters; //sheet "gms"
 
 // ----- Additional info -----
 export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-2020-v-geekmo-rogues-gallery';
+export const RGArticleImage = '/images/rg_banner.jpg';
+export const RGNoCharsCaption = 'Добро пожаловать в «Rogues Gallery»!';
+export const RGNoCharsDescription = 'Знакомство с мегакампанией';
 
 // ===== Golarion Heroes (Pathfinder 1 edition) =====
 // ----- Spreadsheet -----
