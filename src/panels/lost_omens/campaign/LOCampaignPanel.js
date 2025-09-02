@@ -16,9 +16,10 @@ import LONoCharsPage from './LONoCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
-import {FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice, LOLvlupLevel, LOCharacter, LOBulletinLink} from '../../../consts.js'
+import {FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice, 
+	LOLvlupLevel, LOCharacter, LOBulletinLink} from '../../../consts.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();

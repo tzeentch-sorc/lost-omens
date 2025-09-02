@@ -1,4 +1,4 @@
-import config from '../config.json';
+import config from './config.json';
 
 // ===== Common =====
 export const FormPreEnter = "?usp=pp_url";

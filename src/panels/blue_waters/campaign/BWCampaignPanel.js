@@ -12,7 +12,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import '../../common/css/CampaignPanel.css';
 //import BWInfoCard from './BWInfoCard.js';
 //import BWCharUpdateAlert from './BWCharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 //import BWCharCard from './BWCharCard.js';
 import BWNoCharsPage from './BWNoCharsPage.js';
 //import BWPlayerInfoSettings from '../export_settings/BWPlayerInfoSettings.js'

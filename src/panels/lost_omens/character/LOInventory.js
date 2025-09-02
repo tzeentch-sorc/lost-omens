@@ -4,7 +4,8 @@ import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/components/AddItem';
 
 import './LOInventory.css'
-import { FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddItemChar, LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold } from '../../../util/consts.js'
+import { FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddItemChar, 
+    LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold } from '../../../consts.js'
 import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
 
 const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
