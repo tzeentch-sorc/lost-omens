@@ -4,6 +4,8 @@ import config from '../config.json';
 export const FormPreEnter = "?usp=pp_url";
 export const FavouriteColor = '#008cff';
 export const VKToken = config.VKToken;
+export const GoogleAuthPath = 'geekk0.KEY.json';
+export const GoogleAuthScope = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 
 // ----- Navigation -----
 export const LOCharacter = '/char/lost_omens';

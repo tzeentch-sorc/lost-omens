@@ -1,5 +1,12 @@
 import axios from 'axios';
+import { GoogleAuthPath, GoogleAuthScope } from './consts.js';
 import Papa from 'papaparse';
+const { google } = require('googleapis');
+const sheets = google.sheets('v4');
+const auth = new google.auth.GoogleAuth({
+  keyFile: GoogleAuthPath,
+  scopes: [GoogleAuthScope],
+});
 
 function idOf(i) {
     let res = (i >= 26 ? idOf(Math.floor(i / 26) - 1) : "") + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i % 26]
@@ -20,13 +27,20 @@ function parseSimpleCsv(csvString) {
 }
 
 async function requestCsv(sheetId, request) {
-    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?gid=${request.gid}&range=${request.range}&tqx=out:csv`;
-    if ("query" in request) {
-        url += `&tq=${encodeURIComponent(request.query)}`;
+    if (!fs.existsSync(GoogleAuthPath)) {
+        throw new Error('Google Sheets API credentials file not found: ' + GoogleAuthPath);
     }
-    const f = await axios.get(url);
-    console.log(url)
-    return f.data;
+    const client = await auth.getClient();
+    let range = request.range;
+    const res = sheets.spreadsheets.values.get({
+        auth: client,
+        spreadsheetId: sheetId,
+        range: range,
+    });
+    const rows = res.data.values || [];
+    const csvString = rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
+    console.log(csvString)
+    return csvString;
 }
 
 class QuerySettings {

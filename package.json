@@ -27,6 +27,7 @@
         "eruda": "^3.3.0",
         "eruda-code": "^2.2.0",
         "eruda-dom": "^2.0.0",
+        "googleapis": "^159.0.0",
         "latest": "^0.2.0",
         "papaparse": "^5.5.3",
         "prop-types": "^15.8.1",
