@@ -22,7 +22,7 @@ import '../../common/css/Character.css';
 
 import SMFeatPanel from './SMFeatPanel.js';
 
-import { SMCampaign } from '../../../util/consts.js'; 
+import { SMCampaign } from '../../../consts.js'; 
 
 const SMCharacter = () => {
 
