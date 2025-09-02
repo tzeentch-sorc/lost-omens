@@ -13,10 +13,10 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import MastersGroup from '../../common/MastersGroup';
-import ArticleBlock from '../../common/ArticleBlock';
+import MastersGroup from '../../common/components/MastersGroup';
+import ArticleBlock from '../../common/components/ArticleBlock';
 import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
-import {VKToken, LOArticleLink} from '../../../util/consts.js'
+import {VKToken, LOArticleLink} from '../../../consts.js'
 
 
 const LONoCharsPage = ({ campaignName, user, }) => {

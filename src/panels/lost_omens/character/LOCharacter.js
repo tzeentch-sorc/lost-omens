@@ -24,7 +24,7 @@ import '../../common/css/Character.css';
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 
-import {LOCampaign} from '../../../util/consts.js'
+import {LOCampaign} from '../../../consts.js'
 
 const LOCharacter = () => {
 
