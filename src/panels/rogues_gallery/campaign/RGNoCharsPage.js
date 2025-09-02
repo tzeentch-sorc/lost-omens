@@ -13,11 +13,11 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import MastersGroup from '../../common/MastersGroup.js';
-import ArticleBlock from '../../common/ArticleBlock.js';
+import MastersGroup from '../../common/components/MastersGroup.js';
+import ArticleBlock from '../../common/components/ArticleBlock.js';
 import RGMastersInfoSettings from '../export_settings/RGMastersInfoSettings.js'
 
-import { VKToken, RGArticleLink } from '../../../util/consts.js'
+import { VKToken, RGArticleLink } from '../../../consts.js'
 
 
 const RGNoCharsPage = ({ campaignName, user, }) => {

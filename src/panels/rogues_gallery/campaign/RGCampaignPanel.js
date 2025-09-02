@@ -12,14 +12,14 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import '../../common/css/CampaignPanel.css';
 //import RGInfoCard from './RGInfoCard.js';
 //import RGCharUpdateAlert from './RGCharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 //import RGCharCard from './RGCharCard.js';
 import RGNoCharsPage from './RGNoCharsPage.js';
 //import RGPlayerInfoSettings from '../export_settings/RGPlayerInfoSettings.js'
 //import RGPriorities from './RGPriorities.js';
 
 //import {RGCharacter} from '../../../util/consts.js';
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {
