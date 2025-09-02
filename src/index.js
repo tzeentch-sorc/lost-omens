@@ -66,12 +66,16 @@ const router = createHashRouter([
     path: '/campaign/voux_umbra',
     panel: 'campaign',
     view: 'voux_umbra',
-  }
-  ,
+  },
   {
     path: '/campaign/rogues_gallery',
     panel: 'campaign',
     view: 'rogues_gallery',
+  },
+  {
+    path: '/enter',
+    panel: 'enter',
+    view: 'default',
   }
 ]);
 

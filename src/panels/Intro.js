@@ -1,4 +1,4 @@
-import { Div, Group, Panel, PanelHeader, Header, Avatar, Spacing, Separator, CardGrid } from "@vkontakte/vkui";
+import { Div, Group, Panel, PanelHeader, Header, Avatar, Spacing, Separator, CardGrid, Button } from "@vkontakte/vkui";
 import React from "react";
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -6,7 +6,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 import CampaignCard from "./common/CampaignCard";
 
-import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign} from '../util/consts.js';
+import { LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign } from '../util/consts.js';
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
@@ -32,15 +32,28 @@ const Intro = ({ fetchedUser }) => {
                     <Group mode="card">
                         <Div className="Intro">
                             <Header>Привет, {fetchedUser.first_name}!</Header>
-                            <p>Это приложение GEEKMO. <br/>Здесь можно будет посмотреть состояние персонажей во всех наших ролевых мегакампаниях.</p>
+                            <p>Это приложение GEEKMO. <br />Здесь можно будет посмотреть состояние персонажей во всех наших ролевых мегакампаниях.</p>
                         </Div>
+                    </Group>
+                    <Group mode="card">
+                        <Button
+                            size="l"
+                            appearance="positive"
+                            onClick={
+                                () => {
+                                    routeNavigator.push("/enter", { keepSearchParams: true })
+                                }
+                            }
+                        >
+                            Посещение GEEKMO (временно кнопка хаха)
+                        </Button>
                     </Group>
                     <Group mode="card">
                         <Header size="large" mode="primary">
                             Мегакампании в GEEKMO
                         </Header>
 
-                        <Separator className="introSeparator"/>
+                        <Separator className="introSeparator" />
 
                         <CardGrid size="l" padding="true">
                             <CampaignCard
@@ -51,7 +64,7 @@ const Intro = ({ fetchedUser }) => {
                                     setParams(params)
                                     routeNavigator.push(LOCampaign, { keepSearchParams: true })
                                 }} />
-                            
+
                             <CampaignCard
                                 title={CAMPAIGNS.HG}
                                 imageSrc="/images/hg_banner.jpg"
@@ -60,7 +73,7 @@ const Intro = ({ fetchedUser }) => {
                                     setParams(params)
                                     routeNavigator.push(HGCampaign, { keepSearchParams: true })
                                 }} />
-                            
+
                             <CampaignCard
                                 title={CAMPAIGNS.SF}
                                 imageSrc="/images/sf_bannerjpg.jpg"
@@ -69,7 +82,7 @@ const Intro = ({ fetchedUser }) => {
                                     setParams(params)
                                     routeNavigator.push(SFCampaign, { keepSearchParams: true })
                                 }} />
-                            
+
                             <CampaignCard
                                 title={CAMPAIGNS.SM}
                                 imageSrc="/images/sm_bannerjpg.jpg"

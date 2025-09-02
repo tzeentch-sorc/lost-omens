@@ -9,6 +9,7 @@ import { useActiveVkuiLocation } from '@vkontakte/vk-mini-apps-router';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Intro from './panels/Intro.js';
+import Form from './panels/form/Form.js';
 import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
 import LOCharacter from './panels/lost_omens/character/LOCharacter.js';
 import HGCampaignPanel from './panels/golarion_heroes/campaign/HGCampaignPanel.js';
@@ -24,7 +25,8 @@ import RGCampaignPanel from './panels/rogues_gallery/campaign/RGCampaignPanel.js
 const ROUTES = {
 	CAMPAIGN: 'campaign',
 	INTRO: 'intro',
-	CHAR: 'char'
+	CHAR: 'char',
+	FORM: 'enter'
 }
 
 const App = (router) => {
@@ -57,6 +59,7 @@ const App = (router) => {
 		<Root popout={popout} activeView={activeView}>
 			<View activePanel={activePanel} nav='default'>
 				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} />
+				<Form id={ROUTES.FORM} fetchedUser={fetchedUser}/>
 			</View>
 			<View activePanel={activePanel} nav='lost_omens'>
 				<LOCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
