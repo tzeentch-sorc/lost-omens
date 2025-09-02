@@ -24,8 +24,10 @@ import {
 	FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice,
 	LOLvlupLevel, LOCharacter, LOBulletinLink
 } from '../../../consts.js'
-import { LOArticleLink, LOArticleImage, LONoCharsCaption, 
-	LONoCharsDescription, CommonNoCharsBody, VKToken } from '../../../consts.js'
+import {
+	LOArticleLink, LOArticleImage, LONoCharsCaption,
+	LONoCharsDescription, CommonNoCharsBody, VKToken
+} from '../../../consts.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -111,21 +113,21 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			}
 
 			const masterData = await LOMastersInfoSettings.getQueryAll();
-            const userIds = masterData.map(elem => elem.id).join(', ');
-            //console.log(masterData);
-            //console.log(userIds);
-            const users = await bridge
-                .send('VKWebAppCallAPIMethod', {
-                    method: 'users.get',
-                    params: {
-                        user_ids: userIds,
-                        v: '5.131',
-                        fields: 'screen_name, photo_200',
-                        access_token: VKToken
-                    }
-                }).then(resp => { return resp.response });
+			const userIds = masterData.map(elem => elem.id).join(', ');
+			//console.log(masterData);
+			//console.log(userIds);
+			const users = await bridge
+				.send('VKWebAppCallAPIMethod', {
+					method: 'users.get',
+					params: {
+						user_ids: userIds,
+						v: '5.131',
+						fields: 'screen_name, photo_200',
+						access_token: VKToken
+					}
+				}).then(resp => { return resp.response });
 
-            setMasters(users);
+			setMasters(users);
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
@@ -136,11 +138,11 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	if (masters.length >= 1 && characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
-			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
-						ArticleLink={LOArticleLink} articleImage={LOArticleImage} caption={LONoCharsCaption}
-						 description={LONoCharsDescription} body={CommonNoCharsBody} />
+			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters}
+				ArticleLink={LOArticleLink} articleImage={LOArticleImage} caption={LONoCharsCaption}
+				description={LONoCharsDescription} body={CommonNoCharsBody} />
 		)
-	} else if (characters.length < 1 && prio == -1||masters.length < 1) {
+	} else if ((characters.length < 1 && prio == -1) || masters.length < 1) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />

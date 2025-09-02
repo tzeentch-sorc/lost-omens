@@ -118,7 +118,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 					Создать
 				</Button>} />
 		)
-	} else if (characters.length < 1 && characters.length < 1 && prio == -1) {
+	} else if (characters.length < 1 || (characters.length < 1 && prio == -1)) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />

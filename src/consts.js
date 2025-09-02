@@ -108,6 +108,9 @@ export const VUMastersSheetID = config.VouxUmbra.Masters; //sheet "gms"
 
 // ----- Additional info -----
 export const VUArticleLink = 'https://vk.com/@geekmo-shadowrun-campaign';
+export const VUArticleImage = '/images/vu_banner.jpg';
+export const VUNoCharsCaption = 'Добро пожаловать в «Глас Теней»!';
+export const VUNoCharsDescription = 'Знакомство с мегакампанией';
 
 
 // ===== Rogues Gallery (Shadowrun 5 edition) =====
