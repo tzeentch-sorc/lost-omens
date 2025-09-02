@@ -23,7 +23,7 @@ import NoCharsPage from '../../common/components/NOCharsPage.js';
 import BWMastersInfoSettings from '../export_settings/BWMastersInfoSettings.js'
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import { BWArticleLink, BWArticleImage, BWNoCharsCaption, 
-	BWNoCharsDescription, VKToken } from '../../../consts.js'
+	BWNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../consts.js'
 
 
 const BWCampaignPanel = ({ fetchedUser }) => {
@@ -122,7 +122,7 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 		return (
 			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
 			ArticleLink={BWArticleLink} articleImage={BWArticleImage} caption={BWNoCharsCaption}
-			 description={BWNoCharsDescription} />
+			 description={BWNoCharsDescription} body={CommonNoCharsBody} />
 		);
 	} else if (characters.length < 1){//characters.length < 1 && prio == -1) {
 		//while loading

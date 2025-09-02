@@ -12,10 +12,10 @@ import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import MastersGroup from './MastersGroup.js';
 import ArticleBlock from './ArticleBlock.js';
 
-const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, description, masters }) => {
+const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, description, masters, action, body }) => {
 
     const routeNavigator = useRouteNavigator();
-    
+
     return (
         <Panel nav='campaign' key={campaignName}>
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
@@ -33,9 +33,9 @@ const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, d
                                     />
                                     <MastersGroup masters={masters} />
                                     <Group mode="card">
-                                        <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа">
+                                        <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа" action={action}>
                                             <Div>
-                                                Для создания стоит написать одному из мастеров
+                                                {body}
                                             </Div>
                                         </Placeholder>
                                     </Group>

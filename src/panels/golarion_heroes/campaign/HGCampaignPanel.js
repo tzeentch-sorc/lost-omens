@@ -19,7 +19,7 @@ import NoCharsPage from '../../common/components/NOCharsPage.js';
 import HGMastersInfoSettings from '../export_settings/HGMastersInfoSettings.js'
 //import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import { HGArticleLink, HGArticleImage, HGNoCharsCaption, 
-	HGNoCharsDescription, VKToken } from '../../../consts.js'
+	HGNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../consts.js'
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -121,7 +121,7 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 		return (
 			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
 			ArticleLink={HGArticleLink} articleImage={HGArticleImage} caption={HGNoCharsCaption}
-			 description={HGNoCharsDescription} />
+			 description={HGNoCharsDescription} body={CommonNoCharsBody} />
 		);
 	} else if (characters.length < 1){//characters.length < 1 && prio == -1) {
 		//while loading

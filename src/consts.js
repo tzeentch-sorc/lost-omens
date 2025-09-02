@@ -4,6 +4,7 @@ import config from './config.json';
 export const FormPreEnter = "?usp=pp_url";
 export const FavouriteColor = '#008cff';
 export const VKToken = config.VKToken;
+export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';
 
 // ----- Navigation -----
 export const LOCharacter = '/char/lost_omens';
@@ -61,6 +62,10 @@ export const SFMastersSheetID = config.Ouroboros.Masters; //sheet "masters"
 
 // ----- Additional info -----
 export const SFArticleLink = 'https://vk.com/@geekmo-ouroboros-invitation';
+export const SFArticleImage = '/images/sf_bannerjpg.jpg';
+export const SFNoCharsCaption = 'Добро пожаловать на станцию «Уроборос»!';
+export const SFNoCharsDescription = 'Введение в систему и мегакампанию';
+export const SFNoCharsBody = 'Кажется, у тебя еще нет персонажа на станции «Уроборос»!';
 
 // ----- Forms -----
 export const SFLvlupLink = 'https://docs.google.com/forms/d/e/1FAIpQLSesFl9kJ-TmJT4smD3eH1C4l3r3zEPinJJsXsQyFqfZfzYTig/viewform';

@@ -25,7 +25,7 @@ import {
 	LOLvlupLevel, LOCharacter, LOBulletinLink
 } from '../../../consts.js'
 import { LOArticleLink, LOArticleImage, LONoCharsCaption, 
-	LONoCharsDescription, VKToken } from '../../../consts.js'
+	LONoCharsDescription, CommonNoCharsBody, VKToken } from '../../../consts.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -138,7 +138,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 		return (
 			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
 						ArticleLink={LOArticleLink} articleImage={LOArticleImage} caption={LONoCharsCaption}
-						 description={LONoCharsDescription} />
+						 description={LONoCharsDescription} body={CommonNoCharsBody} />
 		)
 	} else if (characters.length < 1 && prio == -1||masters.length < 1) {
 		//while loading
