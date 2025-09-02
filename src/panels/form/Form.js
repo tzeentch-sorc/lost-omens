@@ -1,0 +1,58 @@
+import { Div, Group, Panel, PanelHeader, PanelHeaderBack, List, Cell } from "@vkontakte/vkui";
+import React from "react";
+import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+
+const Form = ({ fetchedUser }) => {
+    const routeNavigator = useRouteNavigator();
+    const [params, setParams] = useSearchParams();
+
+    return (
+        <Panel nav='enter'>
+            <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>GEEKMO Посещение</PanelHeader>
+            {
+                fetchedUser &&
+                <>
+                    <Group mode='card'>
+                        <List>
+                            <Cell multiline>
+                                <b>Для тех, кто не из ИТМО</b>
+                            </Cell>
+                            <Cell multiline>
+                                ❗Регистрироваться на встречи нужно не позднее 12:00 дня мероприятия,
+                                если это будний день и не позднее 15:00 пятницы, если вы записываетесь на выходные. В ином
+                                случае мы не можем гарантировать проход.
+                            </Cell>
+                            <Cell multiline>
+                                ❗Лучше записаться и не прийти, чем прийти и быть незаписанным!
+                            </Cell>
+                            <Cell multiline>
+                                ❗Пожалуйста, вводите корректный номер телефона, который будет у вас с собой. Он может потребоваться
+                                на входе.
+                            </Cell>
+                            <Cell multiline>
+                                <b>Как пройти через охрану?</b>
+                            </Cell>
+                            <Cell multiline>
+                                Обратите внимание, что существует два варианта прохода, выбор из которых осуществляется по различным факторам.
+                                Первый вариант основной - начинайте с него :)
+                            </Cell>
+                            <Cell multiline>
+                                1. Проход напрямую через пост охраны: подходите на проходную и называете свое ФИО (могут попросить паспорт)
+                            </Cell>
+                            <Cell multiline>
+                                2. <i>(Временно недоступен)</i> Проход через терминал по QR-коду. Терминалы стоят на видном месте рядом со входом,
+                                вас интересует пункт "Получить пропуск по приглашению", далее необходимо ввести номер и пройти по
+                                выданному коду через охрану
+                            </Cell>
+                            <Cell multiline>
+                                Увидимся!
+                            </Cell>
+                        </List>
+                    </Group>
+                </>
+            }
+        </Panel >
+    )
+};
+
+export default Form;
