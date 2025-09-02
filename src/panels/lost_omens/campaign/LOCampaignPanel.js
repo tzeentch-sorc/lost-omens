@@ -6,20 +6,26 @@ import {
 	CardGrid, Div, Button, Spacing
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
 import LOInfoCard from './LOInfoCard.js';
 import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import LOCharCard from './LOCharCard.js';
-import LONoCharsPage from './LONoCharsPage.js';
+import NoCharsPage from '../../common/components/NOCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
+import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
-import {FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice, 
-	LOLvlupLevel, LOCharacter, LOBulletinLink} from '../../../consts.js'
+import {
+	FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice,
+	LOLvlupLevel, LOCharacter, LOBulletinLink
+} from '../../../consts.js'
+import { LOArticleLink, LOArticleImage, LONoCharsCaption, 
+	LONoCharsDescription, VKToken } from '../../../consts.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -33,14 +39,16 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
 
+	const [masters, setMasters] = useState([]);
+
 	function createPreEnteredLink(playerName, charName, level, link) {
-        var newLink = link + FormPreEnter +
-            LOLvlupPlayer + `${playerName?.split(" ")?.[0] ?? ''} ${playerName?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim() + 
-            LOLvlupChar + charName + 
-            //LOLvlupChoice  + "Выборы на повышении" +
-            LOLvlupLevel + level;
-        return newLink;
-    }
+		var newLink = link + FormPreEnter +
+			LOLvlupPlayer + `${playerName?.split(" ")?.[0] ?? ''} ${playerName?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim() +
+			LOLvlupChar + charName +
+			//LOLvlupChoice  + "Выборы на повышении" +
+			LOLvlupLevel + level;
+		return newLink;
+	}
 
 	const openAction = (element) => {
 		setPopout(
@@ -102,18 +110,37 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				setPrio(-2);
 			}
 
+			const masterData = await LOMastersInfoSettings.getQueryAll();
+            const userIds = masterData.map(elem => elem.id).join(', ');
+            //console.log(masterData);
+            //console.log(userIds);
+            const users = await bridge
+                .send('VKWebAppCallAPIMethod', {
+                    method: 'users.get',
+                    params: {
+                        user_ids: userIds,
+                        v: '5.131',
+                        fields: 'screen_name, photo_200',
+                        access_token: VKToken
+                    }
+                }).then(resp => { return resp.response });
+
+            setMasters(users);
+
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
 
-	if (characters.length < 1 && prio == -2) {
+	if (masters.length >= 1 && characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
-			<LONoCharsPage user={fetchedUser} campaignName={campaignName} />
+			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
+						ArticleLink={LOArticleLink} articleImage={LOArticleImage} caption={LONoCharsCaption}
+						 description={LONoCharsDescription} />
 		)
-	} else if (characters.length < 1 && prio == -1) {
+	} else if (characters.length < 1 && prio == -1||masters.length < 1) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
@@ -132,8 +159,8 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 										<LOInfoCard date={date} prio={prio} adventure={advName} />
 										<Spacing size={4} />
 										<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-											<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral'/>
-											<Button stretched appearance="negative" size="l" onClick={() => {window.open(LOBulletinLink, "_blank")}}>Доска Авроры</Button>
+											<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
+											<Button stretched appearance="negative" size="l" onClick={() => { window.open(LOBulletinLink, "_blank") }}>Доска Авроры</Button>
 										</Div>
 									</Group>
 								}

@@ -10,10 +10,9 @@ import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
 //import HGInfoCard from './HGInfoCard.js';
-//import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import NoCharsPage from '../../common/components/NOCharsPage.js';
 //import HGCharCard from './HGCharCard.js';
-import HGNoCharsPage from './HGNoCharsPage.js';
 //import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
 //import HGPriorities from './HGPriorities.js';
 //import HGCharUpdateAlert from './HGCharUpdateAlert.js';
@@ -97,8 +96,8 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 			*/
 			const masterData = await HGMastersInfoSettings.getQueryAll();
             const userIds = masterData.map(elem => elem.id).join(', ');
-            console.log(masterData);
-            console.log(userIds);
+            //console.log(masterData);
+            //console.log(userIds);
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',
@@ -117,19 +116,19 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 		fetchData().catch(console.error);
 	}, []);
 
-	//if (characters.length < 1 && prio == -2) {
+	if (masters.length >= 1){//characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
 			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
 			ArticleLink={HGArticleLink} articleImage={HGArticleImage} caption={HGNoCharsCaption}
 			 description={HGNoCharsDescription} />
 		);
-	/*} else if (characters.length < 1 && prio == -1) {
+	} else if (characters.length < 1){//characters.length < 1 && prio == -1) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
 		)
-	} else {
+	}/* else {
 		return (
 			<Panel nav='campaign' key={campaignName}>
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>

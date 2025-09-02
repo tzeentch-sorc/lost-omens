@@ -31,6 +31,9 @@ export const LOInventorySheetID = config.LostOmens.Inventory; //sheet "inventory
 // ----- Additional info -----
 export const LOArticleLink = 'https://vk.com/@geekmo-pathfinder-2e-campaign';
 export const LOBulletinLink = "https://unidraw.io/app/board/f5649aff5774fb5628f5";
+export const LOArticleImage = '/images/lo_banner_article.jpg';
+export const LONoCharsCaption = 'Добро пожаловать в «Утраченные Пророчества»!';
+export const LONoCharsDescription = 'Введение в мир Голариона 2й редакции';
 
 // ----- Forms -----
 export const LOLvlupLink = 'https://docs.google.com/forms/d/e/1FAIpQLSf4rQ2XSS3zMYp8NLPlh1Oj7eqAMCWFbO7iyW6XdY-i-Aa4dA/viewform';
@@ -85,6 +88,9 @@ export const BWMastersSheetID = config.BlueWaters.Masters; //sheet "gms"
 
 // ----- Additional info -----
 export const BWArticleLink = 'https://vk.com/@geekmo-megakampaniya-dampd-one-v-geekmo-dobro-pozhalovat-v-sinie-vo';
+export const BWArticleImage = '/images/bw_banner.png';
+export const BWNoCharsCaption = 'Добро пожаловать в «Синие воды»!';
+export const BWNoCharsDescription = 'Знакомство с мегакампанией';
 
 
 // ===== Voux Umbra (Shadowrun 5 edition) =====

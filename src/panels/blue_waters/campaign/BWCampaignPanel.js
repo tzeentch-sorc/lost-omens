@@ -8,18 +8,22 @@ import {
 
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
 //import BWInfoCard from './BWInfoCard.js';
 //import BWCharUpdateAlert from './BWCharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import NoCharsPage from '../../common/components/NOCharsPage.js';
 //import BWCharCard from './BWCharCard.js';
-import BWNoCharsPage from './BWNoCharsPage.js';
 //import BWPlayerInfoSettings from '../export_settings/BWPlayerInfoSettings.js'
 //import BWPriorities from './BWPriorities.js';
 
 //import {BWCharacter} from '../../../util/consts.js';
+import BWMastersInfoSettings from '../export_settings/BWMastersInfoSettings.js'
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import { BWArticleLink, BWArticleImage, BWNoCharsCaption, 
+	BWNoCharsDescription, VKToken } from '../../../consts.js'
 
 
 const BWCampaignPanel = ({ fetchedUser }) => {
@@ -33,6 +37,7 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState(-1)
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
+	const [masters, setMasters] = useState([]);
 
 	/*
 	const openAction = (element) => {
@@ -62,9 +67,9 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 	}
 	*/
 
-	/*useEffect(() => {
+	useEffect(() => {
 		async function fetchData() {
-			const prioData = await BWPlayerInfoSettings.getQueryAll();
+			/*const prioData = await BWPlayerInfoSettings.getQueryAll();
 			setPriorities(prioData.map(elem => ({
 				player: elem.player,
 				char_name: elem.char_name,
@@ -87,25 +92,44 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 				data[0].prio != "" && setPrio(data[0].prio);
 			} else {
 				setPrio(-2);
-			}
+			}*/
+
+			const masterData = await BWMastersInfoSettings.getQueryAll();
+            const userIds = masterData.map(elem => elem.id).join(', ');
+            //console.log(masterData);
+            //console.log(userIds);
+            const users = await bridge
+                .send('VKWebAppCallAPIMethod', {
+                    method: 'users.get',
+                    params: {
+                        user_ids: userIds,
+                        v: '5.131',
+                        fields: 'screen_name, photo_200',
+                        access_token: VKToken
+                    }
+                }).then(resp => { return resp.response });
+
+            setMasters(users);
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
-	}, []);*/
+	}, []);
 
-	//if (characters.length < 1 && prio == -2) {
+	if (masters.length >= 1){//characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
-			<BWNoCharsPage user={fetchedUser} campaignName={campaignName} />
-		)
-	/*} else if (characters.length < 1 && prio == -1) {
+			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
+			ArticleLink={BWArticleLink} articleImage={BWArticleImage} caption={BWNoCharsCaption}
+			 description={BWNoCharsDescription} />
+		);
+	} else if (characters.length < 1){//characters.length < 1 && prio == -1) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
 		)
-	} else {
+	} /*else {
 		return (
 			<Panel nav='campaign' key={campaignName}>
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
