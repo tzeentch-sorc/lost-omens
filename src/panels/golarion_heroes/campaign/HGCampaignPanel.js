@@ -6,16 +6,21 @@ import {
 	CardGrid, Div, Button, Spacing
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
 //import HGInfoCard from './HGInfoCard.js';
-import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+//import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import NoCharsPage from '../../common/components/NOCharsPage.js';
 //import HGCharCard from './HGCharCard.js';
 import HGNoCharsPage from './HGNoCharsPage.js';
 //import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
 //import HGPriorities from './HGPriorities.js';
 //import HGCharUpdateAlert from './HGCharUpdateAlert.js';
-import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import HGMastersInfoSettings from '../export_settings/HGMastersInfoSettings.js'
+//import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import { HGArticleLink, HGArticleImage, HGNoCharsCaption, 
+	HGNoCharsDescription, VKToken } from '../../../consts.js'
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -28,6 +33,7 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState(-1)
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
+	const [masters, setMasters] = useState([]);
 
 	/*
 	const openAction = (element) => {
@@ -58,9 +64,9 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 	}
 	*/
 
-	/*useEffect(() => {
+	useEffect(() => {
 		async function fetchData() {
-			const prioData = await HGPlayerInfoSettings.getQueryAll();
+			/*const prioData = await HGPlayerInfoSettings.getQueryAll();
 			setPriorities(prioData.map(elem => ({
 				player: elem.player,
 				char_name: elem.char_name,
@@ -88,17 +94,35 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 			} else {
 				setPrio(-2);
 			}
+			*/
+			const masterData = await HGMastersInfoSettings.getQueryAll();
+            const userIds = masterData.map(elem => elem.id).join(', ');
+            console.log(masterData);
+            console.log(userIds);
+            const users = await bridge
+                .send('VKWebAppCallAPIMethod', {
+                    method: 'users.get',
+                    params: {
+                        user_ids: userIds,
+                        v: '5.131',
+                        fields: 'screen_name, photo_200',
+                        access_token: VKToken
+                    }
+                }).then(resp => { return resp.response });
 
+            setMasters(users);
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
-	}, []);*/
+	}, []);
 
 	//if (characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
-			<HGNoCharsPage user={fetchedUser} campaignName={campaignName} />
+			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters} 
+			ArticleLink={HGArticleLink} articleImage={HGArticleImage} caption={HGNoCharsCaption}
+			 description={HGNoCharsDescription} />
 		);
 	/*} else if (characters.length < 1 && prio == -1) {
 		//while loading
@@ -139,8 +163,8 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 					</Group>
 				}
 			</Panel>
-		)
-	}*/
+		)*/
+//	}
 };
 
 export default HGCampaignPanel;

@@ -111,3 +111,6 @@ export const HGMastersSheetID = config.GolarionHeroes.Masters; //sheet "gms"
 
 // ----- Additional info -----
 export const HGArticleLink = 'https://vk.com/@geekmo-pathfinder-campaign';
+export const HGArticleImage = '/images/hg_banner_article.png';
+export const HGNoCharsCaption = 'Добро пожаловать к «Героям Голариона»!';
+export const HGNoCharsDescription = 'Введение в мир Голариона 1й редакции';
