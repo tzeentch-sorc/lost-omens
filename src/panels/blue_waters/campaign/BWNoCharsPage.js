@@ -1,6 +1,5 @@
 import {
-    Panel, PanelHeader, Header,
-    Button, Group,
+    Panel, PanelHeader, Group,
     PanelHeaderBack,
     SplitCol, SplitLayout,
     Div, Placeholder,
@@ -13,11 +12,11 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import MastersGroup from '../../common/MastersGroup.js';
-import ArticleBlock from '../../common/ArticleBlock.js';
+import MastersGroup from '../../common/components/MastersGroup.js';
+import ArticleBlock from '../../common/components/ArticleBlock.js';
 import BWMastersInfoSettings from '../export_settings/BWMastersInfoSettings.js'
 
-import { VKToken, BWArticleLink } from '../../../util/consts.js'
+import { VKToken, BWArticleLink } from '../../../consts.js'
 
 
 const BWNoCharsPage = ({ campaignName, user, }) => {

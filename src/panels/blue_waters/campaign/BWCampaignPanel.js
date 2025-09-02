@@ -10,16 +10,16 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import '../../common/css/CampaignPanel.css';
-//import SMInfoCard from './SMInfoCard.js';
-//import SMCharUpdateAlert from './SMCharUpdateAlert.js';
+//import BWInfoCard from './BWInfoCard.js';
+//import BWCharUpdateAlert from './BWCharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
-//import SMCharCard from './SMCharCard.js';
+//import BWCharCard from './BWCharCard.js';
 import BWNoCharsPage from './BWNoCharsPage.js';
-//import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
-//import SMPriorities from './SMPriorities.js';
+//import BWPlayerInfoSettings from '../export_settings/BWPlayerInfoSettings.js'
+//import BWPriorities from './BWPriorities.js';
 
-//import {SMCharacter} from '../../../util/consts.js';
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+//import {BWCharacter} from '../../../util/consts.js';
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
 
 const BWCampaignPanel = ({ fetchedUser }) => {
@@ -37,9 +37,9 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 	/*
 	const openAction = (element) => {
 		setPopout(
-			<SMCharUpdateAlert
+			<BWCharUpdateAlert
 				charName={element.name}
-				navLink={SMCharacter}
+				navLink={BWCharacter}
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -57,7 +57,7 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 	
 	function createCard(element) {
 		return (
-			<SMCharCard element={element} key={element.name + "_sm_card"} openAction={() => { openAlert(element) }} />
+			<BWCharCard element={element} key={element.name + "_bw_card"} openAction={() => { openAlert(element) }} />
 		);
 	}
 	*/
@@ -116,9 +116,9 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 							<SplitCol>
 								{date && prio && advName &&
 									<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
-										<SMInfoCard date={date} prio={prio} adventure={advName} />
+										<BWInfoCard date={date} prio={prio} adventure={advName} />
 										<Spacing size={4} />
-										<SMPriorities setPopout={setPopout} priorities={priorities} />
+										<BWPriorities setPopout={setPopout} priorities={priorities} />
 									</Group>
 								}
 								<Header mode="secondary">Ваши персонажи</Header>

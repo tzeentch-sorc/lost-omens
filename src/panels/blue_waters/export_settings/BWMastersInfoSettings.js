@@ -1,5 +1,5 @@
 import QuerySettings from '../../../util/QuerySettings';
-import {BWSpreadSheetID, BWMastersSheetID} from '../../../util/consts.js'
+import {BWSpreadSheetID, BWMastersSheetID} from '../../../consts.js'
 
 const sheetId = BWSpreadSheetID; // BW Geekmo Mirror
 
