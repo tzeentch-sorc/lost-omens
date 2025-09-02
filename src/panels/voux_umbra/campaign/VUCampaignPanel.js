@@ -12,14 +12,14 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import '../../common/css/CampaignPanel.css';
 //import SMInfoCard from './SMInfoCard.js';
 //import SMCharUpdateAlert from './SMCharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 //import SMCharCard from './SMCharCard.js';
 import VUNoCharsPage from './VUNoCharsPage.js';
 //import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
 //import SMPriorities from './SMPriorities.js';
 
 //import {SMCharacter} from '../../../util/consts.js';
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
 
 const VUCampaignPanel = ({ fetchedUser }) => {
