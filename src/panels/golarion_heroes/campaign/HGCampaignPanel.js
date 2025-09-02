@@ -9,13 +9,13 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 import '../../common/css/CampaignPanel.css';
 //import HGInfoCard from './HGInfoCard.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 //import HGCharCard from './HGCharCard.js';
 import HGNoCharsPage from './HGNoCharsPage.js';
 //import HGPlayerInfoSettings from '../export_settings/HGPlayerInfoSettings.js'
 //import HGPriorities from './HGPriorities.js';
 //import HGCharUpdateAlert from './HGCharUpdateAlert.js';
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
