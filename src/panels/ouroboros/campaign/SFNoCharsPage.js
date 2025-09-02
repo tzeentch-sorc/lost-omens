@@ -13,11 +13,11 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import React, { useEffect, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import MastersGroup from '../../common/MastersGroup';
-import ArticleBlock from '../../common/ArticleBlock';
+import MastersGroup from '../../common/components/MastersGroup';
+import ArticleBlock from '../../common/components/ArticleBlock';
 import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
 
-import {SFCreateLink, SFArticleLink, VKToken} from '../../../util/consts.js'
+import {SFCreateLink, SFArticleLink, VKToken} from '../../../consts.js'
 
 const SFNoCharsPage = ({campaignName, user, }) => {
 

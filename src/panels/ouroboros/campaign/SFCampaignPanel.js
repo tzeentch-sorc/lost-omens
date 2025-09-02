@@ -10,14 +10,14 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import '../../common/css/CampaignPanel.css';
 import SFCharacterInfoCard from './SFInfoCard.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import SFNoCharsPage from './SFNoCharsPage.js';
-import CharUpdateAlert from '../../common/CharUpdateAlert.js';
+import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import SFCharCard from './SFCharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
 
-import {SFCharacter, SFLvlupLink } from '../../../util/consts.js'
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+import {SFCharacter, SFLvlupLink } from '../../../consts.js'
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
