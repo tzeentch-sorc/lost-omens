@@ -84,6 +84,9 @@ export const SMInventorySheetID = config.SilverMarshes.Inventory; //sheet "inven
 // ----- Additional info -----
 export const SMArticleLink = 'https://vk.com/@geekmo-dnd-5e-campaign';
 export const SMCreateLink = 'https://vk.com/@geekmo-new-character-dnd-5e';
+export const SMArticleImage = '/images/sm_bannerjpg.jpg';
+export const SMNoCharsCaption = 'Добро пожаловать в «Серебряный Предел»!';
+export const SMNoCharsDescription = 'Знакомство с мегакампанией';
 
 
 // ===== Blue Waters (Dungeons and Dragons 2024) =====
