@@ -1,10 +1,49 @@
-import { Div, Group, Panel, PanelHeader, PanelHeaderBack, List, Cell } from "@vkontakte/vkui";
-import React from "react";
+import { Group, Panel, PanelHeader, PanelHeaderBack } from "@vkontakte/vkui";
+import React, { useState } from 'react';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+
+import InfoMain from "./InfoMain.js";
+import InfoNotFromITMO from "./InfoNotFromITMO.js";
+import InfoFromITMO from "./InfoFromITMO.js";
+import FormCredentials from './FormCredentials.js';
+import FormItmo from "./FormItmo.js";
 
 const Form = ({ fetchedUser }) => {
     const routeNavigator = useRouteNavigator();
     const [params, setParams] = useSearchParams();
+
+    const GROUPS = {
+        START: 'start',
+        ITMO: 'itmo',
+        NOT_ITMO: 'not_itmo',
+        DATE: 'date',
+        IGROTEKA: 'igroteka',
+        NRI: 'nri',
+        PAINT: 'paint',
+        MAFIA: 'mafia',
+        KT: 'kt',
+        BT: 'bt',
+        SEPARATE_EVENT: 'separate_event',
+        FINISH: 'finish'
+    };
+
+    const [activeGroup, setActiveGroup] = useState(GROUPS.START);
+
+    const handleCredFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        if (creds.choice === 'ITMO') {
+            setActiveGroup(GROUPS.ITMO);
+        } else {
+            setActiveGroup(GROUPS.NOT_ITMO);
+        }
+    };
+
+    const handleItmoFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+    };
+
+    const handleItmoBack = () => setActiveGroup(GROUPS.START);
+
 
     return (
         <Panel nav='enter'>
@@ -12,43 +51,41 @@ const Form = ({ fetchedUser }) => {
             {
                 fetchedUser &&
                 <>
-                    <Group mode='card'>
-                        <List>
-                            <Cell multiline>
-                                <b>Для тех, кто не из ИТМО</b>
-                            </Cell>
-                            <Cell multiline>
-                                ❗Регистрироваться на встречи нужно не позднее 12:00 дня мероприятия,
-                                если это будний день и не позднее 15:00 пятницы, если вы записываетесь на выходные. В ином
-                                случае мы не можем гарантировать проход.
-                            </Cell>
-                            <Cell multiline>
-                                ❗Лучше записаться и не прийти, чем прийти и быть незаписанным!
-                            </Cell>
-                            <Cell multiline>
-                                ❗Пожалуйста, вводите корректный номер телефона, который будет у вас с собой. Он может потребоваться
-                                на входе.
-                            </Cell>
-                            <Cell multiline>
-                                <b>Как пройти через охрану?</b>
-                            </Cell>
-                            <Cell multiline>
-                                Обратите внимание, что существует два варианта прохода, выбор из которых осуществляется по различным факторам.
-                                Первый вариант основной - начинайте с него :)
-                            </Cell>
-                            <Cell multiline>
-                                1. Проход напрямую через пост охраны: подходите на проходную и называете свое ФИО (могут попросить паспорт)
-                            </Cell>
-                            <Cell multiline>
-                                2. <i>(Временно недоступен)</i> Проход через терминал по QR-коду. Терминалы стоят на видном месте рядом со входом,
-                                вас интересует пункт "Получить пропуск по приглашению", далее необходимо ввести номер и пройти по
-                                выданному коду через охрану
-                            </Cell>
-                            <Cell multiline>
-                                Увидимся!
-                            </Cell>
-                        </List>
-                    </Group>
+                    {activeGroup === GROUPS.START &&
+                        <>
+                            <Group mode='card'>
+                                <InfoMain />
+                            </Group>
+                            <Group mode='card'>
+                                <FormCredentials
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleCredFormSubmit}
+                                />
+
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.NOT_ITMO &&
+                        <>
+                            <Group mode='card'>
+                                <InfoNotFromITMO />
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.ITMO &&
+                        <>
+                            <Group mode='card'>
+                                <InfoFromITMO />
+                            </Group>
+                            <Group mode='card'>
+                                <FormItmo
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleItmoFormSubmit}
+                                    onBack={handleItmoBack}
+                                />
+                            </Group>
+                        </>
+                    }
                 </>
             }
         </Panel >
