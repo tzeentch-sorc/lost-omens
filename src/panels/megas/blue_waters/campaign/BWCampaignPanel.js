@@ -10,12 +10,12 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import bridge from '@vkontakte/vk-bridge';
 
-import '../../common/css/CampaignPanel.css';
-import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
-import NoCharsPage from '../../common/components/NOCharsPage.js';
+import '../../../common/css/CampaignPanel.css';
+import EmptyCampaignPanel from '../../../common/components/EmptyCampaignPanel.js';
+import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import BWMastersInfoSettings from '../export_settings/BWMastersInfoSettings.js'
 import { BWArticleLink, BWArticleImage, BWNoCharsCaption, 
-	BWNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../consts.js'
+	BWNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../../consts.js'
 
 
 const BWCampaignPanel = ({ fetchedUser }) => {

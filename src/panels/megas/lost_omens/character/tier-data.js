@@ -1,8 +1,8 @@
-import Icon24AgentTier from "../../common/custom_icons/LOTierIcons/Icon24AgentTier.tsx";
-import Icon24AdeptTier from "../../common/custom_icons/LOTierIcons/Icon24AdeptTier.tsx";
-import Icon24CaptainTier from "../../common/custom_icons/LOTierIcons/Icon24CaptainTier.tsx";
-import Icon24MasterTier from "../../common/custom_icons/LOTierIcons/Icon24MasterTier.tsx";
-import Icon24SeniorTier from "../../common/custom_icons/LOTierIcons/Icon24SeniorTier.tsx";
+import Icon24AgentTier from "../../../common/custom_icons/LOTierIcons/Icon24AgentTier.tsx";
+import Icon24AdeptTier from "../../../common/custom_icons/LOTierIcons/Icon24AdeptTier.tsx";
+import Icon24CaptainTier from "../../../common/custom_icons/LOTierIcons/Icon24CaptainTier.tsx";
+import Icon24MasterTier from "../../../common/custom_icons/LOTierIcons/Icon24MasterTier.tsx";
+import Icon24SeniorTier from "../../../common/custom_icons/LOTierIcons/Icon24SeniorTier.tsx";
 
 const bonusA = {
     title: "Доступ к складам Общества",

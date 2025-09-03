@@ -3,7 +3,7 @@ import {
     SimpleCell, InfoRow, Group
 } from '@vkontakte/vkui';
 
-import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
+import { renderTextWithActions } from '../../../../util/RenderTextWithActions.js';
 
 const LOFormulae = ({ formulae }) => {
     function createFormulaeRow(element) {

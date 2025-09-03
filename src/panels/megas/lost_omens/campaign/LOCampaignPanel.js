@@ -8,26 +8,24 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import bridge from '@vkontakte/vk-bridge';
 
-import '../../common/css/CampaignPanel.css';
+import '../../../common/css/CampaignPanel.css';
 import LOInfoCard from './LOInfoCard.js';
-import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import CharUpdateAlert from '../../../common/components/CharUpdateAlert.js';
+import EmptyCampaignPanel from '../../../common/components/EmptyCampaignPanel.js';
 import LOCharCard from './LOCharCard.js';
-import NoCharsPage from '../../common/components/NOCharsPage.js';
+import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
-import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import { getVkUserUrl } from '../../../../util/VKUserURL.js';
 
 import {
 	FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice,
-	LOLvlupLevel, LOCharacter, LOBulletinLink
-} from '../../../consts.js'
-import {
+	LOLvlupLevel, LOCharacter, LOBulletinLink,
 	LOArticleLink, LOArticleImage, LONoCharsCaption,
 	LONoCharsDescription, CommonNoCharsBody, VKToken
-} from '../../../consts.js'
+} from '../../../../consts.js'
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();

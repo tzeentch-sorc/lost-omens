@@ -6,8 +6,8 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
-import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
+import InventoryPlaceholder from '../../../common/placeholders/InventoryPlaceholder.js';
+import SpellsPlaceholder from '../../../common/placeholders/SpellsPlaceholder.js';
 
 import SMCharTabPanel from './SMCharTabPanel.js';
 import SMSpells from './SMSpells.js';
@@ -18,11 +18,11 @@ import SMInventorySettings from '../export_settings/SMInventorySettings.js'
 import SMCharBuildSettings from '../export_settings/SMCharBuildSettings.js'
 import SMCharInfoSettings from '../export_settings/SMCharInfoSettings.js'
 
-import '../../common/css/Character.css';
+import '../../../common/css/Character.css';
 
 import SMFeatPanel from './SMFeatPanel.js';
 
-import { SMCampaign } from '../../../consts.js'; 
+import { SMCampaign } from '../../../../consts.js'; 
 
 const SMCharacter = () => {
 

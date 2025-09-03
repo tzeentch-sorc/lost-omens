@@ -1,5 +1,5 @@
-import QuerySettings from '../../../util/QuerySettings.js';
-import {VUSpreadSheetID, VUMastersSheetID} from '../../../consts.js'
+import QuerySettings from '../../../../util/QuerySettings.js';
+import {VUSpreadSheetID, VUMastersSheetID} from '../../../../consts.js'
 
 const sheetId = VUSpreadSheetID; // VU Geekmo Mirror
 

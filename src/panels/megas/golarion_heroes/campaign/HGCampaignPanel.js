@@ -5,12 +5,12 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import bridge from '@vkontakte/vk-bridge';
 
-import '../../common/css/CampaignPanel.css';
-import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
-import NoCharsPage from '../../common/components/NOCharsPage.js';
+import '../../../common/css/CampaignPanel.css';
+import EmptyCampaignPanel from '../../../common/components/EmptyCampaignPanel.js';
+import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import HGMastersInfoSettings from '../export_settings/HGMastersInfoSettings.js';
 import { HGArticleLink, HGArticleImage, HGNoCharsCaption, 
-	HGNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../consts.js'
+	HGNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../../consts.js'
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const [params, setParams] = useSearchParams();

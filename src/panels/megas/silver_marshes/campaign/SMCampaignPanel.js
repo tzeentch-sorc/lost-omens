@@ -10,22 +10,19 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import bridge from '@vkontakte/vk-bridge';
 
-import '../../common/css/CampaignPanel.css';
+import '../../../common/css/CampaignPanel.css';
 import SMInfoCard from './SMInfoCard.js';
 import SMCharUpdateAlert from './SMCharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../../common/components/EmptyCampaignPanel.js';
 import SMCharCard from './SMCharCard.js';
-import NoCharsPage from '../../common/components/NOCharsPage.js';
+import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
 import SMMastersInfoSettings from '../export_settings/SMMastersInfoSettings.js'
 import SMPriorities from './SMPriorities.js';
 
-import { SMCharacter, SMCreateLink } from '../../../consts.js';
-import { getVkUserUrl } from '../../../util/VKUserURL.js';
-import {
-	SMArticleLink, SMArticleImage, SMNoCharsCaption,
-	SMNoCharsDescription, CommonNoCharsBody, VKToken
-} from '../../../consts.js'
+import { SMCharacter, SMCreateLink, SMArticleLink, SMArticleImage, SMNoCharsCaption,
+	SMNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../../consts.js';
+import { getVkUserUrl } from '../../../../util/VKUserURL.js';
 
 const SMCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();

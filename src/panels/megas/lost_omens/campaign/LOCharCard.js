@@ -1,32 +1,32 @@
 import { Card, RichCell, Counter, Image } from "@vkontakte/vkui";
 import { Icon28UserOutgoingOutline, Icon24UserOutline } from "@vkontakte/icons";
 
-import Icon48Alchemist from "../../common/custom_icons/LOClassIcons/Icon48Alchemist.tsx";
-import Icon48Animist from "../../common/custom_icons/LOClassIcons/Icon48Animist.tsx";
-import Icon48Barbarian from "../../common/custom_icons/LOClassIcons/Icon48Barbarian.tsx";
-import Icon48Bard from "../../common/custom_icons/LOClassIcons/Icon48Bard.tsx";
-import Icon48Cleric from "../../common/custom_icons/LOClassIcons/Icon48Cleric.tsx";
-import Icon48Druid from "../../common/custom_icons/LOClassIcons/Icon48Druid.tsx";
-import Icon48Fighter from "../../common/custom_icons/LOClassIcons/Icon48Fighter.tsx";
-import Icon48Gunslinger from "../../common/custom_icons/LOClassIcons/Icon48Gunslinger.tsx";
-import Icon48Inventor from "../../common/custom_icons/LOClassIcons/Icon48Inventor.tsx";
-import Icon48Investigator from "../../common/custom_icons/LOClassIcons/Icon48Investigator.tsx";
-import Icon48Kineticist from "../../common/custom_icons/LOClassIcons/Icon48Kineticist.tsx";
-import Icon48Magus from "../../common/custom_icons/LOClassIcons/Icon48Magus.tsx";
-import Icon48Monk from "../../common/custom_icons/LOClassIcons/Icon48Monk.tsx";
-import Icon48Oracle from "../../common/custom_icons/LOClassIcons/Icon48Oracle.tsx";
-import Icon48Paladin from "../../common/custom_icons/LOClassIcons/Icon48Paladin.tsx";
-import Icon48Psychic from "../../common/custom_icons/LOClassIcons/Icon48Psychic.tsx";
-import Icon48Ranger from "../../common/custom_icons/LOClassIcons/Icon48Ranger.tsx";
-import Icon48Rogue from "../../common/custom_icons/LOClassIcons/Icon48Rogue.tsx";
-import Icon48Sorcerer from "../../common/custom_icons/LOClassIcons/Icon48Sorcerer.tsx";
-import Icon48Summoner from "../../common/custom_icons/LOClassIcons/Icon48Summoner.tsx";
-import Icon48Swashbuckler from "../../common/custom_icons/LOClassIcons/Icon48Swashbuckler.tsx";
-import Icon48Taumaturg from "../../common/custom_icons/LOClassIcons/Icon48Taumaturg.tsx";
-import Icon48Witch from "../../common/custom_icons/LOClassIcons/Icon48Witch.tsx";
-import Icon48Wizard from "../../common/custom_icons/LOClassIcons/Icon48Wizard.tsx";
+import Icon48Alchemist from "../../../common/custom_icons/LOClassIcons/Icon48Alchemist.tsx";
+import Icon48Animist from "../../../common/custom_icons/LOClassIcons/Icon48Animist.tsx";
+import Icon48Barbarian from "../../../common/custom_icons/LOClassIcons/Icon48Barbarian.tsx";
+import Icon48Bard from "../../../common/custom_icons/LOClassIcons/Icon48Bard.tsx";
+import Icon48Cleric from "../../../common/custom_icons/LOClassIcons/Icon48Cleric.tsx";
+import Icon48Druid from "../../../common/custom_icons/LOClassIcons/Icon48Druid.tsx";
+import Icon48Fighter from "../../../common/custom_icons/LOClassIcons/Icon48Fighter.tsx";
+import Icon48Gunslinger from "../../../common/custom_icons/LOClassIcons/Icon48Gunslinger.tsx";
+import Icon48Inventor from "../../../common/custom_icons/LOClassIcons/Icon48Inventor.tsx";
+import Icon48Investigator from "../../../common/custom_icons/LOClassIcons/Icon48Investigator.tsx";
+import Icon48Kineticist from "../../../common/custom_icons/LOClassIcons/Icon48Kineticist.tsx";
+import Icon48Magus from "../../../common/custom_icons/LOClassIcons/Icon48Magus.tsx";
+import Icon48Monk from "../../../common/custom_icons/LOClassIcons/Icon48Monk.tsx";
+import Icon48Oracle from "../../../common/custom_icons/LOClassIcons/Icon48Oracle.tsx";
+import Icon48Paladin from "../../../common/custom_icons/LOClassIcons/Icon48Paladin.tsx";
+import Icon48Psychic from "../../../common/custom_icons/LOClassIcons/Icon48Psychic.tsx";
+import Icon48Ranger from "../../../common/custom_icons/LOClassIcons/Icon48Ranger.tsx";
+import Icon48Rogue from "../../../common/custom_icons/LOClassIcons/Icon48Rogue.tsx";
+import Icon48Sorcerer from "../../../common/custom_icons/LOClassIcons/Icon48Sorcerer.tsx";
+import Icon48Summoner from "../../../common/custom_icons/LOClassIcons/Icon48Summoner.tsx";
+import Icon48Swashbuckler from "../../../common/custom_icons/LOClassIcons/Icon48Swashbuckler.tsx";
+import Icon48Taumaturg from "../../../common/custom_icons/LOClassIcons/Icon48Taumaturg.tsx";
+import Icon48Witch from "../../../common/custom_icons/LOClassIcons/Icon48Witch.tsx";
+import Icon48Wizard from "../../../common/custom_icons/LOClassIcons/Icon48Wizard.tsx";
 
-import {FavouriteColor} from '../../../consts.js'
+import {FavouriteColor} from '../../../../consts.js'
 
 
 const LOCharCard = ({element, openAction}) => {

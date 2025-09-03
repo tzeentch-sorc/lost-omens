@@ -3,7 +3,7 @@ import {
     Card, SimpleCell, Header,
 
 } from '@vkontakte/vkui';
-import Icon24AgentTier from '../../common/custom_icons/LOTierIcons/Icon24AgentTier.tsx';
+import Icon24AgentTier from '../../../common/custom_icons/LOTierIcons/Icon24AgentTier.tsx';
 import { tierMap } from './tier-data';
 
 const TierCard = ({ tier, onOpenTierModal }) => {

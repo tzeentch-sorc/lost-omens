@@ -6,9 +6,9 @@ import {
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
-import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
-import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
-import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
+import InventoryPlaceholder from '../../../common/placeholders/InventoryPlaceholder.js';
+import SpellsPlaceholder from '../../../common/placeholders/SpellsPlaceholder.js';
+import FormulaePlaceholder from '../../../common/placeholders/FormulaePlaceholder.js';
 import LOCharTabPanel from './LOCharTabPanel.js';
 import LOSpells from './LOSpells.js';
 import LOInventory from './LOInventory.js';
@@ -19,12 +19,12 @@ import LOInventorySettings from '../export_settings/LOInventorySettings.js'
 import LOCharBuildSettings from '../export_settings/LOCharBuildSettings.js'
 import LOCharInfoSettings from '../export_settings/LOCharInfoSettings.js'
 
-import '../../common/css/Character.css';
+import '../../../common/css/Character.css';
 
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 
-import {LOCampaign} from '../../../consts.js'
+import {LOCampaign} from '../../../../consts.js'
 
 const LOCharacter = () => {
 
