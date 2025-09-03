@@ -1,8 +1,8 @@
-import FreeActionIcon from './custom_icons/Actions/FreeActionIcon.tsx';
-import OneActionIcon from './custom_icons/Actions/OneActionIcon.tsx';
-import TwoActionIcon from './custom_icons/Actions/TwoActionIcon.tsx';
-import ThreeActionIcon from './custom_icons/Actions/ThreeActionIcon.tsx';
-import ReactionActionIcon from './custom_icons/Actions/ReactionActionIcon.tsx';
+import FreeActionIcon from '../panels/common/custom_icons/Actions/FreeActionIcon.tsx';
+import OneActionIcon from '../panels/common/custom_icons/Actions/OneActionIcon.tsx';
+import TwoActionIcon from '../panels/common/custom_icons/Actions/TwoActionIcon.tsx';
+import ThreeActionIcon from '../panels/common/custom_icons/Actions/ThreeActionIcon.tsx';
+import ReactionActionIcon from '../panels/common/custom_icons/Actions/ReactionActionIcon.tsx';
 
 import React from 'react';
 // Mapping of symbols to icons

@@ -1,7 +1,7 @@
 import {React, useState} from 'react';
 import { Card, Div, Gradient, Image } from '@vkontakte/vkui';
 
-import './CampaignCard.css';
+import '../css/CampaignCard.css';
 
 function CampaignCard({ imageSrc, title, onClick }) {
   const [hovered, setHovered] = useState(false);

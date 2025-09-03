@@ -3,21 +3,27 @@ import {
 	Panel, PanelHeader, Header, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Div
+	CardGrid, Div, Button
 
 } from '@vkontakte/vkui';
+import bridge from '@vkontakte/vk-bridge';
 
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
-import './SFCampaignPanel.css'
+import '../../common/css/CampaignPanel.css';
 import SFCharacterInfoCard from './SFInfoCard.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
-import SFNoCharsPage from './SFNoCharsPage.js';
-import CharUpdateAlert from '../../common/CharUpdateAlert.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import NoCharsPage from '../../common/components/NOCharsPage.js';
+import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import SFCharCard from './SFCharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
+import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
 
-import {SFCharacter, SFLvlupLink } from '../../../util/consts.js'
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+import { SFCharacter, SFLvlupLink, SFCreateLink } from '../../../consts.js'
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import {
+	SFArticleLink, SFArticleImage, SFNoCharsCaption,
+	SFNoCharsDescription, SFNoCharsBody, VKToken
+} from '../../../consts.js'
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
@@ -29,6 +35,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState(-1) // -1 => loading
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [isDisplayed, setIsDisplayed] = useState(false);
+
+	const [masters, setMasters] = useState([]);
 
 	const openAction = (element) => {
 		setPopout(
@@ -60,7 +68,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
-			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser)});
+			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
 			console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
@@ -68,22 +76,49 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 				lvl_up: elem.lvl_up === "FALSE" ? false : true,
 			})));
 			if (data.length > 0) {
-				data[0].prio!="" && setPrio(data[0].prio);
+				data[0].prio != "" && setPrio(data[0].prio);
 			} else {
 				setPrio(-2); // -2 => no character
 			}
+
+			const masterData = await SFMastersInfoSettings.getQueryAll();
+			const userIds = masterData.map(elem => elem.id).join(', ');
+			//console.log(masterData);
+			//console.log(userIds);
+			const users = await bridge
+				.send('VKWebAppCallAPIMethod', {
+					method: 'users.get',
+					params: {
+						user_ids: userIds,
+						v: '5.131',
+						fields: 'screen_name, photo_200',
+						access_token: VKToken
+					}
+				}).then(resp => { return resp.response });
+
+			setMasters(users);
+
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => {setPopout(null); setIsDisplayed(true);}, 700);
+			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
 
-	if (characters.length < 1 && prio != -1) {
+	if (masters.length >= 1 && characters.length < 1 && prio != -1) {
 		//no chars found
 		return (
-			<SFNoCharsPage user={fetchedUser} campaignName={campaignName} />
+			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters}
+				ArticleLink={SFArticleLink} articleImage={SFArticleImage} caption={SFNoCharsCaption}
+				description={SFNoCharsDescription} body={SFNoCharsBody}
+				action={<Button
+					size="m"
+					appearance="positive"
+					onClick={() => window.open(SFCreateLink, "_blank")}
+				>
+					Создать
+				</Button>} />
 		)
-	} else if (characters.length < 1 && prio == -1) {
+	} else if (characters.length < 1 || (characters.length < 1 && prio == -1)) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
@@ -103,7 +138,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 									{prio && <SFCharacterInfoCard prio={prio} />}
 									<Header mode="secondary">Ваши персонажи</Header>
 									<Group mode="plain">
-										<Div className="not4mob" style={{cursor: 'pointer'}}>
+										<Div className="not4mob" style={{ cursor: 'pointer' }}>
 											<CardGrid size="m">
 												{characters && characters.map((elem) => createCard(elem))}
 											</CardGrid>

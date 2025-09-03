@@ -15,7 +15,7 @@ function parseSimpleCsv(csvString) {
         newline: '',             
         dynamicTyping: false     
     });
-    console.log(result)
+    //console.log(result)
     return result.data;
 }
 
@@ -25,7 +25,7 @@ async function requestCsv(sheetId, request) {
         url += `&tq=${encodeURIComponent(request.query)}`;
     }
     const f = await axios.get(url);
-    console.log(url)
+    //console.log(url)
     return f.data;
 }
 

@@ -4,23 +4,28 @@ import {
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
 	CardGrid, Div,
-	Spacing
+	Spacing, Button
 
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+import bridge from '@vkontakte/vk-bridge';
 
-import './SMCampaignPanel.css'
+import '../../common/css/CampaignPanel.css';
 import SMInfoCard from './SMInfoCard.js';
 import SMCharUpdateAlert from './SMCharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import SMCharCard from './SMCharCard.js';
-import SMNoCharsPage from './SMNoCharsPage.js';
+import NoCharsPage from '../../common/components/NOCharsPage.js';
 import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
+import SMMastersInfoSettings from '../export_settings/SMMastersInfoSettings.js'
 import SMPriorities from './SMPriorities.js';
 
-import {SMCharacter} from '../../../util/consts.js';
-import { getVkUserUrl } from '../../../util/utilFunc.js';
-
+import { SMCharacter, SMCreateLink } from '../../../consts.js';
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import {
+	SMArticleLink, SMArticleImage, SMNoCharsCaption,
+	SMNoCharsDescription, CommonNoCharsBody, VKToken
+} from '../../../consts.js'
 
 const SMCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -33,6 +38,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState(-1)
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const [priorities, setPriorities] = useState([]);
+	const [masters, setMasters] = useState([]);
 
 	const openAction = (element) => {
 		setPopout(
@@ -87,18 +93,45 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 				setPrio(-2);
 			}
 
+			const masterData = await SMMastersInfoSettings.getQueryAll();
+			const userIds = masterData.map(elem => elem.id).join(', ');
+			//console.log(masterData);
+			//console.log(userIds);
+			const users = await bridge
+				.send('VKWebAppCallAPIMethod', {
+					method: 'users.get',
+					params: {
+						user_ids: userIds,
+						v: '5.131',
+						fields: 'screen_name, photo_200',
+						access_token: VKToken
+					}
+				}).then(resp => { return resp.response });
+
+			setMasters(users);
+
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
 
-	if (characters.length < 1 && prio == -2) {
+	if (masters.length >= 1 && characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
-			<SMNoCharsPage user={fetchedUser} campaignName={campaignName} />
+			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters}
+				ArticleLink={SMArticleLink} articleImage={SMArticleImage} caption={SMNoCharsCaption}
+				description={SMNoCharsDescription} body={CommonNoCharsBody}
+				action={
+					<Button
+						size="m"
+						appearance="positive"
+						onClick={() => window.open(SMCreateLink)}
+					>
+						Статья о создании персонажа
+					</Button>} />
 		)
-	} else if (characters.length < 1 && prio == -1) {
+	} else if (characters.length < 1 || (characters.length < 1 && prio == -1)) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
@@ -122,7 +155,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 								<Header mode="secondary">Ваши персонажи</Header>
 								<Group mode="plain">
 									<Div className="not4mob">
-										<CardGrid size="m" style={{cursor: 'pointer'}} >
+										<CardGrid size="m" style={{ cursor: 'pointer' }} >
 											{characters && characters.map((elem) => createCard(elem))}
 										</CardGrid>
 									</Div>

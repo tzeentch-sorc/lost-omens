@@ -1,20 +1,20 @@
 import { Card, RichCell, Counter } from "@vkontakte/vkui";
 import { Icon28UserOutgoingOutline, Icon24UserOutline } from "@vkontakte/icons";
 
-import Icon48DndWarlock from "../../common/custom_icons/Icon48DndWarlock.tsx";
-import Icon48DndBarbarian from "../../common/custom_icons/Icon48DndBarbarian.tsx";
-import Icon48DndBard from "../../common/custom_icons/Icon48DndBard.tsx";
-import Icon48DndCleric from "../../common/custom_icons/Icon48DndCleric.tsx";
-import Icon48DndDruid from "../../common/custom_icons/Icon48DndDruid.tsx";
-import Icon48DndFighter from "../../common/custom_icons/Icon48DndFighter.tsx";
-import Icon48DndMonk from "../../common/custom_icons/Icon48DndMonk.tsx";
-import Icon48DndPaladin from "../../common/custom_icons/Icon48DndPaladin.tsx";
-import Icon48DndRanger from "../../common/custom_icons/Icon48DndRanger.tsx";
-import Icon48DndRogue from "../../common/custom_icons/Icon48DndRogue.tsx";
-import Icon48DndSorcerer from "../../common/custom_icons/Icon48DndSorcerer.tsx";
-import Icon48DndWizard from "../../common/custom_icons/Icon48DndWizard.tsx";
+import Icon48DndWarlock from "../../common/custom_icons/DNDClassIcons/Icon48DndWarlock.tsx";
+import Icon48DndBarbarian from "../../common/custom_icons/DNDClassIcons/Icon48DndBarbarian.tsx";
+import Icon48DndBard from "../../common/custom_icons/DNDClassIcons/Icon48DndBard.tsx";
+import Icon48DndCleric from "../../common/custom_icons/DNDClassIcons/Icon48DndCleric.tsx";
+import Icon48DndDruid from "../../common/custom_icons/DNDClassIcons/Icon48DndDruid.tsx";
+import Icon48DndFighter from "../../common/custom_icons/DNDClassIcons/Icon48DndFighter.tsx";
+import Icon48DndMonk from "../../common/custom_icons/DNDClassIcons/Icon48DndMonk.tsx";
+import Icon48DndPaladin from "../../common/custom_icons/DNDClassIcons/Icon48DndPaladin.tsx";
+import Icon48DndRanger from "../../common/custom_icons/DNDClassIcons/Icon48DndRanger.tsx";
+import Icon48DndRogue from "../../common/custom_icons/DNDClassIcons/Icon48DndRogue.tsx";
+import Icon48DndSorcerer from "../../common/custom_icons/DNDClassIcons/Icon48DndSorcerer.tsx";
+import Icon48DndWizard from "../../common/custom_icons/DNDClassIcons/Icon48DndWizard.tsx";
 
-import { FavouriteColor } from "../../../util/consts.js";
+import { FavouriteColor } from "../../../consts.js";
 
 const SMCharCard = ({element, openAction}) => {
     const iconMap = {

@@ -18,10 +18,11 @@ import SMInventorySettings from '../export_settings/SMInventorySettings.js'
 import SMCharBuildSettings from '../export_settings/SMCharBuildSettings.js'
 import SMCharInfoSettings from '../export_settings/SMCharInfoSettings.js'
 
-import './SMCharacter.css'
+import '../../common/css/Character.css';
+
 import SMFeatPanel from './SMFeatPanel.js';
 
-import { SMCampaign } from '../../../util/consts.js'; 
+import { SMCampaign } from '../../../consts.js'; 
 
 const SMCharacter = () => {
 
