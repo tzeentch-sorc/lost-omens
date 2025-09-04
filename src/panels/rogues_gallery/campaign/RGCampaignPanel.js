@@ -16,10 +16,13 @@ import RGMastersInfoSettings from '../export_settings/RGMastersInfoSettings.js'
 import RGPlayerInfoSettings from '../export_settings/RGPlayerInfoSettings.js'
 import { RGCharacter } from '../../../consts.js';
 import RGCharUpdateAlert from './RGCharUpdateAlert.js';
+import RGCharCard from './RGCharCard.js';
 import {
 	RGArticleLink, RGArticleImage, RGNoCharsCaption,
 	RGNoCharsDescription, CommonNoCharsBody, VKToken
 } from '../../../consts.js'
+
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {
@@ -68,7 +71,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 				name: elem.char_name,
 				type: elem.char_class,
 				owner: elem.owner,
-				lvl_up: elem.lvl_up === "FALSE" ? false : true,
+				lvl_up: elem.lvl_up === "TRUE" ? true : false,
 			})));
 			if (data.length > 0) {
 				data[0].name != "" && setPrio(1); //loaded
@@ -94,7 +97,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 			setMasters(users);
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => setPopout(null), 700);
+			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
@@ -118,6 +121,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
 					{campaignName}
 				</PanelHeader>
+				{console.log("render chars")}
 				{fetchedUser &&
 					<Group mode="card">
 						<SplitLayout popout={popout}>

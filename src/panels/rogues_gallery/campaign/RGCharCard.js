@@ -9,6 +9,7 @@ const RGCharCard = ({ element, openAction }) => {
     return (
         <Card mode="shadow" size="m" key={element.name + "_rg_card"}
             onClick={openAction}>
+                {console.log("render char card")}
             <RichCell
                 key={element.name}
                 id={element.name}

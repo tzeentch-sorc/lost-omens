@@ -118,6 +118,8 @@ export const VUNoCharsDescription = 'Знакомство с мегакампа�
 // ----- Spreadsheet -----
 export const RGSpreadSheetID = config.RoguesGallery.Mirror; //RG Geekmo Mirror
 export const RGMastersSheetID = config.RoguesGallery.Masters; //sheet "gms"
+export const RGPlayersSheetID = config.RoguesGallery.Players; //sheet "players"
+export const RGCharactersSheetID = config.RoguesGallery.Characters; //sheet "characters"
 
 // ----- Additional info -----
 export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-2020-v-geekmo-rogues-gallery';

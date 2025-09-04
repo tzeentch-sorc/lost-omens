@@ -4,10 +4,15 @@ export const getVkUserUrl = (elem, fetchedUser) => {
         // Running with npm start
         //DEBUG:
         //return elem.id == ("vk.com/id166159611");
-        return elem.id == ("vk.com/tzeentch_sorc");
+        return elem.id == ("https://vk.com/contruction");
 
     } else {
         // Running with npm run deploy (production)
-        return elem.id == ("vk.com/" + fetchedUser.screen_name) || elem.id == ("vk.com/id" + fetchedUser.id);
+        return elem.id == ("vk.com/" + fetchedUser.screen_name) ||
+            elem.id == ("vk.com/id" + fetchedUser.id) ||
+            elem.id == ("https://vk.com/id" + fetchedUser.id)||
+            elem.id == ("vk.ru/" + fetchedUser.screen_name) ||
+            elem.id == ("vk.ru/id" + fetchedUser.id) ||
+            elem.id == ("https://vk.ru/id" + fetchedUser.id);
     }
 }
