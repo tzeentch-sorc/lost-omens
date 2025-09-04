@@ -20,6 +20,7 @@ import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
 import BWCampaignPanel from './panels/blue_waters/campaign/BWCampaignPanel.js';
 import VUCampaignPanel from './panels/voux_umbra/campaign/VUCampaignPanel.js';
 import RGCampaignPanel from './panels/rogues_gallery/campaign/RGCampaignPanel.js';
+import RGCharacter from './panels/rogues_gallery/character/RGCharacter.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
@@ -82,6 +83,7 @@ const App = (router) => {
 			</View>
 			<View activePanel={activePanel} nav='rogues_gallery'>
 				<RGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+				<RGCharacter id={ROUTES.CHAR} />
 			</View>
 		</Root>
 	);

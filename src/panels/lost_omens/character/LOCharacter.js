@@ -173,9 +173,7 @@ const LOCharacter = () => {
 			<ModalPage
 				id={MODAL_PAGE_TIERS}
 				header={
-					<ModalPageHeader
-						after={<PanelHeaderClose onClick={closeModal} />}
-					>
+					<ModalPageHeader>
 						Бонусы за достижение ранга
 					</ModalPageHeader>
 				}

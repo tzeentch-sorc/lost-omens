@@ -126,6 +126,8 @@ export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-202
 export const RGArticleImage = '/images/rg_banner.jpg';
 export const RGNoCharsCaption = 'Добро пожаловать в «Rogues Gallery»!';
 export const RGNoCharsDescription = 'Знакомство с мегакампанией';
+export const RGDrinkLowPlaceholder = "Ты ещё не заслужил. Наберись опыта, докажи, что ты не гонк, тогда поговорим.";
+export const RGDrinkHighPlaceholder = "Добро пожаловать в высшую лигу. Зайди к Харми перед следующим заказом, она запишет твой рецепт.";
 
 // ===== Golarion Heroes (Pathfinder 1 edition) =====
 // ----- Spreadsheet -----
