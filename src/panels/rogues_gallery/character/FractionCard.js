@@ -4,17 +4,22 @@ import {
 
 } from '@vkontakte/vkui';
 import {
-    Icon28HourglassOutline
+    Icon28GlobeOutline
 } from '@vkontakte/icons'
+import { FavouriteColor } from '../../../consts';
 
 const FractionCard = ({ helped, hurt, onOpenFractionModal }) => {
 
     return (
         <>
             <Card onClick={() => onOpenFractionModal()} style={{ cursor: 'pointer' }}>
-                <Header mode="primary">Отношения с фракциями</Header>
-                <SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>
-                    Ну, кому ты еще насолил?
+                <Header mode="primary">Статус фракций</Header>
+                <SimpleCell
+                    before={<Icon28GlobeOutline
+                        width={24} height={24}
+                        style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                    />}>
+                    Check me
                 </SimpleCell>
             </Card>
         </>

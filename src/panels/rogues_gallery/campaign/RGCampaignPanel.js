@@ -121,7 +121,6 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
 					{campaignName}
 				</PanelHeader>
-				{console.log("render chars")}
 				{fetchedUser &&
 					<Group mode="card">
 						<SplitLayout popout={popout}>

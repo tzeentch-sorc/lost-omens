@@ -4,7 +4,7 @@ export const getVkUserUrl = (elem, fetchedUser) => {
         // Running with npm start
         //DEBUG:
         //return elem.id == ("vk.com/id166159611");
-        return elem.id == ("https://vk.com/contruction");
+        return elem.id == ("https://vk.com/nancy_drukovishna");
 
     } else {
         // Running with npm run deploy (production)

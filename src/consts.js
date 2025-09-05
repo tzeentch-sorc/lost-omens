@@ -3,6 +3,8 @@ import config from './config.json';
 // ===== Common =====
 export const FormPreEnter = "?usp=pp_url";
 export const FavouriteColor = '#008cff';
+export const GoodColor = '#00B86B';
+export const BadColor = '#E84C5B';
 export const VKToken = config.VKToken;
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';
 
@@ -128,6 +130,10 @@ export const RGNoCharsCaption = 'Добро пожаловать в «Rogues Gal
 export const RGNoCharsDescription = 'Знакомство с мегакампанией';
 export const RGDrinkLowPlaceholder = "Ты ещё не заслужил. Наберись опыта, докажи, что ты не гонк, тогда поговорим.";
 export const RGDrinkHighPlaceholder = "Добро пожаловать в высшую лигу. Зайди к Харми перед следующим заказом, она запишет твой рецепт.";
+
+// ----- Forms -----
+export const RGTransactions = "https://docs.google.com/forms/d/e/1FAIpQLSfng6xGVuvdWjSyb_CuAHQU5YCgxhggbiMysWOmSu8guXGYhg/viewform";
+export const RGTransactionsChar = "&entry.1071171589=";
 
 // ===== Golarion Heroes (Pathfinder 1 edition) =====
 // ----- Spreadsheet -----

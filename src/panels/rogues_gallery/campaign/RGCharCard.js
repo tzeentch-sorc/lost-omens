@@ -9,11 +9,14 @@ const RGCharCard = ({ element, openAction }) => {
     return (
         <Card mode="shadow" size="m" key={element.name + "_rg_card"}
             onClick={openAction}>
-                {console.log("render char card")}
             <RichCell
                 key={element.name}
                 id={element.name}
-                before={<Icon24UserOutline width={48} height={48} color={FavouriteColor} />}
+                before={<Icon24UserOutline 
+                    width={48} height={48} 
+                    color={FavouriteColor} 
+                    style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                    />}
                 text={element.type}
                 caption={element.owner && 
                     ("Собственность " + element.owner)}

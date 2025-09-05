@@ -4,10 +4,11 @@ import {
     Header, Group, CardGrid, Card
 } from '@vkontakte/vkui';
 import {
-    Icon28HourglassOutline, Icon36CoinsStacks3Outline, Icon56Stars3Outline,
-    Icon24PlaneOutline, Icon28CompassOutline, Icon28WrenchOutline
+    Icon28HourglassOutline, Icon28MasksOutline, Icon28ClockOutline, Icon56Stars3Outline,
+    Icon20ArrowUpOutline, Icon56StatisticsOutline, Icon20ArrowDownOutline, Icon24DollarOutline
 } from '@vkontakte/icons'
 import FractionCard from './FractionCard';
+import { GoodColor, BadColor, FavouriteColor } from '../../../consts';
 
 
 const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budget, income, expenses, onOpenFractionModal }) => {
@@ -17,22 +18,44 @@ const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budg
             <CardGrid size='m'>
                 <Card key="humanity">
                     <Header mode="primary">Человечность</Header>
-                    <SimpleCell before={<Icon36CoinsStacks3Outline width={24} height={24} />}>{humanity}</SimpleCell>
+                    <SimpleCell
+                        before={<Icon28MasksOutline
+                            width={24} height={24}
+                            style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                        />}>
+                        {humanity}
+                    </SimpleCell>
                 </Card>
                 <Card key="reputation">
                     <Header mode="primary">Репутация</Header>
-                    <SimpleCell before={<Icon28CompassOutline width={24} height={24} />}>{rep}</SimpleCell>
+                    <SimpleCell
+                        before={<Icon56StatisticsOutline
+                            width={24} height={24}
+                            style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                        />}>
+                        {rep}
+                    </SimpleCell>
                 </Card>
                 <Card key="experience">
                     <Header mode="primary">Опыт в навыке</Header>
-                    <SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{exp}</SimpleCell>
+                    <SimpleCell
+                        before={<Icon56Stars3Outline
+                            width={24} height={24}
+                            style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                        />}>
+                        {exp}
+                    </SimpleCell>
                 </Card>
                 <FractionCard helped={helped} hurt={hurt} onOpenFractionModal={onOpenFractionModal} />
             </CardGrid>
             <CardGrid size='m'>
                 <Card key="downtime">
                     <Header mode="primary">Даунтайм</Header>
-                    <SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
+                    <SimpleCell
+                        before={<Icon28HourglassOutline
+                            width={24} height={24}
+                            style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                        />}>
                         {downtime}
                     </SimpleCell>
                 </Card>
@@ -40,7 +63,11 @@ const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budg
                     <Header mode="primary">
                         Свободное время
                     </Header>
-                    <SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>
+                    <SimpleCell
+                        before={<Icon28ClockOutline
+                            width={24} height={24}
+                            style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                        />}>
                         {freetime}
                     </SimpleCell>
                 </Card>
@@ -50,17 +77,31 @@ const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budg
                     <Header mode="primary">Финансы</Header>
                     <SimpleGrid align='stretch' columns={3} margin='none' gap='m'>
                         <HorizontalCell size='l' >
-                            <SimpleCell subhead='Бюджет' before={<Icon36CoinsStacks3Outline width={24} height={24} />}>
+                            <SimpleCell subhead='Бюджет'
+                                before={<Icon24DollarOutline
+                                    width={24} height={24}
+                                    style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                                />}>
                                 {budget}
                             </SimpleCell>
                         </HorizontalCell>
                         <HorizontalCell size='l ' >
-                            <SimpleCell subhead='Доходы' before={<Icon24PlaneOutline width={24} height={24} />}>
+                            <SimpleCell subhead='Доходы'
+                                before={<Icon20ArrowUpOutline
+                                    width={24} height={24}
+                                    color={GoodColor}
+                                    style={{ filter: `drop-shadow(0 0 4px ${GoodColor})` }}
+                                />}>
                                 {income}
                             </SimpleCell>
                         </HorizontalCell>
                         <HorizontalCell size='m' >
-                            <SimpleCell subhead='Расходы' before={<Icon28WrenchOutline width={24} height={24} />}>
+                            <SimpleCell subhead='Расходы'
+                                before={<Icon20ArrowDownOutline
+                                    width={24} height={24}
+                                    color={BadColor}
+                                    style={{ filter: `drop-shadow(0 0 4px ${BadColor})` }}
+                                />}>
                                 {expenses}
                             </SimpleCell>
                         </HorizontalCell>

@@ -11,6 +11,7 @@ import {
 
 import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
 import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
+import DrinkPlaceholder from '../../common/placeholders/DrinkPlaceholder.js';
 import RGCharTabPanel from './RGCharTabPanel.js';
 //import RGInventory from './RGInventory.js';
 //import RGFormulae from './RGFormulae.js';
@@ -24,7 +25,7 @@ import '../../common/css/Character.css';
 
 //import RGFeatPanel from './RGFeatPanel.js';
 
-import { RGCampaign } from '../../../consts.js'
+import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder } from '../../../consts.js'
 
 const RGCharacter = () => {
 
@@ -45,7 +46,7 @@ const RGCharacter = () => {
 	const [drink, setDrink] = useState("None");
 
 	const [menuOpened, setMenuOpened] = React.useState(false);
-	const [selected, setSelected] = React.useState('inventory');
+	const [selected, setSelected] = React.useState('drink');
 
 	// const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
@@ -69,12 +70,12 @@ const RGCharacter = () => {
 	}
 	*/
 	function hasDrink() {
-		return (drink !== "None");
+		return (drink !== "None" && drink !== "");
 	}
 
 	function renderSelectedTab() {
 		switch (selected) {
-			case 'inventory':
+			/*case 'inventory':
 				return hasInventory() ? (
 					//<RGInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player} />
 					console.log("inventory")
@@ -87,10 +88,16 @@ const RGCharacter = () => {
 					console.log("formulae")
 				) : (
 					<FormulaePlaceholder />
-				);
+				);*/
 			case 'drink':
 				return hasDrink() ? (
-					<Text>{drink}</Text>
+					<SimpleCell key="drink" multiline>
+						<InfoRow header="Твой спешелти дринк в баре Посмертие">
+							{drink.split('\n').map((line, index) => (
+								<Text key={index}>{line}</Text>
+							))}
+						</InfoRow>
+					</SimpleCell>
 				) : (
 
 					rep < 4
@@ -132,12 +139,22 @@ const RGCharacter = () => {
 			>
 				{modalFraction && (
 					<Div>
+						<Text style={{ fontStyle: 'italic', padding: 20 }}>Ну, кому ты еще насолил?</Text>
+						<Separator />
 						<List>
 							<SimpleCell key="helped" multiline>
-								<InfoRow header="Этим ты помог">{helped}</InfoRow>
+								<InfoRow header="Этим ты помог">
+									{helped.split('\n').map((line, index) => (
+										<Text key={index}>{line}</Text>
+									))}
+								</InfoRow>
 							</SimpleCell>
 							<SimpleCell key="hurt" multiline>
-								<InfoRow header="А этим - помешал">{hurt}</InfoRow>
+								<InfoRow header="А этим - помешал">
+									{hurt.split('\n').map((line, index) => (
+										<Text key={index}>{line}</Text>
+									))}
+								</InfoRow>
 							</SimpleCell>
 						</List>
 					</Div>
@@ -181,25 +198,7 @@ const RGCharacter = () => {
 			let characterBuildData = await RGCharBuildSettings.getFilteredQuery("name", charName);
 			console.log("character build data", characterBuildData);
 
-			setSpell_0(characterBuildData[0].spells_0.split(','));
-			setSpell_1(characterBuildData[0].spells_1.split(','));
-			setSpell_2(characterBuildData[0].spells_2.split(','));
-			setSpell_3(characterBuildData[0].spells_3.split(','));
-			setSpell_4(characterBuildData[0].spells_4.split(','));
-			setSpell_5(characterBuildData[0].spells_5.split(','));
-			setSpell_6(characterBuildData[0].spells_6.split(','));
-			setSpell_7(characterBuildData[0].spells_7.split(','));
-			setSpell_8(characterBuildData[0].spells_8.split(','));
-			setSpell_9(characterBuildData[0].spells_9.split(','));
-			setSpell_10(characterBuildData[0].spells_10.split(','));
-
 			setFormulae(characterBuildData[0].formulas.split(','));
-
-			setFeatRace(characterBuildData[0].feat_race.split(','));
-			setFeatGeneral(characterBuildData[0].feat_general.split(','));
-			setFeatSkill(characterBuildData[0].feat_skill.split(','));
-			setFeatClass(characterBuildData[0].feat_class.split(','));
-			setFeatArchetype(characterBuildData[0].feat_archetype.split(','));
 			*/
 
 
