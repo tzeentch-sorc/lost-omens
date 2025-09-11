@@ -3,6 +3,8 @@ import config from './config.json';
 // ===== Common =====
 export const FormPreEnter = "?usp=pp_url";
 export const FavouriteColor = '#008cff';
+export const GoodColor = '#00B86B';
+export const BadColor = '#E84C5B';
 export const VKToken = config.VKToken;
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';
 
@@ -18,6 +20,7 @@ export const SMCampaign = '/campaign/silver_marshes';
 export const BWCampaign = '/campaign/blue_waters';
 export const VUCampaign = '/campaign/voux_umbra';
 export const RGCampaign = '/campaign/rogues_gallery';
+export const RGCharacter = '/char/rogues_gallery';
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
@@ -117,12 +120,20 @@ export const VUNoCharsDescription = 'Знакомство с мегакампа�
 // ----- Spreadsheet -----
 export const RGSpreadSheetID = config.RoguesGallery.Mirror; //RG Geekmo Mirror
 export const RGMastersSheetID = config.RoguesGallery.Masters; //sheet "gms"
+export const RGPlayersSheetID = config.RoguesGallery.Players; //sheet "players"
+export const RGCharactersSheetID = config.RoguesGallery.Characters; //sheet "characters"
 
 // ----- Additional info -----
 export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-2020-v-geekmo-rogues-gallery';
 export const RGArticleImage = '/images/rg_banner.jpg';
 export const RGNoCharsCaption = 'Добро пожаловать в «Rogues Gallery»!';
 export const RGNoCharsDescription = 'Знакомство с мегакампанией';
+export const RGDrinkLowPlaceholder = "Ты ещё не заслужил. Наберись опыта, докажи, что ты не гонк, тогда поговорим.";
+export const RGDrinkHighPlaceholder = "Добро пожаловать в высшую лигу. Зайди к Харми перед следующим заказом, она запишет твой рецепт.";
+
+// ----- Forms -----
+export const RGTransactions = "https://docs.google.com/forms/d/e/1FAIpQLSfng6xGVuvdWjSyb_CuAHQU5YCgxhggbiMysWOmSu8guXGYhg/viewform";
+export const RGTransactionsChar = "&entry.1071171589=";
 
 // ===== Golarion Heroes (Pathfinder 1 edition) =====
 // ----- Spreadsheet -----
