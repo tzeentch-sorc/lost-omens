@@ -7,11 +7,11 @@ import {
     Icon28HourglassOutline, Icon28MasksOutline, Icon28ClockOutline, Icon56Stars3Outline,
     Icon20ArrowUpOutline, Icon56StatisticsOutline, Icon20ArrowDownOutline, Icon24DollarOutline
 } from '@vkontakte/icons'
-import FractionCard from './FractionCard';
+import FactionCard from './FactionCard';
 import { GoodColor, BadColor, FavouriteColor } from '../../../consts';
 
 
-const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budget, income, expenses, onOpenFractionModal }) => {
+const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budget, income, expenses, onOpenFactionModal }) => {
 
     return (
         <Group mode='card' header={<Header mode='secondary'>информация о персонаже</Header>}>
@@ -46,7 +46,7 @@ const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budg
                         {exp}
                     </SimpleCell>
                 </Card>
-                <FractionCard helped={helped} hurt={hurt} onOpenFractionModal={onOpenFractionModal} />
+                <FactionCard helped={helped} hurt={hurt} onOpenFactionModal={onOpenFactionModal} />
             </CardGrid>
             <CardGrid size='m'>
                 <Card key="downtime">

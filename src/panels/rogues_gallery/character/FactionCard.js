@@ -8,11 +8,11 @@ import {
 } from '@vkontakte/icons'
 import { FavouriteColor } from '../../../consts';
 
-const FractionCard = ({ helped, hurt, onOpenFractionModal }) => {
+const FactionCard = ({ helped, hurt, onOpenFactionModal }) => {
 
     return (
         <>
-            <Card onClick={() => onOpenFractionModal()} style={{ cursor: 'pointer' }}>
+            <Card onClick={() => onOpenFactionModal()} style={{ cursor: 'pointer' }}>
                 <Header mode="primary">Статус фракций</Header>
                 <SimpleCell
                     before={<Icon28GlobeOutline
@@ -26,4 +26,4 @@ const FractionCard = ({ helped, hurt, onOpenFractionModal }) => {
     );
 };
 
-export default FractionCard;
+export default FactionCard;

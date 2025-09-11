@@ -111,25 +111,25 @@ const RGCharacter = () => {
 	};
 
 	//TODO rework all modals
-	const [modalFraction, setModalFraction] = useState(null);
+	const [modalFaction, setModalFaction] = useState(null);
 	const [activeModal, setActiveModal] = useState(null);
 
-	const MODAL_PAGE_FRACTION = 'fraction_reputation';
+	const MODAL_PAGE_FACTION = 'faction_reputation';
 
-	const openFractionModal = () => {
-		setModalFraction(true);
-		setActiveModal(MODAL_PAGE_FRACTION);
+	const openFactionModal = () => {
+		setModalFaction(true);
+		setActiveModal(MODAL_PAGE_FACTION);
 	};
 
 	const closeModal = () => {
 		setActiveModal(null);
-		setModalFraction(null);
+		setModalFaction(null);
 	};
 
 	const modal = (
 		<ModalRoot activeModal={activeModal} onClose={closeModal}>
 			<ModalPage
-				id={MODAL_PAGE_FRACTION}
+				id={MODAL_PAGE_FACTION}
 				header={
 					<ModalPageHeader>
 						Отношения с фракциями
@@ -137,7 +137,7 @@ const RGCharacter = () => {
 				}
 				onClose={closeModal}
 			>
-				{modalFraction && (
+				{modalFaction && (
 					<Div>
 						<Text style={{ fontStyle: 'italic', padding: 20 }}>Ну, кому ты еще насолил?</Text>
 						<Separator />
@@ -232,7 +232,7 @@ const RGCharacter = () => {
 						exp={exp} downtime={downtime} freetime={freetime}
 						budget={budget} income={income} expenses={expenses}
 						// setPopout={setPopout}
-						onOpenFractionModal={openFractionModal}
+						onOpenFactionModal={openFactionModal}
 					/>
 					{/*<RGFeatPanel featlist={featlist()} />*/}
 					<Group mode='card'>
