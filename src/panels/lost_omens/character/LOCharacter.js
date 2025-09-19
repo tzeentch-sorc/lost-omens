@@ -9,6 +9,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
 import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
 import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
+import Marquee from '../../common/components/Marquee.js';
 import LOCharTabPanel from './LOCharTabPanel.js';
 import LOSpells from './LOSpells.js';
 import LOInventory from './LOInventory.js';
@@ -271,7 +272,7 @@ const LOCharacter = () => {
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(LOCampaign, { keepSearchParams: true })} />}>
-				{charName}
+				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout /*popout={popout} */ modal={modal}>
 				<SplitCol>

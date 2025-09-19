@@ -14,6 +14,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import SFCharInfoSettings from '../export_settings/SFCharInfoSettings.js'
 import {SFCampaign} from '../../../consts.js'
 import * as logger from '../../../util/Logger.js';
+import Marquee from '../../common/components/Marquee.js';
 
 const SFCharacter = () => {
 
@@ -58,7 +59,7 @@ const SFCharacter = () => {
 
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SFCampaign, { keepSearchParams: true })} />}>
-				{charName}
+				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout popout={popout}>
 				<SplitCol>

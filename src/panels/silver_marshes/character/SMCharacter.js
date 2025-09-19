@@ -24,6 +24,7 @@ import SMFeatPanel from './SMFeatPanel.js';
 
 import { SMCampaign } from '../../../consts.js';
 import * as logger from '../../../util/Logger.js'; 
+import Marquee from '../../common/components/Marquee.js';
 
 const SMCharacter = () => {
 
@@ -142,7 +143,7 @@ const SMCharacter = () => {
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
-				{charName}
+				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout popout={popout}>
 				<SplitCol>

@@ -27,6 +27,7 @@ import '../../common/css/Character.css';
 
 import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder } from '../../../consts.js'
 import * as logger from '../../../util/Logger.js';
+import Marquee from '../../common/components/Marquee.js';
 
 const RGCharacter = () => {
 
@@ -223,7 +224,7 @@ const RGCharacter = () => {
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(RGCampaign, { keepSearchParams: true })} />}>
-				{charName}
+				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout /*popout={popout} */ modal={modal}>
 				<SplitCol>
