@@ -15,16 +15,17 @@ import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import NoCharsPage from '../../common/components/NOCharsPage.js';
 import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import SFCharCard from './SFCharCard.js';
-import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
-import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
+import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js';
+import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js';
 
 import { SFCharacter, SFLvlupLink, SFCreateLink } from '../../../consts.js'
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
-	SFNoCharsDescription, SFNoCharsBody, VKToken
-} from '../../../consts.js'
+	SFNoCharsDescription, SFNoCharsBody, VKToken, MastersText
+} from '../../../consts.js';
 import * as logger from '../../../util/Logger.js';
+import MastersGroup from '../../common/components/MastersGroup.js';
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
@@ -131,8 +132,10 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 					{campaignName}
 				</PanelHeader>
 				{fetchedUser &&
-					<Group mode="card">
-						<SplitLayout popout={popout}>
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode="card">
+							<SplitLayout popout={popout}>
 								<SplitCol>
 									{prio &&
 										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
@@ -153,8 +156,9 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 										</Div>
 									</Group>
 								</SplitCol>
-						</SplitLayout>
-					</Group>
+							</SplitLayout>
+						</Group>
+					</>
 				}
 			</Panel>
 		)

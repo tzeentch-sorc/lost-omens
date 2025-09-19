@@ -19,11 +19,13 @@ import RGCharUpdateAlert from './RGCharUpdateAlert.js';
 import RGCharCard from './RGCharCard.js';
 import {
 	RGArticleLink, RGArticleImage, RGNoCharsCaption,
-	RGNoCharsDescription, CommonNoCharsBody, VKToken
+	RGNoCharsDescription, CommonNoCharsBody, VKToken,
+	MastersText
 } from '../../../consts.js'
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
+import MastersGroup from '../../common/components/MastersGroup.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {
@@ -123,27 +125,30 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 					{campaignName}
 				</PanelHeader>
 				{fetchedUser &&
-					<Group mode="card">
-						<SplitLayout popout={popout}>
-							{isDisplayed &&
-								<SplitCol>
-									<Header mode="secondary">Ваши персонажи</Header>
-									<Group mode="plain">
-										<Div className="not4mob" style={{ cursor: 'pointer' }}>
-											<CardGrid size="m">
-												{characters && characters.map((elem) => createCard(elem))}
-											</CardGrid>
-										</Div>
-										<Div className="formob">
-											<CardGrid size="l">
-												{characters && characters.map((elem) => createCard(elem))}
-											</CardGrid>
-										</Div>
-									</Group>
-								</SplitCol>
-							}
-						</SplitLayout>
-					</Group>
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode="card">
+							<SplitLayout popout={popout}>
+								{isDisplayed &&
+									<SplitCol>
+										<Header mode="secondary">Ваши персонажи</Header>
+										<Group mode="plain">
+											<Div className="not4mob" style={{ cursor: 'pointer' }}>
+												<CardGrid size="m">
+													{characters && characters.map((elem) => createCard(elem))}
+												</CardGrid>
+											</Div>
+											<Div className="formob">
+												<CardGrid size="l">
+													{characters && characters.map((elem) => createCard(elem))}
+												</CardGrid>
+											</Div>
+										</Group>
+									</SplitCol>
+								}
+							</SplitLayout>
+						</Group>
+					</>
 				}
 			</Panel>
 		)

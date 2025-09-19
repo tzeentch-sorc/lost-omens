@@ -25,11 +25,11 @@ import {
 	FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice,
 	LOLvlupLevel, LOCharacter, LOBulletinLink,
 	MastersText
-} from '../../../consts.js'
+} from '../../../consts.js';
 import {
 	LOArticleLink, LOArticleImage, LONoCharsCaption,
 	LONoCharsDescription, CommonNoCharsBody, VKToken
-} from '../../../consts.js'
+} from '../../../consts.js';
 import MastersGroup from '../../common/components/MastersGroup.js';
 
 const LOCampaignPanel = ({ fetchedUser }) => {

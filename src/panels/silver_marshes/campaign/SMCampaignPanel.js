@@ -25,8 +25,10 @@ import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
 import {
 	SMArticleLink, SMArticleImage, SMNoCharsCaption,
-	SMNoCharsDescription, CommonNoCharsBody, VKToken
+	SMNoCharsDescription, CommonNoCharsBody, VKToken,
+	MastersText
 } from '../../../consts.js'
+import MastersGroup from '../../common/components/MastersGroup.js';
 
 const SMCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -143,32 +145,35 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
 				{
 					fetchedUser &&
-					<Group mode='card'>
-						<SplitLayout popout={popout}>
-							<SplitCol>
-								{date && prio && advName &&
-									<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
-										<SMInfoCard date={date} prio={prio} adventure={advName} />
-										<Spacing size={4} />
-										<SMPriorities setPopout={setPopout} priorities={priorities} />
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode='card'>
+							<SplitLayout popout={popout}>
+								<SplitCol>
+									{date && prio && advName &&
+										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+											<SMInfoCard date={date} prio={prio} adventure={advName} />
+											<Spacing size={4} />
+											<SMPriorities setPopout={setPopout} priorities={priorities} />
+										</Group>
+									}
+									<Header mode="secondary">Ваши персонажи</Header>
+									<Group mode="plain">
+										<Div className="not4mob">
+											<CardGrid size="m" style={{ cursor: 'pointer' }} >
+												{characters && characters.map((elem) => createCard(elem))}
+											</CardGrid>
+										</Div>
+										<Div className="formob">
+											<CardGrid size="l">
+												{characters && characters.map((elem) => createCard(elem))}
+											</CardGrid>
+										</Div>
 									</Group>
-								}
-								<Header mode="secondary">Ваши персонажи</Header>
-								<Group mode="plain">
-									<Div className="not4mob">
-										<CardGrid size="m" style={{ cursor: 'pointer' }} >
-											{characters && characters.map((elem) => createCard(elem))}
-										</CardGrid>
-									</Div>
-									<Div className="formob">
-										<CardGrid size="l">
-											{characters && characters.map((elem) => createCard(elem))}
-										</CardGrid>
-									</Div>
-								</Group>
-							</SplitCol>
-						</SplitLayout>
-					</Group>
+								</SplitCol>
+							</SplitLayout>
+						</Group>
+					</>
 				}
 			</Panel>
 		)
