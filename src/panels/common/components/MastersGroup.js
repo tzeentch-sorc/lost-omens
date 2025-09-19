@@ -2,7 +2,7 @@ import { Group, Header, HorizontalScroll } from "@vkontakte/vkui";
 import UserRefCell from './UserRefCell';
 import { MastersNoCharsText } from "../../../consts";
 
-const MastersGroup = ({ masters, text={MastersNoCharsText} }) => {
+const MastersGroup = ({ masters, text=MastersNoCharsText }) => {
     return (
         <Group mode="card" header={
             <Header

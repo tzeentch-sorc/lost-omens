@@ -26,6 +26,7 @@ import {
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
 import MastersGroup from '../../common/components/MastersGroup.js';
+import Marquee from '../../common/components/Marquee.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {
@@ -122,7 +123,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 		return (
 			<Panel nav='campaign' key={campaignName}>
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
-					{campaignName}
+					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
 				</PanelHeader>
 				{fetchedUser &&
 					<>

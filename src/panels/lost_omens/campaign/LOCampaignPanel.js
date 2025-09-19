@@ -31,6 +31,7 @@ import {
 	LONoCharsDescription, CommonNoCharsBody, VKToken
 } from '../../../consts.js';
 import MastersGroup from '../../common/components/MastersGroup.js';
+import Marquee from '../../common/components/Marquee.js';
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -153,7 +154,9 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	} else {
 		return (
 			<Panel nav='campaign' key={campaignName}>
-				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
+				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
+				</PanelHeader>
 				{
 					fetchedUser &&
 					<>
