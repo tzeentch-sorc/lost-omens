@@ -6,6 +6,7 @@ export const FavouriteColor = '#008cff';
 export const GoodColor = '#00B86B';
 export const BadColor = '#E84C5B';
 export const VKToken = config.VKToken;
+export const DEBUG_MODE = config.DEBUG_MODE || 'none';
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';
 
 // ----- Navigation -----

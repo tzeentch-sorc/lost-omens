@@ -95,7 +95,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			const data = prioData.filter(elem => {
 				return getVkUserUrl(elem, fetchedUser)
 			});
-			console.log("data: ", data);
+			//console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				player: `${elem.player?.split(" ")?.[0] ?? ''} ${elem.player?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim(),

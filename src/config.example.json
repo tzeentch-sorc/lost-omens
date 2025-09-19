@@ -1,5 +1,7 @@
 {
     "VKToken": "insert_your_token_here",
+    "_hint_DEBUG_MODE": "Values 'none'(see all chars), 'LO', 'SF', 'SM', 'HG', 'BW', 'VU', 'RG' (see player view of the select mega)",
+    "DEBUG_MODE": "none", 
     "LostOmens":{
         "Mirror": "insert_your_mirror_id_here",
         "Builds": 0,

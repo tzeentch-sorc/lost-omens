@@ -168,7 +168,7 @@ const RGCharacter = () => {
 			//попытка получить через spreadsheetApp
 			//получение золота, уровня, даунтайма и опыта
 			let characterInfoData = await RGCharInfoSettings.getFilteredQuery("name", charName);
-			console.log("character info data", characterInfoData);
+			//console.log("character info data", characterInfoData);
 			setHelped(characterInfoData[0].helped);
 			setHurt(characterInfoData[0].hurt);
 			setRep(characterInfoData[0].rep);

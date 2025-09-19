@@ -36,7 +36,7 @@ const SFCharacter = () => {
 		async function fetchData() {
 			//получение золота, уровня и опыта
 			let characterInfoData = await SFCharInfoSettings.getFilteredQuery("name", charName);
-			console.log("character info data", characterInfoData);
+			//console.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExp(characterInfoData[0].exp);
 			setLvl(characterInfoData[0].lvl);
@@ -48,7 +48,7 @@ const SFCharacter = () => {
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
-			console.log(characterInfoData)
+			//console.log(characterInfoData)
 		}
 		fetchData().catch(console.error);
 	}, []);

@@ -206,7 +206,7 @@ const LOCharacter = () => {
 			//попытка получить через spreadsheetApp
 			//получение золота, уровня, даунтайма и опыта
 			let characterInfoData = await LOCharInfoSettings.getFilteredQuery("name", charName);
-			console.log("character info data", characterInfoData);
+			//console.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
@@ -214,7 +214,7 @@ const LOCharacter = () => {
 
 			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
-			console.log("inventory data", inventoryData);
+			//console.log("inventory data", inventoryData);
 
 			if (inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
@@ -226,7 +226,7 @@ const LOCharacter = () => {
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await LOCharBuildSettings.getFilteredQuery("name", charName);
-			console.log("character build data", characterBuildData);
+			//console.log("character build data", characterBuildData);
 
 			setSpell_0(characterBuildData[0].spells_0.split(','));
 			setSpell_1(characterBuildData[0].spells_1.split(','));

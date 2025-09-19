@@ -66,7 +66,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 		async function fetchData() {
 			const playerData = await RGPlayerInfoSettings.getQueryAll();
 			const data = playerData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			console.log("data: ", data);
+			//console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				type: elem.char_class,

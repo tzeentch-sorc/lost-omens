@@ -77,7 +77,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 			})).sort((a, b) => b.prio - a.prio));
 			//console.log(prioData);
 			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			console.log("data: ", data);
+			//console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,

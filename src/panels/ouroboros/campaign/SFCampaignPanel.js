@@ -34,7 +34,6 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	const [characters, setCharacters] = useState([])
 	const [prio, setPrio] = useState(-1) // -1 => loading
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
-	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	const [masters, setMasters] = useState([]);
 
@@ -69,7 +68,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
 			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			console.log("data: ", data);
+			//console.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
@@ -99,7 +98,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 			setMasters(users);
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
+			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
@@ -133,9 +132,12 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 				{fetchedUser &&
 					<Group mode="card">
 						<SplitLayout popout={popout}>
-							{isDisplayed &&
 								<SplitCol>
-									{prio && <SFCharacterInfoCard prio={prio} />}
+									{prio &&
+										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+											<SFCharacterInfoCard prio={prio} />
+										</Group>
+									}
 									<Header mode="secondary">Ваши персонажи</Header>
 									<Group mode="plain">
 										<Div className="not4mob" style={{ cursor: 'pointer' }}>
@@ -150,7 +152,6 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 										</Div>
 									</Group>
 								</SplitCol>
-							}
 						</SplitLayout>
 					</Group>
 				}
