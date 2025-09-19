@@ -23,6 +23,7 @@ import {
 } from '../../../consts.js'
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import * as logger from '../../../util/Logger.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {
@@ -66,7 +67,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 		async function fetchData() {
 			const playerData = await RGPlayerInfoSettings.getQueryAll();
 			const data = playerData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			//console.log("data: ", data);
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				type: elem.char_class,
@@ -81,8 +82,8 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await RGMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-			//console.log(masterData);
-			//console.log(userIds);
+			logger.log(masterData);
+			logger.log(userIds);
 			const users = await bridge
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',

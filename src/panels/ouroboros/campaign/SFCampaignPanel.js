@@ -24,6 +24,7 @@ import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
 	SFNoCharsDescription, SFNoCharsBody, VKToken
 } from '../../../consts.js'
+import * as logger from '../../../util/Logger.js';
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
@@ -68,7 +69,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
 			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			//console.log("data: ", data);
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
@@ -82,8 +83,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await SFMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-			//console.log(masterData);
-			//console.log(userIds);
+			logger.log(masterData);
+			logger.log(userIds);
 			const users = await bridge
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',

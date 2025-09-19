@@ -1,9 +1,10 @@
 import { DEBUG_MODE } from "../consts";
+import * as logger from './Logger.js';
 
 export const getVkUserUrl = (elem, fetchedUser) => {
     if (process.env.NODE_ENV === 'development') {
         // Running with npm start
-        console.log("DEBUG_MODE:", DEBUG_MODE);
+        logger.log("DEBUG_MODE:", DEBUG_MODE);
         //DEBUG:
         switch(DEBUG_MODE) {
             case 'LO':

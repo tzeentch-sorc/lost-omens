@@ -17,6 +17,7 @@ import VUMastersInfoSettings from '../export_settings/VUMastersInfoSettings.js'
 import { VUArticleLink, VUArticleImage, VUNoCharsCaption, 
 	VUNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../consts.js'
 
+import * as logger from '../../../util/Logger.js'
 
 const VUCampaignPanel = ({ fetchedUser }) => {
 	const [params, setParams] = useSearchParams();
@@ -28,8 +29,8 @@ const VUCampaignPanel = ({ fetchedUser }) => {
 		async function fetchData() {
 			const masterData = await VUMastersInfoSettings.getQueryAll();
             const userIds = masterData.map(elem => elem.id).join(', ');
-            //console.log(masterData);
-            //console.log(userIds);
+            logger.log(masterData);
+            logger.log(userIds);
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',

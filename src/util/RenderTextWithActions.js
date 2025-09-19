@@ -3,6 +3,7 @@ import OneActionIcon from '../panels/common/custom_icons/Actions/OneActionIcon.t
 import TwoActionIcon from '../panels/common/custom_icons/Actions/TwoActionIcon.tsx';
 import ThreeActionIcon from '../panels/common/custom_icons/Actions/ThreeActionIcon.tsx';
 import ReactionActionIcon from '../panels/common/custom_icons/Actions/ReactionActionIcon.tsx';
+import * as logger from './Logger.js';
 
 import React from 'react';
 // Mapping of symbols to icons
@@ -20,13 +21,13 @@ const iconMap = {
 };
 
 export function renderTextWithActions(text) {
-    //console.log('renderTextWithActions', text);
+    //logger.log('renderTextWithActions', text);
     if (!text) return null; // or return '', depending on your needs
 
     // Regex to match the full symbol+variation selector sequence
     const regex = /(♠️|♠|♣️|♣|♥️|♥|♦️|♦|★️|★)/g;
     const parts = text.split(regex);
-    //console.log('renderTextWithActions parts', parts);
+    //logger.log('renderTextWithActions parts', parts);
     return parts.map((part, idx) => {
         const Icon = iconMap[part];
         if (Icon) {

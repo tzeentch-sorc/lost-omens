@@ -22,6 +22,7 @@ import SMPriorities from './SMPriorities.js';
 
 import { SMCharacter, SMCreateLink } from '../../../consts.js';
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import * as logger from '../../../util/Logger.js';
 import {
 	SMArticleLink, SMArticleImage, SMNoCharsCaption,
 	SMNoCharsDescription, CommonNoCharsBody, VKToken
@@ -75,9 +76,9 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 				prio: elem.prio,
 				lvl: elem.lvl
 			})).sort((a, b) => b.prio - a.prio));
-			//console.log(prioData);
+			logger.log(prioData);
 			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			//console.log("data: ", data);
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
@@ -95,8 +96,8 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await SMMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-			//console.log(masterData);
-			//console.log(userIds);
+			logger.log(masterData);
+			logger.log(userIds);
 			const users = await bridge
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',

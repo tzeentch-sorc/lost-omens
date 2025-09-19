@@ -8,6 +8,8 @@ export const BadColor = '#E84C5B';
 export const VKToken = config.VKToken;
 export const DEBUG_MODE = config.DEBUG_MODE || 'none';
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';
+export const MastersText = 'Этим людям можно написать, если появились вопросы';
+export const MastersNoCharsText = 'Этим людям можно написать, если остались вопросы';
 
 // ----- Navigation -----
 export const LOCharacter = '/char/lost_omens';

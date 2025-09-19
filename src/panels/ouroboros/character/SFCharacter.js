@@ -13,6 +13,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 
 import SFCharInfoSettings from '../export_settings/SFCharInfoSettings.js'
 import {SFCampaign} from '../../../consts.js'
+import * as logger from '../../../util/Logger.js';
 
 const SFCharacter = () => {
 
@@ -36,7 +37,7 @@ const SFCharacter = () => {
 		async function fetchData() {
 			//получение золота, уровня и опыта
 			let characterInfoData = await SFCharInfoSettings.getFilteredQuery("name", charName);
-			//console.log("character info data", characterInfoData);
+			logger.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExp(characterInfoData[0].exp);
 			setLvl(characterInfoData[0].lvl);
@@ -48,7 +49,7 @@ const SFCharacter = () => {
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
-			//console.log(characterInfoData)
+			logger.log(characterInfoData)
 		}
 		fetchData().catch(console.error);
 	}, []);

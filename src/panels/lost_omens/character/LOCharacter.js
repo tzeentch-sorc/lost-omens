@@ -23,6 +23,7 @@ import '../../common/css/Character.css';
 
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
+import * as logger from '../../../util/Logger.js';
 
 import {LOCampaign} from '../../../consts.js'
 
@@ -163,7 +164,7 @@ const LOCharacter = () => {
 
 	const getBonusItemLevel = (lvl) => {
 		const tier = getTierInfo(lvl);
-		console.log(tier)
+		logger.log("tier: ", tier)
 		if (tier >= 4) return (lvl - 1)
 		if (tier >= 2) return (lvl - 2)
 	}
@@ -206,7 +207,7 @@ const LOCharacter = () => {
 			//попытка получить через spreadsheetApp
 			//получение золота, уровня, даунтайма и опыта
 			let characterInfoData = await LOCharInfoSettings.getFilteredQuery("name", charName);
-			//console.log("character info data", characterInfoData);
+			logger.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
@@ -214,7 +215,7 @@ const LOCharacter = () => {
 
 			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
-			//console.log("inventory data", inventoryData);
+			logger.log("inventory data", inventoryData);
 
 			if (inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
@@ -226,7 +227,7 @@ const LOCharacter = () => {
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await LOCharBuildSettings.getFilteredQuery("name", charName);
-			//console.log("character build data", characterBuildData);
+			logger.log("character build data", characterBuildData);
 
 			setSpell_0(characterBuildData[0].spells_0.split(','));
 			setSpell_1(characterBuildData[0].spells_1.split(','));
@@ -253,7 +254,7 @@ const LOCharacter = () => {
 			// setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			// setTimeout(() => setPopout(null), 1000);
 
-			//console.log("new", inventoryData);
+			logger.log("new", inventoryData);
 		}
 		fetchData().catch(console.error);
 
