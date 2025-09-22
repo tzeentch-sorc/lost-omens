@@ -24,7 +24,6 @@ export const getVkUserUrl = (elem, mega, fetchedUser) => {
             case "test":
                 return elem.id == DEBUG_VK_IDS[mega];
             case "my":
-                return currentVKUser(elem, fetchedUser);
             default:
                 return currentVKUser(elem, fetchedUser);
         }
