@@ -95,7 +95,7 @@ const SMSpells = ({ spellist }) => {
                         <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
                         <Accordion.Content>
                             <Div style={infoStyle}>
-                                {fixRetrain(spellist[detail]).map(e => createSpellRow(e))}
+                                {fixRetrain(spellist[detail].sort((a, b) => a.localeCompare(b))).map(e => createSpellRow(e))}
                             </Div>
                         </Accordion.Content>
                     </Accordion>
