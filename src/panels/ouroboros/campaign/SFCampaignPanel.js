@@ -18,7 +18,9 @@ import SFCharCard from './SFCharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js';
 import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js';
 
-import { SFCharacter, SFLvlupLink, SFCreateLink } from '../../../consts.js'
+import { SFCharacter, SFLvlupLink, SFCreateLink, SFLvlupChar, SFLvlupAgree,
+	FormPreEnter, SFCreatePlayer, SFCreateVK
+ } from '../../../consts.js'
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
@@ -40,11 +42,25 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 	const [masters, setMasters] = useState([]);
 
+	function createPreEnteredLVLUPLink(charName, agree, link) {
+			var newLink = link + FormPreEnter +
+				SFLvlupChar + charName +
+				SFLvlupAgree + "Подтверждаю";
+			return newLink;
+		}
+
+	function createPreEnteredNewCharLink(fetchedUser, link) {
+			var newLink = link + FormPreEnter +
+				SFCreatePlayer + `${fetchedUser?.last_name || ''} ${fetchedUser?.first_name || ''}`.trim() +
+				SFCreateVK + "vk.com/" + fetchedUser.screen_name;
+			return newLink;
+		}
+	
 	const openAction = (element) => {
 		setPopout(
 			<CharUpdateAlert
 				charName={element.name}
-				formLink={SFLvlupLink}
+				formLink={createPreEnteredLVLUPLink(element.name, true, SFLvlupLink)}
 				navLink={SFCharacter}
 				closeMethod={() => setPopout(null)}
 			/>
@@ -115,7 +131,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 				action={<Button
 					size="m"
 					appearance="positive"
-					onClick={() => window.open(SFCreateLink, "_blank")}
+					onClick={() => window.open(createPreEnteredNewCharLink(fetchedUser, SFCreateLink), "_blank")}
 				>
 					Создать
 				</Button>} />
