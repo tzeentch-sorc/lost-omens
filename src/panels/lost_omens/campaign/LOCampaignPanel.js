@@ -97,7 +97,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			logger.log("prioData: ", prioData);
 
 			const data = prioData.filter(elem => {
-				return getVkUserUrl(elem, fetchedUser)
+				return getVkUserUrl(elem, "LO", fetchedUser)
 			});
 			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({

@@ -1,33 +1,35 @@
-import { DEBUG_MODE } from "../consts";
+import { DEBUG_MODE, DEBUG_VK_IDS } from "../consts";
 import * as logger from './Logger.js';
 
-export const getVkUserUrl = (elem, fetchedUser) => {
+const currentVKUser = (fetchedUser) => {
+    return elem.id == ("vk.com/" + fetchedUser.screen_name) ||
+        elem.id == ("vk.com/id" + fetchedUser.id) ||
+        elem.id == ("https://vk.com/id" + fetchedUser.id) ||
+        elem.id == ("https://vk.com/" + fetchedUser.screen_name) ||
+        elem.id == ("vk.ru/" + fetchedUser.screen_name) ||
+        elem.id == ("vk.ru/id" + fetchedUser.id) ||
+        elem.id == ("https://vk.ru/id" + fetchedUser.id) ||
+        elem.id == ("https://vk.ru/" + fetchedUser.screen_name);
+}
+
+export const getVkUserUrl = (elem, mega, fetchedUser) => {
     if (process.env.NODE_ENV === 'development') {
         // Running with npm start
-        logger.log("DEBUG_MODE:", DEBUG_MODE);
         //DEBUG:
-        switch(DEBUG_MODE) {
-            case 'LO':
-            case 'SF':
-            case 'HG':
-                return elem.id == ("vk.com/dragon_chronicler");
-            case 'SM':
-                return elem.id == ("vk.com/id166159611");
-            case 'RG':
-                return elem.id == ("https://vk.com/nancy_drukovishna");
-            default:
+        switch (DEBUG_MODE[mega]) {
+            case "all":
                 return true;
-        }  
-
+            case "none":
+                return false;
+            case "test":
+                return elem.id == DEBUG_VK_IDS[mega];
+            case "my":
+                return currentVKUser(fetchedUser);
+            default:
+                return currentVKUser(fetchedUser);
+        }
     } else {
         // Running with npm run deploy (production)
-        return elem.id == ("vk.com/" + fetchedUser.screen_name) ||
-            elem.id == ("vk.com/id" + fetchedUser.id) ||
-            elem.id == ("https://vk.com/id" + fetchedUser.id)||
-            elem.id == ("https://vk.com/" + fetchedUser.screen_name)||
-            elem.id == ("vk.ru/" + fetchedUser.screen_name) ||
-            elem.id == ("vk.ru/id" + fetchedUser.id) ||
-            elem.id == ("https://vk.ru/id" + fetchedUser.id)||
-            elem.id == ("https://vk.ru/" + fetchedUser.screen_name);
+        return currentVKUser(fetchedUser);
     }
 }

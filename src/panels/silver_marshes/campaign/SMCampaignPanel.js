@@ -80,7 +80,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 				lvl: elem.lvl
 			})).sort((a, b) => b.prio - a.prio));
 			logger.log(prioData);
-			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
+			const data = prioData.filter(elem => { return getVkUserUrl(elem, "SM", fetchedUser) });
 			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,

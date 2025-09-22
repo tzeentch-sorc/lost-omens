@@ -70,7 +70,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
-			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
+			const data = prioData.filter(elem => { return getVkUserUrl(elem, "SF", fetchedUser) });
 			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
