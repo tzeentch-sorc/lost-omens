@@ -116,7 +116,7 @@ export const SMCreateLink = 'https://vk.com/@geekmo-new-character-dnd-5e';
 export const SMArticleImage = '/images/sm_bannerjpg.jpg';
 export const SMNoCharsCaption = 'Добро пожаловать в «Серебряный Предел»!';
 export const SMNoCharsDescription = 'Знакомство с мегакампанией';
-
+export const SMSite = 'http://silvermarches.tilda.ws/';
 
 // ===== Blue Waters (Dungeons and Dragons 2024) =====
 // ----- Spreadsheet -----

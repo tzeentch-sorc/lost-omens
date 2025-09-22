@@ -20,7 +20,7 @@ import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
 import SMMastersInfoSettings from '../export_settings/SMMastersInfoSettings.js'
 import SMPriorities from './SMPriorities.js';
 
-import { SMCharacter, SMCreateLink } from '../../../consts.js';
+import { SMCharacter, SMCreateLink, SMSite } from '../../../consts.js';
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
 import {
@@ -157,13 +157,16 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
 											<SMInfoCard date={date} prio={prio} adventure={advName} />
 											<Spacing size={4} />
-											<SMPriorities setPopout={setPopout} priorities={priorities} />
+											<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+												<SMPriorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
+												<Button stretched appearance="negative" size="l" onClick={() => { window.open(SMSite, "_blank") }}>Наш сайт</Button>
+											</Div>
 										</Group>
 									}
 									<Header mode="secondary">Ваши персонажи</Header>
 									<Group mode="plain">
 										<Div className="not4mob">
-											<CardGrid size="m" style={{ cursor: 'pointer' }} >
+											<CardGrid size="m" style={{ cursor: 'pointer' }}>
 												{characters && characters.map((elem) => createCard(elem))}
 											</CardGrid>
 										</Div>

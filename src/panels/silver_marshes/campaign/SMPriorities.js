@@ -43,7 +43,7 @@ const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     );
 };
 
-const SMPriorities = ({ priorities, setPopout }) => {
+const SMPriorities = ({ priorities, setPopout, appearance }) => {
     function setupPriorities(priorities) {
         var result = new Map();
         priorities.forEach((item) => {
@@ -63,8 +63,7 @@ const SMPriorities = ({ priorities, setPopout }) => {
     const onClick = () => setPopout(<SMPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
 
     return (
-        <Div style={{ paddingLeft: 16 }}>
-            <Button stretched appearance="positive" size="l" onClick={onClick}>Открыть список приоритетов</Button>
-        </Div>);
+            <Button stretched appearance={appearance} size="l" onClick={onClick}>Открыть список приоритетов</Button>
+    );
 };
 export default SMPriorities;
