@@ -1,7 +1,7 @@
 import { DEBUG_MODE, DEBUG_VK_IDS } from "../consts";
 import * as logger from './Logger.js';
 
-const currentVKUser = (fetchedUser) => {
+const currentVKUser = (elem, fetchedUser) => {
     return elem.id == ("vk.com/" + fetchedUser.screen_name) ||
         elem.id == ("vk.com/id" + fetchedUser.id) ||
         elem.id == ("https://vk.com/id" + fetchedUser.id) ||
@@ -24,12 +24,12 @@ export const getVkUserUrl = (elem, mega, fetchedUser) => {
             case "test":
                 return elem.id == DEBUG_VK_IDS[mega];
             case "my":
-                return currentVKUser(fetchedUser);
+                return currentVKUser(elem, fetchedUser);
             default:
-                return currentVKUser(fetchedUser);
+                return currentVKUser(elem, fetchedUser);
         }
     } else {
         // Running with npm run deploy (production)
-        return currentVKUser(fetchedUser);
+        return currentVKUser(elem, fetchedUser);
     }
 }
