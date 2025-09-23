@@ -6,10 +6,12 @@ import InfoMain from "./InfoMain.js";
 import InfoNotFromITMO from "./InfoNotFromITMO.js";
 import InfoFromITMO from "./InfoFromITMO.js";
 import InfoMeeting from "./InfoMeeting.js";
+import InfoIgroteka from "./InfoIgroteka.js";
 import FormCredentials from './FormCredentials.js';
 import FormItmo from "./FormItmo.js";
 import FormNotItmo from "./FormNotItmo.js";
 import FormMeeting from "./FormMeeting.js";
+import FormIgroteka from "./FormIgroteka.js";
 
 const Form = ({ fetchedUser }) => {
     const routeNavigator = useRouteNavigator();
@@ -51,7 +53,7 @@ const Form = ({ fetchedUser }) => {
         setActiveGroup(GROUPS.DATE);
     };
 
-    const handleDate = (creds) => {
+    const handleDateFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
         switch (creds.mero) {
             case 'IGROTEKA':
@@ -72,7 +74,7 @@ const Form = ({ fetchedUser }) => {
             case 'BT':
                 setActiveGroup(GROUPS.BT);
                 break;
-            case 'SEPARATE_EVENT':
+            case 'OTHER':
                 setActiveGroup(GROUPS.SEPARATE_EVENT);
                 break;
             default:
@@ -138,6 +140,20 @@ const Form = ({ fetchedUser }) => {
                             </Group>
                             <Group mode='card'>
                                 <FormMeeting
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleDateFormSubmit}
+                                    onBack={handleItmoBack}
+                                />
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.IGROTEKA &&
+                        <>
+                            <Group mode='card'>
+                                <InfoIgroteka />
+                            </Group>
+                            <Group mode='card'>
+                                <FormIgroteka
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleItmoFormSubmit}
                                     onBack={handleItmoBack}
