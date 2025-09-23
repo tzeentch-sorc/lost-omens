@@ -7,6 +7,7 @@ import InfoNotFromITMO from "./InfoNotFromITMO.js";
 import InfoFromITMO from "./InfoFromITMO.js";
 import FormCredentials from './FormCredentials.js';
 import FormItmo from "./FormItmo.js";
+import FormNotItmo from "./FormNotItmo.js";
 
 const Form = ({ fetchedUser }) => {
     const routeNavigator = useRouteNavigator();
@@ -42,6 +43,10 @@ const Form = ({ fetchedUser }) => {
         console.log('Submitted data:', creds);
     };
 
+    const handleNotItmoFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+    };
+
     const handleItmoBack = () => setActiveGroup(GROUPS.START);
 
 
@@ -69,6 +74,13 @@ const Form = ({ fetchedUser }) => {
                         <>
                             <Group mode='card'>
                                 <InfoNotFromITMO />
+                            </Group>
+                            <Group mode='card'>
+                                <FormNotItmo
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleNotItmoFormSubmit}
+                                    onBack={handleItmoBack}
+                                />
                             </Group>
                         </>
                     }

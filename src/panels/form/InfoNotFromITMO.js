@@ -21,6 +21,9 @@ const InfoNotFromITMO = () => {
                 на входе.
             </Cell>
             <Cell multiline>
+                ❗К сожалению, по независимым от нас причинам, проход гостей не из России временно приостановлен :(
+            </Cell>
+            <Cell multiline>
                 <b>Как пройти через охрану?</b>
             </Cell>
             <Cell multiline>
