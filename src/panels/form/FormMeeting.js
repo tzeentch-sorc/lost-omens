@@ -33,7 +33,7 @@ const FormMeeting = ({ fetchedUser, onSubmit, onBack }) => {
             <FormItem top={<span>Выбери желаемое направление или мероприятие<span style={{ color: 'red' }}>*</span></span>}>
                 <Select
                     name="mero"
-                    placeholder="Где нам ждать тебя, воин?"
+                    placeholder="Если нужного в списке нет, выбери 'Отдельное мероприятие'"
                     onChange={handleChange}
                     options={[
                         {
