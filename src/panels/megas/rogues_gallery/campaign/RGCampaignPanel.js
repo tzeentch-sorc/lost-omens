@@ -14,7 +14,7 @@ import EmptyCampaignPanel from '../../../common/components/EmptyCampaignPanel.js
 import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import RGMastersInfoSettings from '../export_settings/RGMastersInfoSettings.js'
 import RGPlayerInfoSettings from '../export_settings/RGPlayerInfoSettings.js'
-import { RGCharacter } from '../../../consts.js';
+import { RGCharacter } from '../../../../consts.js';
 import RGCharUpdateAlert from './RGCharUpdateAlert.js';
 import RGCharCard from './RGCharCard.js';
 import {
@@ -22,7 +22,7 @@ import {
 	RGNoCharsDescription, CommonNoCharsBody, VKToken
 } from '../../../../consts.js'
 
-import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import { getVkUserUrl } from '../../../../util/VKUserURL.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {

@@ -21,7 +21,7 @@ import SMCharacter from './panels/megas/silver_marshes/character/SMCharacter.js'
 import BWCampaignPanel from './panels/megas/blue_waters/campaign/BWCampaignPanel.js';
 import VUCampaignPanel from './panels/megas/voux_umbra/campaign/VUCampaignPanel.js';
 import RGCampaignPanel from './panels/megas/rogues_gallery/campaign/RGCampaignPanel.js';
-import RGCharacter from './panels/rogues_gallery/character/RGCharacter.js';
+import RGCharacter from './panels/megas/rogues_gallery/character/RGCharacter.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',

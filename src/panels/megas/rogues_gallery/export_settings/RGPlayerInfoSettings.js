@@ -1,5 +1,5 @@
-import QuerySettings from '../../../util/QuerySettings';
-import {RGSpreadSheetID, RGPlayersSheetID} from '../../../consts.js'
+import QuerySettings from '../../../../util/QuerySettings';
+import {RGSpreadSheetID, RGPlayersSheetID} from '../../../../consts.js'
 
 const sheetId = RGSpreadSheetID; // RG Geekmo Mirror
 

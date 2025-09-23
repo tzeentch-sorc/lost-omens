@@ -6,7 +6,7 @@ import {
 import {
     Icon28GlobeOutline
 } from '@vkontakte/icons'
-import { FavouriteColor } from '../../../consts';
+import { FavouriteColor } from '../../../../consts';
 
 const FactionCard = ({ helped, hurt, onOpenFactionModal }) => {
 

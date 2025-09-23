@@ -5,7 +5,7 @@ import {
 import {
     Icon28CubeBoxOutline, Icon24BookSpreadOutline, Icon20SkullOutline
 } from '@vkontakte/icons'
-import { FavouriteColor } from '../../../consts';
+import { FavouriteColor } from '../../../../consts';
 
 const RGCharTabPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
     return (

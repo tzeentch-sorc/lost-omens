@@ -9,9 +9,9 @@ import {
 	Icon28HourglassOutline
 } from '@vkontakte/icons'
 
-import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
-import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
-import DrinkPlaceholder from '../../common/placeholders/DrinkPlaceholder.js';
+import InventoryPlaceholder from '../../../common/placeholders/InventoryPlaceholder.js';
+import FormulaePlaceholder from '../../../common/placeholders/FormulaePlaceholder.js';
+import DrinkPlaceholder from '../../../common/placeholders/DrinkPlaceholder.js';
 import RGCharTabPanel from './RGCharTabPanel.js';
 //import RGInventory from './RGInventory.js';
 //import RGFormulae from './RGFormulae.js';
@@ -21,11 +21,11 @@ import RGMainInfo from './RGMainInfo.js';
 //import RGCharBuildSettings from '../export_settings/RGCharBuildSettings.js'
 import RGCharInfoSettings from '../export_settings/RGCharInfoSettings.js'
 
-import '../../common/css/Character.css';
+import '../../../common/css/Character.css';
 
 //import RGFeatPanel from './RGFeatPanel.js';
 
-import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder } from '../../../consts.js'
+import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder } from '../../../../consts.js'
 
 const RGCharacter = () => {
 
