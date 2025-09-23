@@ -29,7 +29,8 @@ const Form = ({ fetchedUser }) => {
         KT: 'kt',
         BT: 'bt',
         SEPARATE_EVENT: 'separate_event',
-        FINISH: 'finish'
+        FINISH: 'finish',
+        SENT: 'sent'
     };
 
     const [activeGroup, setActiveGroup] = useState(GROUPS.START);
@@ -51,6 +52,11 @@ const Form = ({ fetchedUser }) => {
     const handleNotItmoFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
         setActiveGroup(GROUPS.DATE);
+    };
+
+    const handleFinishFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        setActiveGroup(GROUPS.SENT);
     };
 
     const handleDateFormSubmit = (creds) => {
@@ -82,7 +88,13 @@ const Form = ({ fetchedUser }) => {
         }
     }
 
-    const handleItmoBack = () => setActiveGroup(GROUPS.START);
+    const handleIgrotekaFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        setActiveGroup(GROUPS.FINISH);
+    };
+
+    const handleBackToStart = () => setActiveGroup(GROUPS.START);
+    const handleBackToDate = () => setActiveGroup(GROUPS.DATE);
 
 
     return (
@@ -114,7 +126,7 @@ const Form = ({ fetchedUser }) => {
                                 <FormNotItmo
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleNotItmoFormSubmit}
-                                    onBack={handleItmoBack}
+                                    onBack={handleBackToStart}
                                 />
                             </Group>
                         </>
@@ -128,7 +140,7 @@ const Form = ({ fetchedUser }) => {
                                 <FormItmo
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleItmoFormSubmit}
-                                    onBack={handleItmoBack}
+                                    onBack={handleBackToStart}
                                 />
                             </Group>
                         </>
@@ -142,8 +154,8 @@ const Form = ({ fetchedUser }) => {
                                 <FormMeeting
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleDateFormSubmit}
-                                    onBack={handleItmoBack}
-                                />
+                                    onBack={handleBackToStart}
+                                />{/* TODO назад на ITMO или NOT_ITMO */}
                             </Group>
                         </>
                     }
@@ -155,10 +167,24 @@ const Form = ({ fetchedUser }) => {
                             <Group mode='card'>
                                 <FormIgroteka
                                     fetchedUser={fetchedUser}
-                                    onSubmit={handleItmoFormSubmit}
-                                    onBack={handleItmoBack}
+                                    onSubmit={handleIgrotekaFormSubmit}
+                                    onBack={handleBackToDate}
                                 />
                             </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.FINISH &&
+                        <>
+                            <Group mode='card'>
+                                <InfoFinish />
+                            </Group>
+                            <Group mode='card'>
+                                <FormFinish
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleFinishFormSubmit}
+                                    onBack={handleBackToDate}
+                                />
+                            </Group>{/* TODO назад на предфдущую страницу */}
                         </>
                     }
                 </>
