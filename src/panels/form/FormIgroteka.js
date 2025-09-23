@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { FormItem, Input, Button, Div, Radio } from '@vkontakte/vkui';
+import InputMask from 'react-input-mask';
 
 const FormIgroteka = ({ fetchedUser, onSubmit, onBack }) => {
-    const initialISU = '';
+    const initialLate = 'ON_TIME';
+    const initialTime = '';
+    const initialBring = '';
+    const initialTake = '';
     const [form, setForm] = useState({
-        isu: initialISU,
+        late: initialLate,
+        time: initialTime,
+        bring: initialBring,
+        take: initialTake
     });
 
-    const isValidIsu = (isu) => /^\d{6}$/.test(isu);
-
+    const isValidTime = (time) => /^~ к ([01]\d|2[0-3]):[0-5]\d$/.test(time);
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -23,15 +29,63 @@ const FormIgroteka = ({ fetchedUser, onSubmit, onBack }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <FormItem top={<span>Укажи свой табельный номер ИСУ <span style={{ color: 'red' }}>*</span></span>}
-                bottom="6 цифр">
+            <FormItem top={<span>Когда тебя ждать?<span style={{ color: 'red' }}>*</span></span>}
+                bottom="Если знаешь, когда придешь (хотя бы примерно), просим указать время - так ты поможешь нашим ведущим)">
+                <Radio
+                    name="late"
+                    value="ON_TIME"
+                    checked={form.late === 'ON_TIME'}
+                    onChange={handleChange}
+                >
+                    К началу игротеки
+                </Radio>
+                <Radio
+                    name="late"
+                    value="LATE"
+                    checked={form.late === 'LATE'}
+                    onChange={handleChange}
+                >
+                    Могу опоздать
+                </Radio>
+                <Radio
+                    name="late"
+                    value="TIME"
+                    checked={form.late === 'TIME'}
+                    onChange={handleChange}
+                >
+                    Приду ко времени
+                </Radio>
+                {form.late === 'TIME' && (
+                    <InputMask
+                        mask="~ к 99:99"
+                        value={form.time}
+                        onChange={handleChange}
+                    >
+                        {(inputProps) => (
+                            <Input
+                                value={form.time}
+                                name="time"
+                                onChange={handleChange}
+                                status={form.time && !isValidTime(form.time) ? 'error' : 'default'}
+                            />
+                        )}
+                    </InputMask>
+                )}
+            </FormItem>
+            <FormItem top={<span>Если хочешь принести что-нибудь на игротеку (будь то игры или печеньки), напиши сюда :3</span>}>
                 <Input
                     type="text"
-                    name="isu"
-                    value={form.isu}
+                    name="bring"
+                    value={form.bring}
                     onChange={handleChange}
-                    placeholder="Введите ваш табельный номер"
-                    status={form.isu && !isValidIsu(form.isu) ? 'error' : 'default'}
+                />
+            </FormItem>
+            <FormItem top={<span>Пожелания по настолочкам</span>}>
+                <Input
+                    type="text"
+                    name="take"
+                    value={form.take}
+                    onChange={handleChange}
                 />
             </FormItem>
             <FormItem>
@@ -47,7 +101,7 @@ const FormIgroteka = ({ fetchedUser, onSubmit, onBack }) => {
                         size="m"
                         stretched
                         type="submit"
-                        disabled={!isValidIsu(form.isu)}
+                        disabled={!form.late||(form.late === "TIME" && !form.time)}
                     >
                         Далее</Button>
                 </Div>
