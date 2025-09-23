@@ -5,9 +5,11 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import InfoMain from "./InfoMain.js";
 import InfoNotFromITMO from "./InfoNotFromITMO.js";
 import InfoFromITMO from "./InfoFromITMO.js";
+import InfoMeeting from "./InfoMeeting.js";
 import FormCredentials from './FormCredentials.js';
 import FormItmo from "./FormItmo.js";
 import FormNotItmo from "./FormNotItmo.js";
+import FormMeeting from "./FormMeeting.js";
 
 const Form = ({ fetchedUser }) => {
     const routeNavigator = useRouteNavigator();
@@ -41,11 +43,17 @@ const Form = ({ fetchedUser }) => {
 
     const handleItmoFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        setActiveGroup(GROUPS.DATE);
     };
 
     const handleNotItmoFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        setActiveGroup(GROUPS.DATE);
     };
+
+    const handleDate = (creds) => {
+        console.log('Submitted data:', creds);
+    }
 
     const handleItmoBack = () => setActiveGroup(GROUPS.START);
 
@@ -91,6 +99,20 @@ const Form = ({ fetchedUser }) => {
                             </Group>
                             <Group mode='card'>
                                 <FormItmo
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleItmoFormSubmit}
+                                    onBack={handleItmoBack}
+                                />
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.DATE &&
+                        <>
+                            <Group mode='card'>
+                                <InfoMeeting />
+                            </Group>
+                            <Group mode='card'>
+                                <FormMeeting
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleItmoFormSubmit}
                                     onBack={handleItmoBack}
