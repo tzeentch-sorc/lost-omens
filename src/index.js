@@ -67,9 +67,15 @@ const router = createHashRouter([
     panel: 'campaign',
     view: 'voux_umbra',
   },
+  },
   {
     path: '/campaign/rogues_gallery',
     panel: 'campaign',
+    view: 'rogues_gallery',
+  },
+  {
+    path: '/char/rogues_gallery',
+    panel: 'char',
     view: 'rogues_gallery',
   },
   {
