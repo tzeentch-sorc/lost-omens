@@ -53,6 +53,31 @@ const Form = ({ fetchedUser }) => {
 
     const handleDate = (creds) => {
         console.log('Submitted data:', creds);
+        switch (creds.mero) {
+            case 'IGROTEKA':
+                setActiveGroup(GROUPS.IGROTEKA);
+                break;
+            case 'NRI':
+                setActiveGroup(GROUPS.NRI);
+                break;
+            case 'PAINT':
+                setActiveGroup(GROUPS.PAINT);
+                break;
+            case 'MAFIA':
+                setActiveGroup(GROUPS.MAFIA);
+                break;
+            case 'KT':
+                setActiveGroup(GROUPS.KT);
+                break;
+            case 'BT':
+                setActiveGroup(GROUPS.BT);
+                break;
+            case 'SEPARATE_EVENT':
+                setActiveGroup(GROUPS.SEPARATE_EVENT);
+                break;
+            default:
+                setActiveGroup(GROUPS.FINISH);
+        }
     }
 
     const handleItmoBack = () => setActiveGroup(GROUPS.START);
