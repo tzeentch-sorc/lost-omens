@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import { FormItem, Input, Button, Div, Radio } from '@vkontakte/vkui';
+import InputMask from 'react-input-mask';
 
 const FormNotItmo = ({ fetchedUser, onSubmit, onBack }) => {
-    const initialPhone = fetchedUser?.phone || '';
+    const initialPhone = '';
     const initialPassport = '';
     const initialPass = 'false';
     const initialType = 'ITMO_FAMILY';
     const initialPlace = 'LOMO';
+    const initialOtherType = ''
     const [form, setForm] = useState({
         phone: initialPhone,
         passport: initialPassport,
         type: initialType,
+        otherType: initialOtherType,
         place: initialPlace,
         pass: initialPass
     });
 
-    const isValidPhone = (phone) => /^\d{6}$/.test(phone);//TODO правильную регулярку
-    const isValidPassport = (passport) => /^\d{6}$/.test(passport);//TODO правильную регулярку
+    const isValidPhone = (phone) => /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phone);
+    const isValidPassport = (passport) => /^\d{4} \d{6}$/.test(passport);
 
     const handleChange = (e) => {
         setForm({
@@ -64,28 +67,51 @@ const FormNotItmo = ({ fetchedUser, onSubmit, onBack }) => {
                     onChange={handleChange}
                 >
                     Другое
-                </Radio>{/* TODO добавить поле с "а что другое" */}
+                </Radio>
+                {form.type === 'OTHER' && (
+                    <Input
+                        value={form.otherType}
+                        name="otherType"
+                        onChange={handleChange}
+                    />
+                )}
             </FormItem>
             <FormItem top={<span>Укажи номер телефона, который будет у тебя с собой в день мероприятия<span style={{ color: 'red' }}>*</span></span>}>
-                <Input
-                    type="text"
-                    name="phone"
+                <InputMask
+                    mask="+7 (999) 999-99-99"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="+7 (XXX) XXX-XX-XX"
-                    status={form.phone && !isValidPhone(form.phone) ? 'error' : 'default'}
-                />
-            </FormItem>{/* TODO вводить номер телефона и он красиво вставляется в скобки и выставляется +7 */}
+                >
+                    {(inputProps) => (
+                        <Input
+                            type="text"
+                            name="phone"
+                            value={form.phone}
+                            onChange={handleChange}
+                            placeholder="+7 (XXX) XXX-XX-XX"
+                            status={form.phone && !isValidPhone(form.phone) ? 'error' : 'default'}
+                        />
+                    )}
+                </InputMask>
+            </FormItem>
             <FormItem top={<span>Укажи серию и номер паспорта<span style={{ color: 'red' }}>*</span></span>} bottom="(да, нас требуют это указывать)">
-                <Input
-                    type="text"
-                    name="passport"
+                <InputMask
+                    mask="9999 999999"
                     value={form.passport}
                     onChange={handleChange}
-                    placeholder="XXXX XXXXXX"
-                    status={form.pass && !isValidPassport(form.passport) ? 'error' : 'default'}
-                />
-            </FormItem>{/* TODO вводить серию и номер паспорта и он красиво вставляется с пробелами */}
+                >
+                    {(inputProps) => (
+                        <Input
+                            type="text"
+                            name="passport"
+                            value={form.passport}
+                            onChange={handleChange}
+                            placeholder="XXXX XXXXXX"
+                            status={form.passport && !isValidPassport(form.passport) ? 'error' : 'default'}
+                        />
+                    )}
+                </InputMask>
+            </FormItem>
             <FormItem top={<span>В какой корпус требуется проход?<span style={{ color: 'red' }}>*</span></span>}
                 bottom="Если нет уверенности в выборе, корпус можно посмотреть в анонсе мероприятия">
                 <Radio
