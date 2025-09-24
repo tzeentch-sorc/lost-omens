@@ -16,6 +16,7 @@ export const getVkUserUrl = (elem, mega, fetchedUser) => {
     if (process.env.NODE_ENV === 'development') {
         // Running with npm start
         //DEBUG:
+        logger.log("DEBUG_MODE", DEBUG_MODE);
         switch (DEBUG_MODE[mega]) {
             case "all":
                 return true;
