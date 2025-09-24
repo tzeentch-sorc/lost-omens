@@ -9,15 +9,15 @@ import {
     Icon20ArrowUpOutline, Icon56StatisticsOutline, Icon20ArrowDownOutline, Icon24DollarOutline
 } from '@vkontakte/icons'
 import FactionCard from './FactionCard';
-import { GoodColor, BadColor, FavouriteColor, RGTransactions, RGTransactionsChar,FormPreEnter } from '../../../consts';
+import { GoodColor, BadColor, FavouriteColor, RGTransactions, RGTransactionsChar, FormPreEnter } from '../../../consts';
 
 function createPreEnteredTransactionsLink(charName, link) {
-            var newLink = link + FormPreEnter +
-                RGTransactionsChar + charName;
-            return newLink;
-        }
+    var newLink = link + FormPreEnter +
+        RGTransactionsChar + charName;
+    return newLink;
+}
 
-const RGMainInfo = ({ charName, helped, hurt, rep, humanity, exp, downtime, freetime, budget, income, expenses, onOpenFactionModal }) => {
+const RGMainInfo = ({ charName, helped, hurt, rep, humanity, exp, downtime, freetime, budget, income, expenses, onOpenFactionModal, openRequests }) => {
 
     return (
         <>
@@ -152,8 +152,12 @@ const RGMainInfo = ({ charName, helped, hurt, rep, humanity, exp, downtime, free
                 </CardGrid>
                 <Spacing size={4} />
                 <Group mode='plain'>
-                    <Div style={{ paddingLeft: 16 }}>
+                    <Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                         <Button stretched appearance="positive" size="l" onClick={() => { window.open(createPreEnteredTransactionsLink(charName, RGTransactions), "_blank") }}>Совершить транзакцию</Button>
+                        <Button stretched appearance="negative" size="l" onClick={() => { openRequests(charName) }}>Заявки
+                        </Button>
+                    </Div>
+                    <Div style={{ paddingLeft: 16 }}>
                     </Div>
                 </Group>
             </Group>

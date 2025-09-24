@@ -43,6 +43,7 @@ export const BWCampaign = '/campaign/blue_waters';
 export const VUCampaign = '/campaign/voux_umbra';
 export const RGCampaign = '/campaign/rogues_gallery';
 export const RGCharacter = '/char/rogues_gallery';
+export const RGRequests = '/requests/rogues_gallery';
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
