@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     SimpleCell, SimpleGrid, HorizontalCell,
-    Header, Group, CardGrid, Card
+    Header, Group, CardGrid, Card, Div
 } from '@vkontakte/vkui';
 import {
     Icon28HourglassOutline, Icon28MasksOutline, Icon28ClockOutline, Icon56Stars3Outline,
@@ -75,35 +75,70 @@ const RGMainInfo = ({ helped, hurt, rep, humanity, exp, downtime, freetime, budg
             <CardGrid size="l" >
                 <Card key="gold">
                     <Header mode="primary">Финансы</Header>
-                    <SimpleGrid align='stretch' columns={3} margin='none' gap='m'>
-                        <HorizontalCell size='l' >
-                            <SimpleCell subhead='Бюджет'
-                                before={<Icon24DollarOutline
-                                    width={24} height={24}
-                                    style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
-                                />}>
-                                {budget}
-                            </SimpleCell>
-                        </HorizontalCell>
-                        <HorizontalCell size='l ' >
-                            <SimpleCell subhead='Доходы'
-                                before={<Icon20ArrowUpOutline
-                                    width={24} height={24}
-                                    color={GoodColor}
-                                    style={{ filter: `drop-shadow(0 0 4px ${GoodColor})` }}
-                                />}>
-                                {income}
-                            </SimpleCell>
+                    <SimpleGrid align='stretch' columns={3} gap='xs'>
+                        <HorizontalCell size='m' >
+                            <Div className="not4mob">
+                                <SimpleCell subhead='Бюджет'
+                                    before={<Icon24DollarOutline
+                                        width={24} height={24}
+                                        style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                                    />}>
+                                    {budget}
+                                </SimpleCell>
+                            </Div>
+                            <Div className="formob">
+                                <SimpleCell subhead='Бюджет'
+                                    before={<Icon24DollarOutline
+                                        width={20} height={20}
+                                        style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+                                    />}>
+                                    {budget}
+                                </SimpleCell>
+                            </Div>
                         </HorizontalCell>
                         <HorizontalCell size='m' >
-                            <SimpleCell subhead='Расходы'
-                                before={<Icon20ArrowDownOutline
-                                    width={24} height={24}
-                                    color={BadColor}
-                                    style={{ filter: `drop-shadow(0 0 4px ${BadColor})` }}
-                                />}>
-                                {expenses}
-                            </SimpleCell>
+                            <Div className="not4mob">
+                                <SimpleCell subhead='Доходы'
+                                    before={<Icon20ArrowUpOutline
+                                        width={24} height={24}
+                                        color={GoodColor}
+                                        style={{ filter: `drop-shadow(0 0 4px ${GoodColor})` }}
+                                    />}>
+                                    {income}
+                                </SimpleCell>
+                            </Div>
+                            <Div className="formob">
+                                <SimpleCell subhead='Доходы'
+                                    before={<Icon20ArrowUpOutline
+                                        width={20} height={20}
+                                        color={GoodColor}
+                                        style={{ filter: `drop-shadow(0 0 4px ${GoodColor})` }}
+                                    />}>
+                                    {income}
+                                </SimpleCell>
+                            </Div>
+                        </HorizontalCell>
+                        <HorizontalCell size='s' >
+                            <Div className="not4mob">
+                                <SimpleCell subhead='Расходы'
+                                    before={<Icon20ArrowDownOutline
+                                        width={24} height={24}
+                                        color={BadColor}
+                                        style={{ filter: `drop-shadow(0 0 4px ${BadColor})` }}
+                                    />}>
+                                    {expenses}
+                                </SimpleCell>
+                            </Div>
+                            <Div className="formob">
+                                <SimpleCell subhead='Расходы'
+                                    before={<Icon20ArrowDownOutline
+                                        width={20} height={20}
+                                        color={BadColor}
+                                        style={{ filter: `drop-shadow(0 0 4px ${BadColor})` }}
+                                    />}>
+                                    {expenses}
+                                </SimpleCell>
+                            </Div>
                         </HorizontalCell>
                     </SimpleGrid>
                 </Card>
