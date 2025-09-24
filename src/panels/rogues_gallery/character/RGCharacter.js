@@ -25,7 +25,7 @@ import '../../common/css/Character.css';
 
 //import RGFeatPanel from './RGFeatPanel.js';
 
-import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder, RGTransactions } from '../../../consts.js'
+import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder, RGRequests } from '../../../consts.js'
 import * as logger from '../../../util/Logger.js';
 import Marquee from '../../common/components/Marquee.js';
 
@@ -77,7 +77,7 @@ const RGCharacter = () => {
 
 	function renderSelectedTab() {
 		switch (selected) {
-			/*case 'inventory':
+			case 'inventory':
 				return hasInventory() ? (
 					//<RGInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player} />
 					logger.log("inventory")
@@ -90,7 +90,7 @@ const RGCharacter = () => {
 					logger.log("formulae")
 				) : (
 					<FormulaePlaceholder />
-				);*/
+				);
 			case 'drink':
 				return hasDrink() ? (
 					<SimpleCell key="drink" multiline>
@@ -122,6 +122,12 @@ const RGCharacter = () => {
 		setModalFaction(true);
 		setActiveModal(MODAL_PAGE_FACTION);
 	};
+
+	const openRequests = (element) => {
+		params.set('CharName', element);
+		setParams(params);
+		routeNavigator.push(RGRequests, { keepSearchParams: true });
+	}
 
 	const closeModal = () => {
 		setActiveModal(null);
@@ -236,6 +242,7 @@ const RGCharacter = () => {
 						budget={budget} income={income} expenses={expenses}
 						// setPopout={setPopout}
 						onOpenFactionModal={openFactionModal}
+						openRequests={openRequests}
 					/>
 					{/*<RGFeatPanel featlist={featlist()} />*/}
 					<Group mode='card'>

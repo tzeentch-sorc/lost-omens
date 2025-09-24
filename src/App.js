@@ -23,11 +23,13 @@ import BWCampaignPanel from './panels/blue_waters/campaign/BWCampaignPanel.js';
 import VUCampaignPanel from './panels/voux_umbra/campaign/VUCampaignPanel.js';
 import RGCampaignPanel from './panels/rogues_gallery/campaign/RGCampaignPanel.js';
 import RGCharacter from './panels/rogues_gallery/character/RGCharacter.js';
+import RGRequests from './panels/rogues_gallery/requests/RGRequests.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
 	INTRO: 'intro',
-	CHAR: 'char'
+	CHAR: 'char',
+	REQUESTS: 'requests'
 }
 
 const App = (router) => {
@@ -91,6 +93,7 @@ const App = (router) => {
 			<View activePanel={activePanel} nav='rogues_gallery'>
 				<RGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<RGCharacter id={ROUTES.CHAR} />
+				<RGRequests id={ROUTES.REQUESTS} />
 			</View>
 		</Root>
 	);
