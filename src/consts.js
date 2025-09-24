@@ -94,7 +94,11 @@ export const SFNoCharsBody = 'Кажется, у тебя еще нет перс
 
 // ----- Forms -----
 export const SFLvlupLink = 'https://docs.google.com/forms/d/e/1FAIpQLSesFl9kJ-TmJT4smD3eH1C4l3r3zEPinJJsXsQyFqfZfzYTig/viewform';
+export const SFLvlupChar = "&entry.1593373665=";
+export const SFLvlupAgree = "&entry.26974706=";
 export const SFCreateLink = 'https://docs.google.com/forms/d/e/1FAIpQLSckArbA9xOBAh_VBKUB9pVSryyrX0uLxGwJwGupVtUVrseaSg/viewform';
+export const SFCreatePlayer = "&entry.1374386289=";
+export const SFCreateVK = "&entry.1232131845=";
 
 
 // ===== Silver Marshes (Dungeons and Dragons 5 edition) =====
