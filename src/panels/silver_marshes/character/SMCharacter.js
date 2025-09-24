@@ -62,6 +62,8 @@ const SMCharacter = () => {
 	}
 
 	function hasInventory() {
+		logger.log("inventory", inventory);
+		logger.log("hasInventory", (inventory.length > 0));
 		return (inventory.length > 0);
 	}
 	function spellist() {
@@ -79,6 +81,7 @@ const SMCharacter = () => {
 		switch (selected) {
 			case 'inventory':
 				return hasInventory() ? (
+					logger.log("render inventory", inventory),
 					<SMInventory inventory={inventory} totalWealth={wealth} />
 				) : (
 					<InventoryPlaceholder />
@@ -110,7 +113,7 @@ const SMCharacter = () => {
 			let inventoryData = await SMInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
 
-			if (hasInventory() && inventoryData[0].name) {
+			if (inventoryData[0] && inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
 				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
 				setWealth(totalCost);

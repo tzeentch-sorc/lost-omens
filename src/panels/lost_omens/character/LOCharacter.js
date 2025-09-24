@@ -218,7 +218,7 @@ const LOCharacter = () => {
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
 
-			if (hasInventory() && inventoryData[0].name) {
+			if (inventoryData[0] && inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
 				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
 				setWealth(totalCost);
