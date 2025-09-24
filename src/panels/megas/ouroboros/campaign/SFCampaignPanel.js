@@ -15,14 +15,20 @@ import EmptyCampaignPanel from '../../../common/components/EmptyCampaignPanel.js
 import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import CharUpdateAlert from '../../../common/components/CharUpdateAlert.js';
 import SFCharCard from './SFCharCard.js';
-import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
-import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
+import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js';
+import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js';
 
-import { SFCharacter, SFLvlupLink, SFCreateLink,
+import { SFCharacter, SFLvlupLink, SFCreateLink, SFLvlupChar, SFLvlupAgree,
+	FormPreEnter, SFCreatePlayer, SFCreateVK
+ } from '../../../consts.js'
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
-	SFNoCharsDescription, SFNoCharsBody, VKToken
- } from '../../../../consts.js'
-import { getVkUserUrl } from '../../../../util/VKUserURL.js';
+	SFNoCharsDescription, SFNoCharsBody, VKToken, MastersText
+} from '../../../../consts.js';
+import * as logger from '../../../../util/Logger.js';
+import MastersGroup from '../../../common/components/MastersGroup.js';
+import Marquee from '../../../common/components/Marquee.js';
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
@@ -33,15 +39,28 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	const [characters, setCharacters] = useState([])
 	const [prio, setPrio] = useState(-1) // -1 => loading
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
-	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	const [masters, setMasters] = useState([]);
 
+	function createPreEnteredLVLUPLink(charName, agree, link) {
+			var newLink = link + FormPreEnter +
+				SFLvlupChar + charName +
+				SFLvlupAgree + "Подтверждаю";
+			return newLink;
+		}
+
+	function createPreEnteredNewCharLink(fetchedUser, link) {
+			var newLink = link + FormPreEnter +
+				SFCreatePlayer + `${fetchedUser?.last_name || ''} ${fetchedUser?.first_name || ''}`.trim() +
+				SFCreateVK + "vk.com/" + fetchedUser.screen_name;
+			return newLink;
+		}
+	
 	const openAction = (element) => {
 		setPopout(
 			<CharUpdateAlert
 				charName={element.name}
-				formLink={SFLvlupLink}
+				formLink={createPreEnteredLVLUPLink(element.name, true, SFLvlupLink)}
 				navLink={SFCharacter}
 				closeMethod={() => setPopout(null)}
 			/>
@@ -67,8 +86,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
-			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			console.log("data: ", data);
+			const data = prioData.filter(elem => { return getVkUserUrl(elem, "SF", fetchedUser) });
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
@@ -82,8 +101,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await SFMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-			//console.log(masterData);
-			//console.log(userIds);
+			logger.log(masterData);
+			logger.log(userIds);
 			const users = await bridge
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',
@@ -98,7 +117,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 			setMasters(users);
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
+			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
@@ -112,7 +131,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 				action={<Button
 					size="m"
 					appearance="positive"
-					onClick={() => window.open(SFCreateLink, "_blank")}
+					onClick={() => window.open(createPreEnteredNewCharLink(fetchedUser, SFCreateLink), "_blank")}
 				>
 					Создать
 				</Button>} />
@@ -127,14 +146,19 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		return (
 			<Panel nav='campaign' key={campaignName}>
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
-					{campaignName}
+					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
 				</PanelHeader>
 				{fetchedUser &&
-					<Group mode="card">
-						<SplitLayout popout={popout}>
-							{isDisplayed &&
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode="card">
+							<SplitLayout popout={popout}>
 								<SplitCol>
-									{prio && <SFCharacterInfoCard prio={prio} />}
+									{prio &&
+										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+											<SFCharacterInfoCard prio={prio} />
+										</Group>
+									}
 									<Header mode="secondary">Ваши персонажи</Header>
 									<Group mode="plain">
 										<Div className="not4mob" style={{ cursor: 'pointer' }}>
@@ -149,9 +173,9 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 										</Div>
 									</Group>
 								</SplitCol>
-							}
-						</SplitLayout>
-					</Group>
+							</SplitLayout>
+						</Group>
+					</>
 				}
 			</Panel>
 		)

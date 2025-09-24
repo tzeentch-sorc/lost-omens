@@ -12,7 +12,9 @@ import {
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import SFCharInfoSettings from '../export_settings/SFCharInfoSettings.js'
-import {SFCampaign} from '../../../../consts.js'
+import { SFCampaign } from '../../../../consts.js'
+import * as logger from '../../../../util/Logger.js';
+import Marquee from '../../../common/components/Marquee.js';
 
 const SFCharacter = () => {
 
@@ -31,12 +33,12 @@ const SFCharacter = () => {
 
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
 	const charName = params.get('CharName');
-	
+
 	useEffect(() => {
 		async function fetchData() {
 			//получение золота, уровня и опыта
 			let characterInfoData = await SFCharInfoSettings.getFilteredQuery("name", charName);
-			console.log("character info data", characterInfoData);
+			logger.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExp(characterInfoData[0].exp);
 			setLvl(characterInfoData[0].lvl);
@@ -48,7 +50,7 @@ const SFCharacter = () => {
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
-			console.log(characterInfoData)
+			logger.log(characterInfoData)
 		}
 		fetchData().catch(console.error);
 	}, []);
@@ -57,7 +59,7 @@ const SFCharacter = () => {
 
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SFCampaign, { keepSearchParams: true })} />}>
-				{charName}
+				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout popout={popout}>
 				<SplitCol>
@@ -76,21 +78,43 @@ const SFCharacter = () => {
 							<CardGrid size="l" >
 								<Card key="gold">
 									<Header mode="primary">Финансы</Header>
-									<SimpleGrid align='stretch' columns={3} margin='none' gap='m'>
-										<HorizontalCell size='l' >
-											<SimpleCell subhead='Кредиты' before={<Icon36CoinsStacks3Outline width={24} height={24} />}>
-												{gold}
-											</SimpleCell>
-										</HorizontalCell>
-										<HorizontalCell size='l ' >
-											<SimpleCell subhead='Корабль' before={<Icon24PlaneOutline width={24} height={24} />}>
-												{ship}
-											</SimpleCell>
+									<SimpleGrid align='stretch' columns={3} margin='none' gap='2xs'>
+										<HorizontalCell size='m' >
+											<Div className="not4mob">
+												<SimpleCell subhead='Кредиты' before={<Icon36CoinsStacks3Outline width={24} height={24} />}>
+													{gold}
+												</SimpleCell>
+											</Div>
+											<Div className="formob">
+												<SimpleCell subhead='Кредиты' before={<Icon36CoinsStacks3Outline width={20} height={20} />}>
+													{gold}
+												</SimpleCell>
+											</Div>
+
 										</HorizontalCell>
 										<HorizontalCell size='m' >
-											<SimpleCell subhead='Мех' before={<Icon28WrenchOutline width={24} height={24} />}>
-												{mech}
-											</SimpleCell>
+											<Div className="not4mob">
+												<SimpleCell subhead='Корабль' before={<Icon24PlaneOutline width={24} height={24} />}>
+													{ship}
+												</SimpleCell>
+											</Div>
+											<Div className="formob">
+												<SimpleCell subhead='Корабль' before={<Icon24PlaneOutline width={20} height={20} />}>
+													{ship}
+												</SimpleCell>
+											</Div>
+										</HorizontalCell>
+										<HorizontalCell size='s' >
+											<Div className="not4mob">
+												<SimpleCell subhead='Мех' before={<Icon28WrenchOutline width={24} height={24} />}>
+													{mech}
+												</SimpleCell>
+											</Div>
+											<Div className="formob">
+												<SimpleCell subhead='Мех' before={<Icon28WrenchOutline width={20} height={20} />}>
+													{mech}
+												</SimpleCell>
+											</Div>
 										</HorizontalCell>
 									</SimpleGrid>
 								</Card>
@@ -99,17 +123,17 @@ const SFCharacter = () => {
 								<Card key="desc">
 									<Header mode="primary">Описание персонажа</Header>
 									<Div>
-									{desc.split('\n').map((line, index) => (
-      									<Text key={index}>{line}</Text>
-    								))}
+										{desc.split('\n').map((line, index) => (
+											<Text key={index}>{line}</Text>
+										))}
 									</Div>
 								</Card>
 								<Card key="hist">
 									<Header mode="primary">История</Header>
 									<Div>
-									{hist.split('\n').map((line, index) => (
-										<Text key={index}>{line}</Text>
-    								))}
+										{hist.split('\n').map((line, index) => (
+											<Text key={index}>{line}</Text>
+										))}
 									</Div>
 								</Card>
 							</CardGrid>

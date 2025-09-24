@@ -19,10 +19,14 @@ import RGCharUpdateAlert from './RGCharUpdateAlert.js';
 import RGCharCard from './RGCharCard.js';
 import {
 	RGArticleLink, RGArticleImage, RGNoCharsCaption,
-	RGNoCharsDescription, CommonNoCharsBody, VKToken
+	RGNoCharsDescription, CommonNoCharsBody, VKToken,
+	MastersText
 } from '../../../../consts.js'
 
 import { getVkUserUrl } from '../../../../util/VKUserURL.js';
+import * as logger from '../../../../util/Logger.js';
+import MastersGroup from '../../../common/components/MastersGroup.js';
+import Marquee from '../../../common/components/Marquee.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {
@@ -65,8 +69,8 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const playerData = await RGPlayerInfoSettings.getQueryAll();
-			const data = playerData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			console.log("data: ", data);
+			const data = playerData.filter(elem => { return getVkUserUrl(elem, "RG", fetchedUser) });
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				type: elem.char_class,
@@ -81,8 +85,8 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await RGMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-			//console.log(masterData);
-			//console.log(userIds);
+			logger.log(masterData);
+			logger.log(userIds);
 			const users = await bridge
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',
@@ -119,30 +123,33 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 		return (
 			<Panel nav='campaign' key={campaignName}>
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
-					{campaignName}
+					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
 				</PanelHeader>
 				{fetchedUser &&
-					<Group mode="card">
-						<SplitLayout popout={popout}>
-							{isDisplayed &&
-								<SplitCol>
-									<Header mode="secondary">Ваши персонажи</Header>
-									<Group mode="plain">
-										<Div className="not4mob" style={{ cursor: 'pointer' }}>
-											<CardGrid size="m">
-												{characters && characters.map((elem) => createCard(elem))}
-											</CardGrid>
-										</Div>
-										<Div className="formob">
-											<CardGrid size="l">
-												{characters && characters.map((elem) => createCard(elem))}
-											</CardGrid>
-										</Div>
-									</Group>
-								</SplitCol>
-							}
-						</SplitLayout>
-					</Group>
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode="card">
+							<SplitLayout popout={popout}>
+								{isDisplayed &&
+									<SplitCol>
+										<Header mode="secondary">Ваши персонажи</Header>
+										<Group mode="plain">
+											<Div className="not4mob" style={{ cursor: 'pointer' }}>
+												<CardGrid size="m">
+													{characters && characters.map((elem) => createCard(elem))}
+												</CardGrid>
+											</Div>
+											<Div className="formob">
+												<CardGrid size="l">
+													{characters && characters.map((elem) => createCard(elem))}
+												</CardGrid>
+											</Div>
+										</Group>
+									</SplitCol>
+								}
+							</SplitLayout>
+						</Group>
+					</>
 				}
 			</Panel>
 		)

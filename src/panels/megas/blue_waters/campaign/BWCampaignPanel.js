@@ -16,7 +16,7 @@ import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import BWMastersInfoSettings from '../export_settings/BWMastersInfoSettings.js'
 import { BWArticleLink, BWArticleImage, BWNoCharsCaption, 
 	BWNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../../consts.js'
-
+import * as logger from '../../../../util/Logger.js';
 
 const BWCampaignPanel = ({ fetchedUser }) => {
 	const [params, setParams] = useSearchParams();
@@ -30,8 +30,8 @@ const BWCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await BWMastersInfoSettings.getQueryAll();
             const userIds = masterData.map(elem => elem.id).join(', ');
-            //console.log(masterData);
-            //console.log(userIds);
+            logger.log("masterData: ", masterData);
+            logger.log("userIds: ", userIds);
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',

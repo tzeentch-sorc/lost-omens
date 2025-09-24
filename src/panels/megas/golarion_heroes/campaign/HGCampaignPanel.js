@@ -11,6 +11,7 @@ import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import HGMastersInfoSettings from '../export_settings/HGMastersInfoSettings.js';
 import { HGArticleLink, HGArticleImage, HGNoCharsCaption, 
 	HGNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../../consts.js'
+import * as logger from '../../../../util/Logger.js';
 
 const HGCampaignPanel = ({ fetchedUser }) => {
 	const [params, setParams] = useSearchParams();
@@ -24,8 +25,8 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await HGMastersInfoSettings.getQueryAll();
             const userIds = masterData.map(elem => elem.id).join(', ');
-            //console.log(masterData);
-            //console.log(userIds);
+            logger.log("masterData: ", masterData);
+            logger.log("userIds: ", userIds);
             const users = await bridge
                 .send('VKWebAppCallAPIMethod', {
                     method: 'users.get',

@@ -26,6 +26,8 @@ import '../../../common/css/Character.css';
 //import RGFeatPanel from './RGFeatPanel.js';
 
 import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder } from '../../../../consts.js'
+import * as logger from '../../../../util/Logger.js';
+import Marquee from '../../../common/components/Marquee.js';
 
 const RGCharacter = () => {
 
@@ -78,14 +80,14 @@ const RGCharacter = () => {
 			/*case 'inventory':
 				return hasInventory() ? (
 					//<RGInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player} />
-					console.log("inventory")
+					logger.log("inventory")
 				) : (
 					<InventoryPlaceholder />
 				);
 			case 'formulae':
 				return hasFormulae() ? (
 					//<RGFormulae formulae={formulae} />
-					console.log("formulae")
+					logger.log("formulae")
 				) : (
 					<FormulaePlaceholder />
 				);*/
@@ -168,7 +170,7 @@ const RGCharacter = () => {
 			//попытка получить через spreadsheetApp
 			//получение золота, уровня, даунтайма и опыта
 			let characterInfoData = await RGCharInfoSettings.getFilteredQuery("name", charName);
-			console.log("character info data", characterInfoData);
+			logger.log("character info data", characterInfoData);
 			setHelped(characterInfoData[0].helped);
 			setHurt(characterInfoData[0].hurt);
 			setRep(characterInfoData[0].rep);
@@ -184,7 +186,7 @@ const RGCharacter = () => {
 			//получение инвентаря
 			/*
 			let inventoryData = await RGInventorySettings.getFilteredQuery("owner", charName);
-			console.log("inventory data", inventoryData);
+			logger.log("inventory data", inventoryData);
 
 			if (inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
@@ -196,7 +198,7 @@ const RGCharacter = () => {
 			//получение черт, формул
 			/*
 			let characterBuildData = await RGCharBuildSettings.getFilteredQuery("name", charName);
-			console.log("character build data", characterBuildData);
+			logger.log("character build data", characterBuildData);
 
 			setFormulae(characterBuildData[0].formulas.split(','));
 			*/
@@ -205,7 +207,7 @@ const RGCharacter = () => {
 			// setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			// setTimeout(() => setPopout(null), 1000);
 
-			//console.log("new", inventoryData);
+			//logger.log("new", inventoryData);
 		}
 		fetchData().catch(console.error);
 
@@ -222,7 +224,7 @@ const RGCharacter = () => {
 	return (
 		<Panel nav='char'>
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(RGCampaign, { keepSearchParams: true })} />}>
-				{charName}
+				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout /*popout={popout} */ modal={modal}>
 				<SplitCol>

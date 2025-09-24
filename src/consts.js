@@ -6,7 +6,29 @@ export const FavouriteColor = '#008cff';
 export const GoodColor = '#00B86B';
 export const BadColor = '#E84C5B';
 export const VKToken = config.VKToken;
+export const DEBUG_MODE = config.DEBUG_MODE ||
+    {
+        "LO": "all",
+        "SF": "all",
+        "SM": "all",
+        "RG": "all",
+        "HG": "all",
+        "BW": "all",
+        "VU": "all"
+    };
+export const DEBUG_VK_IDS = config.DEBUG_VK_IDS ||
+    {
+        "LO": "",
+        "SF": "",
+        "SM": "",
+        "RG": "",
+        "HG": "",
+        "BW": "",
+        "VU": ""
+    };
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';
+export const MastersText = 'Этим людям можно написать, если появились вопросы';
+export const MastersNoCharsText = 'Этим людям можно написать, если остались вопросы';
 
 // ----- Navigation -----
 export const LOCharacter = '/char/lost_omens';
@@ -72,7 +94,11 @@ export const SFNoCharsBody = 'Кажется, у тебя еще нет перс
 
 // ----- Forms -----
 export const SFLvlupLink = 'https://docs.google.com/forms/d/e/1FAIpQLSesFl9kJ-TmJT4smD3eH1C4l3r3zEPinJJsXsQyFqfZfzYTig/viewform';
+export const SFLvlupChar = "&entry.1593373665=";
+export const SFLvlupAgree = "&entry.26974706=";
 export const SFCreateLink = 'https://docs.google.com/forms/d/e/1FAIpQLSckArbA9xOBAh_VBKUB9pVSryyrX0uLxGwJwGupVtUVrseaSg/viewform';
+export const SFCreatePlayer = "&entry.1374386289=";
+export const SFCreateVK = "&entry.1232131845=";
 
 
 // ===== Silver Marshes (Dungeons and Dragons 5 edition) =====
@@ -90,7 +116,7 @@ export const SMCreateLink = 'https://vk.com/@geekmo-new-character-dnd-5e';
 export const SMArticleImage = '/images/sm_bannerjpg.jpg';
 export const SMNoCharsCaption = 'Добро пожаловать в «Серебряный Предел»!';
 export const SMNoCharsDescription = 'Знакомство с мегакампанией';
-
+export const SMSite = 'http://silvermarches.tilda.ws/';
 
 // ===== Blue Waters (Dungeons and Dragons 2024) =====
 // ----- Spreadsheet -----

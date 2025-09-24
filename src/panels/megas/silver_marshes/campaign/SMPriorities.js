@@ -3,11 +3,12 @@ import {
     Div, ModalRoot, InfoRow, ModalPage, ModalPageHeader,
     Button, SimpleCell
 } from '@vkontakte/vkui';
+import * as logger from '../../../util/Logger.js';
 
 const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     const MODAL_PAGE_WITH_FIXED_HEIGHT = 'fixed-height';
     function createPriorityRow(element) {
-        //console.log("element",element);
+        logger.log("element",element);
         let srt = element[1].sort((a, b) => b.lvl - a.lvl).map(e => (
             e.lvl + " ур. " + e.char_name + ", "));
         srt[srt.length - 1] = srt[srt.length - 1].substring(0, srt[srt.length - 1].length - 2);
@@ -42,7 +43,7 @@ const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     );
 };
 
-const SMPriorities = ({ priorities, setPopout }) => {
+const SMPriorities = ({ priorities, setPopout, appearance }) => {
     function setupPriorities(priorities) {
         var result = new Map();
         priorities.forEach((item) => {
@@ -54,7 +55,7 @@ const SMPriorities = ({ priorities, setPopout }) => {
         }
         );
 
-        console.log(result);
+        logger.log(result);
 
         return Array.from(result);
     }
@@ -62,8 +63,7 @@ const SMPriorities = ({ priorities, setPopout }) => {
     const onClick = () => setPopout(<SMPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
 
     return (
-        <Div style={{ paddingLeft: 16 }}>
-            <Button stretched appearance="positive" size="l" onClick={onClick}>Открыть список приоритетов</Button>
-        </Div>);
+            <Button stretched appearance={appearance} size="l" onClick={onClick}>Открыть список приоритетов</Button>
+    );
 };
 export default SMPriorities;

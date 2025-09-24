@@ -4,12 +4,15 @@ import {
 
 } from '@vkontakte/vkui';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+import Marquee from './Marquee';
 
 const EmptyCampaignPanel = ({user, campaignName, popout}) => {
     const routeNavigator = useRouteNavigator();
     return (
         <Panel nav='campaign' key={campaignName}>
-            <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
+            <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+                <Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
+            </PanelHeader>
             {
                 user &&
                 <Group mode="plain">

@@ -19,13 +19,19 @@ import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
 
 import { getVkUserUrl } from '../../../../util/VKUserURL.js';
+import * as logger from '../../../../util/Logger.js';
 
 import {
 	FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice,
 	LOLvlupLevel, LOCharacter, LOBulletinLink,
+	MastersText
+} from '../../../../consts.js';
+import {
 	LOArticleLink, LOArticleImage, LONoCharsCaption,
 	LONoCharsDescription, CommonNoCharsBody, VKToken
-} from '../../../../consts.js'
+} from '../../../../consts.js';
+import MastersGroup from '../../../common/components/MastersGroup.js';
+import Marquee from '../../../common/components/Marquee.js';
 
 const LOCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
@@ -68,7 +74,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 			params.set('Player', element.player);
 			params.set('CharName', element.name);
 			setParams(params);
-			//console.log(params);
+			logger.log("params: ", params);
 			routeNavigator.push(LOCharacter, { keepSearchParams: true });
 		}
 	}
@@ -88,12 +94,12 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				prio: elem.prio,
 				lvl: elem.lvl
 			})).sort((a, b) => b.prio - a.prio));
-			//console.log(prioData);
+			logger.log("prioData: ", prioData);
 
 			const data = prioData.filter(elem => {
-				return getVkUserUrl(elem, fetchedUser)
+				return getVkUserUrl(elem, "LO", fetchedUser)
 			});
-			console.log("data: ", data);
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				player: `${elem.player?.split(" ")?.[0] ?? ''} ${elem.player?.split(" ")?.[1]?.charAt(0) ?? ''}`.trim(),
@@ -112,8 +118,8 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await LOMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-			//console.log(masterData);
-			//console.log(userIds);
+			logger.log("masterData: ", masterData);
+			logger.log("userIds: ", userIds);
 			const users = await bridge
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',
@@ -148,38 +154,43 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	} else {
 		return (
 			<Panel nav='campaign' key={campaignName}>
-				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
+				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
+				</PanelHeader>
 				{
 					fetchedUser &&
-					<Group mode='card'>
-						<SplitLayout popout={popout}>
-							<SplitCol>
-								{date && prio && advName &&
-									<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
-										<LOInfoCard date={date} prio={prio} adventure={advName} />
-										<Spacing size={4} />
-										<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-											<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
-											<Button stretched appearance="negative" size="l" onClick={() => { window.open(LOBulletinLink, "_blank") }}>Доска Авроры</Button>
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode='card'>
+							<SplitLayout popout={popout}>
+								<SplitCol>
+									{date && prio && advName &&
+										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+											<LOInfoCard date={date} prio={prio} adventure={advName} />
+											<Spacing size={4} />
+											<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+												<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
+												<Button stretched appearance="negative" size="l" onClick={() => { window.open(LOBulletinLink, "_blank") }}>Доска Авроры</Button>
+											</Div>
+										</Group>
+									}
+									<Header mode="secondary">Ваши персонажи</Header>
+									<Group mode="plain">
+										<Div className="not4mob">
+											<CardGrid size="m" style={{ cursor: 'pointer' }}>
+												{characters && characters.map((elem) => createCard(elem))}
+											</CardGrid>
+										</Div>
+										<Div className="formob">
+											<CardGrid size="l">
+												{characters && characters.map((elem) => createCard(elem))}
+											</CardGrid>
 										</Div>
 									</Group>
-								}
-								<Header mode="secondary">Ваши персонажи</Header>
-								<Group mode="plain">
-									<Div className="not4mob">
-										<CardGrid size="m" style={{ cursor: 'pointer' }}>
-											{characters && characters.map((elem) => createCard(elem))}
-										</CardGrid>
-									</Div>
-									<Div className="formob">
-										<CardGrid size="l">
-											{characters && characters.map((elem) => createCard(elem))}
-										</CardGrid>
-									</Div>
-								</Group>
-							</SplitCol>
-						</SplitLayout>
-					</Group>
+								</SplitCol>
+							</SplitLayout>
+						</Group>
+					</>
 				}
 			</Panel>
 		)
