@@ -11,6 +11,7 @@ import {
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import MastersGroup from './MastersGroup.js';
 import ArticleBlock from './ArticleBlock.js';
+import Marquee from './Marquee.js';
 
 const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, description, masters, action, body }) => {
 
@@ -18,7 +19,9 @@ const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, d
 
     return (
         <Panel nav='campaign' key={campaignName}>
-            <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
+            <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+                <Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
+            </PanelHeader>
             {
                 user && masters &&
                 <Group mode="plain">

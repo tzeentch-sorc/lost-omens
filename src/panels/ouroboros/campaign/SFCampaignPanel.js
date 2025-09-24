@@ -15,15 +15,18 @@ import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import NoCharsPage from '../../common/components/NOCharsPage.js';
 import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import SFCharCard from './SFCharCard.js';
-import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js'
-import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js'
+import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js';
+import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js';
 
 import { SFCharacter, SFLvlupLink, SFCreateLink } from '../../../consts.js'
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
-	SFNoCharsDescription, SFNoCharsBody, VKToken
-} from '../../../consts.js'
+	SFNoCharsDescription, SFNoCharsBody, VKToken, MastersText
+} from '../../../consts.js';
+import * as logger from '../../../util/Logger.js';
+import MastersGroup from '../../common/components/MastersGroup.js';
+import Marquee from '../../common/components/Marquee.js';
 
 const SFCampaignPanel = ({ fetchedUser }) => {
 
@@ -34,7 +37,6 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	const [characters, setCharacters] = useState([])
 	const [prio, setPrio] = useState(-1) // -1 => loading
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
-	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	const [masters, setMasters] = useState([]);
 
@@ -68,8 +70,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const prioData = await SFPlayerInfoSettings.getQueryAll();
-			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			console.log("data: ", data);
+			const data = prioData.filter(elem => { return getVkUserUrl(elem, "SF", fetchedUser) });
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
 				lvl: elem.lvl,
@@ -83,8 +85,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 			const masterData = await SFMastersInfoSettings.getQueryAll();
 			const userIds = masterData.map(elem => elem.id).join(', ');
-			//console.log(masterData);
-			//console.log(userIds);
+			logger.log(masterData);
+			logger.log(userIds);
 			const users = await bridge
 				.send('VKWebAppCallAPIMethod', {
 					method: 'users.get',
@@ -99,7 +101,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 			setMasters(users);
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
+			setTimeout(() => setPopout(null), 700);
 		}
 		fetchData().catch(console.error);
 	}, []);
@@ -128,14 +130,19 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 		return (
 			<Panel nav='campaign' key={campaignName}>
 				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
-					{campaignName}
+					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
 				</PanelHeader>
 				{fetchedUser &&
-					<Group mode="card">
-						<SplitLayout popout={popout}>
-							{isDisplayed &&
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode="card">
+							<SplitLayout popout={popout}>
 								<SplitCol>
-									{prio && <SFCharacterInfoCard prio={prio} />}
+									{prio &&
+										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+											<SFCharacterInfoCard prio={prio} />
+										</Group>
+									}
 									<Header mode="secondary">Ваши персонажи</Header>
 									<Group mode="plain">
 										<Div className="not4mob" style={{ cursor: 'pointer' }}>
@@ -150,9 +157,9 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 										</Div>
 									</Group>
 								</SplitCol>
-							}
-						</SplitLayout>
-					</Group>
+							</SplitLayout>
+						</Group>
+					</>
 				}
 			</Panel>
 		)
