@@ -4,7 +4,7 @@ import {
     InfoRow, Accordion
 } from '@vkontakte/vkui';
 
-import * as logger from '../../../util/Logger.js';
+import * as logger from '../../../../util/Logger.js';
 
 const SMSpells = ({ spellist }) => {
 

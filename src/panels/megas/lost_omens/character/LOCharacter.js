@@ -24,7 +24,7 @@ import '../../../common/css/Character.css';
 
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
-import * as logger from '../../../util/Logger.js';
+import * as logger from '../../../../util/Logger.js';
 
 import {LOCampaign} from '../../../../consts.js'
 

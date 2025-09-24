@@ -20,8 +20,8 @@ import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js';
 
 import { SFCharacter, SFLvlupLink, SFCreateLink, SFLvlupChar, SFLvlupAgree,
 	FormPreEnter, SFCreatePlayer, SFCreateVK
- } from '../../../consts.js'
-import { getVkUserUrl } from '../../../util/VKUserURL.js';
+ } from '../../../../consts.js'
+import { getVkUserUrl } from '../../../../util/VKUserURL.js';
 import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
 	SFNoCharsDescription, SFNoCharsBody, VKToken, MastersText

@@ -3,7 +3,7 @@ import {
     Div, ModalRoot, InfoRow, ModalPage, ModalPageHeader,
     Button, SimpleCell
 } from '@vkontakte/vkui';
-import * as logger from '../../../util/Logger.js';
+import * as logger from '../../../../util/Logger.js';
 
 const SMPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     const MODAL_PAGE_WITH_FIXED_HEIGHT = 'fixed-height';

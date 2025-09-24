@@ -17,7 +17,7 @@ import VUMastersInfoSettings from '../export_settings/VUMastersInfoSettings.js'
 import { VUArticleLink, VUArticleImage, VUNoCharsCaption, 
 	VUNoCharsDescription, CommonNoCharsBody, VKToken } from '../../../../consts.js'
 
-import * as logger from '../../../util/Logger.js'
+import * as logger from '../../../../util/Logger.js'
 
 const VUCampaignPanel = ({ fetchedUser }) => {
 	const [params, setParams] = useSearchParams();
