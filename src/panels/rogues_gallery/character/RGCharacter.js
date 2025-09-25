@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
 	Panel, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
-	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text
+	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text, Button, Spacing
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import {
@@ -25,7 +25,7 @@ import '../../common/css/Character.css';
 
 //import RGFeatPanel from './RGFeatPanel.js';
 
-import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder } from '../../../consts.js'
+import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder, RGTransactions } from '../../../consts.js'
 import * as logger from '../../../util/Logger.js';
 import Marquee from '../../common/components/Marquee.js';
 
@@ -228,7 +228,7 @@ const RGCharacter = () => {
 			</PanelHeader>
 			<SplitLayout /*popout={popout} */ modal={modal}>
 				<SplitCol>
-					<RGMainInfo
+					<RGMainInfo charName={charName}
 						helped={helped} hurt={hurt}
 						rep={rep} humanity={humanity}
 						exp={exp} downtime={downtime} freetime={freetime}
