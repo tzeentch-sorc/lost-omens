@@ -14,7 +14,7 @@ const DrinkPlaceholder = ({ text }) => {
             aria-controls="tab-drink"
             role="tabpanel"
             mode="plain">
-            <Placeholder icon={<Icon28WineglassOutline width={56} height={56} />} header="Здесь бы мог быть ваш фирменный рецепт">
+            <Placeholder icon={<Icon28WineglassOutline width={56} height={56} />} title="Здесь бы мог быть ваш фирменный рецепт">
                 <Div>
                     {text}
                 </Div>

@@ -36,7 +36,7 @@ const Intro = ({ fetchedUser }) => {
                         </Div>
                     </Group>
                     <Group mode="card">
-                        <Header size="large" mode="primary">
+                        <Header size="xl">
                             Мегакампании в GEEKMO
                         </Header>
 

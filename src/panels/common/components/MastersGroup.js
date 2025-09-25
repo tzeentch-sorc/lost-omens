@@ -6,7 +6,7 @@ const MastersGroup = ({ masters, text=MastersNoCharsText }) => {
     return (
         <Group mode="card" header={
             <Header
-                mode='secondary'
+                size='s'
                 subtitle={text}
             >
                 Мастера

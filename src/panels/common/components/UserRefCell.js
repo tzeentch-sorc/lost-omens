@@ -5,7 +5,7 @@ import {
 
 const UserRefCell = ({user}) => {
     return (
-        <HorizontalCell onClick={() => { window.open('https://vk.com/im?sel=' + user.id) }} key={user.id} size="s" header={user.first_name}>
+        <HorizontalCell onClick={() => { window.open('https://vk.com/im?sel=' + user.id) }} key={user.id} size="s" title={user.first_name}>
             <Avatar size={56} src={user.photo_200} />
         </HorizontalCell>
     );

@@ -50,7 +50,7 @@ const RGCharacter = () => {
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('drink');
 
-	// const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	// const [popout, setPopout] = useState(<ScreenSpinner />)
 	const charName = params.get('CharName');
 	const player = params.get('Player');
 
@@ -232,8 +232,9 @@ const RGCharacter = () => {
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(RGCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
-			<SplitLayout /*popout={popout} */ modal={modal}>
-				<SplitCol>
+			<SplitLayout>
+                {modal}
+                <SplitCol>
 					<RGMainInfo charName={charName}
 						helped={helped} hurt={hurt}
 						rep={rep} humanity={humanity}
