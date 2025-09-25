@@ -38,7 +38,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 	const [characters, setCharacters] = useState([])
 	const [prio, setPrio] = useState(-1) // -1 => loading
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 
 	const [masters, setMasters] = useState([]);
 
@@ -152,14 +152,15 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 					<>
 						<MastersGroup masters={masters} text={MastersText} />
 						<Group mode="card">
-							<SplitLayout popout={popout}>
-								<SplitCol>
+							<SplitLayout>
+                                {popout}
+                                <SplitCol>
 									{prio &&
-										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+										<Group header={<Header size="s">Информация игрока</Header>} mode="plain" padding='s'>
 											<SFCharacterInfoCard prio={prio} />
 										</Group>
 									}
-									<Header mode="secondary">Ваши персонажи</Header>
+									<Header size="s">Ваши персонажи</Header>
 									<Group mode="plain">
 										<Div className="not4mob" style={{ cursor: 'pointer' }}>
 											<CardGrid size="m">

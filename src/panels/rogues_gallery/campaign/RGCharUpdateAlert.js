@@ -25,8 +25,8 @@ const RGCharUpdateAlert = ({navLink, charName, closeMethod}) => {
             ]}
             onClose={closeMethod}
             renderAction={renderAction}
-            header={charName + ' нуждается в обновлении навыка!'}
-            text="Можно обновить навык прямо сейчас, если написать одному из мастеров"
+            title={charName + ' нуждается в обновлении навыка!'}
+            description="Можно обновить навык прямо сейчас, если написать одному из мастеров"
         />
     )
 }

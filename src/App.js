@@ -33,7 +33,7 @@ const App = (router) => {
 	const { view: activeView, panel: activePanel } = useActiveVkuiLocation();
 
 	const [fetchedUser, setUser] = useState(null);
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const [popout, setPopout] = useState(<ScreenSpinner />);
 
 	useEffect(() => {
 		async function fetchData() {

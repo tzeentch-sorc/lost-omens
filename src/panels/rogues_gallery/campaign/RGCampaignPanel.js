@@ -33,7 +33,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const [masters, setMasters] = useState([]);
 	const [prio, setPrio] = useState(-1); // while loading
 
@@ -129,10 +129,11 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 					<>
 						<MastersGroup masters={masters} text={MastersText} />
 						<Group mode="card">
-							<SplitLayout popout={popout}>
-								{isDisplayed &&
+							<SplitLayout >
+                                {popout}
+                                {isDisplayed &&
 									<SplitCol>
-										<Header mode="secondary">Ваши персонажи</Header>
+										<Header size="s">Ваши персонажи</Header>
 										<Group mode="plain">
 											<Div className="not4mob" style={{ cursor: 'pointer' }}>
 												<CardGrid size="m">

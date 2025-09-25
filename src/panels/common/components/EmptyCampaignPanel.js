@@ -16,7 +16,9 @@ const EmptyCampaignPanel = ({user, campaignName, popout}) => {
             {
                 user &&
                 <Group mode="plain">
-                    <SplitLayout popout={popout} />
+                    <SplitLayout>
+                        {popout}
+                    </SplitLayout>
                 </Group>
             }
         </Panel>

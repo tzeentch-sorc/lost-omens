@@ -22,7 +22,7 @@ import * as logger from '../../../util/Logger.js'
 const VUCampaignPanel = ({ fetchedUser }) => {
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const [masters, setMasters] = useState([]);
 
 	useEffect(() => {
