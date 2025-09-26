@@ -27,6 +27,7 @@ const RGRequests = () => {
 
     const routeNavigator = useRouteNavigator();
     const [params, setParams] = useSearchParams();
+    const [popout, setPopout] = useState(<ScreenSpinner />)
 
     const [menuOpened, setMenuOpened] = React.useState(false);
     const [selected, setSelected] = React.useState('transactions');
@@ -41,7 +42,7 @@ const RGRequests = () => {
     }
 
     function hasDowntime() {
-        return (transactions.length > 0);
+        return (downtime.length > 0);
     }
 
     function renderSelectedTab() {
