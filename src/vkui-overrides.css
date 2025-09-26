@@ -40,7 +40,7 @@ body,
   height: 100%;
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-positive .vkuiButton__in {
+.vkuiButton__modePrimary.vkuiButton__appearancePositive .vkuiButton__in {
   position: relative;
   /* needed for pseudo-element positioning */
   overflow: hidden;
@@ -49,9 +49,11 @@ body,
   border-radius: 6px;
   /* keep rounded corners */
   transition: background 0.3s ease;
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-positive .vkuiButton__in::after {
+.vkuiButton__modePrimary.vkuiButton__appearancePositive .vkuiButton__in::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -62,11 +64,15 @@ body,
   transition: background 0.3s ease;
   pointer-events: none;
   /* so it doesn’t block clicks */
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-positive:hover .vkuiButton__in::after {
+.vkuiButton__modePrimary.vkuiButton__appearancePositive:hover .vkuiButton__in::after {
   background: rgba(255, 255, 255, 0.1);
   /* white overlay on hover */
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
 .vkuiPanelHeader__in {
@@ -81,7 +87,7 @@ body,
 }
 
 
-.vkuiButton--mode-primary.vkuiButton--appearance-neutral .vkuiButton__in {
+.vkuiButton__modePrimary.vkuiButton__appearanceNeutral .vkuiButton__in {
   position: relative;
   /* needed for pseudo-element positioning */
   overflow: hidden;
@@ -90,9 +96,11 @@ body,
   border-radius: 6px;
   /* keep rounded corners */
   transition: background 0.3s ease;
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-neutral .vkuiButton__in::after {
+.vkuiButton__modePrimary.vkuiButton__appearanceNeutral .vkuiButton__in::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -103,14 +111,18 @@ body,
   transition: background 0.3s ease;
   pointer-events: none;
   /* so it doesn’t block clicks */
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-neutral:hover .vkuiButton__in::after {
+.vkuiButton__modePrimary.vkuiButton__appearanceNeutral:hover .vkuiButton__in::after {
   background: rgba(255, 255, 255, 0.1);
   /* white overlay on hover */
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-negative .vkuiButton__in {
+.vkuiButton__modePrimary.vkuiButton__appearanceNegative .vkuiButton__in {
   position: relative;
   /* needed for pseudo-element positioning */
   overflow: hidden;
@@ -119,9 +131,11 @@ body,
   border-radius: 6px;
   /* keep rounded corners */
   transition: background 0.3s ease;
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-negative .vkuiButton__in::after {
+.vkuiButton__modePrimary.vkuiButton__appearanceNegative .vkuiButton__in::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -132,9 +146,13 @@ body,
   transition: background 0.3s ease;
   pointer-events: none;
   /* so it doesn’t block clicks */
+  
+  color: #fff; /* цвет текста кнопки */
 }
 
-.vkuiButton--mode-primary.vkuiButton--appearance-negative:hover .vkuiButton__in::after {
+.vkuiButton__modePrimary.vkuiButton__appearanceNegative:hover .vkuiButton__in::after {
   background: rgba(255, 255, 255, 0.1);
   /* white overlay on hover */
+  
+  color: #fff; /* цвет текста кнопки */
 }

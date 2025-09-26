@@ -17,11 +17,11 @@ const RGCharCard = ({ element, openAction }) => {
                     color={FavouriteColor} 
                     style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
                     />}
-                text={element.type}
-                caption={element.owner && 
+                subtitle={element.type}
+                extraSubtitle={element.owner &&
                     ("Собственность " + element.owner)}
                 after={element.lvl_up &&
-                    <Counter size="s" mode="primary">
+                    <Counter size="s" mode="primary" appearance="accent">
                         <Icon28UserOutgoingOutline width={16} height={16} />
                     </Counter>}
                 afterCaption={element.lvl_up && "Доступно повышение"}

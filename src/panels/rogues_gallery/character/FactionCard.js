@@ -13,7 +13,7 @@ const FactionCard = ({ helped, hurt, onOpenFactionModal }) => {
     return (
         <>
             <Card onClick={() => onOpenFactionModal()} style={{ cursor: 'pointer' }}>
-                <Header mode="primary">Статус фракций</Header>
+                <Header size="m">Статус фракций</Header>
                 <SimpleCell
                     before={<Icon28GlobeOutline
                         width={24} height={24}

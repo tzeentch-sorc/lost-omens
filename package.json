@@ -16,10 +16,10 @@
     "dependencies": {
         "@vkontakte/icons": "^2.139.0",
         "@vkontakte/vk-bridge": "^2.15.0",
-        "@vkontakte/vk-mini-apps-router": "^1.4.6",
+        "@vkontakte/vk-mini-apps-router": "^1.8.1",
         "@vkontakte/vk-miniapps-deploy": "^0.1.8",
         "@vkontakte/vk-tunnel": "^0.2.2",
-        "@vkontakte/vkui": "6.7.0",
+        "@vkontakte/vkui": "7.7.0",
         "@vkontakte/vkui-tokens": "^4.54.0",
         "axios": "^1.7.7",
         "babel-eslint": "^10.1.0",

@@ -60,7 +60,7 @@ const LOCharacter = () => {
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
-	// const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	// const [popout, setPopout] = useState(<ScreenSpinner />)
 	const charName = params.get('CharName');
 	const player = params.get('Player');
 
@@ -274,7 +274,8 @@ const LOCharacter = () => {
 			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(LOCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
-			<SplitLayout /*popout={popout} */ modal={modal}>
+			<SplitLayout>
+                {modal}
 				<SplitCol>
 					<LOMainInfo
 						gold={gold}

@@ -76,6 +76,11 @@ const router = createHashRouter([
     path: '/char/rogues_gallery',
     panel: 'char',
     view: 'rogues_gallery',
+  },
+  {
+    path: '/requests/rogues_gallery',
+    panel: 'requests',
+    view: 'rogues_gallery',
   }
 ]);
 

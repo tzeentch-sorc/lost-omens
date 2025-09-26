@@ -15,7 +15,7 @@ const FormulaePlaceholder = () => {
             role="tabpanel"
             mode="plain"
         >
-            <Placeholder icon={<Icon28MortarOutline width={56} height={56} />} header="Здесь будут ваши формулы">
+            <Placeholder icon={<Icon28MortarOutline width={56} height={56} />} title="Здесь будут ваши формулы">
                 <Div>
                     Never gonna give you up...
                 </Div>
