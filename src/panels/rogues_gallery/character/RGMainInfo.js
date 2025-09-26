@@ -153,7 +153,7 @@ const RGMainInfo = ({ charName, helped, hurt, rep, humanity, exp, downtime, free
                 <Spacing size={4} />
                 <Group mode='plain'>
                     <Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                        <Button stretched appearance="neutral" size="l" onClick={() => { window.open(createPreEnteredTransactionsLink(charName, RGTransactions), "_blank") }}>Совершить транзакцию</Button>
+                        <Button stretched appearance="neutral" size="l" onClick={() => { window.open(createPreEnteredTransactionsLink(charName, RGTransactions), "_blank") }}>Транзакция</Button>
                         <Button stretched appearance="negative" size="l" onClick={() => { openRequests(charName) }}>Заявки
                         </Button>
                     </Div>
