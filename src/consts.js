@@ -150,6 +150,8 @@ export const RGSpreadSheetID = config.RoguesGallery.Mirror; //RG Geekmo Mirror
 export const RGMastersSheetID = config.RoguesGallery.Masters; //sheet "gms"
 export const RGPlayersSheetID = config.RoguesGallery.Players; //sheet "players"
 export const RGCharactersSheetID = config.RoguesGallery.Characters; //sheet "characters"
+export const RGTransactionsSheetID = config.RoguesGallery.Transactions; //sheet "transactions"
+export const RGDowntimeSheetID = config.RoguesGallery.Downtime; // sheet "downtime"
 
 // ----- Additional info -----
 export const RGArticleLink = 'https://vk.com/@geekmo-megakampaniya-cyberpunk-2020-v-geekmo-rogues-gallery';

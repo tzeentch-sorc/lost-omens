@@ -14,12 +14,14 @@ import RGRequestsTabPanel from './RGRequestsTabPanel.js';
 import RGTransactionsWall from './RGTransactionsWall.js';
 import RGDowntimeWall from './RGDowntimeWall.js';
 
-//import RGDowntimeSettings from '../export_settings/RGDowntimeSettings.js'
-//import RGTransactionsSettings from '../export_settings/RGTransactionsSettings.js'
+import RGDowntimeSettings from '../export_settings/RGDowntimeSettings.js'
+import RGTransactionsSettings from '../export_settings/RGTransactionsSettings.js'
 
 import { RGCharacter } from '../../../consts.js'
 import * as logger from '../../../util/Logger.js';
 import Marquee from '../../common/components/Marquee.js';
+import DowntimePlaceholder from '../../common/placeholders/DowntimePlaceholder.js';
+import TransactionsPlaceholder from '../../common/placeholders/TransactionsPlaceholder.js';
 
 const RGRequests = () => {
 
@@ -29,34 +31,32 @@ const RGRequests = () => {
     const [menuOpened, setMenuOpened] = React.useState(false);
     const [selected, setSelected] = React.useState('transactions');
 
-    // const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
     const charName = params.get('CharName');
+    
+    const [transactions, setTransactions] = useState([]);
+    const [downtime, setDowntime] = useState([]);
 
     function hasTransactions() {
-        //return ( Array.isArray(formulae) && formulae[0] != "");
-        return false;
+        return (transactions.length > 0);
     }
 
     function hasDowntime() {
-        //return (inventory.length > 0);
-        return false;
+        return (transactions.length > 0);
     }
 
     function renderSelectedTab() {
         switch (selected) {
             case 'transactions':
                 return hasTransactions() ? (
-                    //<RGInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player} />
-                    logger.log("transactions")
+                    <RGTransactionsWall transactions={transactions}/>
                 ) : (
-                    <RGTransactionsWall />
+                    <TransactionsPlaceholder text="Зато не обанкротился (пока)" />
                 );
             case 'downtime':
                 return hasDowntime() ? (
-                    //<RGFormulae formulae={formulae} />
-                    logger.log("downtime")
+                    <RGDowntimeWall downtime={downtime}/>
                 ) : (
-                    <RGDowntimeWall />
+                    <DowntimePlaceholder text="... это время, проведенное с друзьями" />
                 );
             default:
                 return null;
@@ -67,23 +67,20 @@ const RGRequests = () => {
         async function fetchData() {
             //попытка получить через spreadsheetApp
 
-            //получение инвентаря
-            /*
-            let inventoryData = await RGInventorySettings.getFilteredQuery("owner", charName);
-            logger.log("inventory data", inventoryData);
+            //получение транзакций
+            let transactionsData = await RGTransactionsSettings.getFilteredQuery("name", charName);
+            logger.log("transactions data", transactionsData);
 
-            if (inventoryData[0].name) {
-                setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
-                const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
-                setWealth(totalCost);
-            }
-            */
+            setTransactions(transactionsData);
 
+            //получение даунтайма
+            let downtimeData = await RGDowntimeSettings.getFilteredQuery("name", charName);
+            logger.log("downtime data", downtimeData);
+
+            setDowntime(downtimeData);
 
             setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
             setTimeout(() => setPopout(null), 1000);
-
-            //logger.log("new", inventoryData);
         }
         fetchData().catch(console.error);
 	}, []);
