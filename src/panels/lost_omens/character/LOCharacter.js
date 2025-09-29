@@ -127,20 +127,6 @@ const LOCharacter = () => {
 		}
 	};
 
-	function extractTokensFromInventory(setTokens, inventoryData) {
-		var tokens = setTokens(inventoryData.find((item) => {
-			if (item.name === 'Жетон открытой дороги') {
-				const index = inventoryData.indexOf(item);
-				if (index !== -1) {
-					inventoryData.splice(index, 1);
-					return item;
-				}
-			}
-		}));
-		if (tokens) return tokens.count;
-		return 0;
-	}
-
 	//TODO rework all modals
 	const [modalTier, setModalTier] = useState(null);
 	const [activeModal, setActiveModal] = useState(null);
@@ -215,6 +201,7 @@ const LOCharacter = () => {
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
 			setDowntime(characterInfoData[0].downtime);
+			setTokens(characterInfoData[0].jods);
 
 			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
@@ -225,8 +212,6 @@ const LOCharacter = () => {
 				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
 				setWealth(totalCost);
 			}
-
-			extractTokensFromInventory(setTokens, inventoryData);
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await LOCharBuildSettings.getFilteredQuery("name", charName);
