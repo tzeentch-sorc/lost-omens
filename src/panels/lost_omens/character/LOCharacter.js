@@ -128,7 +128,7 @@ const LOCharacter = () => {
 	};
 
 	function extractTokensFromInventory(setTokens, inventoryData) {
-		setTokens(inventoryData.find((item) => {
+		var tokens = setTokens(inventoryData.find((item) => {
 			if (item.name === 'Жетон открытой дороги') {
 				const index = inventoryData.indexOf(item);
 				if (index !== -1) {
@@ -136,7 +136,9 @@ const LOCharacter = () => {
 					return item;
 				}
 			}
-		}).count);
+		}));
+		if (tokens) return tokens.count;
+		return 0;
 	}
 
 	//TODO rework all modals
