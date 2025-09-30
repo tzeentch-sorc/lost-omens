@@ -15,6 +15,7 @@ import LOSpells from './LOSpells.js';
 import LOInventory from './LOInventory.js';
 import LOFormulae from './LOFormulae.js';
 import LOMainInfo from './LOMainInfo.js';
+import LODescription from './LODescription.js';
 
 import LOInventorySettings from '../export_settings/LOInventorySettings.js'
 import LOCharBuildSettings from '../export_settings/LOCharBuildSettings.js'
@@ -26,7 +27,7 @@ import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 import * as logger from '../../../util/Logger.js';
 
-import {LOCampaign} from '../../../consts.js'
+import { LOCampaign } from '../../../consts.js'
 
 const LOCharacter = () => {
 
@@ -34,6 +35,7 @@ const LOCharacter = () => {
 	const [params, setParams] = useSearchParams();
 	const [inventory, setInventory] = useState([]);
 	const [tokens, setTokens] = useState(0);
+	const [room, setRoom] = useState("");
 	const [wealth, setWealth] = useState(0);
 	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
@@ -68,21 +70,21 @@ const LOCharacter = () => {
 
 	function hasSpells() {
 		return (
-        Array.isArray(spell_0) && spell_0[0] !== "" ||
-        Array.isArray(spell_1) && spell_1[0] !== "" ||
-        Array.isArray(spell_2) && spell_2[0] !== "" ||
-        Array.isArray(spell_3) && spell_3[0] !== "" ||
-        Array.isArray(spell_4) && spell_4[0] !== "" ||
-        Array.isArray(spell_5) && spell_5[0] !== "" ||
-        Array.isArray(spell_6) && spell_6[0] !== "" ||
-        Array.isArray(spell_7) && spell_7[0] !== "" ||
-        Array.isArray(spell_8) && spell_8[0] !== "" ||
-        Array.isArray(spell_9) && spell_9[0] !== "" ||
-        Array.isArray(spell_10) && spell_10[0] !== ""
-    );
+			Array.isArray(spell_0) && spell_0[0] !== "" ||
+			Array.isArray(spell_1) && spell_1[0] !== "" ||
+			Array.isArray(spell_2) && spell_2[0] !== "" ||
+			Array.isArray(spell_3) && spell_3[0] !== "" ||
+			Array.isArray(spell_4) && spell_4[0] !== "" ||
+			Array.isArray(spell_5) && spell_5[0] !== "" ||
+			Array.isArray(spell_6) && spell_6[0] !== "" ||
+			Array.isArray(spell_7) && spell_7[0] !== "" ||
+			Array.isArray(spell_8) && spell_8[0] !== "" ||
+			Array.isArray(spell_9) && spell_9[0] !== "" ||
+			Array.isArray(spell_10) && spell_10[0] !== ""
+		);
 	}
 	function hasFormulae() {
-		return ( Array.isArray(formulae) && formulae[0] != "");
+		return (Array.isArray(formulae) && formulae[0] != "");
 	}
 	function hasInventory() {
 		return (inventory.length > 0);
@@ -106,7 +108,7 @@ const LOCharacter = () => {
 		switch (selected) {
 			case 'inventory':
 				return hasInventory() ? (
-					<LOInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player}/>
+					<LOInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player} />
 				) : (
 					<InventoryPlaceholder />
 				);
@@ -202,6 +204,7 @@ const LOCharacter = () => {
 			setLevel(characterInfoData[0].lvl);
 			setDowntime(characterInfoData[0].downtime);
 			setTokens(characterInfoData[0].jods);
+			setRoom(characterInfoData[0].room);
 
 			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
@@ -262,7 +265,7 @@ const LOCharacter = () => {
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout>
-                {modal}
+				{modal}
 				<SplitCol>
 					<LOMainInfo
 						gold={gold}
@@ -275,7 +278,10 @@ const LOCharacter = () => {
 						// setPopout={setPopout}
 						onOpenTierModal={openTierModal}
 					/>
-					<LOFeatPanel featlist={featlist()} />
+					<Group mode="card">
+						<LOFeatPanel featlist={featlist()} />
+						<LODescription room={room} />
+					</Group>
 					<Group mode='card'>
 						<LOCharTabPanel
 							selected={selected}
