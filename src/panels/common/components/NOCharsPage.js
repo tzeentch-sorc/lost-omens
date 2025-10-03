@@ -36,7 +36,7 @@ const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, d
                                     />
                                     <MastersGroup masters={masters} />
                                     <Group mode="card">
-                                        <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа" action={action}>
+                                        <Placeholder icon={<Icon56UserAddOutline />} title="Создание персонажа" action={action}>
                                             <Div>
                                                 {body}
                                             </Div>

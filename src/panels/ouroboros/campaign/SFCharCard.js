@@ -13,9 +13,9 @@ const SFCharCard = ({ element, openAction }) => {
                 key={element.name}
                 id={element.name}
                 before={<Icon24UserOutline width={48} height={48} color={FavouriteColor} />}
-                text={element.lvl + " ур."}
+                subtitle={element.lvl + " ур."}
                 after={element.lvl_up &&
-                    <Counter size="s" mode="primary">
+                    <Counter size="s" mode="primary" appearance="accent">
                         <Icon28UserOutgoingOutline width={16} height={16} />
                     </Counter>}
                 afterCaption={element.lvl_up && "Доступно повышение"}

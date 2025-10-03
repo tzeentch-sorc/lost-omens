@@ -71,6 +71,8 @@
         "Characters": 0,
         "Players": 0,
         "Masters": 0,
-        "Inventory": 0
+        "Inventory": 0,
+        "Transactions": 0,
+        "Downtime": 0
     }
 }

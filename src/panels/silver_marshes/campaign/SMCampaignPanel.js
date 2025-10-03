@@ -40,7 +40,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 	const [date, setDate] = useState("Хроника утеряна")
 	const [advName, setAdvName] = useState("Неизвестное приключение")
 	const [prio, setPrio] = useState(-1)
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const [priorities, setPriorities] = useState([]);
 	const [masters, setMasters] = useState([]);
 
@@ -151,10 +151,11 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 					<>
 						<MastersGroup masters={masters} text={MastersText} />
 						<Group mode='card'>
-							<SplitLayout popout={popout}>
-								<SplitCol>
+							<SplitLayout>
+                                {popout}
+                                <SplitCol>
 									{date && prio && advName &&
-										<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
+										<Group header={<Header size="s">Информация игрока</Header>} mode="plain" padding='s'>
 											<SMInfoCard date={date} prio={prio} adventure={advName} />
 											<Spacing size={4} />
 											<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
@@ -163,7 +164,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 											</Div>
 										</Group>
 									}
-									<Header mode="secondary">Ваши персонажи</Header>
+									<Header size="s">Ваши персонажи</Header>
 									<Group mode="plain">
 										<Div className="not4mob">
 											<CardGrid size="m" style={{ cursor: 'pointer' }}>

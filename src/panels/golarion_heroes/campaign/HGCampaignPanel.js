@@ -17,7 +17,7 @@ const HGCampaignPanel = ({ fetchedUser }) => {
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
 
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const [masters, setMasters] = useState([]);
 
 	useEffect(() => {

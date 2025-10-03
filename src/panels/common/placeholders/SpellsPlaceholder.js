@@ -15,7 +15,7 @@ const SpellsPlaceholder = () => {
             role="tabpanel"
             mode="plain"
         >
-            <Placeholder icon={<Icon28MagicHatOutline width={56} height={56} />} header="Здесь будут ваши заклинания">
+            <Placeholder icon={<Icon28MagicHatOutline width={56} height={56} />} title="Здесь будут ваши заклинания">
                 <Div>
                     Ты думал здесь что-то будет?
                 </Div>

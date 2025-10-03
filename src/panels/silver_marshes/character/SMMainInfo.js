@@ -46,26 +46,26 @@ const SMMainInfo = ({ gold, downtime, experience, level, mult }) => {
     }
 
     return (
-        <Group mode='card' header={<Header mode='secondary'>Ресурсы и опыт персонажа</Header>}>
+        <Group mode='card' header={<Header size="s">Ресурсы и опыт персонажа</Header>}>
             <CardGrid size='m'>
                 <Card key="gold">
-                    <Header mode="primary">Золото</Header>
+                    <Header size="m">Золото</Header>
                     <SimpleCell before={<Icon36CoinsStacks3Outline width={24} height={24} />}>{gold}</SimpleCell>
                 </Card>
                 <Card key="downtime">
-                    <Header mode="primary">Даунтайм</Header>
+                    <Header size="m">Даунтайм</Header>
                     <SimpleCell before={<Icon28HourglassOutline width={24} height={24} />}>{downtime}</SimpleCell>
                 </Card>
             </CardGrid>
             <CardGrid size='m'>
                 <Card key="experience">
-                    <Header mode="primary">Уровень</Header>
+                    <Header size="m">Уровень</Header>
                     <SimpleCell before={<Icon56Stars3Outline width={24} height={24} />}>
                         {experience && level && (level)} {!experience && ("unknown")}
                     </SimpleCell>
                 </Card>
                 <Card key="lvlcountdown">
-                    <Header mode="primary">
+                    <Header size="m">
                         Партий до {level && (parseInt(level, 10) + 1)} {!level && (" ??? ")} ур.
                     </Header>
                     <SimpleCell before={<Icon28HourglassErrorBadgeOutline width={24} height={24} />}>
@@ -76,7 +76,7 @@ const SMMainInfo = ({ gold, downtime, experience, level, mult }) => {
             </CardGrid>
             <CardGrid size="l" >
                 <Card key="mult">
-                    <Header mode="primary">Класс</Header>
+                    <Header size="m">Класс</Header>
                     <SimpleCell before={<Icon28WidgetsOutline width={24} height={24} />}>
                         {mult}
                     </SimpleCell>
