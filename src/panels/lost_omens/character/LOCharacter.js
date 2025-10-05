@@ -26,8 +26,9 @@ import '../../common/css/Character.css';
 import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 import * as logger from '../../../util/Logger.js';
+import { getVkPhotoSrc } from '../../../util/GetVkPhotoSrc';
 
-import { LOCampaign } from '../../../consts.js'
+import { LOCampaign, VKToken } from '../../../consts.js'
 
 const LOCharacter = () => {
 
@@ -36,6 +37,7 @@ const LOCharacter = () => {
 	const [inventory, setInventory] = useState([]);
 	const [tokens, setTokens] = useState(0);
 	const [room, setRoom] = useState("");
+	const [img, setImg] = useState();
 	const [wealth, setWealth] = useState(0);
 	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
@@ -239,8 +241,10 @@ const LOCharacter = () => {
 			setFeatSkill(characterBuildData[0].feat_skill.split(','));
 			setFeatClass(characterBuildData[0].feat_class.split(','));
 			setFeatArchetype(characterBuildData[0].feat_archetype.split(','));
-
 			setEasterEgg(getRandomInt(14));
+
+			const url = await getVkPhotoSrc("https://vk.com/photo172683390_457260472", VKToken);
+      		if (url) setImg(url);
 
 			// setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			// setTimeout(() => setPopout(null), 1000);
@@ -280,7 +284,7 @@ const LOCharacter = () => {
 					/>
 					<Group mode="card">
 						<LOFeatPanel featlist={featlist()} />
-						<LODescription room={room} />
+						<LODescription room={room} imageSrc={img} />
 					</Group>
 					<Group mode='card'>
 						<LOCharTabPanel
