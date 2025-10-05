@@ -26,7 +26,7 @@ import * as logger from '../../../util/Logger.js';
 import {
 	SMArticleLink, SMArticleImage, SMNoCharsCaption,
 	SMNoCharsDescription, CommonNoCharsBody, VKToken,
-	MastersText
+	MastersText, MOCKUP_FETCHED_USER
 } from '../../../consts.js'
 import MastersGroup from '../../common/components/MastersGroup.js';
 import Marquee from '../../common/components/Marquee.js';
@@ -101,19 +101,22 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 			const userIds = masterData.map(elem => elem.id).join(', ');
 			logger.log(masterData);
 			logger.log(userIds);
-			const users = await bridge
-				.send('VKWebAppCallAPIMethod', {
-					method: 'users.get',
-					params: {
-						user_ids: userIds,
-						v: '5.131',
-						fields: 'screen_name, photo_200',
-						access_token: VKToken
-					}
-				}).then(resp => { return resp.response });
+			if (window.location.hostname === 'localhost') {
+				setMasters([MOCKUP_FETCHED_USER]);
+			} else {
+				const users = await bridge
+					.send('VKWebAppCallAPIMethod', {
+						method: 'users.get',
+						params: {
+							user_ids: userIds,
+							v: '5.131',
+							fields: 'screen_name, photo_200',
+							access_token: VKToken
+						}
+					}).then(resp => { return resp.response });
 
-			setMasters(users);
-
+				setMasters(users);
+			}
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
@@ -152,8 +155,8 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 						<MastersGroup masters={masters} text={MastersText} />
 						<Group mode='card'>
 							<SplitLayout>
-                                {popout}
-                                <SplitCol>
+								{popout}
+								<SplitCol>
 									{date && prio && advName &&
 										<Group header={<Header size="s">Информация игрока</Header>} mode="plain" padding='s'>
 											<SMInfoCard date={date} prio={prio} adventure={advName} />

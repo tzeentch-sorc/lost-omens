@@ -18,13 +18,14 @@ import SFCharCard from './SFCharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js';
 import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js';
 
-import { SFCharacter, SFLvlupLink, SFCreateLink, SFLvlupChar, SFLvlupAgree,
+import {
+	SFCharacter, SFLvlupLink, SFCreateLink, SFLvlupChar, SFLvlupAgree,
 	FormPreEnter, SFCreatePlayer, SFCreateVK
- } from '../../../consts.js'
+} from '../../../consts.js'
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
-	SFNoCharsDescription, SFNoCharsBody, VKToken, MastersText
+	SFNoCharsDescription, SFNoCharsBody, VKToken, MastersText, MOCKUP_FETCHED_USER
 } from '../../../consts.js';
 import * as logger from '../../../util/Logger.js';
 import MastersGroup from '../../common/components/MastersGroup.js';
@@ -43,19 +44,19 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 	const [masters, setMasters] = useState([]);
 
 	function createPreEnteredLVLUPLink(charName, agree, link) {
-			var newLink = link + FormPreEnter +
-				SFLvlupChar + charName +
-				SFLvlupAgree + "Подтверждаю";
-			return newLink;
-		}
+		var newLink = link + FormPreEnter +
+			SFLvlupChar + charName +
+			SFLvlupAgree + "Подтверждаю";
+		return newLink;
+	}
 
 	function createPreEnteredNewCharLink(fetchedUser, link) {
-			var newLink = link + FormPreEnter +
-				SFCreatePlayer + `${fetchedUser?.last_name || ''} ${fetchedUser?.first_name || ''}`.trim() +
-				SFCreateVK + "vk.com/" + fetchedUser.screen_name;
-			return newLink;
-		}
-	
+		var newLink = link + FormPreEnter +
+			SFCreatePlayer + `${fetchedUser?.last_name || ''} ${fetchedUser?.first_name || ''}`.trim() +
+			SFCreateVK + "vk.com/" + fetchedUser.screen_name;
+		return newLink;
+	}
+
 	const openAction = (element) => {
 		setPopout(
 			<CharUpdateAlert
@@ -103,19 +104,22 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 			const userIds = masterData.map(elem => elem.id).join(', ');
 			logger.log(masterData);
 			logger.log(userIds);
-			const users = await bridge
-				.send('VKWebAppCallAPIMethod', {
-					method: 'users.get',
-					params: {
-						user_ids: userIds,
-						v: '5.131',
-						fields: 'screen_name, photo_200',
-						access_token: VKToken
-					}
-				}).then(resp => { return resp.response });
+			if (window.location.hostname === 'localhost') {
+				setMasters([MOCKUP_FETCHED_USER]);
+			} else {
+				const users = await bridge
+					.send('VKWebAppCallAPIMethod', {
+						method: 'users.get',
+						params: {
+							user_ids: userIds,
+							v: '5.131',
+							fields: 'screen_name, photo_200',
+							access_token: VKToken
+						}
+					}).then(resp => { return resp.response });
 
-			setMasters(users);
-
+				setMasters(users);
+			}
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}
@@ -153,8 +157,8 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 						<MastersGroup masters={masters} text={MastersText} />
 						<Group mode="card">
 							<SplitLayout>
-                                {popout}
-                                <SplitCol>
+								{popout}
+								<SplitCol>
 									{prio &&
 										<Group header={<Header size="s">Информация игрока</Header>} mode="plain" padding='s'>
 											<SFCharacterInfoCard prio={prio} />
