@@ -1,4 +1,4 @@
-import axios from "axios";
+import bridge from '@vkontakte/vk-bridge';
 import * as logger from "./Logger.js";
 import { MOCKUP_VK_PHOTO } from "../consts.js";
 
@@ -18,21 +18,18 @@ export async function getVkPhotoSrc(photoPageUrl, accessToken) {
 
   try {
     // Make a request to VK API
-    var response = MOCKUP_VK_PHOTO;
-    if (!window.location.hostname === 'localhost') {
-      response = await axios.get(
-        `https://api.vk.com/method/photos.getById`,
-        {
-          params: {
-            photos: `${owner_id}_${photo_id}`,
-            access_token: accessToken,
-            v: "5.131",
-          },
-        }
-      );
-    }
+    const result = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'photos.getById',
+      request_id: '1', 
+      params: {
+        photos: `${owner_id}_${photo_id}`,
+        v: '5.131',
+        access_token: accessToken,
+      },
+    });
 
-    const item = response.data.response?.[0];
+    logger.log("VK API response:", result);
+    const item = result.response?.[0];
     if (!item || !item.sizes) return null;
 
     // Choose 'x' size or the largest
