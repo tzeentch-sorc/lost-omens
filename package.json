@@ -18,7 +18,7 @@
         "@vkontakte/vk-bridge": "^2.15.0",
         "@vkontakte/vk-mini-apps-router": "^1.8.1",
         "@vkontakte/vk-miniapps-deploy": "^0.1.8",
-        "@vkontakte/vk-tunnel": "^0.2.2",
+        "@vkontakte/vk-tunnel": "^0.2.9",
         "@vkontakte/vkui": "7.7.0",
         "@vkontakte/vkui-tokens": "^4.54.0",
         "axios": "^1.7.7",

@@ -8,6 +8,8 @@ import { useActiveVkuiLocation } from '@vkontakte/vk-mini-apps-router';
 
 import '@vkontakte/vkui/dist/vkui.css';
 
+import { VKToken, MOCKUP_FETCHED_USER } from './consts.js';
+
 import Intro from './panels/Intro.js';
 import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
 import LOCharacter from './panels/lost_omens/character/LOCharacter.js';
@@ -37,6 +39,11 @@ const App = (router) => {
 
 	useEffect(() => {
 		async function fetchData() {
+			if (window.location.hostname === 'localhost') {
+				setUser(MOCKUP_FETCHED_USER);
+				setPopout(null);
+				return;
+			}
 			const uid = await bridge.send('VKWebAppGetLaunchParams');
 			const user = await bridge
 				.send('VKWebAppCallAPIMethod', {
@@ -45,7 +52,7 @@ const App = (router) => {
 						user_ids: uid.vk_user_id,
 						v: '5.131',
 						fields: 'screen_name, photo_200',
-						access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
+						access_token:  VKToken
 					}
 				}).then(resp => { return resp.response[0] });
 			setUser(user);
@@ -61,7 +68,7 @@ const App = (router) => {
 			</View>
 			<View activePanel={activePanel} nav='lost_omens'>
 				<LOCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				<LOCharacter id={ROUTES.CHAR}/>
+				<LOCharacter id={ROUTES.CHAR} />
 			</View>
 			<View activePanel={activePanel} nav='golarion_heroes'>
 				<HGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
