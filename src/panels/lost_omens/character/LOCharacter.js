@@ -244,6 +244,7 @@ const LOCharacter = () => {
 			setEasterEgg(getRandomInt(14));
 
 			const url = await getVkPhotoSrc("https://vk.com/photo172683390_457260472", VKToken);
+			//const url = await getVkPhotoSrc(characterInfoData[0].photo, VKToken);
       		if (url) setImg(url);
 
 			// setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);

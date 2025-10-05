@@ -3,13 +3,13 @@ import * as logger from "./Logger.js";
 import { MOCKUP_VK_PHOTO } from "../consts.js";
 
 /**
- * Получает прямой URL изображения из ссылки VK photo
- * @param {string} photoPageUrl - пример: "https://vk.com/photo172683390_457260472"
- * @param {string} accessToken - VK API токен
- * @returns {Promise<string|null>} - прямой URL картинки или null
+ * Gets direct image URL from VK photo link
+ * @param {string} photoPageUrl - example: "https://vk.com/photo1234567890_123456789"
+ * @param {string} accessToken - VK API token
+ * @returns {Promise<string|null>} - direct image URL or null
  */
 export async function getVkPhotoSrc(photoPageUrl, accessToken) {
-  // Извлекаем owner_id и photo_id из ссылки
+  // Extract owner_id and photo_id from the link
   const match = photoPageUrl.match(/photo(-?\d+)_([0-9]+)/);
   if (!match) return null;
 
@@ -17,7 +17,7 @@ export async function getVkPhotoSrc(photoPageUrl, accessToken) {
   const photo_id = match[2];
 
   try {
-    // Делаем запрос к VK API
+    // Make a request to VK API
     var response = MOCKUP_VK_PHOTO;
     if (!window.location.hostname === 'localhost') {
       response = await axios.get(
@@ -35,7 +35,7 @@ export async function getVkPhotoSrc(photoPageUrl, accessToken) {
     const item = response.data.response?.[0];
     if (!item || !item.sizes) return null;
 
-    // Выбираем размер 'x' или самый большой
+    // Choose 'x' size or the largest
     const size = item.sizes.find(s => s.type === "x") || item.sizes[item.sizes.length - 1];
     logger.log("Получен VK фото URL:", size.url);
     return size.url;
