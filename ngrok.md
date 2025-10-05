@@ -7,12 +7,13 @@
 ## Setup ngrok
 1. install ngrok `npm install -g ngrok`
 2. configure token `ngrok config add-authtoken <your_secret_authtoken>`
-3. `set HTTPS=true` - without does NOT work
+3. `set HTTPS=true` - set before `npm start` (in the same terminal), without it does NOT work
 
 ## Run ngrok
-1. Run `ngrok http https://localhost:10888`
-2. Go to `http://127.0.0.1:4040` and get there your dev link
-3. Paste dev link to your test group
+1. Run `npm start` - to run app locally
+2. Run `ngrok http https://localhost:10888`
+3. Go to `http://127.0.0.1:4040` and get there your dev link
+4. Paste dev link to your test group
 
 > Additionally, you can check the provided link - it should show the same page as `https://localhost:10888`
 > Moreover, if you need that, you can see all requests to your dev link on `http://127.0.0.1:4040`
