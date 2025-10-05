@@ -4,8 +4,9 @@ import {
 } from '@vkontakte/vkui';
 
 import * as logger from "../../../util/Logger.js";
+import { func } from 'prop-types';
 
-const LODescription = ({ room, imageSrc }) => {
+const LODescription = ({ room, imageSrc, fullname, backstory, description, race }) => {
 
     const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
 
@@ -15,6 +16,17 @@ const LODescription = ({ room, imageSrc }) => {
             title: 'Описание',
         }
     ];
+
+    function roomNumber(room) {
+        if (!room) {
+            return "Таверна Аврора";
+        }
+        const isOnlyDigits = /^\d+$/.test(room);
+        if (isOnlyDigits) {
+            return `Комната ${room}`;
+        }
+        return room;
+    }
 
     const [openId, setOpenId] = React.useState();
 
@@ -31,17 +43,15 @@ const LODescription = ({ room, imageSrc }) => {
                         <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
                         <Accordion.Content>
                             <Div style={infoStyle}>
-                                {logger.log("imageSrc:", imageSrc)}
-                                {imageSrc &&
                                 <ContentCard
-                                    overTitle={"Academy Dropout"}
-                                    title={"Норлон Ювиэль"}
-                                    description={"Высокий совершеннолетний полуэльф около 195 см ростом, с пышными рыжими волосами, синими глазами, подтянутым телом и заострёнными ушами. На усыпанном веснушками лице обычно никаких эмоций, безучастный взгляд с мешками под глазами и солидный шрам на нижней части левой стороны лица. Носит подвеску в виде камня, чтобы 'маскировать' светящийся на груди сигил неоднозначной формы. Одевается безвкусно и очень просто, словно его одежда не волнует вовсе. Обычно горбится, но, если выпрямится, вероятно, обязательно будет стукаться о дверные косяки."}
-                                    caption={`Место жительства: комната ${room}`}
+                                    overTitle={backstory}
+                                    title={`${fullname}, ${race}`}
+                                    description={description}
+                                    caption={`Место жительства: ${roomNumber(room)}`}
                                     src={imageSrc}
                                     imageObjectFit="contain"
                                     maxHeight={300}
-                                />}
+                                />
                             </Div>
                         </Accordion.Content>
                     </Accordion>

@@ -38,6 +38,10 @@ const LOCharacter = () => {
 	const [tokens, setTokens] = useState(0);
 	const [room, setRoom] = useState("");
 	const [img, setImg] = useState();
+	const [fullname, setFullname] = useState("");
+	const [backstory, setBackstory] = useState("");
+	const [description, setDescription] = useState("");
+	const [race, setRace] = useState("");
 	const [wealth, setWealth] = useState(0);
 	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
@@ -207,6 +211,18 @@ const LOCharacter = () => {
 			setDowntime(characterInfoData[0].downtime);
 			setTokens(characterInfoData[0].jods);
 			setRoom(characterInfoData[0].room);
+			const url = await getVkPhotoSrc("https://vk.com/photo172683390_457260472", VKToken);
+			//const url = await getVkPhotoSrc(characterInfoData[0].photo, VKToken);
+      		if (url) setImg(url);
+			if(characterInfoData[0].fullname){
+				setFullname(characterInfoData[0].fullname);
+			} else {
+				setFullname(charName);
+			}
+			setRace(characterInfoData[0].race);
+			setBackstory(characterInfoData[0].backstory);
+			setDescription(characterInfoData[0].notes);
+			//setDescription("Высокий совершеннолетний полуэльф около 195 см ростом, с пышными рыжими волосами, синими глазами, подтянутым телом и заострёнными ушами. На усыпанном веснушками лице обычно никаких эмоций, безучастный взгляд с мешками под глазами и солидный шрам на нижней части левой стороны лица. Носит подвеску в виде камня, чтобы 'маскировать' светящийся на груди сигил неоднозначной формы. Одевается безвкусно и очень просто, словно его одежда не волнует вовсе. Обычно горбится, но, если выпрямится, вероятно, обязательно будет стукаться о дверные косяки.");
 
 			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
@@ -242,10 +258,6 @@ const LOCharacter = () => {
 			setFeatClass(characterBuildData[0].feat_class.split(','));
 			setFeatArchetype(characterBuildData[0].feat_archetype.split(','));
 			setEasterEgg(getRandomInt(14));
-
-			const url = await getVkPhotoSrc("https://vk.com/photo172683390_457260472", VKToken);
-			//const url = await getVkPhotoSrc(characterInfoData[0].photo, VKToken);
-      		if (url) setImg(url);
 
 			// setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			// setTimeout(() => setPopout(null), 1000);
@@ -285,7 +297,7 @@ const LOCharacter = () => {
 					/>
 					<Group mode="card">
 						<LOFeatPanel featlist={featlist()} />
-						<LODescription room={room} imageSrc={img} />
+						<LODescription room={room} imageSrc={img} fullname={fullname} backstory={backstory} description={description} race={race} />
 					</Group>
 					<Group mode='card'>
 						<LOCharTabPanel
