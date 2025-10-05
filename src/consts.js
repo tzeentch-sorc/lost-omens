@@ -27,7 +27,6 @@ export const DEBUG_VK_IDS = config.DEBUG_VK_IDS ||
         "VU": ""
     };
 export const MOCKUP_FETCHED_USER = config.MOCKUP_FETCHED_USER || null;
-export const MOCKUP_VK_PHOTO = config.MOCKUP_VK_PHOTO || null;
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';
 export const MastersText = 'Этим людям можно написать, если появились вопросы';
 export const MastersNoCharsText = 'Этим людям можно написать, если остались вопросы';
