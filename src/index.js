@@ -3,10 +3,12 @@ import { createRoot } from "react-dom/client";
 import bridge from "@vkontakte/vk-bridge";
 import App from "./App";
 import { createHashRouter, RouterProvider } from '@vkontakte/vk-mini-apps-router';
-import { AdaptivityProvider, useAppearance, AppRoot, ConfigProvider, Div } from '@vkontakte/vkui';
+import { AdaptivityProvider, useColorScheme, AppRoot, ConfigProvider, Div, ColorScheme } from '@vkontakte/vkui';
 
-import '@vkontakte/vkui/dist/vkui.css'
-import './vkui-overrides.css';
+import '@vkontakte/vkui/dist/components.css';
+import './index.css';
+import './themes/geekmo-theme.css';
+import './themes/geekmo-theme-dark.css';
 
 // Init VK Mini App
 bridge.send("VKWebAppInit");
@@ -81,55 +83,22 @@ const router = createHashRouter([
 
 function ThemedApp() {
 
-  const [appearance, setAppearance] = useState('light'); // default fallback
-
-  useEffect(() => {
-    // Listen for VKWebAppUpdateConfig
-    bridge.subscribe((e) => {
-      if (
-        e.detail.type === 'VKWebAppUpdateConfig' &&
-        e.detail.data?.appearance
-      ) {
-        setAppearance(e.detail.data.appearance); // 'light' or 'dark'
-      }
-    });
-
-    // Request config explicitly in case it’s not pushed immediately
-    bridge
-      .send('VKWebAppGetConfig')
-      .then((data) => {
-        if (data.appearance) {
-          setAppearance('dark'); //TODO - remove dark theme enforcing
-        }
-      })
-      .catch(console.error);
-  }, []);
-
-  const panelBgColor =
-    appearance === 'dark'
-      ? 'rgba(18, 18, 18, 0.45)'    // dark semi-transparent
-      : 'rgba(255, 255, 255, 0.05)'; // light semi-transparent
-
-  const panelHeaderBgColor =
-    appearance === 'dark'
-      ? 'rgba(34, 34, 34, 1)'    // dark 
-      : 'rgba(255, 255, 255, 1)'; // light 
+  // const colorScheme = useColorScheme();
+  const colorScheme = ColorScheme.DARK; // force dark mode
 
   return (
-    <div className="gradient-app"
-      style={{ '--panel-bg-color': panelBgColor,  '--panel-header-bg-color': panelHeaderBgColor,}}
-    >
-      <Div className="geekmoGradient" />
-      <ConfigProvider appearance={appearance}>
+      <ConfigProvider colorScheme={colorScheme} tokensClassNames={{
+        light: 'geekmoTheme--light',
+        dark: 'geekmoTheme--dark'
+      }}>
         <AdaptivityProvider>
           <AppRoot>
             <RouterProvider router={router} notFound={<p>Ничегошеньки!</p>}>
-              <App/>
+              <App className="gradient-app"/>
             </RouterProvider>
           </AppRoot>
         </AdaptivityProvider>
       </ConfigProvider>
-    </div>
   );
 }
 

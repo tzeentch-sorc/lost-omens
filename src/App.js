@@ -62,7 +62,7 @@ const App = (router) => {
 	}, []);
 
 	return (
-		<Root popout={popout} activeView={activeView}>
+		<Root popout={popout} activeView={activeView} className='gradient-app'>
 			<View activePanel={activePanel} nav='default'>
 				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} />
 			</View>
