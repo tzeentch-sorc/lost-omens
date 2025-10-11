@@ -68,10 +68,10 @@ const LOCharCard = ({element, openAction}) => {
                 before={
                      iconMap[element.type] || <Icon24UserOutline width={48} height={48} color={FavouriteColor} />
                 }
-                text={element.type + ", " + element.lvl + " ур."}
-                caption={element.race}
+                subtitle={element.type + ", " + element.lvl + " ур."}
+                extraSubtitle={element.race}
                 after={element.lvl_up &&
-                    <Counter size="s" mode="primary">
+                    <Counter size="s" mode="primary" appearance="accent">
                         <Icon28UserOutgoingOutline width={16} height={16} />
                     </Counter>}
                 afterCaption={element.lvl_up && "Доступно повышение"}

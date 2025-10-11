@@ -19,7 +19,7 @@ const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, d
 
     return (
         <Panel nav='campaign' key={campaignName}>
-            <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+            <PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
                 <Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
             </PanelHeader>
             {
@@ -36,7 +36,7 @@ const NoCharsPage = ({ campaignName, user, ArticleLink, articleImage, caption, d
                                     />
                                     <MastersGroup masters={masters} />
                                     <Group mode="card">
-                                        <Placeholder icon={<Icon56UserAddOutline />} header="Создание персонажа" action={action}>
+                                        <Placeholder icon={<Icon56UserAddOutline />} title="Создание персонажа" action={action}>
                                             <Div>
                                                 {body}
                                             </Div>

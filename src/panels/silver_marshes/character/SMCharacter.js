@@ -51,7 +51,7 @@ const SMCharacter = () => {
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const charName = params.get('CharName');
 
 	function hasSpells() {
@@ -145,11 +145,12 @@ const SMCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
+			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
-			<SplitLayout popout={popout}>
-				<SplitCol>
+			<SplitLayout>
+                {popout}
+                <SplitCol>
 					<SMMainInfo
 						gold={gold}
 						downtime={downtime}

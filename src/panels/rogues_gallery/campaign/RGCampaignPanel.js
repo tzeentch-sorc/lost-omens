@@ -20,7 +20,7 @@ import RGCharCard from './RGCharCard.js';
 import {
 	RGArticleLink, RGArticleImage, RGNoCharsCaption,
 	RGNoCharsDescription, CommonNoCharsBody, VKToken,
-	MastersText
+	MastersText, MOCKUP_FETCHED_USER
 } from '../../../consts.js'
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
@@ -33,7 +33,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const [masters, setMasters] = useState([]);
 	const [prio, setPrio] = useState(-1); // while loading
 
@@ -87,19 +87,22 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 			const userIds = masterData.map(elem => elem.id).join(', ');
 			logger.log(masterData);
 			logger.log(userIds);
-			const users = await bridge
-				.send('VKWebAppCallAPIMethod', {
-					method: 'users.get',
-					params: {
-						user_ids: userIds,
-						v: '5.131',
-						fields: 'screen_name, photo_200',
-						access_token: VKToken
-					}
-				}).then(resp => { return resp.response });
+			if (window.location.hostname === 'localhost') {
+				setMasters([MOCKUP_FETCHED_USER]);
+			} else {
+				const users = await bridge
+					.send('VKWebAppCallAPIMethod', {
+						method: 'users.get',
+						params: {
+							user_ids: userIds,
+							v: '5.131',
+							fields: 'screen_name, photo_200',
+							access_token: VKToken
+						}
+					}).then(resp => { return resp.response });
 
-			setMasters(users);
-
+				setMasters(users);
+			}
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
 		}
@@ -122,17 +125,18 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 		//loaded chars
 		return (
 			<Panel nav='campaign' key={campaignName}>
-				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+				<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
 					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
 				</PanelHeader>
 				{fetchedUser &&
 					<>
 						<MastersGroup masters={masters} text={MastersText} />
 						<Group mode="card">
-							<SplitLayout popout={popout}>
+							<SplitLayout >
+								{popout}
 								{isDisplayed &&
 									<SplitCol>
-										<Header mode="secondary">Ваши персонажи</Header>
+										<Header size="s">Ваши персонажи</Header>
 										<Group mode="plain">
 											<Div className="not4mob" style={{ cursor: 'pointer' }}>
 												<CardGrid size="m">

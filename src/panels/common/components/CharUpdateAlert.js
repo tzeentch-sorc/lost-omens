@@ -32,8 +32,8 @@ const CharUpdateAlert = ({formLink, navLink, charName, closeMethod}) => {
             ]}
             onClose={closeMethod}
             renderAction={renderAction}
-            header={charName + ' нуждается в повышении уровня!'}
-            text="Можно повысить уровень прямо сейчас или продолжить работу без повышения"
+            title={charName + ' нуждается в повышении уровня!'}
+            description="Можно повысить уровень прямо сейчас или продолжить работу без повышения"
         />
     )
 }
