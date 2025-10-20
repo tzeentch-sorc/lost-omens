@@ -146,7 +146,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 	} else {
 		return (
 			<Panel nav='campaign' key={campaignName}>
-				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+				<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
 					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
 				</PanelHeader>
 				{

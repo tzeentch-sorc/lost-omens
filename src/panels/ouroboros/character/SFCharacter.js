@@ -58,7 +58,7 @@ const SFCharacter = () => {
 	return (
 
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SFCampaign, { keepSearchParams: true })} />}>
+			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(SFCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout>

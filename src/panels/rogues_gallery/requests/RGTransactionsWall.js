@@ -9,17 +9,26 @@ const RGTransactionsWall = ({ transactions }) => {
         if (element.count === 0) return null;
         let mode = "plain";
         let appearance = "neutral";
-        if (element.approved === "Отклонено"){
-            mode = "tint";
-            appearance = "accent-red";
-        }else if (element.approved === "Подтверждено") {
-            mode = "outline";
-            appearance = "accent-green";
-        } else if (element.approved === "На рассмотрении") {
-            mode = "plain";
-            appearance = "neutral";
-        }
         
+        switch (element.approved) {
+            case "Отклонено":
+                mode = "tint";
+                appearance = "accent-red";
+                break;
+            case "Подтверждено":
+                mode = "outline";
+                appearance = "accent-green";
+                break;
+            case "На рассмотрении":
+                mode = "plain";
+                appearance = "neutral";
+                break;
+            default:
+                mode = "plain";
+                appearance = "neutral";
+                break;
+        }
+
         return (
             <ContentCard
                 overTitle={element.activity}
@@ -29,7 +38,7 @@ const RGTransactionsWall = ({ transactions }) => {
                     size="s"
                     appearance={appearance}
                     mode='outline'>
-                    {element.approved}
+                    {element.approved ? element.approved : "На рассмотрении"}
                 </ContentBadge>  {element.master}</>}
                 mode={mode}
             />
@@ -38,7 +47,7 @@ const RGTransactionsWall = ({ transactions }) => {
     return (
         <CardGrid size="l">
             <Separator />
-            
+
             {transactions && transactions.map(createTransactionCard)}
         </CardGrid>
 
