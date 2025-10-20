@@ -47,6 +47,8 @@ Then you need to rename file `config.example.json` as `config.json`:
 3. Open link which is provided in logs and set it in vk app settings
 4. Open `vk.com/app51758531`
 
+> If vk-tunnel does not work - [instructions](./ngrok.md)
+
 ### To deploy
 
 1. Run `npm run deploy` and follow steps in console
