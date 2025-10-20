@@ -21,7 +21,7 @@ import {
 	RGArticleLink, RGArticleImage, RGNoCharsCaption,
 	RGNoCharsDescription, CommonNoCharsBody, VKToken,
 	MastersText, MOCKUP_FETCHED_USER
-} from '../../../consts.js'
+} from '../../../../consts.js'
 
 import { getVkUserUrl } from '../../../../util/VKUserURL.js';
 import * as logger from '../../../../util/Logger.js';

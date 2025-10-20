@@ -5,7 +5,7 @@ import {
 import {
     Icon28ClockOutline, Icon28MoneyTransferOutline
 } from '@vkontakte/icons'
-import { FavouriteColor } from '../../../consts';
+import { FavouriteColor } from '../../../../consts';
 
 const RGCharTabPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
     return (

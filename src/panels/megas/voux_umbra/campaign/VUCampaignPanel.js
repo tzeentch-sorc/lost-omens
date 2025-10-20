@@ -14,7 +14,6 @@ import '../../../common/css/CampaignPanel.css';
 import EmptyCampaignPanel from '../../../common/components/EmptyCampaignPanel.js';
 import NoCharsPage from '../../../common/components/NOCharsPage.js';
 import VUMastersInfoSettings from '../export_settings/VUMastersInfoSettings.js'
-	rom '../../../../consts.js'
 import {
 	VUArticleLink, VUArticleImage, VUNoCharsCaption,
 	VUNoCharsDescription, CommonNoCharsBody, VKToken, MOCKUP_FETCHED_USER

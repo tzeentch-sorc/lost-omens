@@ -17,11 +17,11 @@ import RGDowntimeWall from './RGDowntimeWall.js';
 import RGDowntimeSettings from '../export_settings/RGDowntimeSettings.js'
 import RGTransactionsSettings from '../export_settings/RGTransactionsSettings.js'
 
-import { RGCharacter } from '../../../consts.js'
-import * as logger from '../../../util/Logger.js';
-import Marquee from '../../common/components/Marquee.js';
-import DowntimePlaceholder from '../../common/placeholders/DowntimePlaceholder.js';
-import TransactionsPlaceholder from '../../common/placeholders/TransactionsPlaceholder.js';
+import { RGCharacter } from '../../../../consts.js'
+import * as logger from '../../../../util/Logger.js';
+import Marquee from '../../../common/components/Marquee.js';
+import DowntimePlaceholder from '../../../common/placeholders/DowntimePlaceholder.js';
+import TransactionsPlaceholder from '../../../common/placeholders/TransactionsPlaceholder.js';
 
 const RGRequests = () => {
 

@@ -29,7 +29,7 @@ import {
 import {
 	LOArticleLink, LOArticleImage, LONoCharsCaption,
 	LONoCharsDescription, CommonNoCharsBody, VKToken, MOCKUP_FETCHED_USER
-} from '../../../consts.js';
+} from '../../../../consts.js';
 import MastersGroup from '../../../common/components/MastersGroup.js';
 import Marquee from '../../../common/components/Marquee.js';
 
