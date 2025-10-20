@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Cell, Group, List, Separator } from '@vkontakte/vkui';
+import { Cell, Group, List, Separator, Div } from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/components/AddItem';
 
@@ -40,15 +40,13 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
     function createInventoryRow(element) {
         if (element.count === 0) return null;
         return (
-            <Cell multiline key={element.name}>
-                <div
+                <Div
                     className='inventoryCell'
                 >
-                    <div><b>{renderTextWithActions(element.name)}</b></div>
+                    <div className='inventoryTypeColumn'><b>{renderTextWithActions(element.name)}</b></div>
                     <div style={{ textAlign: 'center' }}>{element.cost}</div>
                     <div style={{ textAlign: 'center' }}>{element.count}</div>
-                </div>
-            </Cell>
+                </Div>
         );
     }
 
@@ -111,11 +109,7 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
             <List>
                 {inventory && sortedData.map(createInventoryRow)}
             </List>
-
-
             <Separator />
-
-
             <div
                 className='inventoryCellFooter'
             >

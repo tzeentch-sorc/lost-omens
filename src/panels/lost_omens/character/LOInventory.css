@@ -26,6 +26,10 @@
     grid-template-columns: 5fr 80px 80px;
 }
 
+.inventoryTypeColumn {
+    padding-left: 12px;
+}
+
 .inventoryCellFooter {
     display: grid;
     grid-template-columns: 5fr 160px;
