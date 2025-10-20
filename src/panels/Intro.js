@@ -24,13 +24,13 @@ const Intro = ({ fetchedUser }) => {
 
     return (
         <Panel nav='intro'>
-            <PanelHeader>
+            <PanelHeader className="panelHeader" transparent={false}>
                 Добро пожаловать
             </PanelHeader>
             {fetchedUser &&
                 <>
                     <Group mode="card">
-                        <Div className="Intro">
+                        <Div className="intro">
                             <Header>Привет, {fetchedUser.first_name}!</Header>
                             <p>Это приложение GEEKMO. <br />Здесь можно будет посмотреть состояние персонажей во всех наших ролевых мегакампаниях.</p>
                         </Div>

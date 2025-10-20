@@ -25,8 +25,8 @@ const SMCharUpdateAlert = ({navLink, charName, closeMethod}) => {
             ]}
             onClose={closeMethod}
             renderAction={renderAction}
-            header={charName + ' нуждается в повышении уровня!'}
-            text="Можно повысить уровень прямо сейчас, если написать одному из мастеров"
+            title={charName + ' нуждается в повышении уровня!'}
+            description="Можно повысить уровень прямо сейчас, если написать одному из мастеров"
         />
     )
 }

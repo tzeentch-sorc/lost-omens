@@ -19,6 +19,25 @@
         "BW": "insert_your_vk_id_here",
         "VU": "insert_your_vk_id_here"
     },
+    "MOCKUP_FETCHED_USER": {
+        "id": 123456789,
+        "first_name": "insert_name_here",
+        "last_name": "insert_surname_here",
+        "screen_name": "insert_screen_name_here",
+        "photo_200": "https://vk.com/images/camera_200.png",
+        "can_access_closed": true,
+        "is_closed": false,
+        "sex": 1,
+        "city": {
+            "id": 2,
+            "title": "Санкт-Петербург"
+        },
+        "country": {
+            "id": 1,
+            "title": "Россия"
+        },
+        "online": 0
+    },
     "LostOmens": {
         "Mirror": "insert_your_mirror_id_here",
         "Builds": 0,
@@ -71,6 +90,8 @@
         "Characters": 0,
         "Players": 0,
         "Masters": 0,
-        "Inventory": 0
+        "Inventory": 0,
+        "Transactions": 0,
+        "Downtime": 0
     }
 }

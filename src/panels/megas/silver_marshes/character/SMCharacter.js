@@ -51,7 +51,7 @@ const SMCharacter = () => {
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const charName = params.get('CharName');
 
 	function hasSpells() {
@@ -62,6 +62,8 @@ const SMCharacter = () => {
 	}
 
 	function hasInventory() {
+		logger.log("inventory", inventory);
+		logger.log("hasInventory", (inventory.length > 0));
 		return (inventory.length > 0);
 	}
 	function spellist() {
@@ -79,6 +81,7 @@ const SMCharacter = () => {
 		switch (selected) {
 			case 'inventory':
 				return hasInventory() ? (
+					logger.log("render inventory", inventory),
 					<SMInventory inventory={inventory} totalWealth={wealth} />
 				) : (
 					<InventoryPlaceholder />
@@ -110,7 +113,7 @@ const SMCharacter = () => {
 			let inventoryData = await SMInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
 
-			if (inventoryData[0].name) {
+			if (inventoryData[0] && inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
 				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
 				setWealth(totalCost);
@@ -142,11 +145,12 @@ const SMCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
+			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
-			<SplitLayout popout={popout}>
-				<SplitCol>
+			<SplitLayout>
+                {popout}
+                <SplitCol>
 					<SMMainInfo
 						gold={gold}
 						downtime={downtime}

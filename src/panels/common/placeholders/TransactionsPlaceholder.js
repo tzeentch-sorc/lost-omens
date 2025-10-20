@@ -3,18 +3,18 @@ import {
     Group, Div, Placeholder
 } from '@vkontakte/vkui';
 import {
-    Icon28WineglassOutline
+    Icon56RudeMessageOutline
 } from '@vkontakte/icons'
 
 
-const DrinkPlaceholder = ({ text }) => {
+const TransactionsPlaceholder = ({ text }) => {
     return (
         <Group
-            id="tab-content-drink"
-            aria-controls="tab-drink"
+            id="tab-content-transactions"
+            aria-controls="tab-transactions"
             role="tabpanel"
             mode="plain">
-            <Placeholder icon={<Icon28WineglassOutline width={56} height={56} />} title="Здесь бы мог быть ваш фирменный рецепт">
+            <Placeholder icon={<Icon56RudeMessageOutline width={56} height={56} />} title="Заявок не обнаружено">
                 <Div>
                     {text}
                 </Div>
@@ -22,4 +22,4 @@ const DrinkPlaceholder = ({ text }) => {
         </Group>
     );
 };
-export default DrinkPlaceholder;
+export default TransactionsPlaceholder;

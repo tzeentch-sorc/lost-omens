@@ -11,7 +11,7 @@ const SMInfoCard = ({ date, prio, adventure }) => {
         <>
             <CardGrid key="infoBlock" id="infoBlock" size='l'>
                 <Card mode="plain" key="last_game">
-                    <Group header={<Header mode="primary">Последняя партия</Header>} mode="plain">
+                    <Group header={<Header size="m">Последняя партия</Header>} mode="plain">
                         <SimpleCell before={<Icon28CalendarOutline width={24} height={24} />}>
                             <InfoRow header="Дата партии">{date}</InfoRow>
                         </SimpleCell>
@@ -23,14 +23,14 @@ const SMInfoCard = ({ date, prio, adventure }) => {
             </CardGrid>
             <CardGrid key="infoBlock2" id="infoBlock2" size='m' padding="true">
                 <Card mode="plain">
-                    <Group header={<Header mode="primary">Приоритет</Header>} mode="plain">
+                    <Group header={<Header size="m">Приоритет</Header>} mode="plain">
                         <SimpleCell before={<Icon28CrownOutline width={24} height={24} />}>
                             <InfoRow>{prio}</InfoRow>
                         </SimpleCell>
                     </Group>
                 </Card>
                 <Card mode="plain">
-                    <Group header={<Header mode="primary">После партии</Header>} mode="plain">
+                    <Group header={<Header size="m">После партии</Header>} mode="plain">
                         <SimpleCell before={<Icon28HistoryForwardOutline width={24} height={24} />}>
                             <InfoRow>{(prio - prio * 0.2).toFixed(2)}</InfoRow>
                         </SimpleCell>

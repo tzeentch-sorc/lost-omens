@@ -10,13 +10,15 @@ const EmptyCampaignPanel = ({user, campaignName, popout}) => {
     const routeNavigator = useRouteNavigator();
     return (
         <Panel nav='campaign' key={campaignName}>
-            <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+            <PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
                 <Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
             </PanelHeader>
             {
                 user &&
                 <Group mode="plain">
-                    <SplitLayout popout={popout} />
+                    <SplitLayout>
+                        {popout}
+                    </SplitLayout>
                 </Group>
             }
         </Panel>

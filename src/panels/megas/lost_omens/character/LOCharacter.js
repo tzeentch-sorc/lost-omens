@@ -60,7 +60,7 @@ const LOCharacter = () => {
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
-	// const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	// const [popout, setPopout] = useState(<ScreenSpinner />)
 	const charName = params.get('CharName');
 	const player = params.get('Player');
 
@@ -126,18 +126,6 @@ const LOCharacter = () => {
 				return null;
 		}
 	};
-
-	function extractTokensFromInventory(setTokens, inventoryData) {
-		setTokens(inventoryData.find((item) => {
-			if (item.name === 'Жетон открытой дороги') {
-				const index = inventoryData.indexOf(item);
-				if (index !== -1) {
-					inventoryData.splice(index, 1);
-					return item;
-				}
-			}
-		}).count);
-	}
 
 	//TODO rework all modals
 	const [modalTier, setModalTier] = useState(null);
@@ -213,18 +201,17 @@ const LOCharacter = () => {
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
 			setDowntime(characterInfoData[0].downtime);
+			setTokens(characterInfoData[0].jods);
 
 			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
 
-			if (inventoryData[0].name) {
+			if (inventoryData[0] && inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
 				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
 				setWealth(totalCost);
 			}
-
-			extractTokensFromInventory(setTokens, inventoryData);
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await LOCharBuildSettings.getFilteredQuery("name", charName);
@@ -271,10 +258,11 @@ const LOCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(LOCampaign, { keepSearchParams: true })} />}>
+			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(LOCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
-			<SplitLayout /*popout={popout} */ modal={modal}>
+			<SplitLayout>
+                {modal}
 				<SplitCol>
 					<LOMainInfo
 						gold={gold}
