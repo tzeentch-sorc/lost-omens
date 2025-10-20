@@ -1,28 +1,40 @@
 import React from 'react';
 import {
-    Group, CardGrid, ContentCard, Separator, ContentBadge
+    Group, CardGrid, ContentCard, ContentBadge
 } from '@vkontakte/vkui';
 
+import Divider from '../../common/components/Divider';
+
 const RGTransactionsWall = ({ transactions }) => {
+    const STATUS = {
+        REJECTED: 'Отклонено',
+        APPROVED: 'Подтверждено',
+        PENDING: 'На рассмотрении'
+    };
+    const sortedData = [...(transactions || [])].sort((a, b) => b.date - a.date);
+
+    const oldT = sortedData.filter(e => e.date < 0);
+    const newT = sortedData.filter(e => e.date >= 0);
 
     function createTransactionCard(element) {
         if (element.count === 0) return null;
         let mode = "plain";
         let appearance = "neutral";
-        
-        switch (element.approved) {
-            case "Отклонено":
+
+        // normalize status: use PENDING for any unknown value
+        const allowed = Object.values(STATUS);
+        const status = allowed.includes(element.approved) ? element.approved : STATUS.PENDING;
+
+        switch (status) {
+            case STATUS.REJECTED:
                 mode = "tint";
                 appearance = "accent-red";
                 break;
-            case "Подтверждено":
+            case STATUS.APPROVED:
                 mode = "outline";
                 appearance = "accent-green";
                 break;
-            case "На рассмотрении":
-                mode = "plain";
-                appearance = "neutral";
-                break;
+            case STATUS.PENDING:
             default:
                 mode = "plain";
                 appearance = "neutral";
@@ -38,19 +50,23 @@ const RGTransactionsWall = ({ transactions }) => {
                     size="s"
                     appearance={appearance}
                     mode='outline'>
-                    {element.approved ? element.approved : "На рассмотрении"}
+                    {status}
                 </ContentBadge>  {element.master}</>}
                 mode={mode}
             />
         );
     }
     return (
-        <CardGrid size="l">
-            <Separator />
 
-            {transactions && transactions.map(createTransactionCard)}
-        </CardGrid>
+        <>
+            {newT.length > 0 && <CardGrid size="l">{newT.map(createTransactionCard)}</CardGrid>}
 
+            {oldT.length > 0 && newT.length > 0 && <Divider />}
+
+            {oldT.length > 0 && <CardGrid size="l">{oldT.map(createTransactionCard)}</CardGrid>}
+        </>
     );
+
+
 }
 export default RGTransactionsWall;

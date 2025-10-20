@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
 	Panel, Group, PanelHeaderBack, PanelHeader,
-	ScreenSpinner, SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
-	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text
+	SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
+	List, SimpleCell, InfoRow, Cell, Title, Text
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -10,6 +10,7 @@ import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder
 import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
 import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.js';
 import Marquee from '../../common/components/Marquee.js';
+import Divider from '../../common/components/Divider.js';
 import LOCharTabPanel from './LOCharTabPanel.js';
 import LOSpells from './LOSpells.js';
 import LOInventory from './LOInventory.js';
@@ -172,9 +173,9 @@ const LOCharacter = () => {
 				{modalTier && (
 					<Div>
 						<Cell before={modalTier.getIcon(48)}> <Title level="1" style={{ marginBottom: 12, marginTop: 12 }} inline="true">{modalTier.name}</Title></Cell>
-						<Separator />
+						<Divider />
 						<Text style={{ fontStyle: 'italic', padding: 20 }}>{modalTier.description}</Text>
-						<Separator />
+						<Divider />
 						<List>
 							{modalTier.bonuses.map((bonus, index) => {
 								const ruleText = bonus.rule.includes('{level}') ? bonus.rule.replace('{level}', getBonusItemLevel(level)) : bonus.rule;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Div, Group, List, Separator } from '@vkontakte/vkui';
+import { Div, Group, List} from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import './SMInventory.css'
+import Divider from '../../common/components/Divider';
 
 const SMInventory = ({ inventory, totalWealth }) => {
     // Track both sorted column and direction ('asc' or 'desc')
@@ -92,7 +93,7 @@ const SMInventory = ({ inventory, totalWealth }) => {
                 {inventory && sortedData.map(createInventoryRow)}
             </List>
 
-            <Separator />
+            <Divider />
 
             <div
                 className='inventoryCellFooter'

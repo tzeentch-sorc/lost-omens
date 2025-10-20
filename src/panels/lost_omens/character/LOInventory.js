@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Cell, Group, List, Separator, Div } from '@vkontakte/vkui';
+import { Cell, Group, List, Div } from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/components/AddItem';
 
@@ -7,6 +7,7 @@ import './LOInventory.css'
 import { FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddItemChar, 
     LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold } from '../../../consts.js'
 import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
+import Divider from '../../common/components/Divider.js';
 
 const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
     // Track both sorted column and direction ('asc' or 'desc')
@@ -109,7 +110,7 @@ const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
             <List>
                 {inventory && sortedData.map(createInventoryRow)}
             </List>
-            <Separator />
+            <Divider />
             <div
                 className='inventoryCellFooter'
             >

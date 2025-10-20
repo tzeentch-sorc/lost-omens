@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
 	Panel, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
-	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text, Button, Spacing
+	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Title, Text, Button, Spacing
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import {
@@ -28,6 +28,7 @@ import '../../common/css/Character.css';
 import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder, RGRequests } from '../../../consts.js'
 import * as logger from '../../../util/Logger.js';
 import Marquee from '../../common/components/Marquee.js';
+import Divider from '../../common/components/Divider.js';
 
 const RGCharacter = () => {
 
@@ -148,7 +149,7 @@ const RGCharacter = () => {
 				{modalFaction && (
 					<Div>
 						<Text style={{ fontStyle: 'italic', padding: 20 }}>Ну, кому ты еще насолил?</Text>
-						<Separator />
+						<Divider />
 						<List>
 							<SimpleCell key="helped" multiline>
 								<InfoRow header="Этим ты помог">

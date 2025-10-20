@@ -1,0 +1,7 @@
+.divider-light {
+  color: #969A9F !important;
+  height: 1px; /* ensure thin line */
+  opacity: 1 !important;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
