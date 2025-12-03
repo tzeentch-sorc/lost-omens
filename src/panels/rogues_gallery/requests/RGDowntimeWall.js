@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-    Group, CardGrid, ContentCard, Spacing, ContentBadge
+    Group, CardGrid, ContentCard, Spacing, ContentBadge, Separator
 } from '@vkontakte/vkui';
-
-import Divider from '../../common/components/Divider';
 
 const RGDowntimeWall = ({ downtime }) => {
     const STATUS = {
@@ -63,7 +61,7 @@ const RGDowntimeWall = ({ downtime }) => {
         <>
             {newD.length > 0 && <CardGrid size="l">{newD.map(createDowntimeCard)}</CardGrid>}
 
-            {oldD.length > 0 && newD.length > 0 && <Divider />}
+            {oldD.length > 0 && newD.length > 0 && <><Spacing size={12} /> <Separator /> <Spacing size={12} /></>}
 
             {oldD.length > 0 && <CardGrid size="l">{oldD.map(createDowntimeCard)}</CardGrid>}
         </>

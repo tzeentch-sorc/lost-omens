@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-    Group, CardGrid, ContentCard, ContentBadge
+    Group, CardGrid, ContentCard, ContentBadge, Separator, Spacing
 } from '@vkontakte/vkui';
-
-import Divider from '../../common/components/Divider';
 
 const RGTransactionsWall = ({ transactions }) => {
     const STATUS = {
@@ -61,7 +59,7 @@ const RGTransactionsWall = ({ transactions }) => {
         <>
             {newT.length > 0 && <CardGrid size="l">{newT.map(createTransactionCard)}</CardGrid>}
 
-            {oldT.length > 0 && newT.length > 0 && <Divider />}
+            {oldT.length > 0 && newT.length > 0 && <><Spacing size={12} /> <Separator /> <Spacing size={12} /></>}
 
             {oldT.length > 0 && <CardGrid size="l">{oldT.map(createTransactionCard)}</CardGrid>}
         </>

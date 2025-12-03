@@ -5,3 +5,8 @@
     text-align: center;
     flex-direction: column;
 }
+
+.intro-separator {
+  margin-top: 8px;
+  margin-bottom: 12px;
+}

@@ -1,11 +1,10 @@
-import { Div, Group, Panel, PanelHeader, Header, CardGrid } from "@vkontakte/vkui";
+import { Div, Group, Panel, PanelHeader, Header, CardGrid, Separator } from "@vkontakte/vkui";
 import React from "react";
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 
 import './Intro.css'
 import CampaignCard from "./common/components/CampaignCard";
-import Divider from "./common/components/Divider";
 
 import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign} from '../consts.js';
 
@@ -41,7 +40,7 @@ const Intro = ({ fetchedUser }) => {
                             Мегакампании в GEEKMO
                         </Header>
 
-                        <Divider/>
+                        <Separator className="intro-separator"/>
 
                         <CardGrid size="l" padding="true">
                             <CampaignCard
