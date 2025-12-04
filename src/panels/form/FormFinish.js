@@ -44,14 +44,13 @@ const FormFinish = ({ fetchedUser, onSubmit, onBack }) => {
                         size="m"
                         stretched
                         type="button"
-                        appearance='neutral'
                         onClick={onBack}
                     >
                         Назад</Button>
                     <Button
                         size="m"
                         stretched
-                        appearance='negative'
+                        appearance='positive'
                         type="submit"
                         disabled={!form.agreement}
                     >Отправить</Button>
