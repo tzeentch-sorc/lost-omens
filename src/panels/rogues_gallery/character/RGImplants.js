@@ -21,7 +21,7 @@ const RGImplants = ({ featlist, level = 0, ancestorsHasNext = [] }) => {
                     </span>
                 );
             }
-            return <React.Fragment key={i}>{part}</React.Fragment>;
+            return <>{part}</>;
         });
     }
     const renderPrefix = (level, isLast, ancestorsHasNext) => {
