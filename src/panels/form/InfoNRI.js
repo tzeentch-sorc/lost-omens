@@ -1,12 +1,12 @@
 import { List, Cell } from "@vkontakte/vkui";
 import React from "react";
 
-const InfoIgroteka = () => {
+const InfoNRI = () => {
 
     return (
         <List>
             <Cell multiline>
-                <b>Настольные игры</b>
+                <b>Настольные ролевые игры</b>
             </Cell>
             <Cell multiline>
                Запись на традиционные настольные игротеки
@@ -16,4 +16,4 @@ const InfoIgroteka = () => {
 
 };
 
-export default InfoIgroteka;
+export default InfoNRI;

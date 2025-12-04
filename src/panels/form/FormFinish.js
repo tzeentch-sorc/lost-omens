@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FormItem, Input, Button, Checkbox } from '@vkontakte/vkui';
+import { FormItem, Input, Button, Checkbox, Div } from '@vkontakte/vkui';
 
-const FormFinish = ({ fetchedUser, onSubmit }) => {
+const FormFinish = ({ fetchedUser, onSubmit, onBack }) => {
     const initialWishes = "";
     const initialAgreement = false;
     const [form, setForm] = useState({
@@ -24,7 +24,7 @@ const FormFinish = ({ fetchedUser, onSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <FormItem top={<span>Напиши свое ФИО (как в паспорте) <span style={{ color: 'red' }}>*</span></span>}>
-                <Checkbox 
+                <Checkbox
                     name="agreement"
                     description="Я даю согласие на обработку своих персональных данных в соответствии с ФЗ-152"
                     onChange={handleChange}
@@ -39,13 +39,24 @@ const FormFinish = ({ fetchedUser, onSubmit }) => {
                 />
             </FormItem>
             <FormItem>
-                <Button 
-                    size="m" 
-                    stretched 
-                    appearance='positive'
-                    type="submit"
-                    disabled={!form.agreement}
-                >Отправить</Button>
+                <Div style={{ display: 'flex', gap: 8 }}>
+                    <Button
+                        size="m"
+                        stretched
+                        type="button"
+                        appearance='neutral'
+                        onClick={onBack}
+                    >
+                        Назад</Button>
+                    <Button
+                        size="m"
+                        stretched
+                        appearance='negative'
+                        type="submit"
+                        disabled={!form.agreement}
+                    >Отправить</Button>
+                </Div>
+
             </FormItem>
         </form>
     );

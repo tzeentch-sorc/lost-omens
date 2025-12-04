@@ -7,12 +7,24 @@ import InfoNotFromITMO from "./InfoNotFromITMO.js";
 import InfoFromITMO from "./InfoFromITMO.js";
 import InfoMeeting from "./InfoMeeting.js";
 import InfoIgroteka from "./InfoIgroteka.js";
+import InfoNRI from "./InfoNRI.js";
+import InfoPaint from "./InfoPaint.js";
+import InfoMafia from "./InfoMafia.js";
+import InfoKT from "./InfoKT.js";
+import InfoBT from "./InfoBT.js";
+import InfoSeparateEvent from "./InfoSeparateEvent.js";
 import InfoFinish from "./InfoFinish.js";
 import FormCredentials from './FormCredentials.js';
 import FormItmo from "./FormItmo.js";
 import FormNotItmo from "./FormNotItmo.js";
 import FormMeeting from "./FormMeeting.js";
 import FormIgroteka from "./FormIgroteka.js";
+import FormNRI from "./FormNRI.js";
+import FormPaint from "./FormPaint.js";
+import FormMafia from "./FormMafia.js";
+import FormKT from "./FormKT.js";
+import FormBT from "./FormBT.js";
+import FormSeparateEvent from "./FormSeparateEvent.js";
 import FormFinish from "./FormFinish.js";
 
 const Form = ({ fetchedUser }) => {
@@ -105,6 +117,41 @@ const Form = ({ fetchedUser }) => {
         pushToHistory(GROUPS.IGROTEKA);
         setActiveGroup(GROUPS.FINISH);
     };
+    const handleNRIFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.NRI);
+        setActiveGroup(GROUPS.FINISH);
+    };
+
+    const handlePaintFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.PAINT);
+        setActiveGroup(GROUPS.FINISH);
+    };
+
+    const handleMafiaFormSubmit = (creds) => {
+        console.log('Submitted  data:', creds);
+        pushToHistory(GROUPS.MAFIA);
+        setActiveGroup(GROUPS.FINISH);
+    };
+
+    const handleKTFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.KT);
+        setActiveGroup(GROUPS.FINISH);
+    };
+
+    const handleBTFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.BT);
+        setActiveGroup(GROUPS.FINISH);
+    };
+
+    const handleSeparateEventFormSubmit = (creds) => {
+        console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.SEPARATE_EVENT);
+        setActiveGroup(GROUPS.FINISH);
+    };
 
     const handleBack = () => {
         setGroupHistory(prev => {
@@ -192,6 +239,90 @@ const Form = ({ fetchedUser }) => {
                             </Group>
                         </>
                     }
+                    {activeGroup === GROUPS.NRI &&
+                        <>
+                            <Group mode='card'>
+                                <InfoNRI />
+                            </Group>
+                            <Group mode='card'>
+                                <FormNRI
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleNRIFormSubmit}
+                                    onBack={handleBack}
+                                />
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.PAINT &&
+                        <>
+                            <Group mode='card'>
+                                <InfoPaint />
+                                </Group>
+                                <Group mode='card'>
+                                    <FormPaint
+                                        fetchedUser={fetchedUser}
+                                        onSubmit={handlePaintFormSubmit}
+                                        onBack={handleBack}
+                                    />
+                                </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.MAFIA &&
+                        <>
+                            <Group mode='card'>
+                                <InfoMafia />
+                            </Group>
+                            <Group mode='card'>
+                                <FormMafia
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleMafiaFormSubmit}
+                                    onBack={handleBack}
+                                />
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.KT &&
+                        <>
+                            <Group mode='card'>
+                                <InfoKT />
+                            </Group>
+                            <Group mode='card'>
+                                <FormKT
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleKTFormSubmit}
+                                    onBack={handleBack}
+                                />
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.BT &&
+                        <>
+                            <Group mode='card'>
+                                <InfoBT />
+                            </Group>
+                            <Group mode='card'>
+                                <FormBT
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleBTFormSubmit}
+                                    onBack={handleBack}
+                                />
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.SEPARATE_EVENT &&
+                        <>
+                            <Group mode='card'>
+                                <InfoSeparateEvent />
+                            </Group>
+                            <Group mode='card'>
+                                <FormSeparateEvent
+                                    fetchedUser={fetchedUser}
+                                    onSubmit={handleSeparateEventFormSubmit}
+                                    onBack={handleBack}
+                                />
+                            </Group>
+                        </>
+                    }
                     {activeGroup === GROUPS.FINISH &&
                         <>
                             <Group mode='card'>
@@ -209,7 +340,7 @@ const Form = ({ fetchedUser }) => {
                     {activeGroup === GROUPS.SENT &&
                         <>
                             <Group mode='card'>
-                                {/*<InfoSent />*/}
+                                <InfoSent />
                             </Group>
                             <Group mode='card'>
                                 <Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
