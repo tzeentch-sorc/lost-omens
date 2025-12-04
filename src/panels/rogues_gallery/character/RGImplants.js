@@ -1,9 +1,29 @@
 import React from "react";
 import {
-    Group, 
+    Group,
 } from '@vkontakte/vkui';
+import { BadColor, FavouriteColor, GoodColor } from '../../../consts';
 
 const RGImplants = ({ featlist, level = 0, ancestorsHasNext = [] }) => {
+    function highlightAngleBrackets(text) {
+        const parts = text.split(/(<[^>]+>)/g);
+
+        return parts.map((part, i) => {
+            if (part.match(/^<[^>]+>$/)) {
+                // убираем угловые скобки, оставляем содержимое
+                const inner = part.slice(1, -1);
+                return (
+                    <span key={i} style={{
+                        color: BadColor,
+                        textShadow: `0 0 4px ${BadColor}`
+                    }}>
+                        {inner}
+                    </span>
+                );
+            }
+            return <React.Fragment key={i}>{part}</React.Fragment>;
+        });
+    }
     const renderPrefix = (level, isLast, ancestorsHasNext) => {
         let prefix = "";
 
@@ -29,7 +49,7 @@ const RGImplants = ({ featlist, level = 0, ancestorsHasNext = [] }) => {
                 return (
                     <>
                         {renderPrefix(level, isLast, ancestorsHasNext)}
-                        {item.name}<br />
+                        {highlightAngleBrackets(item.name)}<br />
                         {hasChildren && (
                             <RGImplants featlist={item.children} level={level + 1} ancestorsHasNext={newAncestors} />
                         )}
