@@ -14,6 +14,7 @@ import InfoKT from "./InfoKT.js";
 import InfoBT from "./InfoBT.js";
 import InfoSeparateEvent from "./InfoSeparateEvent.js";
 import InfoFinish from "./InfoFinish.js";
+import InfoSent from "./InfoSent.js";
 import FormCredentials from './FormCredentials.js';
 import FormItmo from "./FormItmo.js";
 import FormNotItmo from "./FormNotItmo.js";
