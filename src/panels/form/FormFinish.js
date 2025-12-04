@@ -23,7 +23,7 @@ const FormFinish = ({ fetchedUser, onSubmit, onBack }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <FormItem top={<span>Напиши свое ФИО (как в паспорте) <span style={{ color: 'red' }}>*</span></span>}>
+            <FormItem top={<span>согласие на обработку персональных данных <span style={{ color: 'red' }}>*</span></span>}>
                 <Checkbox
                     name="agreement"
                     description="Я даю согласие на обработку своих персональных данных в соответствии с ФЗ-152"
