@@ -57,7 +57,7 @@ const RGDowntimeWall = ({ downtime }) => {
             />
         );
     }
-    // ...existing code...
+    
     return (
         <>
             {newD.length > 0 && <CardGrid size="l">{newD.map(createDowntimeCard)}</CardGrid>}
