@@ -1,4 +1,4 @@
-import { Group, Panel, PanelHeader, PanelHeaderBack } from "@vkontakte/vkui";
+import { Group, Panel, PanelHeader, PanelHeaderBack, Button, Div } from "@vkontakte/vkui";
 import React, { useState } from 'react';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -7,11 +7,13 @@ import InfoNotFromITMO from "./InfoNotFromITMO.js";
 import InfoFromITMO from "./InfoFromITMO.js";
 import InfoMeeting from "./InfoMeeting.js";
 import InfoIgroteka from "./InfoIgroteka.js";
+import InfoFinish from "./InfoFinish.js";
 import FormCredentials from './FormCredentials.js';
 import FormItmo from "./FormItmo.js";
 import FormNotItmo from "./FormNotItmo.js";
 import FormMeeting from "./FormMeeting.js";
 import FormIgroteka from "./FormIgroteka.js";
+import FormFinish from "./FormFinish.js";
 
 const Form = ({ fetchedUser }) => {
     const routeNavigator = useRouteNavigator();
@@ -34,9 +36,15 @@ const Form = ({ fetchedUser }) => {
     };
 
     const [activeGroup, setActiveGroup] = useState(GROUPS.START);
+    const [groupHistory, setGroupHistory] = useState([]);
+
+    const pushToHistory = (group) => {
+        setGroupHistory(prev => [...prev, group]);
+    };
 
     const handleCredFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.START);
         if (creds.choice === 'ITMO') {
             setActiveGroup(GROUPS.ITMO);
         } else {
@@ -46,21 +54,25 @@ const Form = ({ fetchedUser }) => {
 
     const handleItmoFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.ITMO);
         setActiveGroup(GROUPS.DATE);
     };
 
     const handleNotItmoFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.NOT_ITMO);
         setActiveGroup(GROUPS.DATE);
     };
 
     const handleFinishFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.FINISH);
         setActiveGroup(GROUPS.SENT);
     };
 
     const handleDateFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.DATE);
         switch (creds.mero) {
             case 'IGROTEKA':
                 setActiveGroup(GROUPS.IGROTEKA);
@@ -90,11 +102,18 @@ const Form = ({ fetchedUser }) => {
 
     const handleIgrotekaFormSubmit = (creds) => {
         console.log('Submitted data:', creds);
+        pushToHistory(GROUPS.IGROTEKA);
         setActiveGroup(GROUPS.FINISH);
     };
 
-    const handleBackToStart = () => setActiveGroup(GROUPS.START);
-    const handleBackToDate = () => setActiveGroup(GROUPS.DATE);
+    const handleBack = () => {
+        setGroupHistory(prev => {
+            const newHistory = [...prev];
+            const previousGroup = newHistory.pop();
+            setActiveGroup(previousGroup || GROUPS.START);
+            return newHistory;
+        });
+    };
 
 
     return (
@@ -126,7 +145,7 @@ const Form = ({ fetchedUser }) => {
                                 <FormNotItmo
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleNotItmoFormSubmit}
-                                    onBack={handleBackToStart}
+                                    onBack={handleBack}
                                 />
                             </Group>
                         </>
@@ -140,7 +159,7 @@ const Form = ({ fetchedUser }) => {
                                 <FormItmo
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleItmoFormSubmit}
-                                    onBack={handleBackToStart}
+                                    onBack={handleBack}
                                 />
                             </Group>
                         </>
@@ -154,8 +173,8 @@ const Form = ({ fetchedUser }) => {
                                 <FormMeeting
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleDateFormSubmit}
-                                    onBack={handleBackToStart}
-                                />{/* TODO назад на ITMO или NOT_ITMO */}
+                                    onBack={handleBack}
+                                />
                             </Group>
                         </>
                     }
@@ -168,7 +187,7 @@ const Form = ({ fetchedUser }) => {
                                 <FormIgroteka
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleIgrotekaFormSubmit}
-                                    onBack={handleBackToDate}
+                                    onBack={handleBack}
                                 />
                             </Group>
                         </>
@@ -182,9 +201,22 @@ const Form = ({ fetchedUser }) => {
                                 <FormFinish
                                     fetchedUser={fetchedUser}
                                     onSubmit={handleFinishFormSubmit}
-                                    onBack={handleBackToDate}
+                                    onBack={handleBack}
                                 />
-                            </Group>{/* TODO назад на предфдущую страницу */}
+                            </Group>
+                        </>
+                    }
+                    {activeGroup === GROUPS.SENT &&
+                        <>
+                            <Group mode='card'>
+                                {/*<InfoSent />*/}
+                            </Group>
+                            <Group mode='card'>
+                                <Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                                    <Button stretched appearance="neutral" size="l" onClick={() => { setActiveGroup(GROUPS.START); }}>Заполнить еще раз</Button>
+                                    <Button stretched appearance="negative" size="l" onClick={() => { routeNavigator.replace("/") }}>Выход</Button>
+                                </Div>
+                            </Group>
                         </>
                     }
                 </>

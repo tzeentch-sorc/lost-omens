@@ -1,7 +1,7 @@
 import { List, Cell } from "@vkontakte/vkui";
 import React from "react";
 
-const InfoFromITMO = () => {
+const InfoIgrotekaITMO = () => {
 
     return (
         <List>
@@ -16,4 +16,4 @@ const InfoFromITMO = () => {
 
 };
 
-export default InfoFromITMO;
+export default InfoIgrotekaITMO;
