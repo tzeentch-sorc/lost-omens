@@ -46,7 +46,7 @@ const RGCharacter = () => {
 	const [income, setIncome] = useState();
 	const [expenses, setExpenses] = useState();
 	const [drink, setDrink] = useState("None");
-	const [implants, setImplants] = useState("");
+	const [implants, setImplants] = useState("None");
 
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('drink');
@@ -68,6 +68,10 @@ const RGCharacter = () => {
 
 	function hasDrink() {
 		return (drink !== "None" && drink !== "");
+	}
+
+	function hasImplants() {
+		return (implants !== "None" && implants !== "");
 	}
 
 	function renderSelectedTab() {
@@ -237,7 +241,7 @@ const RGCharacter = () => {
 						onOpenFactionModal={openFactionModal}
 						openRequests={openRequests}
 					/>
-					<RGImplantsPanel featlist={implants} />
+					{hasImplants() && <RGImplantsPanel featlist={implants} />}
 					<Group mode='card'>
 						<RGCharTabPanel
 							selected={selected}
