@@ -41,6 +41,7 @@ const RGTransactionsWall = ({ transactions }) => {
 
         return (
             <ContentCard
+                key={element.date+element.comment}
                 overTitle={element.activity}
                 title={`Сумма ${element.money}`}
                 description={element.comment}

@@ -43,6 +43,7 @@ const RGDowntimeWall = ({ downtime }) => {
         
         return (
             <ContentCard
+                key={element.date+element.comment}
                 overTitle={element.activity}
                 title={`Потрачено ${element.time} ч.`}
                 description={element.comment}
