@@ -241,7 +241,7 @@ const RGCharacter = () => {
 						onOpenFactionModal={openFactionModal}
 						openRequests={openRequests}
 					/>
-					{hasImplants() && <RGImplantsPanel featlist={implants} />}
+					{hasImplants() && <RGImplantsPanel implantList={implants} />}
 					<Group mode='card'>
 						<RGCharTabPanel
 							selected={selected}

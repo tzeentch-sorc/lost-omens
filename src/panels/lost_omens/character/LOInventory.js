@@ -8,7 +8,6 @@ import { FormPreEnter, LOAddItemLink, LOAddItemBought, LOAddItemChange, LOAddIte
     LOAddItemOnParty, LOAddItemPlayer, LOAddItemService, LOAddItemSold } from '../../../consts.js'
 import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
 
-
 const LOInventory = ({ inventory, totalWealth, charName, playerName }) => {
     // Track both sorted column and direction ('asc' or 'desc')
     const [sortBy, setSortBy] = useState('cost');

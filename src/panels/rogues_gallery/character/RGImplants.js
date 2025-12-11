@@ -4,7 +4,7 @@ import {
 } from '@vkontakte/vkui';
 import { BadColor, FavouriteColor, GoodColor } from '../../../consts';
 
-const RGImplants = ({ featlist, level = 0, ancestorsHasNext = [] }) => {
+const RGImplants = ({ implantList, level = 0, ancestorsHasNext = [] }) => {
     function highlightAngleBrackets(text) {
         const parts = text.split(/(<[^>]+>)/g);
 
@@ -41,9 +41,9 @@ const RGImplants = ({ featlist, level = 0, ancestorsHasNext = [] }) => {
     return (
 
         <>
-            {featlist.map((item, idx) => {
+            {implantList.map((item, idx) => {
                 const hasChildren = item.children && item.children.length > 0;
-                const isLast = idx === featlist.length - 1;
+                const isLast = idx === implantList.length - 1;
                 const newAncestors = [...ancestorsHasNext, !isLast];
 
                 return (
@@ -51,7 +51,7 @@ const RGImplants = ({ featlist, level = 0, ancestorsHasNext = [] }) => {
                         {renderPrefix(level, isLast, ancestorsHasNext)}
                         {highlightAngleBrackets(item.name)}<br />
                         {hasChildren && (
-                            <RGImplants featlist={item.children} level={level + 1} ancestorsHasNext={newAncestors} />
+                            <RGImplants implantList={item.children} level={level + 1} ancestorsHasNext={newAncestors} />
                         )}
                     </>
                 );

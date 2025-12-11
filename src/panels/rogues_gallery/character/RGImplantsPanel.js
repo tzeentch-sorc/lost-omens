@@ -7,7 +7,7 @@ import {
 import RGImplants from './RGImplants.js';
 import * as logger from '../../../util/Logger.js';
 
-const RGImplantsPanel = ({ featlist }) => {
+const RGImplantsPanel = ({ implantList }) => {
 
     function parseImplants(rawText) {
         const lines = rawText
@@ -65,7 +65,7 @@ const RGImplantsPanel = ({ featlist }) => {
         <Group mode='card'>
             {data.map(
 
-                ({ id, title }) => featlist && featlist[0] != "" && (
+                ({ id, title }) => implantList && implantList[0] != "" && (
                     <Accordion
                         key={id}
                         expanded={openId === id}
@@ -76,7 +76,7 @@ const RGImplantsPanel = ({ featlist }) => {
                             <Div style={infoStyle}>
                                 <SimpleCell multiline>
                                     <InfoRow>
-                                        <RGImplants featlist={parseImplants(featlist)} />
+                                        <RGImplants implantList={parseImplants(implantList)} />
                                     </InfoRow>
                                 </SimpleCell>
                             </Div>
