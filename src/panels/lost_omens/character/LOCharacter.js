@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
 	Panel, Group, PanelHeaderBack, PanelHeader,
-	ScreenSpinner, SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
-	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text
+	SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
+	List, SimpleCell, InfoRow, Cell, Title, Text, Separator
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 

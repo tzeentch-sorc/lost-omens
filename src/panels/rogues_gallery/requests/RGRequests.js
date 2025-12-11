@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
     Panel, Group, PanelHeaderBack, PanelHeader,
-    ScreenSpinner, SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
-    PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text, Button, Spacing
+    ScreenSpinner, SplitCol, SplitLayout   
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
-import {
-    Icon28HourglassOutline
-} from '@vkontakte/icons'
 
 
 import RGRequestsTabPanel from './RGRequestsTabPanel.js';
