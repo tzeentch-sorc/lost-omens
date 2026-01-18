@@ -23,6 +23,7 @@
         "@vkontakte/vkui-tokens": "^4.54.0",
         "axios": "^1.7.7",
         "babel-eslint": "^10.1.0",
+        "colorthief": "^2.6.0",
         "crypto": "^1.0.1",
         "eruda": "^3.3.0",
         "eruda-code": "^2.2.0",
