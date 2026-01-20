@@ -89,7 +89,7 @@ export const tierMap = {
   ,
   5: {
     getIcon: (size = 24) =>  <Icon24CaptainTier width={size} height={size} />,
-    name: 'Мастер-искатель',
+    name: 'Капитан-Экспедитор',
     bonuses:  [
         bonusE,
         bonusH,

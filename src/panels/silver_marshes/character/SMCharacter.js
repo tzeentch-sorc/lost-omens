@@ -18,10 +18,13 @@ import SMInventorySettings from '../export_settings/SMInventorySettings.js'
 import SMCharBuildSettings from '../export_settings/SMCharBuildSettings.js'
 import SMCharInfoSettings from '../export_settings/SMCharInfoSettings.js'
 
-import './SMCharacter.css'
+import '../../common/css/Character.css';
+
 import SMFeatPanel from './SMFeatPanel.js';
 
-import { SMCampaign } from '../../../util/consts.js'; 
+import { SMCampaign } from '../../../consts.js';
+import * as logger from '../../../util/Logger.js'; 
+import Marquee from '../../common/components/Marquee.js';
 
 const SMCharacter = () => {
 
@@ -48,7 +51,7 @@ const SMCharacter = () => {
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
+	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const charName = params.get('CharName');
 
 	function hasSpells() {
@@ -59,6 +62,8 @@ const SMCharacter = () => {
 	}
 
 	function hasInventory() {
+		logger.log("inventory", inventory);
+		logger.log("hasInventory", (inventory.length > 0));
 		return (inventory.length > 0);
 	}
 	function spellist() {
@@ -76,6 +81,7 @@ const SMCharacter = () => {
 		switch (selected) {
 			case 'inventory':
 				return hasInventory() ? (
+					logger.log("render inventory", inventory),
 					<SMInventory inventory={inventory} totalWealth={wealth} />
 				) : (
 					<InventoryPlaceholder />
@@ -96,7 +102,7 @@ const SMCharacter = () => {
 			//попытка получить через spreadsheetApp
 			//получение золота, уровня, даунтайма и опыта
 			let characterInfoData = await SMCharInfoSettings.getFilteredQuery("name", charName);
-			console.log("character info data", characterInfoData);
+			logger.log("character info data", characterInfoData);
 			setGold(characterInfoData[0].gold);
 			setExperience(characterInfoData[0].exp);
 			setLevel(characterInfoData[0].lvl);
@@ -105,9 +111,9 @@ const SMCharacter = () => {
 
 			//получение инвентаря
 			let inventoryData = await SMInventorySettings.getFilteredQuery("owner", charName);
-			console.log("inventory data", inventoryData);
+			logger.log("inventory data", inventoryData);
 
-			if (inventoryData[0].name) {
+			if (inventoryData[0] && inventoryData[0].name) {
 				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
 				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
 				setWealth(totalCost);
@@ -115,7 +121,7 @@ const SMCharacter = () => {
 
 			//получение черт, заклинаний, формул, черт
 			let characterBuildData = await SMCharBuildSettings.getFilteredQuery("name", charName);
-			console.log("character build data", characterBuildData);
+			logger.log("character build data", characterBuildData);
 
 			setSpell_0(characterBuildData[0].spells_0.split(','));
 			setSpell_1(characterBuildData[0].spells_1.split(','));
@@ -132,18 +138,19 @@ const SMCharacter = () => {
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
 
-			//console.log("new", inventoryData);
+			logger.log("new", inventoryData);
 		}
 		fetchData().catch(console.error);
 	}, []);
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
-				{charName}
+			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
+				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
-			<SplitLayout popout={popout}>
-				<SplitCol>
+			<SplitLayout>
+                {popout}
+                <SplitCol>
 					<SMMainInfo
 						gold={gold}
 						downtime={downtime}

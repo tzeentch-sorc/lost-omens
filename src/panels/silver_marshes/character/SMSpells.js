@@ -4,7 +4,7 @@ import {
     InfoRow, Accordion
 } from '@vkontakte/vkui';
 
-
+import * as logger from '../../../util/Logger.js';
 
 const SMSpells = ({ spellist }) => {
 
@@ -65,14 +65,14 @@ const SMSpells = ({ spellist }) => {
 
     function fixRetrain(listRankedSpells){
         var retrained = new Set(listRankedSpells.filter(elem => { return elem[0] == "-"}));
-        //console.log("retrained", retrained);
+        logger.log("retrained", retrained);
         var result = new Array();
         listRankedSpells.forEach((item) => {
             if (!(retrained.has(item) || retrained.has("-"+item))) {
                 result.push(item);
             }
         });
-        //console.log("result", result);
+        logger.log("result", result);
 
         return Array.from(result);
     }
@@ -95,7 +95,7 @@ const SMSpells = ({ spellist }) => {
                         <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
                         <Accordion.Content>
                             <Div style={infoStyle}>
-                                {fixRetrain(spellist[detail]).map(e => createSpellRow(e))}
+                                {fixRetrain(spellist[detail].sort((a, b) => a.localeCompare(b))).map(e => createSpellRow(e))}
                             </Div>
                         </Accordion.Content>
                     </Accordion>

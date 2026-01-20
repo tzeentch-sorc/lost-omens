@@ -4,9 +4,8 @@ import {
     InfoRow, Accordion
 } from '@vkontakte/vkui';
 
-import { renderTextWithActions } from '../../common/RenderTextWithActions.js';
-
-
+import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
+import * as logger from '../../../util/Logger.js';
 
 const LOSpells = ({ spellist }) => {
 
@@ -71,6 +70,7 @@ const LOSpells = ({ spellist }) => {
     ];
 
     const [openId, setOpenId] = React.useState();
+    const metaChars = /[♠♣♥♦★\-\s]+/g
 
     function createSpellRow(element) {
         return (
@@ -98,7 +98,11 @@ const LOSpells = ({ spellist }) => {
                         <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
                         <Accordion.Content>
                             <Div style={infoStyle}>
-                                {spellist[detail].map(e => createSpellRow(e))}
+                                {spellist[detail].sort((a, b) => {
+                                    const cleanA = a.replace(metaChars, '').trim();
+                                    const cleanB = b.replace(metaChars, '').trim();
+                                    return cleanA.localeCompare(cleanB);
+                                }).map(e => createSpellRow(e))}
                             </Div>
                         </Accordion.Content>
                     </Accordion>
