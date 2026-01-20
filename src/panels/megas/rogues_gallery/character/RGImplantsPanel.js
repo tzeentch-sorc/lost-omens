@@ -5,7 +5,7 @@ import {
 } from '@vkontakte/vkui';
 
 import RGImplants from './RGImplants.js';
-import * as logger from '../../../util/Logger.js';
+import * as logger from '../../../../util/Logger.js';
 
 const RGImplantsPanel = ({ implantList }) => {
 

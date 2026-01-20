@@ -2,7 +2,7 @@ import React from "react";
 import {
     Group,
 } from '@vkontakte/vkui';
-import { BadColor, FavouriteColor, GoodColor } from '../../../consts';
+import { BadColor, FavouriteColor, GoodColor } from '../../../../consts';
 
 const RGImplants = ({ implantList, level = 0, ancestorsHasNext = [] }) => {
     function highlightAngleBrackets(text) {
