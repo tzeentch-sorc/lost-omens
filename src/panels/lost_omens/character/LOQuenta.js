@@ -13,8 +13,8 @@ import { motion } from "framer-motion";
 import "./LOQuenta.css";
 
 const LOQuenta = ({ text }) => {
-    const linkRegex = /(https?:\/\/[^\s]+)/g;
-    const parts = text.split(linkRegex);
+    const linkRegex = /(https?:\/\/[^\s]+)/g; // TODO refactor to separate util component 1/3
+    const parts = text.split(linkRegex); // TODO refactor to separate util component 2/3
 
     const data = [
         {
@@ -42,7 +42,7 @@ const LOQuenta = ({ text }) => {
                         </Accordion.Summary>
                         <Accordion.Content>
                             <Div className="loquenta-info">
-                                <div className="loquenta-column">
+                                <div className="loquenta-column">{/* TODO refactor to separate util component 3/3 */}
                                     {parts.map((part, i) => {
                                         if (part.match(/^https?:\/\//)) {
                                             const isGoogleDocs = part.includes(
