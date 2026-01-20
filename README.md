@@ -58,7 +58,7 @@ Then you need to rename file `config.example.json` as `config.json`:
 Please, follow below agreement on how to write code and do the bureaucracy.
 
 1. Each commit should contain issue number
-2. For each feature create a separate branch (named *#{issue_number}-{issue-name}*)
+2. For each feature create a separate branch (named after YouTrack issue ID e.g. `feature/lost_omens-X`)
 3. Do **NOT** commit to *master* branch directly, use only merges
 
 ### Useful links
