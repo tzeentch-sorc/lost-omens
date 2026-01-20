@@ -4,7 +4,7 @@ import {
     InfoRow
 } from '@vkontakte/vkui';
 
-import { renderTextWithActions } from '../../common/RenderTextWithActions.js';
+import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
 
 const LOFeats = ({ featlist }) => {
 

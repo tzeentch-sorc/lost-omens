@@ -43,9 +43,11 @@ Then you need to rename file `config.example.json` as `config.json`:
 ### To run
 
 1. Run `npm start` - to run app locally
-2. Run `vk-tunnel --insecure=0 --http-protocol=https --ws-protocol=wss --host=localhost --port=10888 --timeout=10000` - to connect app to VK, in order to get user info
+2. Run `npm run tunnel` - to connect app to VK, in order to get user info
 3. Open link which is provided in logs and set it in vk app settings
 4. Open `vk.com/app51758531`
+
+> If vk-tunnel does not work - [instructions](./ngrok.md)
 
 ### To deploy
 
@@ -56,7 +58,7 @@ Then you need to rename file `config.example.json` as `config.json`:
 Please, follow below agreement on how to write code and do the bureaucracy.
 
 1. Each commit should contain issue number
-2. For each feature create a separate branch (named *#{issue_number}-{issue-name}*)
+2. For each feature create a separate branch (named after YouTrack issue ID e.g. `feature/lost_omens-X`)
 3. Do **NOT** commit to *master* branch directly, use only merges
 
 ### Useful links

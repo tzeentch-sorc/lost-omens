@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GoogleAuthPath, GoogleAuthScope } from './consts.js';
 import Papa from 'papaparse';
+import * as logger from './Logger.js';
 const { google } = require('googleapis');
 const sheets = google.sheets('v4');
 const auth = new google.auth.GoogleAuth({
@@ -10,11 +11,11 @@ const auth = new google.auth.GoogleAuth({
 
 function idOf(i) {
     let res = (i >= 26 ? idOf(Math.floor(i / 26) - 1) : "") + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i % 26]
-    //console.log("idof", i, res)
+    //logger.log("idof", i, res)
     return res;
 }
 function parseSimpleCsv(csvString) {
-    //console.log(csv);
+    //logger.log(csv);
 
     const result = Papa.parse(csvString, {
         header: false,           
@@ -22,7 +23,7 @@ function parseSimpleCsv(csvString) {
         newline: '',             
         dynamicTyping: false     
     });
-    console.log(result)
+    //logger.log(result)
     return result.data;
 }
 
@@ -88,13 +89,13 @@ class QuerySettings {
         let colIDs = this.query.colIDs.filter(i => i !== fieldId);
         let selected = colIDs.map(idOf).join(", ");
         let queryString = `select ${selected} where ${idOf(fieldId)} = "${value}"`;
-        //console.log ("query string",queryString);
+        //logger.log ("query string",queryString);
         let data = parseSimpleCsv(await requestCsv(this.sheetId, {
             gid: this.gid,
             range: this.range.str,
             query: queryString,
         }));
-        //console.log(data);
+        //logger.log(data);
         return data.map(row => this.createObject(colIDs, row));
     }
 

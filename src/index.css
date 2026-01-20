@@ -1,0 +1,108 @@
+/* ------------------------- */
+/* Root gradient app wrapper */
+/* ------------------------- */
+
+/* Make sure VKUI app renders above background */
+.gradient-app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--geekmo-gradient);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Panel header */
+.panelHeader .vkuiPanelHeader__in {
+  background: var(--vkui--color_header_background);
+}
+
+/* Full height */
+html,
+body,
+#root,
+.gradient-app {
+  height: 100%;
+}
+
+/* ------------------------- */
+/* Buttons                    */
+/* ------------------------- */
+
+/* Positive buttons */
+.vkuiButton__modePrimary.vkuiButton__appearancePositive .vkuiButton__in {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  color: #fff;
+  background-image: var(--geekmo-gradient-positive) !important;
+}
+
+.vkuiButton__modePrimary.vkuiButton__appearancePositive .vkuiButton__in::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.vkuiButton__modePrimary.vkuiButton__appearancePositive:hover .vkuiButton__in::after {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Neutral buttons */
+.vkuiButton__modePrimary.vkuiButton__appearanceNeutral .vkuiButton__in {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  color: #fff;
+  background-image: var(--geekmo-gradient-neutral, green) !important;
+}
+
+.vkuiButton__modePrimary.vkuiButton__appearanceNeutral .vkuiButton__in::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.vkuiButton__modePrimary.vkuiButton__appearanceNeutral:hover .vkuiButton__in::after {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Negative buttons */
+.vkuiButton__modePrimary.vkuiButton__appearanceNegative .vkuiButton__in {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  color: #fff;
+  background-image: var(--geekmo-gradient-negative) !important;
+}
+
+.vkuiButton__modePrimary.vkuiButton__appearanceNegative .vkuiButton__in::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.vkuiButton__modePrimary.vkuiButton__appearanceNegative:hover .vkuiButton__in::after {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Allow clicks through background gradient div */
+.gradient-app>div[style*="linear-gradient"] {
+  pointer-events: none;
+}

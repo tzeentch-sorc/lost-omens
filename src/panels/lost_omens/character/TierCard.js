@@ -15,7 +15,7 @@ const TierCard = ({ tier, onOpenTierModal }) => {
     return (
         <>
             <Card onClick={() => onOpenTierModal(tier)} style={{ cursor: 'pointer' }}>
-                <Header mode="primary">Ранг Искателя</Header>
+                <Header size="m">Ранг Искателя</Header>
                 <SimpleCell before={getIcon(24)}>
                     {name}
                 </SimpleCell>

@@ -1,4 +1,4 @@
-.Intro {
+.intro {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,7 +6,7 @@
     flex-direction: column;
 }
 
-.introSeparator {
+.intro-separator {
     margin-top: 8px;
     margin-bottom: 12px;
 }

@@ -3,11 +3,12 @@ import {
     ModalRoot, InfoRow, ModalPage, ModalPageHeader,
     Button, SimpleCell
 } from '@vkontakte/vkui';
+import * as logger from '../../../util/Logger.js';
 
 const LOPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     const MODAL_PAGE_WITH_FIXED_HEIGHT = 'fixed-height';
     function createPriorityRow(element) {
-        //console.log("element",element);
+        logger.log("element",element);
         let srt = element[1].sort((a, b) => b.lvl - a.lvl).map(e => (
             e.lvl + " ур. " + e.char_name + ", "));
         srt[srt.length - 1] = srt[srt.length - 1].substring(0, srt[srt.length - 1].length - 2);
@@ -54,7 +55,7 @@ const LOPriorities = ({ priorities, setPopout, appearance }) => {
         }
         );
 
-        console.log(result);
+        logger.log("result: ", result);
 
         return Array.from(result);
     }

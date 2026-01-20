@@ -8,6 +8,8 @@ import { useActiveVkuiLocation } from '@vkontakte/vk-mini-apps-router';
 
 import '@vkontakte/vkui/dist/vkui.css';
 
+import { VKToken, MOCKUP_FETCHED_USER } from './consts.js';
+
 import Intro from './panels/Intro.js';
 import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
 import LOCharacter from './panels/lost_omens/character/LOCharacter.js';
@@ -20,11 +22,14 @@ import SMCharacter from './panels/silver_marshes/character/SMCharacter.js';
 import BWCampaignPanel from './panels/blue_waters/campaign/BWCampaignPanel.js';
 import VUCampaignPanel from './panels/voux_umbra/campaign/VUCampaignPanel.js';
 import RGCampaignPanel from './panels/rogues_gallery/campaign/RGCampaignPanel.js';
+import RGCharacter from './panels/rogues_gallery/character/RGCharacter.js';
+import RGRequests from './panels/rogues_gallery/requests/RGRequests.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
 	INTRO: 'intro',
-	CHAR: 'char'
+	CHAR: 'char',
+	REQUESTS: 'requests'
 }
 
 const App = (router) => {
@@ -32,10 +37,15 @@ const App = (router) => {
 	const { view: activeView, panel: activePanel } = useActiveVkuiLocation();
 
 	const [fetchedUser, setUser] = useState(null);
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const [popout, setPopout] = useState(<ScreenSpinner />);
 
 	useEffect(() => {
 		async function fetchData() {
+			if (window.location.hostname === 'localhost') {
+				setUser(MOCKUP_FETCHED_USER);
+				setPopout(null);
+				return;
+			}
 			const uid = await bridge.send('VKWebAppGetLaunchParams');
 			const user = await bridge
 				.send('VKWebAppCallAPIMethod', {
@@ -44,7 +54,7 @@ const App = (router) => {
 						user_ids: uid.vk_user_id,
 						v: '5.131',
 						fields: 'screen_name, photo_200',
-						access_token: '3d1cfde53d1cfde53d1cfde5923e09382633d1c3d1cfde55808b77a146aa66ab68e156d'
+						access_token:  VKToken
 					}
 				}).then(resp => { return resp.response[0] });
 			setUser(user);
@@ -54,13 +64,13 @@ const App = (router) => {
 	}, []);
 
 	return (
-		<Root popout={popout} activeView={activeView}>
+		<Root popout={popout} activeView={activeView} className='gradient-app'>
 			<View activePanel={activePanel} nav='default'>
 				<Intro id={ROUTES.INTRO} fetchedUser={fetchedUser} />
 			</View>
 			<View activePanel={activePanel} nav='lost_omens'>
 				<LOCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
-				<LOCharacter id={ROUTES.CHAR}/>
+				<LOCharacter id={ROUTES.CHAR} />
 			</View>
 			<View activePanel={activePanel} nav='golarion_heroes'>
 				<HGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
@@ -82,6 +92,8 @@ const App = (router) => {
 			</View>
 			<View activePanel={activePanel} nav='rogues_gallery'>
 				<RGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+				<RGCharacter id={ROUTES.CHAR} />
+				<RGRequests id={ROUTES.REQUESTS} />
 			</View>
 		</Root>
 	);

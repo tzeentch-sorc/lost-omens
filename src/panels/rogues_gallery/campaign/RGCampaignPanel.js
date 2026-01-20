@@ -3,38 +3,43 @@ import {
 	Panel, PanelHeader, Header, Group,
 	PanelHeaderBack, ScreenSpinner,
 	SplitCol, SplitLayout,
-	CardGrid, Div,
-	Spacing
+	CardGrid, Div
 
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
+import bridge from '@vkontakte/vk-bridge';
 
-import './RGCampaignPanel.css'
-//import RGInfoCard from './RGInfoCard.js';
-//import RGCharUpdateAlert from './RGCharUpdateAlert.js';
-import EmptyCampaignPanel from '../../common/EmptyCampaignPanel.js';
-//import RGCharCard from './RGCharCard.js';
-import RGNoCharsPage from './RGNoCharsPage.js';
-//import RGPlayerInfoSettings from '../export_settings/RGPlayerInfoSettings.js'
-//import RGPriorities from './RGPriorities.js';
+import '../../common/css/CampaignPanel.css';
+import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
+import NoCharsPage from '../../common/components/NOCharsPage.js';
+import RGMastersInfoSettings from '../export_settings/RGMastersInfoSettings.js'
+import RGPlayerInfoSettings from '../export_settings/RGPlayerInfoSettings.js'
+import { RGCharacter } from '../../../consts.js';
+import RGCharUpdateAlert from './RGCharUpdateAlert.js';
+import RGCharCard from './RGCharCard.js';
+import {
+	RGArticleLink, RGArticleImage, RGNoCharsCaption,
+	RGNoCharsDescription, CommonNoCharsBody, VKToken,
+	MastersText, MOCKUP_FETCHED_USER
+} from '../../../consts.js'
 
-//import {RGCharacter} from '../../../util/consts.js';
-import { getVkUserUrl } from '../../../util/utilFunc.js';
+import { getVkUserUrl } from '../../../util/VKUserURL.js';
+import * as logger from '../../../util/Logger.js';
+import MastersGroup from '../../common/components/MastersGroup.js';
+import Marquee from '../../common/components/Marquee.js';
 
 
 const RGCampaignPanel = ({ fetchedUser }) => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const campaignName = params.get('CampaignName');
+	const [popout, setPopout] = useState(<ScreenSpinner />)
+	const [masters, setMasters] = useState([]);
+	const [prio, setPrio] = useState(-1); // while loading
 
-	const [characters, setCharacters] = useState([])
-	const [date, setDate] = useState("Хроника утеряна")
-	const [advName, setAdvName] = useState("Неизвестное приключение")
-	const [prio, setPrio] = useState(-1)
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />)
-	const [priorities, setPriorities] = useState([]);
+	const [isDisplayed, setIsDisplayed] = useState(false);
+	const [characters, setCharacters] = useState([]);
 
-	/*
 	const openAction = (element) => {
 		setPopout(
 			<RGCharUpdateAlert
@@ -47,100 +52,112 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 
 	const openAlert = (element) => {
 		if (element.lvl_up) {
-			openAction(element);
+			openAction(element)
 		} else {
 			params.set('CharName', element.name);
 			setParams(params);
 			routeNavigator.push(RGCharacter, { keepSearchParams: true });
 		}
 	}
-	
-	function createCard(element) {
+
+	function createCard(elem) {
 		return (
-			<RGCharCard element={element} key={element.name + "_rg_card"} openAction={() => { openAlert(element) }} />
+			<RGCharCard element={elem} key={elem.name + "_rg_card"} openAction={() => openAlert(elem)} />
 		);
 	}
-	*/
 
-	/*useEffect(() => {
+	useEffect(() => {
 		async function fetchData() {
-			const prioData = await RGPlayerInfoSettings.getQueryAll();
-			setPriorities(prioData.map(elem => ({
-				player: elem.player,
-				char_name: elem.char_name,
-				prio: elem.prio,
-				lvl: elem.lvl
-			})).sort((a, b) => b.prio - a.prio));
-			//console.log(prioData);
-			const data = prioData.filter(elem => { return getVkUserUrl(elem, fetchedUser) });
-			console.log("data: ", data);
+			const playerData = await RGPlayerInfoSettings.getQueryAll();
+			const data = playerData.filter(elem => { return getVkUserUrl(elem, "RG", fetchedUser) });
+			logger.log("data: ", data);
 			setCharacters(data.map(elem => ({
 				name: elem.char_name,
-				lvl: elem.lvl,
-				lvl_up: elem.lvl_up === "FALSE" ? false : true,
 				type: elem.char_class,
-				race: elem.race
+				owner: elem.owner,
+				lvl_up: elem.lvl_up === "TRUE" ? true : false,
 			})));
 			if (data.length > 0) {
-				data[0].adv_date != "" && setDate(data[0].adv_date);
-				data[0].adv != "" && setAdvName(data[0].adv);
-				data[0].prio != "" && setPrio(data[0].prio);
+				data[0].name != "" && setPrio(1); //loaded
 			} else {
-				setPrio(-2);
+				setPrio(-2); // -2 => no character
 			}
 
+			const masterData = await RGMastersInfoSettings.getQueryAll();
+			const userIds = masterData.map(elem => elem.id).join(', ');
+			logger.log(masterData);
+			logger.log(userIds);
+			if (window.location.hostname === 'localhost') {
+				setMasters([MOCKUP_FETCHED_USER]);
+			} else {
+				const users = await bridge
+					.send('VKWebAppCallAPIMethod', {
+						method: 'users.get',
+						params: {
+							user_ids: userIds,
+							v: '5.131',
+							fields: 'screen_name, photo_200',
+							access_token: VKToken
+						}
+					}).then(resp => { return resp.response });
+
+				setMasters(users);
+			}
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
-			setTimeout(() => setPopout(null), 700);
+			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
 		}
 		fetchData().catch(console.error);
-	}, []);*/
+	}, []);
 
-	//if (characters.length < 1 && prio == -2) {
+	if (masters.length >= 1 && characters.length < 1 && prio == -2) {
 		//no chars found
 		return (
-			<RGNoCharsPage user={fetchedUser} campaignName={campaignName} />
+			<NoCharsPage user={fetchedUser} campaignName={campaignName} masters={masters}
+				ArticleLink={RGArticleLink} articleImage={RGArticleImage} caption={RGNoCharsCaption}
+				description={RGNoCharsDescription} body={CommonNoCharsBody} />
 		)
-	/*} else if (characters.length < 1 && prio == -1) {
+	} else if (masters.length < 1 || (characters.length < 1 && prio == -1)) {
 		//while loading
 		return (
 			<EmptyCampaignPanel user={fetchedUser} campaignName={campaignName} popout={popout} />
 		)
 	} else {
+		//loaded chars
 		return (
 			<Panel nav='campaign' key={campaignName}>
-				<PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>{campaignName}</PanelHeader>
-				{
-					fetchedUser &&
-					<Group mode='card'>
-						<SplitLayout popout={popout}>
-							<SplitCol>
-								{date && prio && advName &&
-									<Group header={<Header mode="secondary">Информация игрока</Header>} mode="plain" padding='s'>
-										<SMInfoCard date={date} prio={prio} adventure={advName} />
-										<Spacing size={4} />
-										<SMPriorities setPopout={setPopout} priorities={priorities} />
-									</Group>
+				<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace('/')} />}>
+					<Marquee text={campaignName} speed={5} repeat={2} rightPadding={70} />
+				</PanelHeader>
+				{fetchedUser &&
+					<>
+						<MastersGroup masters={masters} text={MastersText} />
+						<Group mode="card">
+							<SplitLayout >
+								{popout}
+								{isDisplayed &&
+									<SplitCol>
+										<Header size="s">Ваши персонажи</Header>
+										<Group mode="plain">
+											<Div className="not4mob" style={{ cursor: 'pointer' }}>
+												<CardGrid size="m">
+													{characters && characters.map((elem) => createCard(elem))}
+												</CardGrid>
+											</Div>
+											<Div className="formob">
+												<CardGrid size="l">
+													{characters && characters.map((elem) => createCard(elem))}
+												</CardGrid>
+											</Div>
+										</Group>
+									</SplitCol>
 								}
-								<Header mode="secondary">Ваши персонажи</Header>
-								<Group mode="plain">
-									<Div className="not4mob">
-										<CardGrid size="m" style={{cursor: 'pointer'}} >
-											{characters && characters.map((elem) => createCard(elem))}
-										</CardGrid>
-									</Div>
-									<Div className="formob">
-										<CardGrid size="l">
-											{characters && characters.map((elem) => createCard(elem))}
-										</CardGrid>
-									</Div>
-								</Group>
-							</SplitCol>
-						</SplitLayout>
-					</Group>
+							</SplitLayout>
+						</Group>
+					</>
 				}
-			</Panel>*/
-//		)
-//	}
+			</Panel>
+		)
+	}
 };
 
 export default RGCampaignPanel;
