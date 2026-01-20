@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Div, Group, List, Separator } from '@vkontakte/vkui';
+import { Div, Group, List} from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import './SMInventory.css'
 
