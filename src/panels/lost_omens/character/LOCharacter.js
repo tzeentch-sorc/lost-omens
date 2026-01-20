@@ -211,7 +211,7 @@ const LOCharacter = () => {
 			setDowntime(characterInfoData[0].downtime);
 			setTokens(characterInfoData[0].jods);
 			setRoom(characterInfoData[0].room);
-			//const url = await getVkPhotoSrc("https://vk.com/photo-37784625_457259547", VKToken);
+			
 			const url = await getVkPhotoSrc(characterInfoData[0].photo, VKToken);
       		if (url) setImg(url);
 			if(characterInfoData[0].fullname){
@@ -222,8 +222,7 @@ const LOCharacter = () => {
 			setRace(characterInfoData[0].race);
 			setBackstory(characterInfoData[0].backstory);
 			setDescription(characterInfoData[0].notes);
-			//setDescription("Высокий совершеннолетний полуэльф около 195 см ростом, с пышными рыжими волосами, синими глазами, подтянутым телом и заострёнными ушами. На усыпанном веснушками лице обычно никаких эмоций, безучастный взгляд с мешками под глазами и солидный шрам на нижней части левой стороны лица. Носит подвеску в виде камня, чтобы 'маскировать' светящийся на груди сигил неоднозначной формы. Одевается безвкусно и очень просто, словно его одежда не волнует вовсе. Обычно горбится, но, если выпрямится, вероятно, обязательно будет стукаться о дверные косяки.");
-
+			
 			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
