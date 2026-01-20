@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
 	Panel, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, SplitCol, SplitLayout, Div, ModalRoot, ModalPage, ModalPageHeader,
-	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Separator, Title, Text, Button, Spacing
+	PanelHeaderClose, List, SimpleCell, InfoRow, Cell, Title, Text, Button, Spacing, Separator
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import {
@@ -23,7 +23,7 @@ import RGCharInfoSettings from '../export_settings/RGCharInfoSettings.js'
 
 import '../../common/css/Character.css';
 
-//import RGFeatPanel from './RGFeatPanel.js';
+import RGImplantsPanel from './RGImplantsPanel.js';
 
 import { RGCampaign, RGDrinkHighPlaceholder, RGDrinkLowPlaceholder, RGRequests } from '../../../consts.js'
 import * as logger from '../../../util/Logger.js';
@@ -46,6 +46,7 @@ const RGCharacter = () => {
 	const [income, setIncome] = useState();
 	const [expenses, setExpenses] = useState();
 	const [drink, setDrink] = useState("None");
+	const [implants, setImplants] = useState("None");
 
 	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('drink');
@@ -65,14 +66,12 @@ const RGCharacter = () => {
 		return false;
 	}
 
-	/*
-	function featlist() {
-		return ([feat_race, feat_general,
-			feat_class, feat_skill, feat_archetype])
-	}
-	*/
 	function hasDrink() {
 		return (drink !== "None" && drink !== "");
+	}
+
+	function hasImplants() {
+		return (implants !== "None" && implants !== "");
 	}
 
 	function renderSelectedTab() {
@@ -188,6 +187,7 @@ const RGCharacter = () => {
 			setIncome(characterInfoData[0].income);
 			setExpenses(characterInfoData[0].expenses);
 			setDrink(characterInfoData[0].drink);
+			setImplants(characterInfoData[0].implants);
 
 			//получение инвентаря
 			/*
@@ -201,11 +201,8 @@ const RGCharacter = () => {
 			}
 			*/
 
-			//получение черт, формул
+			//получение формул
 			/*
-			let characterBuildData = await RGCharBuildSettings.getFilteredQuery("name", charName);
-			logger.log("character build data", characterBuildData);
-
 			setFormulae(characterBuildData[0].formulas.split(','));
 			*/
 
@@ -244,7 +241,7 @@ const RGCharacter = () => {
 						onOpenFactionModal={openFactionModal}
 						openRequests={openRequests}
 					/>
-					{/*<RGFeatPanel featlist={featlist()} />*/}
+					{hasImplants() && <RGImplantsPanel implantList={implants} />}
 					<Group mode='card'>
 						<RGCharTabPanel
 							selected={selected}

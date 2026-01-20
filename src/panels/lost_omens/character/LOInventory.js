@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Cell, Group, List, Separator, Div } from '@vkontakte/vkui';
+import { Cell, Group, List, Div, Separator } from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
 import AddItem from '../../common/components/AddItem';
 

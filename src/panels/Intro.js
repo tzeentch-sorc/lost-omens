@@ -1,4 +1,4 @@
-import { Div, Group, Panel, PanelHeader, Header, Avatar, Spacing, Separator, CardGrid } from "@vkontakte/vkui";
+import { Div, Group, Panel, PanelHeader, Header, CardGrid, Separator } from "@vkontakte/vkui";
 import React from "react";
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -40,7 +40,7 @@ const Intro = ({ fetchedUser }) => {
                             Мегакампании в GEEKMO
                         </Header>
 
-                        <Separator className="introSeparator"/>
+                        <Separator className="intro-separator"/>
 
                         <CardGrid size="l" padding="true">
                             <CampaignCard
