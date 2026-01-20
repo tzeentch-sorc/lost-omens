@@ -19,7 +19,7 @@ const LOFeatPanel = ({ featlist }) => {
     const [openId, setOpenId] = React.useState();
 
     return (
-        <Group mode='card'>
+        <>
             {data.map(
 
                 ({ id, title }) => featlist && featlist[0] != "" && (
@@ -38,7 +38,7 @@ const LOFeatPanel = ({ featlist }) => {
                 )
             )}
 
-        </Group>);
+        </>);
     
 };
 
