@@ -211,7 +211,7 @@ const LOCharacter = () => {
 			setDowntime(characterInfoData[0].downtime);
 			setTokens(characterInfoData[0].jods);
 			setRoom(characterInfoData[0].room);
-			//const url = await getVkPhotoSrc("https://vk.com/photo-37784625_457259547", VKToken);
+			
 			const url = await getVkPhotoSrc(characterInfoData[0].photo, VKToken);
       		if (url) setImg(url);
 			if(characterInfoData[0].fullname){
