@@ -16,6 +16,7 @@ import LOInventory from './LOInventory.js';
 import LOFormulae from './LOFormulae.js';
 import LOMainInfo from './LOMainInfo.js';
 import LODescription from './LODescription.js';
+import LOQuenta from './LOQuenta.js';
 
 import LOInventorySettings from '../export_settings/LOInventorySettings.js'
 import LOCharBuildSettings from '../export_settings/LOCharBuildSettings.js'
@@ -42,6 +43,7 @@ const LOCharacter = () => {
 	const [backstory, setBackstory] = useState("");
 	const [description, setDescription] = useState("");
 	const [race, setRace] = useState("");
+	const [quenta, setQuenta] = useState("");
 	const [wealth, setWealth] = useState(0);
 	const [formulae, setFormulae] = useState();
 	const [gold, setGold] = useState(0);
@@ -223,7 +225,9 @@ const LOCharacter = () => {
 			setBackstory(characterInfoData[0].backstory);
 			setDescription(characterInfoData[0].notes);
 			
-			//получение инвентаря
+			setQuenta(characterInfoData[0].quenta);
+			
+            //получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
 
@@ -297,6 +301,7 @@ const LOCharacter = () => {
 					<Group mode="card">
 						<LOFeatPanel featlist={featlist()} />
 						<LODescription room={room} imageSrc={img} fullname={fullname} backstory={backstory} description={description} race={race} />
+						<LOQuenta text={quenta} />
 					</Group>
 					<Group mode='card'>
 						<LOCharTabPanel
