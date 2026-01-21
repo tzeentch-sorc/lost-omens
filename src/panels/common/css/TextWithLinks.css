@@ -1,0 +1,89 @@
+.loquenta-info {
+    color: var(--vkui--color_text_subhead);
+}
+
+.loquenta-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.loquenta-link-wrapper {
+    position: relative;
+    border-radius: 16px;
+    padding: 2px;
+    overflow: visible;
+}
+
+.loquenta-gradient {
+    position: absolute;
+    inset: 0;
+    border-radius: 9px;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #d946ef);
+    background-size: 200% 200%;
+    padding: 2px;
+}
+
+.loquenta-card {
+    border-radius: 14px;
+    position: relative;
+    z-index: 2;
+    padding: 16px;
+    background: var(--vkui--color_background_content);
+    color: var(--vkui--color_text_primary);
+    box-shadow: 0 4px 12px var(--vkui--color_image_placeholder_alpha);
+}
+
+.loquenta-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.loquenta-card-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.loquenta-icon-wrapper {
+    padding: 8px;
+    border-radius: 999px;
+    background: var(--vkui--color_background_secondary);
+    flex-shrink: 0;
+}
+
+.loquenta-service-name {
+    font-weight: 600;
+}
+
+.loquenta-service-subtext {
+    font-size: 13px;
+    color: var(--vkui--color_text_secondary);
+}
+
+.loquenta-text {
+    
+    line-height: 1.6;
+    color: var(--vkui--color_text_primary);
+}
+
+.loquenta-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Для немного плавных переходов */
+.loquenta-card,
+.loquenta-link-wrapper {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
