@@ -18,7 +18,7 @@
 .loquenta-gradient {
     position: absolute;
     inset: 0;
-    border-radius: 16px;
+    border-radius: 9px;
     pointer-events: none;
     z-index: 0;
     background: linear-gradient(90deg, #3b82f6, #8b5cf6, #d946ef);
@@ -69,7 +69,7 @@
 }
 
 .loquenta-text {
-    white-space: pre-line;
+    
     line-height: 1.6;
     color: var(--vkui--color_text_primary);
 }

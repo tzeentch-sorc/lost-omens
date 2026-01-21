@@ -226,7 +226,8 @@ const LOCharacter = () => {
 			setDescription(characterInfoData[0].notes);
 			
 			setQuenta(characterInfoData[0].quenta);
-			//получение инвентаря
+			
+            //получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
 
