@@ -7,8 +7,8 @@ import {
     Spacing,
 } from "@vkontakte/vkui";
 
-import TextWithLinks from "../../common/components/TextWithLinks";
-import "../../common/css/TextWithLinks.css";
+import TextWithLinks from "../../../common/components/TextWithLinks";
+import "../../../common/css/TextWithLinks.css";
 
 const LOQuenta = ({ text }) => {
     const data = [
