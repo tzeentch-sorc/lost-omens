@@ -4,8 +4,10 @@ import {
 } from '@vkontakte/vkui';
 
 import SMFeats from './SMFeats';
+import * as logger from '../../../util/Logger.js';
 
 const SMFeatPanel = ({ featlist }) => {
+    //logger.log("SMFeatPanel featlist:", featlist);
 
     const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
 
@@ -21,7 +23,7 @@ const SMFeatPanel = ({ featlist }) => {
     return (
         <Group mode='card'>
             {data.map(
-                ({ id, title }) => featlist && featlist[0] != "" && (
+                ({ id, title }) => featlist && (featlist[0] != "" || featlist[1] != "") && (
                     <Accordion
                         key={id}
                         expanded={openId === id}

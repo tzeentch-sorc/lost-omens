@@ -22,24 +22,31 @@ const LOFeatPanel = ({ featlist }) => {
         <>
             {data.map(
 
-                ({ id, title }) => featlist && featlist[0] != "" && (
-                    <Accordion
-                        key={id}
-                        expanded={openId === id}
-                        onChange={(e) => (e ? setOpenId(id) : setOpenId(null))}
-                    >
-                        <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
-                        <Accordion.Content>
-                            <Div style={infoStyle}>
-                                <LOFeats featlist={featlist}/>
-                            </Div>
-                        </Accordion.Content>
-                    </Accordion>
-                )
+                ({ id, title }) => featlist &&
+                    (
+                        featlist[0] != "" ||
+                        featlist[1] != "" ||
+                        featlist[2] != "" ||
+                        featlist[3] != "" ||
+                        featlist[4] != ""
+                    ) && (
+                        <Accordion
+                            key={id}
+                            expanded={openId === id}
+                            onChange={(e) => (e ? setOpenId(id) : setOpenId(null))}
+                        >
+                            <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
+                            <Accordion.Content>
+                                <Div style={infoStyle}>
+                                    <LOFeats featlist={featlist} />
+                                </Div>
+                            </Accordion.Content>
+                        </Accordion>
+                    )
             )}
 
         </>);
-    
+
 };
 
 export default LOFeatPanel;

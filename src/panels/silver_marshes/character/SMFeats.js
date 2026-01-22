@@ -3,11 +3,11 @@ import {
     Group, SimpleCell,
     InfoRow
 } from '@vkontakte/vkui';
-
+import * as logger from '../../../util/Logger.js';
 
 
 const SMFeats = ({ featlist }) => {
-
+    //logger.log("SMFeats featlist:", featlist);
 
     const data = [
         {
