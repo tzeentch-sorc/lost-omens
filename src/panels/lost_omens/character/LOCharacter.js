@@ -213,10 +213,10 @@ const LOCharacter = () => {
 			setDowntime(characterInfoData[0].downtime);
 			setTokens(characterInfoData[0].jods);
 			setRoom(characterInfoData[0].room);
-			
+
 			const url = await getVkPhotoSrc(characterInfoData[0].photo, VKToken);
-      		if (url) setImg(url);
-			if(characterInfoData[0].fullname){
+			if (url) setImg(url);
+			if (characterInfoData[0].fullname) {
 				setFullname(characterInfoData[0].fullname);
 			} else {
 				setFullname(charName);
@@ -224,10 +224,10 @@ const LOCharacter = () => {
 			setRace(characterInfoData[0].race);
 			setBackstory(characterInfoData[0].backstory);
 			setDescription(characterInfoData[0].notes);
-			
+
 			setQuenta(characterInfoData[0].quenta);
-			
-            //получение инвентаря
+
+			//получение инвентаря
 			let inventoryData = await LOInventorySettings.getFilteredQuery("owner", charName);
 			logger.log("inventory data", inventoryData);
 
@@ -281,7 +281,7 @@ const LOCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(LOCampaign, { keepSearchParams: true })} />}>
+			<PanelHeader className="panelHeader" before={<PanelHeaderBack onClick={() => routeNavigator.replace(LOCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout>
@@ -300,7 +300,7 @@ const LOCharacter = () => {
 					/>
 					<Group mode="card">
 						<LOFeatPanel featlist={featlist()} />
-						<LODescription room={room} imageSrc={img} fullname={fullname} backstory={backstory} description={description} race={race} />
+						<LODescription room={room} imageSrc={img} fullname={fullname && fullname != "" ? fullname : charName} backstory={backstory} description={description} race={race} />
 						<LOQuenta text={quenta} />
 					</Group>
 					<Group mode='card'>

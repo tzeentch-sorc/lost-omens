@@ -17,6 +17,8 @@ import NoCharsPage from '../../common/components/NOCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
 import LOPriorities from './LOPriorities.js';
+import LOAgents from './LOAgents.js';
+import { resolveVkPicturesBatch } from '../../../util/GetVkPhotoSrc.js';
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
@@ -44,6 +46,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 	const [prio, setPrio] = useState(-1)
 	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const [priorities, setPriorities] = useState([]);
+	const [agents, setAgents] = useState([]);
 
 	const [masters, setMasters] = useState([]);
 
@@ -95,6 +98,18 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				lvl: elem.lvl
 			})).sort((a, b) => b.prio - a.prio));
 			logger.log("prioData: ", prioData);
+
+			const rawAgents = prioData.map(elem => ({
+				name: elem.char_name,
+				fullname: elem.fullname,
+				race: elem.race,
+				background: elem.background,
+				appearance: elem.appearance,
+				picture: elem.picture,
+				room: elem.room
+			})).sort((a, b) => b.name - a.name);
+			const resolvedAgents = await resolveVkPicturesBatch(rawAgents, VKToken);
+			setAgents(resolvedAgents);
 
 			const data = prioData.filter(elem => {
 				return getVkUserUrl(elem, "LO", fetchedUser)
@@ -174,6 +189,9 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 											<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
 												<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
 												<Button stretched appearance="negative" size="l" onClick={() => { window.open(LOBulletinLink, "_blank") }}>Доска Авроры</Button>
+											</Div>
+											<Div style={{ paddingLeft: 16 }}>
+												<LOAgents setPopout={setPopout} agents={agents} appearance='positive' />
 											</Div>
 										</Group>
 									}

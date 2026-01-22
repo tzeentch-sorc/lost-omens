@@ -1,5 +1,6 @@
 import QuerySettings from '../../../util/QuerySettings';
 import {LOSpreadSheetID, LOPlayersSheetID} from '../../../consts.js'
+import { picture } from 'framer-motion/client';
 
 const sheetId = LOSpreadSheetID; // LO Geekmo Mirror
 
@@ -17,7 +18,11 @@ const LOPlayerInfoSettings = new QuerySettings({
 		char_class: "Класс",
 		race: "Раса",
 		lvl: "Уровень",
-		lvl_up: "Повышение"				
+		lvl_up: "Повышение",
+		room: "Комната",
+		background: "Предыстория",
+		appearance: "Внешность",
+		picture: "Картинка ВК"
 	},
 	query: {
 		colByField: { 
@@ -30,7 +35,12 @@ const LOPlayerInfoSettings = new QuerySettings({
 			char_class: 6,
 			race: 7,
 			lvl: 8,
-			lvl_up: 9
+			lvl_up: 9,
+			fullname: 10,
+			room: 11,
+			background: 12,
+			appearance: 13,
+			picture: 14
 		 },
 		fieldByCol: { 
 			0: "id",
@@ -42,12 +52,17 @@ const LOPlayerInfoSettings = new QuerySettings({
 			6: "char_class",
 			7: "race",
 			8: "lvl",
-			9: "lvl_up"
+			9: "lvl_up",
+			10: "fullname",
+			11: "room",
+			12: "background",
+			13: "appearance",
+			14: "picture"
 		 },
-		colIDs: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
-		queryAll: "select A, B, C, D, E, F, G, H, I, J",
+		colIDs: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+		queryAll: "select A, B, C, D, E, F, G, H, I, J, K, L, M, N, O",
 	},
-	range: { min: 0, max: 9, str: "A1:J" },
+	range: { min: 0, max: 14, str: "A1:O" },
 });
 
 export default LOPlayerInfoSettings;
