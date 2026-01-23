@@ -1,10 +1,9 @@
 {
-  "static_path": "build",
+  "static_path": "build/GeekmoApp",
   "app_id": 51758531,
   "endpoints": {
     "mobile": "index.html",
     "mvk": "index.html",
     "web": "index.html"
-  },
-  "debug": true
+  }
 }
