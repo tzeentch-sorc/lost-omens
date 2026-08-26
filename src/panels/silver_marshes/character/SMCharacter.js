@@ -11,7 +11,7 @@ import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
 
 import SMCharTabPanel from './SMCharTabPanel.js';
 import SMSpells from './SMSpells.js';
-import SMInventory from './SMInventory.js';
+import Inventory from '../../common/components/Inventory.js';
 import SMMainInfo from './SMMainInfo.js';
 
 import SMInventorySettings from '../export_settings/SMInventorySettings.js'
@@ -82,7 +82,7 @@ const SMCharacter = () => {
 			case 'inventory':
 				return hasInventory() ? (
 					logger.log("render inventory", inventory),
-					<SMInventory inventory={inventory} totalWealth={wealth} />
+					<Inventory inventory={inventory} totalWealth={wealth} />
 				) : (
 					<InventoryPlaceholder />
 				);
