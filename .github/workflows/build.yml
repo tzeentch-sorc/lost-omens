@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+# A new push to the same pull request cancels the run that is already going.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: npm ci + npm run build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          # 24.x is what the build is verified on locally.
+          # The Used Toolset table in README.md still says 20.12.2.
+          node-version: 24.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # src/config.json is gitignored: it holds a VK token and the mirror
+      # spreadsheet IDs. src/consts.js imports it, so the build fails on that
+      # import unless the file exists. Placeholder values from the example are
+      # enough here - nothing is fetched at build time.
+      - name: Create config.json from the example
+        run: cp src/config.example.json src/config.json
+
+      # GitHub Actions sets CI=true, and react-scripts then treats every ESLint
+      # warning as an error. That is kept on purpose: the project builds clean
+      # today, so an unused import or variable is worth failing on.
+      - name: Build
+        run: npm run build
