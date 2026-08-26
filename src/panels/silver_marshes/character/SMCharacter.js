@@ -48,7 +48,6 @@ const SMCharacter = () => {
 	const [feat_general, setFeatGeneral] = useState();
 	const [feat_class, setFeatClass] = useState();
 
-	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
 	const [popout, setPopout] = useState(<ScreenSpinner />)
@@ -162,9 +161,6 @@ const SMCharacter = () => {
 						<SMCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
-							onMenuClick={(opened) => {
-								setMenuOpened((prevState) => (opened ? !prevState : false));
-							}}
 						/>
 						{renderSelectedTab()}
 					</Group>

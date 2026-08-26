@@ -14,7 +14,6 @@ const tabs = [
         id: 'inventory',
         title: 'Инвентарь',
         icon: <Icon28CubeBoxOutline width={24} height={24} style={glow} />,
-        opensMenu: true,
     },
     {
         id: 'formulae',

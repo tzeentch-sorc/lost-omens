@@ -3,26 +3,16 @@ import {
     SimpleCell, Tabs, TabsItem, Div
 } from '@vkontakte/vkui';
 
-// tabs: [{ id, title, icon, opensMenu }]
+// tabs: [{ id, title, icon }]
 // id задаёт и значение selected, и идентификаторы разметки: tab-<id> / tab-content-<id>.
-// opensMenu — повторный клик по уже выбранной вкладке разворачивает меню; так ведёт себя инвентарь.
-const CharTabPanel = ({ tabs, selected, setSelected, onMenuClick }) => {
+const CharTabPanel = ({ tabs, selected, setSelected }) => {
     return (
         <Tabs>
-            {tabs.map(({ id, title, icon, opensMenu = false }) => (
+            {tabs.map(({ id, title, icon }) => (
                 <TabsItem
                     key={id}
                     selected={selected === id}
-                    onClick={() => {
-                        if (opensMenu) {
-                            if (selected === id) {
-                                onMenuClick(true);
-                            }
-                        } else {
-                            onMenuClick(false);
-                        }
-                        setSelected(id);
-                    }}
+                    onClick={() => setSelected(id)}
                     id={`tab-${id}`}
                     aria-controls={`tab-content-${id}`}
                 >

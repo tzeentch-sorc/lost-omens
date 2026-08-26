@@ -71,7 +71,6 @@ const LOCharacter = () => {
 	const [feat_skill, setFeatSkill] = useState();
 	const [feat_archetype, setFeatArchetype] = useState();
 
-	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
 	// const [popout, setPopout] = useState(<ScreenSpinner />)
@@ -328,9 +327,6 @@ const LOCharacter = () => {
 						<LOCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
-							onMenuClick={(opened) => {
-								setMenuOpened((prevState) => (opened ? !prevState : false));
-							}}
 						/>
 						{renderSelectedTab()}
 					</Group>
