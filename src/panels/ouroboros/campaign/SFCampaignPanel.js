@@ -6,7 +6,6 @@ import {
 	CardGrid, Div, Button
 
 } from '@vkontakte/vkui';
-import bridge from '@vkontakte/vk-bridge';
 
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import '../../common/css/CampaignPanel.css';
@@ -25,9 +24,10 @@ import {
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import {
 	SFArticleLink, SFArticleImage, SFNoCharsCaption,
-	SFNoCharsDescription, SFNoCharsBody, VKToken, MastersText, MOCKUP_FETCHED_USER
+	SFNoCharsDescription, SFNoCharsBody, MastersText
 } from '../../../consts.js';
 import * as logger from '../../../util/Logger.js';
+import { getMasters } from '../../../util/GetMasters.js';
 import MastersGroup from '../../common/components/MastersGroup.js';
 import Marquee from '../../common/components/Marquee.js';
 
@@ -105,26 +105,7 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 				setPrio(-2); // -2 => no character
 			}
 
-			const masterData = await SFMastersInfoSettings.getQueryAll();
-			const userIds = masterData.map(elem => elem.id).join(', ');
-			logger.log(masterData);
-			logger.log(userIds);
-			if (window.location.hostname === 'localhost') {
-				setMasters([MOCKUP_FETCHED_USER]);
-			} else {
-				const users = await bridge
-					.send('VKWebAppCallAPIMethod', {
-						method: 'users.get',
-						params: {
-							user_ids: userIds,
-							v: '5.131',
-							fields: 'screen_name, photo_200',
-							access_token: VKToken
-						}
-					}).then(resp => { return resp.response });
-
-				setMasters(users);
-			}
+			setMasters(await getMasters(SFMastersInfoSettings));
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}

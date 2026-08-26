@@ -6,7 +6,6 @@ import {
 	CardGrid, Div, Button, Spacing
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
-import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
 import InfoCard from '../../common/components/InfoCard.js';
@@ -21,6 +20,7 @@ import Priorities from '../../common/components/Priorities.js';
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
+import { getMasters } from '../../../util/GetMasters.js';
 
 import {
 	FormPreEnter, LOLvlupLink, LOLvlupChar, LOLvlupPlayer, LOLvlupChoice,
@@ -29,7 +29,7 @@ import {
 } from '../../../consts.js';
 import {
 	LOArticleLink, LOArticleImage, LONoCharsCaption,
-	LONoCharsDescription, CommonNoCharsBody, VKToken, MOCKUP_FETCHED_USER
+	LONoCharsDescription, CommonNoCharsBody
 } from '../../../consts.js';
 import MastersGroup from '../../common/components/MastersGroup.js';
 import Marquee from '../../common/components/Marquee.js';
@@ -124,26 +124,7 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 				setPrio(-2);
 			}
 
-			const masterData = await LOMastersInfoSettings.getQueryAll();
-			const userIds = masterData.map(elem => elem.id).join(', ');
-			logger.log("masterData: ", masterData);
-			logger.log("userIds: ", userIds);
-			if (window.location.hostname === 'localhost') {
-				setMasters([MOCKUP_FETCHED_USER]);
-			} else {
-				const users = await bridge
-					.send('VKWebAppCallAPIMethod', {
-						method: 'users.get',
-						params: {
-							user_ids: userIds,
-							v: '5.131',
-							fields: 'screen_name, photo_200',
-							access_token: VKToken
-						}
-					}).then(resp => { return resp.response });
-
-				setMasters(users);
-			}
+			setMasters(await getMasters(LOMastersInfoSettings));
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 700);
 		}

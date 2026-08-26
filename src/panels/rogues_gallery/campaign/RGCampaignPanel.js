@@ -7,7 +7,6 @@ import {
 
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
-import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
 import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
@@ -20,12 +19,13 @@ import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import CharCard from '../../common/components/CharCard.js';
 import {
 	RGArticleLink, RGArticleImage, RGNoCharsCaption,
-	RGNoCharsDescription, CommonNoCharsBody, VKToken,
-	MastersText, MOCKUP_FETCHED_USER
+	RGNoCharsDescription, CommonNoCharsBody,
+	MastersText
 } from '../../../consts.js'
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
+import { getMasters } from '../../../util/GetMasters.js';
 import MastersGroup from '../../common/components/MastersGroup.js';
 import Marquee from '../../common/components/Marquee.js';
 
@@ -97,26 +97,7 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 				setPrio(-2); // -2 => no character
 			}
 
-			const masterData = await RGMastersInfoSettings.getQueryAll();
-			const userIds = masterData.map(elem => elem.id).join(', ');
-			logger.log(masterData);
-			logger.log(userIds);
-			if (window.location.hostname === 'localhost') {
-				setMasters([MOCKUP_FETCHED_USER]);
-			} else {
-				const users = await bridge
-					.send('VKWebAppCallAPIMethod', {
-						method: 'users.get',
-						params: {
-							user_ids: userIds,
-							v: '5.131',
-							fields: 'screen_name, photo_200',
-							access_token: VKToken
-						}
-					}).then(resp => { return resp.response });
-
-				setMasters(users);
-			}
+			setMasters(await getMasters(RGMastersInfoSettings));
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => { setPopout(null); setIsDisplayed(true); }, 700);
 		}
