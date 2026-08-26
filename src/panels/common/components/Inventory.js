@@ -41,6 +41,7 @@ const Inventory = ({ inventory, totalWealth, addItemLink, renderName = (name) =>
         return (
                 <Div
                     className='inventoryCell'
+                    key={element.name}
                 >
                     <div className='inventoryTypeColumn'><b>{renderName(element.name)}</b></div>
                     <div style={{ textAlign: 'center' }}>{element.cost}</div>
