@@ -11,14 +11,15 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
-import SMInfoCard from './SMInfoCard.js';
-import SMCharUpdateAlert from './SMCharUpdateAlert.js';
+import InfoCard from '../../common/components/InfoCard.js';
+import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
-import SMCharCard from './SMCharCard.js';
+import CharCard from '../../common/components/CharCard.js';
+import dndClassIcons from '../../common/custom_icons/DNDClassIcons/index.js';
 import NoCharsPage from '../../common/components/NOCharsPage.js';
 import SMPlayerInfoSettings from '../export_settings/SMPlayerInfoSettings.js'
 import SMMastersInfoSettings from '../export_settings/SMMastersInfoSettings.js'
-import SMPriorities from './SMPriorities.js';
+import Priorities from '../../common/components/Priorities.js';
 
 import { SMCharacter, SMCreateLink, SMSite } from '../../../consts.js';
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
@@ -46,7 +47,7 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 
 	const openAction = (element) => {
 		setPopout(
-			<SMCharUpdateAlert
+			<CharUpdateAlert
 				charName={element.name}
 				navLink={SMCharacter}
 				closeMethod={() => setPopout(null)}
@@ -66,7 +67,14 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(element) {
 		return (
-			<SMCharCard element={element} key={element.name + "_sm_card"} openAction={() => { openAlert(element) }} />
+			<CharCard
+				element={element}
+				key={element.name + "_sm_card"}
+				openAction={() => { openAlert(element) }}
+				before={dndClassIcons[element.type]}
+				subtitle={element.type + ", " + element.lvl + " ур."}
+				extraSubtitle={element.race}
+			/>
 		);
 	}
 
@@ -159,10 +167,10 @@ const SMCampaignPanel = ({ fetchedUser }) => {
 								<SplitCol>
 									{date && prio && advName &&
 										<Group header={<Header size="s">Информация игрока</Header>} mode="plain" padding='s'>
-											<SMInfoCard date={date} prio={prio} adventure={advName} />
+											<InfoCard date={date} prio={prio} adventure={advName} />
 											<Spacing size={4} />
 											<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-												<SMPriorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
+												<Priorities setPopout={setPopout} priorities={priorities} appearance='neutral' text='Открыть список приоритетов' />
 												<Button stretched appearance="negative" size="l" onClick={() => { window.open(SMSite, "_blank") }}>Наш сайт</Button>
 											</Div>
 										</Group>

@@ -14,7 +14,7 @@ import SFCharacterInfoCard from './SFInfoCard.js';
 import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import NoCharsPage from '../../common/components/NOCharsPage.js';
 import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
-import SFCharCard from './SFCharCard.js';
+import CharCard from '../../common/components/CharCard.js';
 import SFPlayerInfoSettings from '../export_settings/SFPlayerInfoSettings.js';
 import SFMastersInfoSettings from '../export_settings/SFMastersInfoSettings.js';
 
@@ -80,7 +80,12 @@ const SFCampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(elem) {
 		return (
-			<SFCharCard element={elem} key={elem.name + "_sf_card"} openAction={() => openAlert(elem)} />
+			<CharCard
+				element={elem}
+				key={elem.name + "_sf_card"}
+				openAction={() => openAlert(elem)}
+				subtitle={elem.lvl + " ур."}
+			/>
 		);
 	}
 

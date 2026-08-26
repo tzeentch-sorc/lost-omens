@@ -9,14 +9,15 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import bridge from '@vkontakte/vk-bridge';
 
 import '../../common/css/CampaignPanel.css';
-import LOInfoCard from './LOInfoCard.js';
+import InfoCard from '../../common/components/InfoCard.js';
 import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
 import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
-import LOCharCard from './LOCharCard.js';
+import CharCard from '../../common/components/CharCard.js';
+import loClassIcons from '../../common/custom_icons/LOClassIcons/index.js';
 import NoCharsPage from '../../common/components/NOCharsPage.js';
 import LOPlayerInfoSettings from '../export_settings/LOPlayerInfoSettings.js'
 import LOMastersInfoSettings from '../export_settings/LOMastersInfoSettings.js'
-import LOPriorities from './LOPriorities.js';
+import Priorities from '../../common/components/Priorities.js';
 
 import { getVkUserUrl } from '../../../util/VKUserURL.js';
 import * as logger from '../../../util/Logger.js';
@@ -81,7 +82,14 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(element) {
 		return (
-			<LOCharCard element={element} key={element.name + "_lo_card"} openAction={() => { openAlert(element) }} />
+			<CharCard
+				element={element}
+				key={element.name + "_lo_card"}
+				openAction={() => { openAlert(element) }}
+				before={loClassIcons[element.type]}
+				subtitle={element.type + ", " + element.lvl + " ур."}
+				extraSubtitle={element.race}
+			/>
 		);
 	}
 
@@ -169,10 +177,10 @@ const LOCampaignPanel = ({ fetchedUser }) => {
 								<SplitCol>
 									{date && prio && advName &&
 										<Group header={<Header size="s">Информация игрока</Header>} mode="plain" padding='s'>
-											<LOInfoCard date={date} prio={prio} adventure={advName} />
+											<InfoCard date={date} prio={prio} adventure={advName} padding />
 											<Spacing size={4} />
 											<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-												<LOPriorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
+												<Priorities setPopout={setPopout} priorities={priorities} appearance='neutral' />
 												<Button stretched appearance="negative" size="l" onClick={() => { window.open(LOBulletinLink, "_blank") }}>Доска Авроры</Button>
 											</Div>
 										</Group>

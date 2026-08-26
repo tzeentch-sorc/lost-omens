@@ -14,9 +14,10 @@ import EmptyCampaignPanel from '../../common/components/EmptyCampaignPanel.js';
 import NoCharsPage from '../../common/components/NOCharsPage.js';
 import RGMastersInfoSettings from '../export_settings/RGMastersInfoSettings.js'
 import RGPlayerInfoSettings from '../export_settings/RGPlayerInfoSettings.js'
-import { RGCharacter } from '../../../consts.js';
-import RGCharUpdateAlert from './RGCharUpdateAlert.js';
-import RGCharCard from './RGCharCard.js';
+import { RGCharacter, FavouriteColor } from '../../../consts.js';
+import { Icon24UserOutline } from '@vkontakte/icons';
+import CharUpdateAlert from '../../common/components/CharUpdateAlert.js';
+import CharCard from '../../common/components/CharCard.js';
 import {
 	RGArticleLink, RGArticleImage, RGNoCharsCaption,
 	RGNoCharsDescription, CommonNoCharsBody, VKToken,
@@ -42,9 +43,11 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 
 	const openAction = (element) => {
 		setPopout(
-			<RGCharUpdateAlert
+			<CharUpdateAlert
 				charName={element.name}
 				navLink={RGCharacter}
+				title={element.name + ' нуждается в обновлении навыка!'}
+				description="Можно обновить навык прямо сейчас, если написать одному из мастеров"
 				closeMethod={() => setPopout(null)}
 			/>
 		);
@@ -62,7 +65,18 @@ const RGCampaignPanel = ({ fetchedUser }) => {
 
 	function createCard(elem) {
 		return (
-			<RGCharCard element={elem} key={elem.name + "_rg_card"} openAction={() => openAlert(elem)} />
+			<CharCard
+				element={elem}
+				key={elem.name + "_rg_card"}
+				openAction={() => openAlert(elem)}
+				before={<Icon24UserOutline
+					width={48} height={48}
+					color={FavouriteColor}
+					style={{ filter: `drop-shadow(0 0 4px ${FavouriteColor})` }}
+				/>}
+				subtitle={elem.type}
+				extraSubtitle={elem.owner && ("Собственность " + elem.owner)}
+			/>
 		);
 	}
 
