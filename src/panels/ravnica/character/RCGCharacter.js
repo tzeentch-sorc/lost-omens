@@ -37,14 +37,8 @@ const RCGCharacter = () => {
 	const [experience, setExperience] = useState();
 	const [level, setLevel] = useState();
 	const [mult, setMult] = useState();
-	const [spell_0, setSpell_0] = useState();
-	const [spell_1, setSpell_1] = useState();
-	const [spell_2, setSpell_2] = useState();
-	const [spell_3, setSpell_3] = useState();
-	const [spell_4, setSpell_4] = useState();
-	const [spell_5, setSpell_5] = useState();
-	const [spell_6, setSpell_6] = useState();
-	const [spell_7, setSpell_7] = useState();
+	const [spells, setSpells] = useState();
+	const [cantrips, setCantrips] = useState();
 	const [feat_general, setFeatGeneral] = useState();
 	const [feat_class, setFeatClass] = useState();
 
@@ -54,10 +48,7 @@ const RCGCharacter = () => {
 	const charName = params.get('CharName');
 
 	function hasSpells() {
-		return (spell_0[0] != "" || spell_1[0] != "" || spell_2[0] != "" ||
-			spell_3[0] != "" || spell_4[0] != "" || spell_5[0] != "" || spell_6[0] != "" ||
-			spell_7[0] != ""
-		);
+		return (spells[0] != "" || cantrips[0] != "");
 	}
 
 	function hasInventory() {
@@ -66,9 +57,7 @@ const RCGCharacter = () => {
 		return (inventory.length > 0);
 	}
 	function spellist() {
-		return ([spell_0, spell_1, spell_2,
-			spell_3, spell_4, spell_5, spell_6,
-			spell_7]
+		return ([cantrips, spells]
 		)
 	}
 	function featlist() {
@@ -122,17 +111,11 @@ const RCGCharacter = () => {
 			let characterBuildData = await RCGCharBuildSettings.getFilteredQuery("name", charName);
 			logger.log("character build data", characterBuildData);
 
-			setSpell_0(characterBuildData[0].spells_0.split(','));
-			setSpell_1(characterBuildData[0].spells_1.split(','));
-			setSpell_2(characterBuildData[0].spells_2.split(','));
-			setSpell_3(characterBuildData[0].spells_3.split(','));
-			setSpell_4(characterBuildData[0].spells_4.split(','));
-			setSpell_5(characterBuildData[0].spells_5.split(','));
-			setSpell_6(characterBuildData[0].spells_6.split(','));
-			setSpell_7(characterBuildData[0].spells_7.split(','));
+			setSpells(characterBuildData[0].spells.split('\n'));
+			setCantrips(characterBuildData[0].cantrips.split('\n'));
 
-			setFeatGeneral(characterBuildData[0].feat_general.split(',')); //TODO - rework with ; splitter
-			setFeatClass(characterBuildData[0].feat_class.split(','));
+			setFeatGeneral(characterBuildData[0].feat_general.split('\n')); //TODO - rework with ; splitter
+			setFeatClass(characterBuildData[0].feat_class.split('\n'));
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
 			setTimeout(() => setPopout(null), 1000);
@@ -144,7 +127,7 @@ const RCGCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(SMCampaign, { keepSearchParams: true })} />}>
+			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(RCGCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout>
