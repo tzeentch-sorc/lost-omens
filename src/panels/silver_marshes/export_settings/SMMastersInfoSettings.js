@@ -8,9 +8,11 @@ const SMMastersInfoSettings = new QuerySettings({
 	gid: SMMastersSheetID, //sheet "gms"
 	headrow: 1,
 	fields: {
-		name: "Мастер",
+		name: "Имя",
 		link: "VK",
-		id: "VK ID"
+		// Заголовок колонки C в листе пуст, хотя данные в ней есть.
+		// Поправить может только мастер Серебряного Предела: доступа к таблице нет.
+		id: ""
 	},
 	columns: {
 		name: 0,

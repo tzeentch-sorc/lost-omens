@@ -18,8 +18,8 @@ const LOCharInfoSettings = new QuerySettings({
 		fullname: "Полное имя",
 		backstory: "Предыстория",
 		race: "Раса",
-		notes: "Описание",
-		photo: "Картинка ВК",
+		notes: "Внешность",
+		photo: "Картинка",
 		quenta: "Квента",
 	},
 	columns: {
