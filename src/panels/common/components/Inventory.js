@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Div, Group, List, Separator} from '@vkontakte/vkui';
+import { Group, List, Div, Separator } from '@vkontakte/vkui';
 import { Icon12ArrowDown, Icon12ArrowUp } from '@vkontakte/icons';
-import './SMInventory.css'
+import AddItem from './AddItem';
 
-const SMInventory = ({ inventory, totalWealth }) => {
+import '../css/Inventory.css'
+
+// addItemLink — ссылка на форму добавления предмета; где формы нет, там нет и кнопки.
+// renderName — как рисовать название: в Pathfinder 2e в нём встречаются символы действий.
+const Inventory = ({ inventory, totalWealth, addItemLink, renderName = (name) => name }) => {
     // Track both sorted column and direction ('asc' or 'desc')
     const [sortBy, setSortBy] = useState('cost');
     const [sortDirection, setSortDirection] = useState('desc');
@@ -37,8 +41,9 @@ const SMInventory = ({ inventory, totalWealth }) => {
         return (
                 <Div
                     className='inventoryCell'
+                    key={element.name}
                 >
-                    <div className='inventoryTypeColumn'><b>{element.name}</b></div>
+                    <div className='inventoryTypeColumn'><b>{renderName(element.name)}</b></div>
                     <div style={{ textAlign: 'center' }}>{element.cost}</div>
                     <div style={{ textAlign: 'center' }}>{element.count}</div>
                 </Div>
@@ -79,6 +84,7 @@ const SMInventory = ({ inventory, totalWealth }) => {
             role="tabpanel"
             mode="plain"
         >
+            {addItemLink && <AddItem link={addItemLink} />}
             {/* Headers */}
             <div
                 className='inventoryCellHeaderGroup'
@@ -91,9 +97,7 @@ const SMInventory = ({ inventory, totalWealth }) => {
             <List>
                 {inventory && sortedData.map(createInventoryRow)}
             </List>
-
             <Separator />
-
             <div
                 className='inventoryCellFooter'
             >
@@ -103,4 +107,4 @@ const SMInventory = ({ inventory, totalWealth }) => {
         </Group>
     );
 };
-export default SMInventory;
+export default Inventory;

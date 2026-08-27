@@ -1,45 +1,21 @@
 import React from 'react';
-import {
-    Group, Div, Accordion
-} from '@vkontakte/vkui';
 
+import AccordionList from '../../common/components/AccordionList.js';
 import LOFeats from './LOFeats';
 
 const LOFeatPanel = ({ featlist }) => {
 
-    const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
+    const hasFeats = featlist && featlist[0] != "";
 
-    const data = [
-        {
-            id: "feats",
-            title: 'Черты',
-        }
-    ];
-
-    const [openId, setOpenId] = React.useState();
+    const sections = hasFeats
+        ? [{ id: "feats", title: 'Черты', content: <LOFeats featlist={featlist} /> }]
+        : [];
 
     return (
         <>
-            {data.map(
-
-                ({ id, title }) => featlist && featlist[0] != "" && (
-                    <Accordion
-                        key={id}
-                        expanded={openId === id}
-                        onChange={(e) => (e ? setOpenId(id) : setOpenId(null))}
-                    >
-                        <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
-                        <Accordion.Content>
-                            <Div style={infoStyle}>
-                                <LOFeats featlist={featlist}/>
-                            </Div>
-                        </Accordion.Content>
-                    </Accordion>
-                )
-            )}
-
+            <AccordionList sections={sections} />
         </>);
-    
+
 };
 
 export default LOFeatPanel;

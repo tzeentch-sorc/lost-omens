@@ -26,6 +26,18 @@ export const DEBUG_VK_IDS = config.DEBUG_VK_IDS ||
         "BW": "",
         "VU": ""
     };
+// Приложение исполняется вне VK — пользователя и мастеров берём из config.json.
+//
+// Раньше признаком этого было имя хоста, поэтому обход не срабатывал при заходе
+// с телефона по локальной сети. NODE_ENV задаёт его для всей дев-сборки сразу,
+// независимо от адреса, по которому её открыли.
+//
+// REACT_APP_MOCK_VK=false отключает подстановку и в дев-сборке — тогда приложение
+// ходит в VK, как в проде. Обратное невозможно: в прод-сборке NODE_ENV не даст
+// включить моки, даже если переменную выставить.
+export const MOCK_VK = process.env.NODE_ENV === 'development' &&
+    process.env.REACT_APP_MOCK_VK !== 'false';
+
 export const MOCKUP_FETCHED_USER = config.MOCKUP_FETCHED_USER || null;
 export const MOCKUP_VK_PHOTO = config.MOCKUP_VK_PHOTO || null;
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';

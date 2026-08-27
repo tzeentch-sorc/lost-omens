@@ -25,7 +25,6 @@ const RGRequests = () => {
     const [params, setParams] = useSearchParams();
     const [popout, setPopout] = useState(<ScreenSpinner />)
 
-    const [menuOpened, setMenuOpened] = React.useState(false);
     const [selected, setSelected] = React.useState('transactions');
 
     const charName = params.get('CharName');
@@ -93,9 +92,6 @@ const RGRequests = () => {
                         <RGRequestsTabPanel
                             selected={selected}
                             setSelected={setSelected}
-                            onMenuClick={(opened) => {
-                                setMenuOpened((prevState) => (opened ? !prevState : false));
-                            }}
                         />
                         {renderSelectedTab()}
                     </Group>
