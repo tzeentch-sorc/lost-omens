@@ -30,14 +30,30 @@ async function requestCsv(sheetId, request) {
     return f.data;
 }
 
+// Из карты «поле → номер колонки» выводится всё остальное, что нужно запросу:
+// обратная карта, отсортированный список колонок и сам select.
+export function buildQuery(colByField) {
+    const colIDs = Object.values(colByField).sort((a, b) => a - b);
+    const fieldByCol = {};
+    for (const [field, col] of Object.entries(colByField)) {
+        fieldByCol[col] = field;
+    }
+    return {
+        colIDs,
+        colByField,
+        fieldByCol,
+        queryAll: `select ${colIDs.map(idOf).join(", ")}`,
+    };
+}
+
 class QuerySettings {
     constructor(options) {
         this.sheetId = options.sheetId;
         this.gid = options.gid;
         this.headrow = options.headrow;
         this.fields = options.fields;
-        this.query = options.query;
-        this.range = options.range;
+        this.query = options.query ?? buildQuery(options.columns);
+        this.range = typeof options.range === 'string' ? { str: options.range } : options.range;
     }
 
     async updateSetting() {

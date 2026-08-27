@@ -11,22 +11,13 @@ const SMMastersInfoSettings = new QuerySettings({
 		name: "Мастер",
 		link: "VK",
 		id: "VK ID"
+	},
+	columns: {
+		name: 0,
+		link: 1,
+		id: 2,
 	},
-	query: {
-		colByField: { 
-			name: 0,
-			link: 1,
-			id: 2
-		 },
-		fieldByCol: { 
-			0: "name",
-			1: "link",
-			2: "id"
-		 },
-		colIDs: [ 0, 1, 2 ],
-		queryAll: "select A, B, C",
-	},
-	range: { min: 0, max: 2, str: "A1:C" },
+	range: "A1:C",
 });
 
 export default SMMastersInfoSettings;
