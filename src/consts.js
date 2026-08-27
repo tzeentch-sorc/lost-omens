@@ -225,7 +225,7 @@ export const RCGMagInventorySheetID = config.Ravnica.MagInventory; //sheet "magi
 // ----- Additional info -----
 export const RCGArticleLink = '';
 export const RCGCreateLink = '';
-export const RCGArticleImage = '/images/sm_bannerjpg.jpg';
+export const RCGArticleImage = '/images/rcg_banner.jpg';
 export const RCGNoCharsCaption = 'Добро пожаловать в «Равнику»!';
 export const RCGNoCharsDescription = 'Знакомство с мегакампанией';
 export const RCGSite = 'http://silvermarches.tilda.ws/';

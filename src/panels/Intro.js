@@ -82,7 +82,7 @@ const Intro = ({ fetchedUser }) => {
                             
                             <CampaignCard
                                 title={CAMPAIGNS.RCG}
-                                imageSrc="/images/sm_bannerjpg.jpg"
+                                imageSrc="/images/rcg_banner.jpg"
                                 onClick={() => {
                                     params.set('CampaignName', CAMPAIGNS.RCG)
                                     setParams(params)
