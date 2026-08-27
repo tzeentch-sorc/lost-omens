@@ -1,6 +1,6 @@
 import bridge from '@vkontakte/vk-bridge';
 import * as logger from "./Logger.js";
-import { MOCKUP_VK_PHOTO } from "../consts.js";
+import { MOCKUP_VK_PHOTO, MOCK_VK } from "../consts.js";
 
 /**
  * Gets direct image URL from VK photo link
@@ -17,8 +17,11 @@ export async function getVkPhotoSrc(photoPageUrl, accessToken) {
   const photo_id = match[2];
 
   try {
-    // Make a request to VK API
-    const result = await bridge.send('VKWebAppCallAPIMethod', {
+    // Вне VK photos.getById не выполнить: вызов падает в catch, и функция возвращает
+    // null — поэтому локально у персонажей пропадали картинки. MOCKUP_VK_PHOTO
+    // повторяет форму ответа API, так что разбор размеров ниже общий.
+    // Картинка при этом у всех персонажей одна: мок не зависит от id фотографии.
+    const result = MOCK_VK ? MOCKUP_VK_PHOTO : await bridge.send('VKWebAppCallAPIMethod', {
       method: 'photos.getById',
       request_id: '1', 
       params: {
