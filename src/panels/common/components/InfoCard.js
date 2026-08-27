@@ -5,13 +5,11 @@ import {
     Icon28CrownOutline, Icon24BookmarkOutline, Icon28CalendarOutline, Icon28HistoryForwardOutline
 } from '@vkontakte/icons'
 
-// padding — отступы вокруг блока «Последняя партия». У LO они есть, у SM нет;
-// разница досталась от копирования, поэтому вынесена в проп, а не выровнена.
-const InfoCard = ({ date, prio, adventure, padding = false }) => {
+const InfoCard = ({ date, prio, adventure }) => {
 
     return (
         <>
-            <CardGrid key="infoBlock" id="infoBlock" size='l' padding={padding}>
+            <CardGrid key="infoBlock" id="infoBlock" size='l' padding>
                 <Card mode="plain" key="last_game">
                     <Group header={<Header size="m">Последняя партия</Header>} mode="plain">
                         <SimpleCell before={<Icon28CalendarOutline width={24} height={24} />}>
