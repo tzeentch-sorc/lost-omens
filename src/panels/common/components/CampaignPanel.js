@@ -33,7 +33,6 @@ const CampaignPanel = ({ fetchedUser, campaign }) => {
 		classIcons,
 		keepsPlayerParam = false,
 		lvlupFormLink,
-		infoCardPadding = false,
 		prioritiesText,
 		extraButton,
 		noChars,
@@ -155,7 +154,7 @@ const CampaignPanel = ({ fetchedUser, campaign }) => {
 								<SplitCol>
 									{date && prio && advName &&
 										<Group header={<Header size="s">Информация игрока</Header>} mode="plain" padding='s'>
-											<InfoCard date={date} prio={prio} adventure={advName} padding={infoCardPadding} />
+											<InfoCard date={date} prio={prio} adventure={advName} />
 											<Spacing size={4} />
 											<Div style={{ paddingLeft: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
 												<Priorities setPopout={setPopout} priorities={priorities} appearance='neutral' text={prioritiesText} />

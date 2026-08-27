@@ -27,7 +27,6 @@ const campaign = {
 	classIcons: loClassIcons,
 	keepsPlayerParam: true,
 	lvlupFormLink,
-	infoCardPadding: true,
 	extraButton: { text: 'Доска Авроры', link: LOBulletinLink },
 	noChars: {
 		articleLink: LOArticleLink,
