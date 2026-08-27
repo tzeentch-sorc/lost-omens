@@ -1,4 +1,4 @@
-import { DEBUG_MODE, DEBUG_VK_IDS, MOCK_VK } from "../consts";
+import { DEBUG_MODE, DEBUG_VK_IDS, DEV_BUILD } from "../consts";
 import * as logger from './Logger.js';
 
 const currentVKUser = (elem, fetchedUser) => {
@@ -13,8 +13,9 @@ const currentVKUser = (elem, fetchedUser) => {
 }
 
 export const getVkUserUrl = (elem, mega, fetchedUser) => {
-    if (MOCK_VK) {
-        // Запущено через npm start и не переведено в боевой режим
+    if (DEV_BUILD) {
+        // Дев-сборка — в том числе открытая внутри VK через тоннель:
+        // DEBUG_MODE не зависит от того, доступен ли VK.
         //DEBUG:
         switch (DEBUG_MODE[mega]) {
             case "all":
