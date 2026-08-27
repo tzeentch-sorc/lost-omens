@@ -83,6 +83,21 @@ const router = createHashRouter([
     path: '/requests/rogues_gallery',
     panel: 'requests',
     view: 'rogues_gallery',
+  },
+  {
+    path: '/campaign/ravnica',
+    panel: 'campaign',
+    view: 'ravnica',
+  },
+  {
+    path: '/char/ravnica',
+    panel: 'char',
+    view: 'ravnica',
+  },
+  {
+    path: '/requests/ravnica',
+    panel: 'requests',
+    view: 'ravnica',
   }
 ]);
 

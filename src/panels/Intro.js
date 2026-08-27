@@ -6,7 +6,7 @@ import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-rout
 import './Intro.css'
 import CampaignCard from "./common/components/CampaignCard";
 
-import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign} from '../consts.js';
+import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign, RCGCampaign} from '../consts.js';
 
 const CAMPAIGNS = {
     LOST_OMENS: "Утраченные Пророчества (PF 2e)",
@@ -15,7 +15,8 @@ const CAMPAIGNS = {
     HG: "Герои Голариона (PF 1e)",
     BW: "Синие Воды (D&D 2024)",
     VU: "Глас Теней (Shadowrun 5e) 18+",
-    RG: "Rogues Gallery (Cyberpunk 2020) 18+"
+    RG: "Rogues Gallery (Cyberpunk 2020) 18+",
+    RCG: "Равника (D&D 5e)"
 }
 
 const Intro = ({ fetchedUser }) => {
@@ -77,6 +78,15 @@ const Intro = ({ fetchedUser }) => {
                                     params.set('CampaignName', CAMPAIGNS.SM)
                                     setParams(params)
                                     routeNavigator.push(SMCampaign, { keepSearchParams: true })
+                                }} />
+                            
+                            <CampaignCard
+                                title={CAMPAIGNS.RCG}
+                                imageSrc="/images/sm_bannerjpg.jpg"
+                                onClick={() => {
+                                    params.set('CampaignName', CAMPAIGNS.RCG)
+                                    setParams(params)
+                                    routeNavigator.push(RCGCampaign, { keepSearchParams: true })
                                 }} />
 
                             <CampaignCard

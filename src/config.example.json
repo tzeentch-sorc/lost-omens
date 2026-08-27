@@ -93,5 +93,15 @@
         "Inventory": 0,
         "Transactions": 0,
         "Downtime": 0
+    },
+    "Ravnica": {
+        "Mirror": "insert_your_mirror_id_here",
+        "Builds": 0,
+        "Characters": 0,
+        "Players": 0,
+        "Masters": 0,
+        "Inventory": 0,
+        "Transactions": 0,
+        "MagInventory": 0
     }
 }

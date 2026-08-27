@@ -14,7 +14,8 @@ export const DEBUG_MODE = config.DEBUG_MODE ||
         "RG": "all",
         "HG": "all",
         "BW": "all",
-        "VU": "all"
+        "VU": "all",
+        "RCG": "all"
     };
 export const DEBUG_VK_IDS = config.DEBUG_VK_IDS ||
     {
@@ -24,7 +25,8 @@ export const DEBUG_VK_IDS = config.DEBUG_VK_IDS ||
         "RG": "",
         "HG": "",
         "BW": "",
-        "VU": ""
+        "VU": "",
+        "RCG":""
     };
 // Приложение исполняется вне VK — пользователя и мастеров берём из config.json.
 //
@@ -58,6 +60,10 @@ export const VUCampaign = '/campaign/voux_umbra';
 export const RGCampaign = '/campaign/rogues_gallery';
 export const RGCharacter = '/char/rogues_gallery';
 export const RGRequests = '/requests/rogues_gallery';
+export const RCGCampaign = '/campaign/ravnica';
+export const RCGCharacter = '/char/ravnica';
+export const RCGRequests = '/requests/ravnica';
+
 
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
@@ -188,3 +194,22 @@ export const HGArticleLink = 'https://vk.com/@geekmo-pathfinder-campaign';
 export const HGArticleImage = '/images/hg_banner_article.png';
 export const HGNoCharsCaption = 'Добро пожаловать к «Героям Голариона»!';
 export const HGNoCharsDescription = 'Введение в мир Голариона 1й редакции';
+
+// ===== Ravnica (Dungeons and Dragons 5 edition) =====
+// ----- Spreadsheet -----
+export const RCGSpreadSheetID = config.Ravnica.Mirror; //RCG Geekmo Mirror
+export const RCGBuildsSheetID = config.Ravnica.Builds; //sheet "builds"
+export const RCGCharactersSheetID = config.Ravnica.Characters; //sheet "characters"
+export const RCGPlayersSheetID = config.Ravnica.Players; //sheet "players"
+export const RCGMastersSheetID = config.Ravnica.Masters; //sheet "masters"
+export const RCGInventorySheetID = config.Ravnica.Inventory; //sheet "inventory"
+export const RCGTransactionsSheetID = config.Ravnica.Transactions; //sheet "transactions"
+export const RCGMagInventorySheetID = config.Ravnica.MagInventory; //sheet "maginventory"
+
+// ----- Additional info -----
+export const RCGArticleLink = '';
+export const RCGCreateLink = '';
+export const RCGArticleImage = '/images/sm_bannerjpg.jpg';
+export const RCGNoCharsCaption = 'Добро пожаловать в «Равнику»!';
+export const RCGNoCharsDescription = 'Знакомство с мегакампанией';
+export const RCGSite = 'http://silvermarches.tilda.ws/';
