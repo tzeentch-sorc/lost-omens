@@ -1,4 +1,4 @@
-import { DEBUG_MODE, DEBUG_VK_IDS } from "../consts";
+import { DEBUG_MODE, DEBUG_VK_IDS, MOCK_VK } from "../consts";
 import * as logger from './Logger.js';
 
 const currentVKUser = (elem, fetchedUser) => {
@@ -13,8 +13,8 @@ const currentVKUser = (elem, fetchedUser) => {
 }
 
 export const getVkUserUrl = (elem, mega, fetchedUser) => {
-    if (process.env.NODE_ENV === 'development') {
-        // Running with npm start
+    if (MOCK_VK) {
+        // Запущено через npm start и не переведено в боевой режим
         //DEBUG:
         switch (DEBUG_MODE[mega]) {
             case "all":
