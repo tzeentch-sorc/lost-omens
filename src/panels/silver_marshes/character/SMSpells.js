@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-    Group, Div, SimpleCell,
-    InfoRow, Accordion
+    Group, SimpleCell, InfoRow
 } from '@vkontakte/vkui';
 
+import AccordionList from '../../common/components/AccordionList.js';
 import * as logger from '../../../util/Logger.js';
 
 const SMSpells = ({ spellist }) => {
-
-    const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
 
     const data = [
         {
@@ -53,8 +51,6 @@ const SMSpells = ({ spellist }) => {
         },
     ];
 
-    const [openId, setOpenId] = React.useState();
-
     function createSpellRow(element) {
         return (
             <SimpleCell multiline key={element}>
@@ -63,12 +59,14 @@ const SMSpells = ({ spellist }) => {
         );
     }
 
-    function fixRetrain(listRankedSpells){
-        var retrained = new Set(listRankedSpells.filter(elem => { return elem[0] == "-"}));
+    // Переученное заклинание мастер помечает тем же названием с дефисом впереди;
+    // из списка убираются оба — и пометка, и само заклинание.
+    function fixRetrain(listRankedSpells) {
+        var retrained = new Set(listRankedSpells.filter(elem => { return elem[0] == "-" }));
         logger.log("retrained", retrained);
         var result = new Array();
         listRankedSpells.forEach((item) => {
-            if (!(retrained.has(item) || retrained.has("-"+item))) {
+            if (!(retrained.has(item) || retrained.has("-" + item))) {
                 result.push(item);
             }
         });
@@ -77,35 +75,23 @@ const SMSpells = ({ spellist }) => {
         return Array.from(result);
     }
 
+    const sections = data
+        .filter(({ detail }) => spellist[detail] && spellist[detail][0] != "")
+        .map(({ id, title, detail }) => ({
+            id,
+            title,
+            content: fixRetrain(spellist[detail].sort((a, b) => a.localeCompare(b))).map(e => createSpellRow(e))
+        }));
+
     return (
         <Group
             id="tab-content-spells"
             aria-controls="tab-spells"
             role="tabpanel"
             mode="plain">
-
-            {data.map(
-
-                ({ id, title, detail }) => spellist[detail] && spellist[detail][0] != "" && (
-                    <Accordion
-                        key={id}
-                        expanded={openId === id}
-                        onChange={(e) => (e ? setOpenId(id) : setOpenId(null))}
-                    >
-                        <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
-                        <Accordion.Content>
-                            <Div style={infoStyle}>
-                                {fixRetrain(spellist[detail].sort((a, b) => a.localeCompare(b))).map(e => createSpellRow(e))}
-                            </Div>
-                        </Accordion.Content>
-                    </Accordion>
-                )
-            )
-
-            }
-
+            <AccordionList sections={sections} />
         </Group>);
-    
+
 };
 
 export default SMSpells;

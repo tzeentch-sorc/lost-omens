@@ -1,15 +1,12 @@
 import React from 'react';
 import {
-    Group, Div, SimpleCell,
-    InfoRow, Accordion
+    Group, SimpleCell, InfoRow
 } from '@vkontakte/vkui';
 
+import AccordionList from '../../common/components/AccordionList.js';
 import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
-import * as logger from '../../../util/Logger.js';
 
 const LOSpells = ({ spellist }) => {
-
-    const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
 
     const data = [
         {
@@ -69,7 +66,7 @@ const LOSpells = ({ spellist }) => {
         },
     ];
 
-    const [openId, setOpenId] = React.useState();
+    // Символы действий и ведущие дефисы не должны влиять на порядок сортировки.
     const metaChars = /[♠♣♥♦★\-\s]+/g
 
     function createSpellRow(element) {
@@ -80,39 +77,27 @@ const LOSpells = ({ spellist }) => {
         );
     }
 
+    const sections = data
+        .filter(({ detail }) => spellist[detail] && spellist[detail][0] != "")
+        .map(({ id, title, detail }) => ({
+            id,
+            title,
+            content: spellist[detail].sort((a, b) => {
+                const cleanA = a.replace(metaChars, '').trim();
+                const cleanB = b.replace(metaChars, '').trim();
+                return cleanA.localeCompare(cleanB);
+            }).map(e => createSpellRow(e))
+        }));
+
     return (
         <Group
             id="tab-content-spells"
             aria-controls="tab-spells"
             role="tabpanel"
             mode="plain">
-
-            {data.map(
-
-                ({ id, title, detail }) => spellist[detail] && spellist[detail][0] != "" && (
-                    <Accordion
-                        key={id}
-                        expanded={openId === id}
-                        onChange={(e) => (e ? setOpenId(id) : setOpenId(null))}
-                    >
-                        <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
-                        <Accordion.Content>
-                            <Div style={infoStyle}>
-                                {spellist[detail].sort((a, b) => {
-                                    const cleanA = a.replace(metaChars, '').trim();
-                                    const cleanB = b.replace(metaChars, '').trim();
-                                    return cleanA.localeCompare(cleanB);
-                                }).map(e => createSpellRow(e))}
-                            </Div>
-                        </Accordion.Content>
-                    </Accordion>
-                )
-            )
-
-            }
-
+            <AccordionList sections={sections} />
         </Group>);
-    
+
 };
 
 export default LOSpells;

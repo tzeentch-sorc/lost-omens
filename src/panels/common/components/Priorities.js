@@ -5,10 +5,10 @@ import {
 } from '@vkontakte/vkui';
 import * as logger from '../../../util/Logger.js';
 
-const LOPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
+const PrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     const MODAL_PAGE_WITH_FIXED_HEIGHT = 'fixed-height';
     function createPriorityRow(element) {
-        logger.log("element",element);
+        logger.log("element: ", element);
         let srt = element[1].sort((a, b) => b.lvl - a.lvl).map(e => (
             e.lvl + " ур. " + e.char_name + ", "));
         srt[srt.length - 1] = srt[srt.length - 1].substring(0, srt[srt.length - 1].length - 2);
@@ -43,7 +43,7 @@ const LOPrioritiesModal = ({ prioritiesGroupped, onClose }) => {
     );
 };
 
-const LOPriorities = ({ priorities, setPopout, appearance }) => {
+const Priorities = ({ priorities, setPopout, appearance, text = 'Приоритеты' }) => {
     function setupPriorities(priorities) {
         var result = new Map();
         priorities.forEach((item) => {
@@ -60,10 +60,11 @@ const LOPriorities = ({ priorities, setPopout, appearance }) => {
         return Array.from(result);
     }
 
-    const onClick = () => setPopout(<LOPrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
+    const onClick = () => setPopout(<PrioritiesModal prioritiesGroupped={setupPriorities(priorities)} onClose={() => setPopout(null)} />);
 
     return (
-        <Button stretched appearance={appearance} size="l" onClick={onClick}>Приоритеты</Button>
+        <Button stretched appearance={appearance} size="l" onClick={onClick}>{text}</Button>
     );
 };
-export default LOPriorities;
+
+export default Priorities;
