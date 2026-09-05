@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GoogleAuthPath, GoogleAuthScope } from './consts.js';
+import { GoogleAuthPath, GoogleAuthScope } from '../consts.js';
 import Papa from 'papaparse';
 import * as logger from './Logger.js';
 const { google } = require('googleapis');
