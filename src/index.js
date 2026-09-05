@@ -4,6 +4,7 @@ import bridge from "@vkontakte/vk-bridge";
 import App from "./App";
 import { createHashRouter, RouterProvider } from '@vkontakte/vk-mini-apps-router';
 import { AdaptivityProvider, useColorScheme, AppRoot, ConfigProvider, Div, ColorScheme } from '@vkontakte/vkui';
+import { fitAppHeight } from './util/FitAppHeight.js';
 
 import '@vkontakte/vkui/dist/components.css';
 import './index.css';
@@ -11,6 +12,7 @@ import './themes/geekmo-theme.css';
 import './themes/geekmo-theme-dark.css';
 
 // Init VK Mini App
+fitAppHeight();
 bridge.send("VKWebAppInit");
 
 const router = createHashRouter([
