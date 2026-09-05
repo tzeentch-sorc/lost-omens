@@ -1,43 +1,26 @@
 import React from 'react';
 import {
-	SimpleCell, Tabs, TabsItem, Div
-} from '@vkontakte/vkui';
-import {
     Icon28ClockOutline, Icon28MoneyTransferOutline
 } from '@vkontakte/icons'
 import { FavouriteColor } from '../../../consts';
 
-const RGCharTabPanel = ({ menuOpened, onMenuClick, selected, setSelected }) => {
-    return (
-        <Tabs>
-            <TabsItem
-                selected={selected === 'transactions'}
-                onClick={() => {
-                    onMenuClick(false);
-                    setSelected('transactions');
-                }}
-                id="tab-transactions"
-                aria-controls="tab-content-transactions"
-            >
-                <SimpleCell before={<Icon28MoneyTransferOutline width={24} height={24} color={FavouriteColor} style={{filter: `drop-shadow(0 0 4px ${FavouriteColor})`}} />}>
-                    <Div className="not4mob">Транзакции</Div>
-                </SimpleCell>
-            </TabsItem>
-             <TabsItem
-                selected={selected === 'downtime'}
-                onClick={() => {
-                    onMenuClick(false);
-                    setSelected('downtime');
-                }}
-                id="tab-downtime"
-                aria-controls="tab-content-downtime"
-            >
-                <SimpleCell before={<Icon28ClockOutline width={24} height={24} color={FavouriteColor} style={{filter: `drop-shadow(0 0 4px ${FavouriteColor})`}} />}>
-                    <Div className="not4mob">Даунтайм</Div>
-                </SimpleCell>
-            </TabsItem>
-        </Tabs>
-    );
-};
+import CharTabPanel from '../../common/components/CharTabPanel.js';
 
-export default RGCharTabPanel;
+const glow = { filter: `drop-shadow(0 0 4px ${FavouriteColor})` };
+
+const tabs = [
+    {
+        id: 'transactions',
+        title: 'Транзакции',
+        icon: <Icon28MoneyTransferOutline width={24} height={24} color={FavouriteColor} style={glow} />,
+    },
+    {
+        id: 'downtime',
+        title: 'Даунтайм',
+        icon: <Icon28ClockOutline width={24} height={24} color={FavouriteColor} style={glow} />,
+    },
+];
+
+const RGRequestsTabPanel = (props) => <CharTabPanel tabs={tabs} {...props} />;
+
+export default RGRequestsTabPanel;

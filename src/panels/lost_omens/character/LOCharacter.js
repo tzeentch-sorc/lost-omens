@@ -12,7 +12,7 @@ import FormulaePlaceholder from '../../common/placeholders/FormulaePlaceholder.j
 import Marquee from '../../common/components/Marquee.js';
 import LOCharTabPanel from './LOCharTabPanel.js';
 import LOSpells from './LOSpells.js';
-import LOInventory from './LOInventory.js';
+import Inventory from '../../common/components/Inventory.js';
 import LOFormulae from './LOFormulae.js';
 import LOMainInfo from './LOMainInfo.js';
 import LODescription from './LODescription.js';
@@ -28,8 +28,12 @@ import LOFeatPanel from './LOFeatPanel.js';
 import { tierMap } from './tier-data.js';
 import * as logger from '../../../util/Logger.js';
 import { getVkPhotoSrc } from '../../../util/GetVkPhotoSrc';
+import { renderTextWithActions } from '../../../util/RenderTextWithActions.js';
 
-import { LOCampaign, VKToken } from '../../../consts.js'
+import {
+	LOCampaign, VKToken, FormPreEnter,
+	LOAddItemLink, LOAddItemPlayer, LOAddItemChar
+} from '../../../consts.js'
 
 const LOCharacter = () => {
 
@@ -67,7 +71,6 @@ const LOCharacter = () => {
 	const [feat_skill, setFeatSkill] = useState();
 	const [feat_archetype, setFeatArchetype] = useState();
 
-	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
 	// const [popout, setPopout] = useState(<ScreenSpinner />)
@@ -112,11 +115,28 @@ const LOCharacter = () => {
 		return Math.floor(Math.random() * max);
 	}
 
+	function createAddItemLink(playerName, charName, link) {
+		var newLink = link + FormPreEnter +
+			LOAddItemPlayer + playerName +
+			LOAddItemChar + charName;// + 
+		//LOAddItemOnParty + "Полученные предметы (на партии)" +
+		//LOAddItemBought + "Купленные предметы (вне партии)" +
+		//LOAddItemSold + "Проданные предметы (вне партии)" +
+		//LOAddItemService + "Купленные иные услуги" +
+		//LOAddItemChange + "Изменение количества монет";
+		return newLink;
+	};
+
 	function renderSelectedTab() {
 		switch (selected) {
 			case 'inventory':
 				return hasInventory() ? (
-					<LOInventory inventory={inventory} totalWealth={wealth} charName={charName} playerName={player} />
+					<Inventory
+						inventory={inventory}
+						totalWealth={wealth}
+						addItemLink={createAddItemLink(player, charName, LOAddItemLink)}
+						renderName={renderTextWithActions}
+					/>
 				) : (
 					<InventoryPlaceholder />
 				);
@@ -307,9 +327,6 @@ const LOCharacter = () => {
 						<LOCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
-							onMenuClick={(opened) => {
-								setMenuOpened((prevState) => (opened ? !prevState : false));
-							}}
 						/>
 						{renderSelectedTab()}
 					</Group>

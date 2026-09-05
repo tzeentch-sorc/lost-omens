@@ -5,11 +5,11 @@ import {
     Icon28CrownOutline, Icon24BookmarkOutline, Icon28CalendarOutline, Icon28HistoryForwardOutline
 } from '@vkontakte/icons'
 
-const SMInfoCard = ({ date, prio, adventure }) => {
+const InfoCard = ({ date, prio, adventure }) => {
 
     return (
         <>
-            <CardGrid key="infoBlock" id="infoBlock" size='l'>
+            <CardGrid key="infoBlock" id="infoBlock" size='l' padding>
                 <Card mode="plain" key="last_game">
                     <Group header={<Header size="m">Последняя партия</Header>} mode="plain">
                         <SimpleCell before={<Icon28CalendarOutline width={24} height={24} />}>
@@ -21,7 +21,7 @@ const SMInfoCard = ({ date, prio, adventure }) => {
                     </Group>
                 </Card>
             </CardGrid>
-            <CardGrid key="infoBlock2" id="infoBlock2" size='m' padding="true">
+            <CardGrid key="infoBlock2" id="infoBlock2" size='m' padding>
                 <Card mode="plain">
                     <Group header={<Header size="m">Приоритет</Header>} mode="plain">
                         <SimpleCell before={<Icon28CrownOutline width={24} height={24} />}>
@@ -41,4 +41,4 @@ const SMInfoCard = ({ date, prio, adventure }) => {
     )
 }
 
-export default SMInfoCard;
+export default InfoCard;

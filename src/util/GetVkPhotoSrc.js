@@ -1,6 +1,6 @@
 import bridge from '@vkontakte/vk-bridge';
 import * as logger from "./Logger.js";
-import { MOCKUP_VK_PHOTO } from "../consts.js";
+import { MOCKUP_VK_PHOTO, USE_MOCK_VK } from "../consts.js";
 
 /**
  * Gets direct image URL from VK photo link
@@ -17,8 +17,9 @@ export async function getVkPhotoSrc(photoPageUrl, accessToken) {
   const photo_id = match[2];
 
   try {
-    // Make a request to VK API
-    const result = await bridge.send('VKWebAppCallAPIMethod', {
+    // Вне VK photos.getById не выполнить. MOCKUP_VK_PHOTO повторяет форму ответа API,
+    // поэтому подставляется вместо него, а разбор размеров ниже остаётся общий.
+    const result = USE_MOCK_VK ? MOCKUP_VK_PHOTO : await bridge.send('VKWebAppCallAPIMethod', {
       method: 'photos.getById',
       request_id: '1', 
       params: {

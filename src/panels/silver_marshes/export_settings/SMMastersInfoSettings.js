@@ -8,25 +8,18 @@ const SMMastersInfoSettings = new QuerySettings({
 	gid: SMMastersSheetID, //sheet "gms"
 	headrow: 1,
 	fields: {
-		name: "Мастер",
+		name: "Имя",
 		link: "VK",
-		id: "VK ID"
+		// Заголовок колонки C в листе пуст, хотя данные в ней есть.
+		// Поправить может только мастер Серебряного Предела: доступа к таблице нет.
+		id: ""
+	},
+	columns: {
+		name: 0,
+		link: 1,
+		id: 2,
 	},
-	query: {
-		colByField: { 
-			name: 0,
-			link: 1,
-			id: 2
-		 },
-		fieldByCol: { 
-			0: "name",
-			1: "link",
-			2: "id"
-		 },
-		colIDs: [ 0, 1, 2 ],
-		queryAll: "select A, B, C",
-	},
-	range: { min: 0, max: 2, str: "A1:C" },
+	range: "A1:C",
 });
 
 export default SMMastersInfoSettings;

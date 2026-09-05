@@ -42,12 +42,20 @@ Then you need to rename file `config.example.json` as `config.json`:
 
 ### To run
 
-1. Run `npm start` - to run app locally
-2. Run `npm run tunnel` - to connect app to VK, in order to get user info
-3. Open link which is provided in logs and set it in vk app settings
-4. Open `vk.com/app51758531`
+Locally, without VK:
 
-> If vk-tunnel does not work - [instructions](./ngrok.md)
+1. Run `npm start` - dev server on `https://localhost:10888`
+
+When the hostname is `localhost` the app substitutes a mock user from `config.json`
+instead of asking VK, so panels render with real spreadsheet data. Anything that
+depends on `vk-bridge` - the real VK user, avatars - does not work this way.
+
+To see the app **inside VK** you need a public HTTPS address. See
+[tunnel.md](./tunnel.md).
+
+> `npm run tunnel` no longer works: VK Tunnel has been switched off on VK's side
+> since 2 October 2025, with no end date announced. The script is kept in case the
+> service comes back. [tunnel.md](./tunnel.md) describes what to use instead.
 
 ### To deploy
 

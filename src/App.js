@@ -8,7 +8,7 @@ import { useActiveVkuiLocation } from '@vkontakte/vk-mini-apps-router';
 
 import '@vkontakte/vkui/dist/vkui.css';
 
-import { VKToken, MOCKUP_FETCHED_USER } from './consts.js';
+import { VKToken, MOCKUP_FETCHED_USER, USE_MOCK_VK } from './consts.js';
 
 import Intro from './panels/Intro.js';
 import LOCampaignPanel from './panels/lost_omens/campaign/LOCampaignPanel.js';
@@ -41,7 +41,7 @@ const App = (router) => {
 
 	useEffect(() => {
 		async function fetchData() {
-			if (window.location.hostname === 'localhost') {
+			if (USE_MOCK_VK) {
 				setUser(MOCKUP_FETCHED_USER);
 				setPopout(null);
 				return;
