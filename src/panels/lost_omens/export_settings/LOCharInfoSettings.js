@@ -18,17 +18,14 @@ const LOCharInfoSettings = new QuerySettings({
 		fullname: "Полное имя",
 		backstory: "Предыстория",
 		race: "Раса",
-		notes: "Описание",
-		photo: "Картинка ВК",
+		notes: "Внешность",
+		photo: "Картинка",
 		quenta: "Квента",
+	},
+	columns: {
+		name: 0, lvl: 1, exp: 2, gold:3, downtime: 4, jods: 5, room: 6, fullname: 7, backstory: 8, race: 9, notes: 10, photo: 11, quenta: 12,
 	},
-	query: {
-		colByField: { name: 0, lvl: 1, exp: 2, gold:3, downtime: 4, jods: 5, room: 6, fullname: 7, backstory: 8, race: 9, notes: 10, photo: 11, quenta: 12 },
-		fieldByCol: { 0: "name", 1: "lvl", 2: "exp", 3: "gold", 4: "downtime", 5: "jods", 6: "room", 7: "fullname", 8: "backstory", 9: "race", 10: "notes", 11: "photo", 12: "quenta" },
-		colIDs: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ],
-		queryAll: "select A, B, C, D, E, F, G, H, I, J, K, L, M",
-	},
-	range: { min: 0, max: 12, str: "A2:M" },
+	range: "A2:M",
 });
 
 export default LOCharInfoSettings;

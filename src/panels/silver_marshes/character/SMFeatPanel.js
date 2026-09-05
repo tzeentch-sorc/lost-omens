@@ -1,46 +1,26 @@
 import React from 'react';
 import {
-    Group, Div, Accordion
+    Group
 } from '@vkontakte/vkui';
 
+import AccordionList from '../../common/components/AccordionList.js';
 import SMFeats from './SMFeats';
-import * as logger from '../../../util/Logger.js';
 
 const SMFeatPanel = ({ featlist }) => {
-    //logger.log("SMFeatPanel featlist:", featlist);
 
-    const infoStyle = { color: 'var(--vkui--color_text_subhead)' };
+    // Раньше проверялся только первый список: персонаж без общих черт, но с классовыми,
+    // блока «Черты» не видел.
+    const hasFeats = featlist && featlist.some((feats) => feats != "");
 
-    const data = [
-        {
-            id: "feats",
-            title: 'Черты',
-        }
-    ];
-
-    const [openId, setOpenId] = React.useState();
+    const sections = hasFeats
+        ? [{ id: "feats", title: 'Черты', content: <SMFeats featlist={featlist} /> }]
+        : [];
 
     return (
         <Group mode='card'>
-            {data.map(
-                ({ id, title }) => featlist && (featlist[0] != "" || featlist[1] != "") && (
-                    <Accordion
-                        key={id}
-                        expanded={openId === id}
-                        onChange={(e) => (e ? setOpenId(id) : setOpenId(null))}
-                    >
-                        <Accordion.Summary iconPosition="before"><b>{title}</b></Accordion.Summary>
-                        <Accordion.Content>
-                            <Div style={infoStyle}>
-                                <SMFeats featlist={featlist}/>
-                            </Div>
-                        </Accordion.Content>
-                    </Accordion>
-                )
-            )}
-
+            <AccordionList sections={sections} />
         </Group>);
-    
+
 };
 
 export default SMFeatPanel;

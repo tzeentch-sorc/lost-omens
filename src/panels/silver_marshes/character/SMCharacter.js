@@ -11,7 +11,7 @@ import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
 
 import SMCharTabPanel from './SMCharTabPanel.js';
 import SMSpells from './SMSpells.js';
-import SMInventory from './SMInventory.js';
+import Inventory from '../../common/components/Inventory.js';
 import SMMainInfo from './SMMainInfo.js';
 
 import SMInventorySettings from '../export_settings/SMInventorySettings.js'
@@ -48,7 +48,6 @@ const SMCharacter = () => {
 	const [feat_general, setFeatGeneral] = useState();
 	const [feat_class, setFeatClass] = useState();
 
-	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('inventory');
 
 	const [popout, setPopout] = useState(<ScreenSpinner />)
@@ -82,7 +81,7 @@ const SMCharacter = () => {
 			case 'inventory':
 				return hasInventory() ? (
 					logger.log("render inventory", inventory),
-					<SMInventory inventory={inventory} totalWealth={wealth} />
+					<Inventory inventory={inventory} totalWealth={wealth} />
 				) : (
 					<InventoryPlaceholder />
 				);
@@ -162,9 +161,6 @@ const SMCharacter = () => {
 						<SMCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
-							onMenuClick={(opened) => {
-								setMenuOpened((prevState) => (opened ? !prevState : false));
-							}}
 						/>
 						{renderSelectedTab()}
 					</Group>

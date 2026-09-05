@@ -48,7 +48,6 @@ const RGCharacter = () => {
 	const [drink, setDrink] = useState("None");
 	const [implants, setImplants] = useState("None");
 
-	const [menuOpened, setMenuOpened] = React.useState(false);
 	const [selected, setSelected] = React.useState('drink');
 
 	// const [popout, setPopout] = useState(<ScreenSpinner />)
@@ -246,9 +245,6 @@ const RGCharacter = () => {
 						<RGCharTabPanel
 							selected={selected}
 							setSelected={setSelected}
-							onMenuClick={(opened) => {
-								setMenuOpened((prevState) => (opened ? !prevState : false));
-							}}
 						/>
 						{renderSelectedTab()}
 					</Group>

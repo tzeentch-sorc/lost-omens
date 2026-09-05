@@ -1,3 +1,5 @@
+import bridge from '@vkontakte/vk-bridge';
+
 import config from './config.json';
 
 // ===== Common =====
@@ -26,6 +28,20 @@ export const DEBUG_VK_IDS = config.DEBUG_VK_IDS ||
         "BW": "",
         "VU": ""
     };
+// Дев-сборка: `npm start`, в том числе открытая внутри VK через тоннель. Отвечает за
+// отладочные послабления — DEBUG_MODE, подробный лог, — а не за доступность VK.
+export const DEV_BUILD = process.env.NODE_ENV === 'development';
+
+// Подставлять ли моки вместо данных VK — пользователя, мастеров, фотографии из config.json:
+//
+// DEV_BUILD               — прод-сборка не подставляет моки никогда;
+// !isEmbedded()           — внутри VK (iframe у веба, webview у приложения) данные настоящие,
+//                           в том числе у дев-сервера, открытого через тоннель;
+// REACT_APP_MOCK_VK=false — ручное отключение, чтобы пройти боевым путём локально.
+export const USE_MOCK_VK = DEV_BUILD &&
+    !bridge.isEmbedded() &&
+    process.env.REACT_APP_MOCK_VK !== 'false';
+
 export const MOCKUP_FETCHED_USER = config.MOCKUP_FETCHED_USER || null;
 export const MOCKUP_VK_PHOTO = config.MOCKUP_VK_PHOTO || null;
 export const CommonNoCharsBody = 'Для создания стоит написать одному из мастеров';

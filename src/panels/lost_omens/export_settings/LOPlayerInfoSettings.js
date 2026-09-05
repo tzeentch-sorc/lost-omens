@@ -1,6 +1,5 @@
 import QuerySettings from '../../../util/QuerySettings';
 import {LOSpreadSheetID, LOPlayersSheetID} from '../../../consts.js'
-import { picture } from 'framer-motion/client';
 
 const sheetId = LOSpreadSheetID; // LO Geekmo Mirror
 
@@ -19,50 +18,30 @@ const LOPlayerInfoSettings = new QuerySettings({
 		race: "Раса",
 		lvl: "Уровень",
 		lvl_up: "Повышение",
+		fullname: "Полное имя",
 		room: "Комната",
 		background: "Предыстория",
 		appearance: "Внешность",
-		picture: "Картинка ВК"
+		picture: "Картинка",
+	},
+	columns: {
+		id: 0,
+		player: 1,
+		prio: 2,
+		adv: 3,
+		adv_date: 4,
+		char_name: 5,
+		char_class: 6,
+		race: 7,
+		lvl: 8,
+		lvl_up: 9,
+		fullname: 10,
+		room: 11,
+		background: 12,
+		appearance: 13,
+		picture: 14,
 	},
-	query: {
-		colByField: { 
-			id: 0,
-			player: 1,
-			prio: 2,
-			adv: 3,
-			adv_date: 4,
-			char_name: 5,	
-			char_class: 6,
-			race: 7,
-			lvl: 8,
-			lvl_up: 9,
-			fullname: 10,
-			room: 11,
-			background: 12,
-			appearance: 13,
-			picture: 14
-		 },
-		fieldByCol: { 
-			0: "id",
-			1: "player",
-			2: "prio",
-			3: "adv",
-			4: "adv_date",
-			5: "char_name",	
-			6: "char_class",
-			7: "race",
-			8: "lvl",
-			9: "lvl_up",
-			10: "fullname",
-			11: "room",
-			12: "background",
-			13: "appearance",
-			14: "picture"
-		 },
-		colIDs: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
-		queryAll: "select A, B, C, D, E, F, G, H, I, J, K, L, M, N, O",
-	},
-	range: { min: 0, max: 14, str: "A1:O" },
+	range: "A1:O",
 });
 
 export default LOPlayerInfoSettings;
