@@ -1,20 +1,27 @@
-import { DEBUG_MODE, DEBUG_VK_IDS } from "../consts";
+import { DEBUG_MODE, DEBUG_VK_IDS, DEV_BUILD } from "../consts";
 import * as logger from './Logger.js';
 
+// Мастера записывают ссылку на игрока как придётся: с протоколом и без,
+// на vk.com и на vk.ru. Требовать от них единый вид нельзя — им и с таблицами
+// неудобно, — поэтому приводим написание к одному виду перед сравнением.
+const normalize = (url) => String(url ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\//, '')
+    .replace(/^(www\.|m\.)/, '')
+    .replace(/^vk\.ru\//, 'vk.com/')
+    .replace(/\/+$/, '');
+
 const currentVKUser = (elem, fetchedUser) => {
-    return elem.id == ("vk.com/" + fetchedUser.screen_name) ||
-        elem.id == ("vk.com/id" + fetchedUser.id) ||
-        elem.id == ("https://vk.com/id" + fetchedUser.id) ||
-        elem.id == ("https://vk.com/" + fetchedUser.screen_name) ||
-        elem.id == ("vk.ru/" + fetchedUser.screen_name) ||
-        elem.id == ("vk.ru/id" + fetchedUser.id) ||
-        elem.id == ("https://vk.ru/id" + fetchedUser.id) ||
-        elem.id == ("https://vk.ru/" + fetchedUser.screen_name);
+    const link = normalize(elem.id);
+    return link === normalize("vk.com/" + fetchedUser.screen_name) ||
+        link === normalize("vk.com/id" + fetchedUser.id);
 }
 
 export const getVkUserUrl = (elem, mega, fetchedUser) => {
-    if (process.env.NODE_ENV === 'development') {
-        // Running with npm start
+    if (DEV_BUILD) {
+        // Дев-сборка — в том числе открытая внутри VK через тоннель:
+        // DEBUG_MODE не зависит от того, доступен ли VK.
         //DEBUG:
         switch (DEBUG_MODE[mega]) {
             case "all":
