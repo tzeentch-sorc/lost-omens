@@ -1,6 +1,6 @@
 import bridge from '@vkontakte/vk-bridge';
 
-import { VKToken, MOCKUP_FETCHED_USER, MOCK_VK } from '../consts.js';
+import { VKToken, MOCKUP_FETCHED_USER, USE_MOCK_VK } from '../consts.js';
 import * as logger from './Logger.js';
 
 // Мастера кампании: в таблице лежат только VK id, имена и аватарки отдаёт VK.
@@ -11,7 +11,7 @@ export async function getMasters(mastersSettings) {
     logger.log("masterData: ", masterData);
     logger.log("userIds: ", userIds);
 
-    if (MOCK_VK) {
+    if (USE_MOCK_VK) {
         return [MOCKUP_FETCHED_USER];
     }
 

@@ -38,7 +38,7 @@ export const DEV_BUILD = process.env.NODE_ENV === 'development';
 // !isEmbedded()           — внутри VK (iframe у веба, webview у приложения) данные настоящие,
 //                           в том числе у дев-сервера, открытого через тоннель;
 // REACT_APP_MOCK_VK=false — ручное отключение, чтобы пройти боевым путём локально.
-export const MOCK_VK = DEV_BUILD &&
+export const USE_MOCK_VK = DEV_BUILD &&
     !bridge.isEmbedded() &&
     process.env.REACT_APP_MOCK_VK !== 'false';
 
