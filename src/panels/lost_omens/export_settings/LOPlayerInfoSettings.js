@@ -18,7 +18,7 @@ const LOPlayerInfoSettings = new QuerySettings({
 		race: "Раса",
 		lvl: "Уровень",
 		lvl_up: "Повышение"				
-	},
+	},
 	columns: {
 		id: 0,
 		player: 1,

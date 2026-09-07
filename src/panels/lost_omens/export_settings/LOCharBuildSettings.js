@@ -27,7 +27,7 @@ const LOCharBuildSettings = new QuerySettings({
 		spells_8: "Заклинания 8",
 		spells_9: "Заклинания 9",
 		spells_10: "Заклинания 10",
-	},
+	},
 	columns: {
 		name: 0,
 		feat_race: 1,

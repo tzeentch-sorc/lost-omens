@@ -15,7 +15,7 @@ const RGTransactionsSettings = new QuerySettings({
 		approved: "Подтверждено",
 		master: "Мастер",
 		date: "Дата"
-	},
+	},
 	columns: {
 		name: 0, activity: 1, money: 2, comment: 3, approved: 4, master: 5, date: 6,
 	},

@@ -12,7 +12,7 @@ const SMInventorySettings = new QuerySettings({
 		cost: "Цена",
 		count: "Шт.",
 		owner: "Владелец",
-	},
+	},
 	columns: {
 		name: 0, cost: 1, count: 2, owner: 3,
 	},

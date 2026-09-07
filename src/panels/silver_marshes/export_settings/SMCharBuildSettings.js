@@ -20,7 +20,7 @@ const SMCharBuildSettings = new QuerySettings({
 		spells_5: "Заклинания 5",
 		spells_6: "Заклинания 6",
 		spells_7: "Заклинания 7",
-	},
+	},
 	columns: {
 		name: 0,
 		feat_class: 2,

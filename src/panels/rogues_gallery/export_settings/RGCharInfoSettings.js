@@ -21,7 +21,7 @@ const RGCharInfoSettings = new QuerySettings({
 		helped: "Помог",
 		hurt: "Помешал",
 		implants: "Импланты"
-	},
+	},
 	columns: {
 		name: 0, rep: 1, humanity: 2, exp: 3, downtime: 4, freetime: 5, budget: 6, income: 7, expenses: 8, drink: 9, helped: 10, hurt: 11, implants: 12,
 	},

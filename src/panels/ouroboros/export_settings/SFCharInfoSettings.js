@@ -17,7 +17,7 @@ const SFCharInfoSettings = new QuerySettings({
 		mech: "Мех",
 		desc: "Описание",
 		story: "История"	
-	},
+	},
 	columns: {
 		name: 0, id: 1, lvl: 2, exp: 3, gold: 4, ship: 5, mech: 6, desc: 7, story: 8,
 	},

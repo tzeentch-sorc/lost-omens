@@ -14,7 +14,7 @@ const SFPlayerInfoSettings = new QuerySettings({
 		char_name: "Персонаж",	
 		lvl: "Уровень",
 		lvl_up: "Повышение"				
-	},
+	},
 	columns: {
 		id: 0,
 		player: 1,

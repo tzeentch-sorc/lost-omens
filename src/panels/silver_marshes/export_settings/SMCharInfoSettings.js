@@ -14,7 +14,7 @@ const SMCharInfoSettings = new QuerySettings({
 		gold: "Золото",
 		downtime: "Даунтайм",
 		mult: "Класс",	
-	},
+	},
 	columns: {
 		name: 0, lvl: 1, exp: 2, gold:3, downtime: 4, mult: 5,
 	},

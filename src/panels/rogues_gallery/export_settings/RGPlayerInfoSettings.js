@@ -13,7 +13,7 @@ const RGPlayerInfoSettings = new QuerySettings({
 		char_class: "Роль",
 		owner: "Чья жопа",
 		lvl_up: "Повышение"				
-	},
+	},
 	columns: {
 		id: 0,
 		char_name: 1,

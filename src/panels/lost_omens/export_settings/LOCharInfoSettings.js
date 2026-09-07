@@ -21,7 +21,7 @@ const LOCharInfoSettings = new QuerySettings({
 		notes: "Внешность",
 		photo: "Картинка",
 		quenta: "Квента",
-	},
+	},
 	columns: {
 		name: 0, lvl: 1, exp: 2, gold:3, downtime: 4, jods: 5, room: 6, fullname: 7, backstory: 8, race: 9, notes: 10, photo: 11, quenta: 12,
 	},
