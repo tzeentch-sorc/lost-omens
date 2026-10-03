@@ -4,14 +4,15 @@ import {
 } from '@vkontakte/vkui';
 
 const RCGTransactionsWall = ({ transactions }) => {
-    const STATUS_BY_VALUE = {
-    'Одобрено': STATUS.APPROVED,
-    'Нет': STATUS.REJECTED,
-};
+
     const STATUS = {
         REJECTED: 'Отклонено',
         APPROVED: 'Подтверждено',
         PENDING: 'На рассмотрении'
+    };
+    const STATUS_BY_VALUE = {
+        'Одобрено': STATUS.APPROVED,
+        'Нет': STATUS.REJECTED,
     };
 
     const oldT = transactions.filter(e => e.new == "FALSE");
@@ -43,16 +44,16 @@ const RCGTransactionsWall = ({ transactions }) => {
 
         return (
             <ContentCard
-                key={element.activity+element.name+element.money+element.rep}
-                overTitle={element.activity}
-                title={`Сумма ${element.money}`}
-                description={element.comment}
+                key={element.activity + element.name + element.money + element.rep}
+                overTitle={element.rep}
+                title={`Изменение золота: ${element.money}gc`}
+                description={element.activity}
                 caption={<><ContentBadge
                     size="s"
                     appearance={appearance}
                     mode='outline'>
                     {status}
-                </ContentBadge>  {element.rep}</>}
+                </ContentBadge>  {element.comment}</>}
                 mode={mode}
             />
         );

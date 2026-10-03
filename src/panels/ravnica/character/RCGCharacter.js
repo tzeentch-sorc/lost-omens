@@ -23,7 +23,8 @@ import '../../common/css/Character.css';
 
 import RCGFeatPanel from './RCGFeatPanel.js';
 
-import { RCGCampaign } from '../../../consts.js';
+import { RCGCampaign, RCGRequests } from '../../../consts.js';
+
 import * as logger from '../../../util/Logger.js';
 import Marquee from '../../common/components/Marquee.js';
 
@@ -104,6 +105,11 @@ const RCGCharacter = () => {
 				return null;
 		}
 	};
+	const openRequests = (element) => {
+			params.set('CharName', element);
+			setParams(params);
+			routeNavigator.push(RCGRequests, { keepSearchParams: true });
+	}
 
 	useEffect(() => {
 		async function fetchData() {
@@ -161,11 +167,13 @@ const RCGCharacter = () => {
 				{popout}
 				<SplitCol>
 					<RCGMainInfo
+						charName={charName}
 						gold={gold}
 						downtime={downtime}
 						experience={experience}
 						level={level}
-						mult={mult} />
+						mult={mult}
+						openRequests={openRequests} />
 					{hasFeats() && <RCGFeatPanel featlist={featlist()} />}
 					<Group mode='card'>
 						<RCGCharTabPanel

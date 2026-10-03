@@ -199,7 +199,7 @@ export const HGArticleImage = '/images/hg_banner_article.png';
 export const HGNoCharsCaption = 'Добро пожаловать к «Героям Голариона»!';
 export const HGNoCharsDescription = 'Введение в мир Голариона 1й редакции';
 
-// ===== Ravnica (Dungeons and Dragons 5 edition) =====
+// ===== Ravnica (Dungeons and Dragons 5.5 edition) =====
 // ----- Spreadsheet -----
 export const RCGSpreadSheetID = config.Ravnica.Mirror; //RCG Geekmo Mirror
 export const RCGBuildsSheetID = config.Ravnica.Builds; //sheet "builds"

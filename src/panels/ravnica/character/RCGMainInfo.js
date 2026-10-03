@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    SimpleCell,
+    SimpleCell, Spacing, Div, Button,
     Header, Group, CardGrid, Card
 } from '@vkontakte/vkui';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@vkontakte/icons'
 
 
-const RCGMainInfo = ({ gold, downtime, experience, level, mult }) => {
+const RCGMainInfo = ({ charName, gold, downtime, experience, level, mult, openRequests }) => {
     function countGames(exp, lvl) {
         if (lvl && lvl < 5) {
             var tmplvl = lvl - 3;
@@ -82,6 +82,15 @@ const RCGMainInfo = ({ gold, downtime, experience, level, mult }) => {
                     </SimpleCell>
                 </Card>
             </CardGrid>
+            <Spacing size={4} />
+            <Group mode='plain'>
+                <Div style={{ paddingLeft: 16 }}>
+                    <Button stretched appearance="positive" size="l" onClick={() => { openRequests(charName) }}>Транзакции
+                    </Button>
+                </Div>
+                <Div style={{ paddingLeft: 16 }}>
+                </Div>
+            </Group>
         </Group>)
 }
 
