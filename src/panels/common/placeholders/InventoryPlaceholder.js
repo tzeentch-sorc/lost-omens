@@ -3,7 +3,7 @@ import {
     Group, Div, Placeholder
 } from '@vkontakte/vkui';
 import {
-    Icon56DiamondOutline
+    Icon28BoxHeartOutline
 } from '@vkontakte/icons'
 
 
@@ -14,7 +14,7 @@ const InventoryPlaceholder = () => {
             aria-controls="tab-inventory"
             role="tabpanel"
             mode="plain">
-            <Placeholder icon={<Icon56DiamondOutline width={56} height={56} />} title="Здесь будет ваш инвентарь">
+            <Placeholder icon={<Icon28BoxHeartOutline width={56} height={56} />} title="Здесь будет ваш инвентарь">
                 <Div>
                     Сходи, закупись, не скупись!
                 </Div>

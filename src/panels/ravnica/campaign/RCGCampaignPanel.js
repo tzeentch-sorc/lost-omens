@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from '@vkontakte/vkui';
 
 import CampaignPanel from '../../common/components/CampaignPanel.js';
-import dndClassIcons from '../../common/custom_icons/DNDClassIcons/index.js';
 import RCGPlayerInfoSettings from '../export_settings/RCGPlayerInfoSettings.js'
 import RCGMastersInfoSettings from '../export_settings/RCGMastersInfoSettings.js'
 
@@ -16,7 +15,6 @@ const campaign = {
 	characterRoute: RCGCharacter,
 	playerInfoSettings: RCGPlayerInfoSettings,
 	mastersInfoSettings: RCGMastersInfoSettings,
-	classIcons: dndClassIcons,
 	prioritiesText: 'Открыть список приоритетов',
 	extraButton: { text: 'Наш сайт', link: RCGSite },
 	noChars: {

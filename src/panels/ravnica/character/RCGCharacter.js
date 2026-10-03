@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {
 	Panel, Group, PanelHeaderBack, PanelHeader,
 	ScreenSpinner, SplitCol,
-	SplitLayout
+	SplitLayout, Link
 } from '@vkontakte/vkui';
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 import InventoryPlaceholder from '../../common/placeholders/InventoryPlaceholder.js';
+import MagInventoryPlaceholder from '../../common/placeholders/MagInventoryPlaceholder.js';
 import SpellsPlaceholder from '../../common/placeholders/SpellsPlaceholder.js';
 
 import RCGCharTabPanel from './RCGCharTabPanel.js';
@@ -84,9 +85,13 @@ const RCGCharacter = () => {
 			case 'maginventory':
 				return hasMagInventory() ? (
 					logger.log("render maginventory", magInventory),
-					<Inventory inventory={magInventory} costs={true} totalWealth={wealth} />
+					<Inventory inventory={magInventory} costs={true} totalWealth={wealth}
+						renderName={(name, item) => item.link
+							? <Link href={item.link} target="_blank">{name}</Link>
+							: name}
+					/>
 				) : (
-					<InventoryPlaceholder />
+					<MagInventoryPlaceholder />
 				);
 			case 'inventory':
 				return hasInventory() ? (
@@ -106,9 +111,9 @@ const RCGCharacter = () => {
 		}
 	};
 	const openRequests = (element) => {
-			params.set('CharName', element);
-			setParams(params);
-			routeNavigator.push(RCGRequests, { keepSearchParams: true });
+		params.set('CharName', element);
+		setParams(params);
+		routeNavigator.push(RCGRequests, { keepSearchParams: true });
 	}
 
 	useEffect(() => {

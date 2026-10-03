@@ -30,7 +30,7 @@ const CampaignPanel = ({ fetchedUser, campaign }) => {
 		characterRoute,
 		playerInfoSettings,
 		mastersInfoSettings,
-		classIcons,
+		classIcons={},
 		keepsPlayerParam = false,
 		lvlupFormLink,
 		prioritiesText,

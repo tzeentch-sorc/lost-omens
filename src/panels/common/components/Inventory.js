@@ -43,7 +43,7 @@ const Inventory = ({ inventory, costs=true, totalWealth, addItemLink, renderName
                     className={costs ? 'inventoryCell' : 'inventoryCell inventoryNoCost'}
                     key={element.name}
                 >
-                    <div className='inventoryTypeColumn'><b>{renderName(element.name)}</b></div>
+                    <div className='inventoryTypeColumn'><b>{renderName(element.name, element)}</b></div>
                     {costs && <div style={{ textAlign: 'center' }}>{element.cost}</div>}
                     <div style={{ textAlign: 'center' }}>{element.count}</div>
                 </Div>

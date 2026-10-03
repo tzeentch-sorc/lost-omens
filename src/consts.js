@@ -69,7 +69,6 @@ export const RCGCharacter = '/char/ravnica';
 export const RCGRequests = '/requests/ravnica';
 
 
-
 // ===== Lost Omens (Pathfinder 2 edition) =====
 // ----- Spreadsheet -----
 export const LOSpreadSheetID = config.LostOmens.Mirror; //LO Geekmo Mirror

@@ -7,14 +7,14 @@ import CharTabPanel from '../../common/components/CharTabPanel.js';
 
 const tabs = [
     {
-        id: 'inventory',
-        title: 'Инвентарь',
-        icon: <Icon28CubeBoxOutline width={24} height={24} />,
-    },
-    {
         id: 'maginventory',
         title: 'Магическое',
         icon: <Icon28MagicHatOutline width={24} height={24} />,
+    },
+    {
+        id: 'inventory',
+        title: 'Инвентарь',
+        icon: <Icon28CubeBoxOutline width={24} height={24} />,
     },
     {
         id: 'spells',
