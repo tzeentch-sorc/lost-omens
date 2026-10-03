@@ -4,9 +4,11 @@ import * as logger from './Logger.js';
 // Мастера записывают ссылку на игрока как придётся: с протоколом и без,
 // на vk.com и на vk.ru. Требовать от них единый вид нельзя — им и с таблицами
 // неудобно, — поэтому приводим написание к одному виду перед сравнением.
+// Без домена — screen_name или id<N>, как мастера лежат в листах masters, — это vk.com/<то же>.
 const normalize = (url) => String(url ?? '')
     .trim()
     .toLowerCase()
+    .replace(/^([^/]+)$/, 'vk.com/$1')
     .replace(/^https?:\/\//, '')
     .replace(/^(www\.|m\.)/, '')
     .replace(/^vk\.ru\//, 'vk.com/')

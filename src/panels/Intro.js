@@ -1,27 +1,32 @@
 import { Div, Group, Panel, PanelHeader, Header, CardGrid, Separator } from "@vkontakte/vkui";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams, useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 
 import './Intro.css'
 import CampaignCard from "./common/components/CampaignCard";
 
-import {LOCampaign, SMCampaign, SFCampaign, BWCampaign, VUCampaign, RGCampaign, HGCampaign, RCGCampaign} from '../consts.js';
+import { CAMPAIGNS } from '../consts.js';
+import { getMemberships } from '../util/Members.js';
 
-const CAMPAIGNS = {
-    LOST_OMENS: "Утраченные Пророчества (PF 2e)",
-    SF: "Уроборос (Starfinder)",
-    SM: "Серебряный Предел (D&D 5e)",
-    HG: "Герои Голариона (PF 1e)",
-    BW: "Синие Воды (D&D 2024)",
-    VU: "Глас Теней (Shadowrun 5e) 18+",
-    RG: "Rogues Gallery (Cyberpunk 2020) 18+",
-    RCG: "Равника (D&D 5e)"
-}
+const HIDDEN_MEGAS = CAMPAIGNS.filter(campaign => campaign.hidden).map(campaign => campaign.key);
 
 const Intro = ({ fetchedUser }) => {
     const routeNavigator = useRouteNavigator();
     const [params, setParams] = useSearchParams();
+    // Пока лист участников грузится, скрытые карточки не показываются никому.
+    const [memberships, setMemberships] = useState(new Set());
+
+    useEffect(() => {
+        if (!fetchedUser) return;
+        getMemberships(HIDDEN_MEGAS, fetchedUser).then(setMemberships);
+    }, [fetchedUser]);
+
+    const openCampaign = (campaign) => {
+        params.set('CampaignName', campaign.title)
+        setParams(params)
+        routeNavigator.push(campaign.route, { keepSearchParams: true })
+    };
 
     return (
         <Panel nav='intro'>
@@ -44,76 +49,16 @@ const Intro = ({ fetchedUser }) => {
                         <Separator className="intro-separator"/>
 
                         <CardGrid size="l" padding="true">
-                            <CampaignCard
-                                title={CAMPAIGNS.LOST_OMENS}
-                                imageSrc="/images/lo_banner.jpg"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.LOST_OMENS)
-                                    setParams(params)
-                                    routeNavigator.push(LOCampaign, { keepSearchParams: true })
-                                }} />
-                            
-                            <CampaignCard
-                                title={CAMPAIGNS.HG}
-                                imageSrc="/images/hg_banner.jpg"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.HG)
-                                    setParams(params)
-                                    routeNavigator.push(HGCampaign, { keepSearchParams: true })
-                                }} />
-                            
-                            <CampaignCard
-                                title={CAMPAIGNS.SF}
-                                imageSrc="/images/sf_bannerjpg.jpg"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.SF)
-                                    setParams(params)
-                                    routeNavigator.push(SFCampaign, { keepSearchParams: true })
-                                }} />
-                            
-                            <CampaignCard
-                                title={CAMPAIGNS.SM}
-                                imageSrc="/images/sm_bannerjpg.jpg"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.SM)
-                                    setParams(params)
-                                    routeNavigator.push(SMCampaign, { keepSearchParams: true })
-                                }} />
-                            
-                            <CampaignCard
-                                title={CAMPAIGNS.RCG}
-                                imageSrc="/images/rcg_banner.jpg"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.RCG)
-                                    setParams(params)
-                                    routeNavigator.push(RCGCampaign, { keepSearchParams: true })
-                                }} />
-
-                            <CampaignCard
-                                title={CAMPAIGNS.BW}
-                                imageSrc="/images/bw_banner.png"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.BW)
-                                    setParams(params)
-                                    routeNavigator.push(BWCampaign, { keepSearchParams: true })
-                                }} />
-
-                            <CampaignCard
-                                title={CAMPAIGNS.VU}
-                                imageSrc="/images/vu_banner.jpg"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.VU)
-                                    setParams(params)
-                                    routeNavigator.push(VUCampaign, { keepSearchParams: true })
-                                }} />
-                            <CampaignCard
-                                title={CAMPAIGNS.RG}
-                                imageSrc="/images/rg_banner.jpg"
-                                onClick={() => {
-                                    params.set('CampaignName', CAMPAIGNS.RG)
-                                    setParams(params)
-                                    routeNavigator.push(RGCampaign, { keepSearchParams: true })
-                                }} />
+                            {CAMPAIGNS
+                                .filter(campaign => !campaign.hidden || memberships.has(campaign.key))
+                                .map(campaign =>
+                                    <CampaignCard
+                                        key={campaign.key}
+                                        title={campaign.title}
+                                        imageSrc={campaign.image}
+                                        outdated={campaign.hidden}
+                                        onClick={() => openCampaign(campaign)} />
+                                )}
                         </CardGrid>
                     </Group>
                 </>
