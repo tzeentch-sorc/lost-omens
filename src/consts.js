@@ -209,11 +209,12 @@ export const RCGMastersSheetID = config.Ravnica.Masters; //sheet "masters"
 export const RCGInventorySheetID = config.Ravnica.Inventory; //sheet "inventory"
 export const RCGTransactionsSheetID = config.Ravnica.Transactions; //sheet "transactions"
 export const RCGMagInventorySheetID = config.Ravnica.MagInventory; //sheet "maginventory"
+export const RCGExperienceInfoSheetID = config.Ravnica.ExperienceInfo; //sheet "exp_table"
 
 // ----- Additional info -----
-export const RCGArticleLink = '';
-export const RCGCreateLink = '';
+export const RCGArticleLink = 'https://vk.ru/@geekmo-megakampaniya-dampd-2024-v-geekmo-ravnika-gorod-gildii';
+export const RCGCreateLink = 'https://vk.ru/club241084272';
 export const RCGArticleImage = '/images/rcg_banner.jpg';
 export const RCGNoCharsCaption = 'Добро пожаловать в «Равнику»!';
 export const RCGNoCharsDescription = 'Знакомство с мегакампанией';
-export const RCGSite = 'http://silvermarches.tilda.ws/';
+export const RCGSite = 'https://wmravnica.ru';

@@ -102,6 +102,7 @@
         "Masters": 0,
         "Inventory": 0,
         "Transactions": 0,
-        "MagInventory": 0
+        "MagInventory": 0,
+        "ExperienceInfo": 0
     }
 }
