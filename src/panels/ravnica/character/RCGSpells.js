@@ -1,60 +1,46 @@
 import React from 'react';
 import {
-    Group, SimpleCell, InfoRow
+    Group, SimpleCell
 } from '@vkontakte/vkui';
 
 import AccordionList from '../../common/components/AccordionList.js';
 import * as logger from '../../../util/Logger.js';
+import { BadColor } from '../../../consts.js';
+
+const CIRCLES = 9;
+const UNDEFINED_CIRCLE = CIRCLES + 1;
+
+// Заговоры, круги 1–9 и в конце — заклинания, круг которых по строке не понять.
+const SECTIONS = [
+    { id: "acc_spell_0", title: 'Заговоры' },
+    ...Array.from({ length: CIRCLES }, (_, i) => ({ id: `acc_spell_${i + 1}`, title: `Круг ${i + 1}` })),
+    { id: "acc_spell_undefined", title: <span style={{ color: BadColor }}>Круг не определен, обратитесь к мастеру</span> },
+];
+
+const nameStyle = { color: 'var(--vkui--color_text_primary)' };
+const sourceStyle = { color: 'var(--vkui--color_text_secondary)' };
+
+// Мастер пишет заклинание как «Название (круг)» или «Название (источник) (круг)»,
+// пары скобок — в любом порядке. Круг — скобки с одной цифрой, всё остальное в скобках — источник.
+// Нет скобок с цифрой — круг не определён.
+function parseSpell(line) {
+    const groups = [...line.matchAll(/\(([^()]*)\)/g)].map(m => m[1].trim());
+    const name = line.replace(/\([^()]*\)/g, '').replace(/\s+/g, ' ').trim();
+    const circleIx = groups.findIndex(g => /^\d$/.test(g));
+    return {
+        name: name || line,
+        source: groups.filter((_, i) => i !== circleIx).join(', '),
+        circle: circleIx >= 0 ? Number(groups[circleIx]) : UNDEFINED_CIRCLE,
+    };
+}
 
 const RCGSpells = ({ spellist }) => {
 
-    const data = [
-        {
-            id: "acc_spell_0",
-            title: 'Заговоры',
-            detail: 0,
-        },
-        {
-            id: "acc_spell_1",
-            title: 'Круг 1',
-            detail: 1,
-        },
-        {
-            id: "acc_spell_2",
-            title: 'Круг 2',
-            detail: 2,
-        },
-        {
-            id: "acc_spell_3",
-            title: 'Круг 3',
-            detail: 3,
-        },
-        {
-            id: "acc_spell_4",
-            title: 'Круг 4',
-            detail: 4,
-        },
-        {
-            id: "acc_spell_5",
-            title: 'Круг 5',
-            detail: 5,
-        },
-        {
-            id: "acc_spell_6",
-            title: 'Круг 6',
-            detail: 6,
-        },
-        {
-            id: "acc_spell_7",
-            title: 'Круг 7',
-            detail: 7,
-        },
-    ];
-
-    function createSpellRow(element) {
+    function createSpellRow(spell, i) {
         return (
-            <SimpleCell multiline key={element}>
-                <InfoRow>{element}</InfoRow>
+            <SimpleCell multiline key={i}>
+                <b style={nameStyle}>{spell.name}</b>
+                {spell.source && <> <i style={sourceStyle}>{spell.source}</i></>}
             </SimpleCell>
         );
     }
@@ -75,13 +61,25 @@ const RCGSpells = ({ spellist }) => {
         return Array.from(result);
     }
 
-    const sections = data
-        .filter(({ detail }) => spellist[detail] && spellist[detail][0] != "")
-        .map(({ id, title, detail }) => ({
-            id,
-            title,
-            content: fixRetrain(spellist[detail].sort((a, b) => a.localeCompare(b))).map(e => createSpellRow(e))
-        }));
+    const clean = (list) => fixRetrain((list || []).map(s => s.trim()).filter(Boolean));
+    const [cantrips, spells] = spellist;
+
+    const byCircle = SECTIONS.map(() => []);
+    // Заговоры лежат в своей колонке, круг у них всегда нулевой — из скобок берётся только источник.
+    clean(cantrips).forEach(line => byCircle[0].push({ ...parseSpell(line), circle: 0 }));
+    clean(spells).forEach(line => {
+        const spell = parseSpell(line);
+        byCircle[spell.circle].push(spell);
+    });
+
+    const sections = SECTIONS
+        .map((section, circle) => ({
+            ...section,
+            content: byCircle[circle]
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(createSpellRow),
+        }))
+        .filter(({ content }) => content.length > 0);
 
     return (
         <Group

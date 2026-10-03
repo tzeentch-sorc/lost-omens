@@ -46,7 +46,7 @@ const RCGCharacter = () => {
 	const [feat_general, setFeatGeneral] = useState();
 	const [feat_class, setFeatClass] = useState();
 
-	const [selected, setSelected] = React.useState('inventory');
+	const [selected, setSelected] = React.useState('maginventory');
 
 	const [popout, setPopout] = useState(<ScreenSpinner />)
 	const charName = params.get('CharName');

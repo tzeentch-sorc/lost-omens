@@ -8,11 +8,7 @@ import RCGFeats from './RCGFeats.js';
 
 const RCGFeatPanel = ({ featlist }) => {
 
-    const hasFeats = featlist && featlist[0] != "";
-
-    const sections = hasFeats
-        ? [{ id: "feats", title: 'Черты', content: <RCGFeats featlist={featlist} /> }]
-        : [];
+    const sections = [{ id: "feats", title: 'Черты', content: <RCGFeats featlist={featlist} /> }];
 
     return (
         <Group mode='card'>
