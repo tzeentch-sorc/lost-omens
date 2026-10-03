@@ -38,3 +38,8 @@
     font-size: 16px;
     margin-top: 16px;
 }
+
+.inventoryCellHeaderGroup.inventoryNoCost,
+.inventoryCell.inventoryNoCost {
+    grid-template-columns: 5fr 80px;
+}

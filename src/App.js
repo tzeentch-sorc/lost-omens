@@ -24,6 +24,9 @@ import VUCampaignPanel from './panels/voux_umbra/campaign/VUCampaignPanel.js';
 import RGCampaignPanel from './panels/rogues_gallery/campaign/RGCampaignPanel.js';
 import RGCharacter from './panels/rogues_gallery/character/RGCharacter.js';
 import RGRequests from './panels/rogues_gallery/requests/RGRequests.js';
+import RCGCampaignPanel from './panels/ravnica/campaign/RCGCampaignPanel.js';
+import RCGCharacter from './panels/ravnica/character/RCGCharacter.js';
+import RCGRequests from './panels/ravnica/requests/RCGRequests.js';
 
 const ROUTES = {
 	CAMPAIGN: 'campaign',
@@ -94,6 +97,11 @@ const App = (router) => {
 				<RGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
 				<RGCharacter id={ROUTES.CHAR} />
 				<RGRequests id={ROUTES.REQUESTS} />
+			</View>
+			<View activePanel={activePanel} nav='ravnica'>
+				<RCGCampaignPanel id={ROUTES.CAMPAIGN} fetchedUser={fetchedUser} />
+				<RCGCharacter id={ROUTES.CHAR} />
+				<RCGRequests id={ROUTES.REQUESTS} />
 			</View>
 		</Root>
 	);

@@ -1,0 +1,39 @@
+import QuerySettings from '../../../util/QuerySettings.js';
+import {RCGSpreadSheetID, RCGPlayersSheetID} from '../../../consts.js'
+
+
+const sheetId = RCGSpreadSheetID; // RCG Geekmo Mirror
+
+const RCGPlayerInfoSettings = new QuerySettings({
+	sheetId,
+	gid: RCGPlayersSheetID, //sheet "players"
+	headrow: 1,
+	fields: {
+		id: "VK",
+		player: "Игрок",
+		prio: "Приоритет",
+		adv: "Последняя партия",
+		adv_date: "Дата партии",
+		char_name: "Персонаж",	
+		char_class: "Класс",
+		race: "Раса",
+		lvl: "Уровень",
+		lvl_up: "Повышение"				
+	},//WIP пока только те поля, что брали марши. Все что после - либо для списка агентов, либо для жоп. 
+
+	columns: {
+		id: 0,
+		player: 1,
+		prio: 2,
+		adv: 3,
+		adv_date: 4,
+		char_name: 5,
+		char_class: 6,
+		race: 7,
+		lvl: 8,
+		lvl_up: 9,
+	},
+	range: "A1:J",
+});
+
+export default RCGPlayerInfoSettings;

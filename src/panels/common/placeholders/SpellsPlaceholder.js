@@ -3,7 +3,7 @@ import {
     Group, Div, Placeholder
 } from '@vkontakte/vkui';
 import {
-    Icon28MagicHatOutline
+    Icon28FireAltOutline
 } from '@vkontakte/icons'
 
 
@@ -15,7 +15,7 @@ const SpellsPlaceholder = () => {
             role="tabpanel"
             mode="plain"
         >
-            <Placeholder icon={<Icon28MagicHatOutline width={56} height={56} />} title="Здесь будут ваши заклинания">
+            <Placeholder icon={<Icon28FireAltOutline width={56} height={56} />} title="Здесь будут ваши заклинания">
                 <Div>
                     Ты думал здесь что-то будет?
                 </Div>
