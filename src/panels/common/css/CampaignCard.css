@@ -27,3 +27,8 @@
     overflow: hidden;
     text-align: center;
 }
+
+/* Мега больше не набирает: картинка на карточке стартового экрана — чёрно-белая. */
+.campaignCardOutdated img {
+    filter: grayscale(1);
+}

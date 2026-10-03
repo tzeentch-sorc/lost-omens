@@ -68,6 +68,30 @@ export const RCGCampaign = '/campaign/ravnica';
 export const RCGCharacter = '/char/ravnica';
 export const RCGRequests = '/requests/ravnica';
 
+// ----- Campaign list -----
+// Карточки стартового экрана, в порядке показа. Ключ — тот же, что в DEBUG_MODE
+// и в колонке «Мега» общего листа участников.
+// hidden — мега больше не набирает (закончена, заморожена или ушла в закрытый
+// формат): карточку видят только её участники, и видят чёрно-белой.
+// Маршрут при этом остаётся открытым — по прямой ссылке страница доступна всем.
+export const CAMPAIGNS = [
+    { key: "LO", title: "Утраченные Пророчества (PF 2e)", image: "/images/lo_banner.jpg", route: LOCampaign, hidden: true },
+    { key: "HG", title: "Герои Голариона (PF 1e)", image: "/images/hg_banner.jpg", route: HGCampaign },
+    { key: "SF", title: "Уроборос (Starfinder)", image: "/images/sf_bannerjpg.jpg", route: SFCampaign, hidden: true },
+    { key: "SM", title: "Серебряный Предел (D&D 5e)", image: "/images/sm_bannerjpg.jpg", route: SMCampaign, hidden: true },
+    { key: "RCG", title: "Равника (D&D 5e)", image: "/images/rcg_banner.jpg", route: RCGCampaign },
+    { key: "BW", title: "Синие Воды (D&D 2024)", image: "/images/bw_banner.png", route: BWCampaign },
+    { key: "VU", title: "Глас Теней (Shadowrun 5e) 18+", image: "/images/vu_banner.jpg", route: VUCampaign },
+    { key: "RG", title: "Rogues Gallery (Cyberpunk 2020) 18+", image: "/images/rg_banner.jpg", route: RGCampaign, hidden: true },
+];
+
+// ----- Members spreadsheet -----
+// Один лист со всеми участниками всех мег — игроками и мастерами. Наполняется
+// формулами по листам players и gms зеркал; нужен стартовому экрану, чтобы
+// проверить членство в скрытых мегах одним запросом, а не по запросу на мегу.
+export const MembersSpreadSheetID = config.Members?.Mirror; //Geekmo Members
+export const MembersSheetID = config.Members?.Members; //sheet "members"
+
 
 // ===== Lost Omens (Pathfinder 2 edition) =====
 // ----- Spreadsheet -----

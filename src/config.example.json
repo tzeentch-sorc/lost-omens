@@ -104,5 +104,9 @@
         "Transactions": 0,
         "MagInventory": 0,
         "ExperienceInfo": 0
+    },
+    "Members": {
+        "Mirror": "insert_your_members_spreadsheet_id_here",
+        "Members": 0
     }
 }

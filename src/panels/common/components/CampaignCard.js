@@ -3,7 +3,7 @@ import { Card, Div, Gradient, Image } from '@vkontakte/vkui';
 
 import '../css/CampaignCard.css';
 
-function CampaignCard({ imageSrc, title, onClick }) {
+function CampaignCard({ imageSrc, title, onClick, outdated = false }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ function CampaignCard({ imageSrc, title, onClick }) {
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className='campaignCardBase'
+      className={outdated ? 'campaignCardBase campaignCardOutdated' : 'campaignCardBase'}
     >
       {/* Image background */}
       <Image
