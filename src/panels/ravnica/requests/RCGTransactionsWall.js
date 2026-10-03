@@ -4,15 +4,18 @@ import {
 } from '@vkontakte/vkui';
 
 const RCGTransactionsWall = ({ transactions }) => {
+    const STATUS_BY_VALUE = {
+    'Одобрено': STATUS.APPROVED,
+    'Нет': STATUS.REJECTED,
+};
     const STATUS = {
         REJECTED: 'Отклонено',
         APPROVED: 'Подтверждено',
         PENDING: 'На рассмотрении'
     };
-    const sortedData = [...(transactions || [])].sort((a, b) => b.date - a.date);
 
-    const oldT = sortedData.filter(e => e.date < 0);
-    const newT = sortedData.filter(e => e.date >= 0);
+    const oldT = transactions.filter(e => e.new == "FALSE");
+    const newT = transactions.filter(e => e.new == "TRUE");
 
     function createTransactionCard(element) {
         if (element.count === 0) return null;
@@ -20,8 +23,7 @@ const RCGTransactionsWall = ({ transactions }) => {
         let appearance = "neutral";
 
         // normalize status: use PENDING for any unknown value
-        const allowed = Object.values(STATUS);
-        const status = allowed.includes(element.approved) ? element.approved : STATUS.PENDING;
+        const status = STATUS_BY_VALUE[element.approved] ?? STATUS.PENDING;
 
         switch (status) {
             case STATUS.REJECTED:
@@ -41,7 +43,7 @@ const RCGTransactionsWall = ({ transactions }) => {
 
         return (
             <ContentCard
-                key={element.date+element.comment}
+                key={element.activity+element.name+element.money+element.rep}
                 overTitle={element.activity}
                 title={`Сумма ${element.money}`}
                 description={element.comment}
@@ -50,7 +52,7 @@ const RCGTransactionsWall = ({ transactions }) => {
                     appearance={appearance}
                     mode='outline'>
                     {status}
-                </ContentBadge>  {element.master}</>}
+                </ContentBadge>  {element.rep}</>}
                 mode={mode}
             />
         );

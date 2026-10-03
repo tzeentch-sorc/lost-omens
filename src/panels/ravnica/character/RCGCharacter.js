@@ -15,6 +15,7 @@ import Inventory from '../../common/components/Inventory.js';
 import RCGMainInfo from './RCGMainInfo.js';
 
 import RCGInventorySettings from '../export_settings/RCGInventorySettings.js'
+import RCGMagInventorySettings from '../export_settings/RCGMagInventorySettings.js'
 import RCGCharBuildSettings from '../export_settings/RCGCharBuildSettings.js'
 import RCGCharInfoSettings from '../export_settings/RCGCharInfoSettings.js'
 
@@ -23,7 +24,7 @@ import '../../common/css/Character.css';
 import RCGFeatPanel from './RCGFeatPanel.js';
 
 import { RCGCampaign } from '../../../consts.js';
-import * as logger from '../../../util/Logger.js'; 
+import * as logger from '../../../util/Logger.js';
 import Marquee from '../../common/components/Marquee.js';
 
 const RCGCharacter = () => {
@@ -31,6 +32,7 @@ const RCGCharacter = () => {
 	const routeNavigator = useRouteNavigator();
 	const [params, setParams] = useSearchParams();
 	const [inventory, setInventory] = useState([]);
+	const [magInventory, setMagInventory] = useState([]);
 	const [gold, setGold] = useState(0);
 	const [wealth, setWealth] = useState(0);
 	const [downtime, setDowntime] = useState(0);
@@ -56,6 +58,17 @@ const RCGCharacter = () => {
 		logger.log("hasInventory", (inventory.length > 0));
 		return (inventory.length > 0);
 	}
+
+	function hasMagInventory() {
+		logger.log("maginventory", magInventory);
+		logger.log("hasInventory", (magInventory.length > 0));
+		return (magInventory.length > 0);
+	}
+
+	function hasFeats() {
+		return (feat_class != "" || feat_general != "");
+	}
+
 	function spellist() {
 		return ([cantrips, spells]
 		)
@@ -67,10 +80,17 @@ const RCGCharacter = () => {
 
 	function renderSelectedTab() {
 		switch (selected) {
+			case 'maginventory':
+				return hasMagInventory() ? (
+					logger.log("render maginventory", magInventory),
+					<Inventory inventory={magInventory} costs={true} totalWealth={wealth} />
+				) : (
+					<InventoryPlaceholder />
+				);
 			case 'inventory':
 				return hasInventory() ? (
 					logger.log("render inventory", inventory),
-					<Inventory inventory={inventory} totalWealth={wealth} />
+					<Inventory inventory={inventory} costs={false} />
 				) : (
 					<InventoryPlaceholder />
 				);
@@ -102,19 +122,26 @@ const RCGCharacter = () => {
 			logger.log("inventory data", inventoryData);
 
 			if (inventoryData[0] && inventoryData[0].name) {
-				setInventory(inventoryData.sort((a, b) => b.cost - a.cost))
-				const totalCost = inventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
+				setInventory(inventoryData);
+			}
+
+			let magInventoryData = await RCGMagInventorySettings.getFilteredQuery("owner", charName);
+			logger.log("maginventory data", magInventoryData);
+
+			if (magInventoryData[0] && magInventoryData[0].name) {
+				setMagInventory(magInventoryData.sort((a, b) => b.cost - a.cost))
+				const totalCost = magInventoryData.reduce((counter, elem) => counter + Number(elem.cost), 0);
 				setWealth(totalCost);
 			}
 
-			//получение черт, заклинаний, формул, черт
+			//получение черт, заклинаний, формул
 			let characterBuildData = await RCGCharBuildSettings.getFilteredQuery("name", charName);
 			logger.log("character build data", characterBuildData);
 
 			setSpells(characterBuildData[0].spells.split('\n'));
 			setCantrips(characterBuildData[0].cantrips.split('\n'));
 
-			setFeatGeneral(characterBuildData[0].feat_general.split('\n')); //TODO - rework with ; splitter
+			setFeatGeneral(characterBuildData[0].feat_general.split('\n'));
 			setFeatClass(characterBuildData[0].feat_class.split('\n'));
 
 			setPopout(<ScreenSpinner state="done">Успешно</ScreenSpinner>);
@@ -127,19 +154,19 @@ const RCGCharacter = () => {
 
 	return (
 		<Panel nav='char'>
-			<PanelHeader className="panelHeader"  before={<PanelHeaderBack onClick={() => routeNavigator.replace(RCGCampaign, { keepSearchParams: true })} />}>
+			<PanelHeader className="panelHeader" before={<PanelHeaderBack onClick={() => routeNavigator.replace(RCGCampaign, { keepSearchParams: true })} />}>
 				<Marquee text={charName} speed={5} repeat={2} rightPadding={70} />
 			</PanelHeader>
 			<SplitLayout>
-                {popout}
-                <SplitCol>
+				{popout}
+				<SplitCol>
 					<RCGMainInfo
 						gold={gold}
 						downtime={downtime}
 						experience={experience}
 						level={level}
 						mult={mult} />
-					<RCGFeatPanel featlist={featlist()} />
+					{hasFeats() && <RCGFeatPanel featlist={featlist()} />}
 					<Group mode='card'>
 						<RCGCharTabPanel
 							selected={selected}

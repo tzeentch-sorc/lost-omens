@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Icon28CubeBoxOutline, Icon28MagicWandOutline
+    Icon28CubeBoxOutline, Icon28MagicWandOutline, Icon28MagicHatOutline
 } from '@vkontakte/icons'
 
 import CharTabPanel from '../../common/components/CharTabPanel.js';
@@ -14,7 +14,7 @@ const tabs = [
     {
         id: 'maginventory',
         title: 'Магическое',
-        icon: <Icon28CubeBoxOutline width={24} height={24} />,
+        icon: <Icon28MagicHatOutline width={24} height={24} />,
     },
     {
         id: 'spells',

@@ -7,10 +7,10 @@ import '../css/Inventory.css'
 
 // addItemLink — ссылка на форму добавления предмета; где формы нет, там нет и кнопки.
 // renderName — как рисовать название: в Pathfinder 2e в нём встречаются символы действий.
-const Inventory = ({ inventory, totalWealth, addItemLink, renderName = (name) => name }) => {
+const Inventory = ({ inventory, costs=true, totalWealth, addItemLink, renderName = (name) => name }) => {
     // Track both sorted column and direction ('asc' or 'desc')
-    const [sortBy, setSortBy] = useState('cost');
-    const [sortDirection, setSortDirection] = useState('desc');
+    const [sortBy, setSortBy] = useState('name');
+    const [sortDirection, setSortDirection] = useState('asc');
 
     // Sorting function updated for asc/desc toggle and keys
     const sortedData = [...inventory].sort((a, b) => {
@@ -40,11 +40,11 @@ const Inventory = ({ inventory, totalWealth, addItemLink, renderName = (name) =>
         if (element.count === 0) return null;
         return (
                 <Div
-                    className='inventoryCell'
+                    className={costs ? 'inventoryCell' : 'inventoryCell inventoryNoCost'}
                     key={element.name}
                 >
                     <div className='inventoryTypeColumn'><b>{renderName(element.name)}</b></div>
-                    <div style={{ textAlign: 'center' }}>{element.cost}</div>
+                    {costs && <div style={{ textAlign: 'center' }}>{element.cost}</div>}
                     <div style={{ textAlign: 'center' }}>{element.count}</div>
                 </Div>
         );
@@ -87,10 +87,10 @@ const Inventory = ({ inventory, totalWealth, addItemLink, renderName = (name) =>
             {addItemLink && <AddItem link={addItemLink} />}
             {/* Headers */}
             <div
-                className='inventoryCellHeaderGroup'
+                className={costs ? 'inventoryCellHeaderGroup' : 'inventoryCellHeaderGroup inventoryNoCost'}
             >
                 {renderHeaderCell('Тип', 'name')}
-                {renderHeaderCell('Цена', 'cost')}
+                {costs && renderHeaderCell('Цена', 'cost')}
                 {renderHeaderCell('Кол-во', 'count')}
             </div>
 
@@ -98,12 +98,12 @@ const Inventory = ({ inventory, totalWealth, addItemLink, renderName = (name) =>
                 {inventory && sortedData.map(createInventoryRow)}
             </List>
             <Separator />
-            <div
+            {costs && <div
                 className='inventoryCellFooter'
             >
                 <div>Пожиток на сумму</div>
                 <div style={{ textAlign: 'center' }}>{totalWealth} золотых</div>
-            </div>
+            </div>}
         </Group>
     );
 };
