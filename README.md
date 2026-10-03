@@ -61,6 +61,15 @@ To see the app **inside VK** you need a public HTTPS address. See
 
 1. Run `npm run deploy` and follow steps in console
 
+`npm run deploy` builds the app first (`predeploy` runs `npm run build`), so there is
+no need to build separately.
+
+The bundle goes to `build/GeekmoApp`, not to `build`: VK Hosting uploads exactly
+that folder (`static_path` in [vk-hosting-config.json](./vk-hosting-config.json)).
+The path is set by `BUILD_PATH` in the `build` script of `package.json`. If you
+change one, change the other - otherwise the deploy uploads a stale or missing
+bundle.
+
 ### Codestyle
 
 Please, follow below agreement on how to write code and do the bureaucracy.
